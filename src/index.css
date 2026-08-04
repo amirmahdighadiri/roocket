@@ -1,0 +1,287 @@
+@import "tailwindcss";
+
+@layer base {
+    @font-face {
+        font-family: "YekanBakh Regular";
+        src: url("./assets/fonts/YekanBakh/YekanBakh-Regular.woff") format('woff');
+        font-display: swap;
+    }
+    @font-face {
+        font-family: "YekanBakh Medium";
+        src: url("./assets/fonts/YekanBakh/YekanBakh-Regular.woff") format('woff');
+        font-display: swap;
+    }
+    @font-face {
+        font-family: "YekanBakh Bold";
+        src: url("./assets/fonts/YekanBakh/YekanBakh-Bold.woff") format('woff');
+        font-display: swap;
+    }
+    @font-face {
+        font-family: "YekanBakh Heavy";
+        src: url("./assets/fonts/YekanBakh/YekanBakh-Heavy.woff") format('woff');
+        font-display: swap;
+    }
+    @font-face {
+        font-family: "YekanBakh Fat";
+        src: url("./assets/fonts/YekanBakh/YekanBakh-Fat.woff") format('woff');
+        font-display: swap;
+    }
+    @font-face {
+        font-family: "Roboto Bold";
+        src: url("./assets/fonts/Roboto/Roboto-Bold.ttf") format('truetype');
+        font-display: swap;
+    }
+    @font-face {
+        font-family: "Roboto Medium";
+        src: url("./assets/fonts/Roboto/Roboto-Medium.ttf") format('truetype');
+        font-display: swap;
+    }
+    body {
+        @apply bg-body font-YekanBakh;
+
+        @variant dark {
+            @apply bg-dark-890;
+        }
+    }
+
+    /** , *:before, *:after {*/
+    /*    border:1px red solid;*/
+    /*}*/
+
+}
+
+
+@theme {
+    --color-green-600: #38CB6E;
+    --color-yellow-400: #FFDC26;
+    --color-purple-400: #6082BB;
+    --color-blue-400: #3D82F4;
+    --color-blue-450: #51B6FF;
+
+    --color-blue-40: #F5F9FF;
+    --color-blue-50: #F3F7FE;
+    --color-primary-blue-300: #547494;
+    --color-blue-200: #91C9FF;
+    --color-blue-500: #629BF8;
+    --color-blue-600: #4F8FF7;
+    --color-blue-700: #3B82F6;
+    --color-blue-800: #2D389A;
+    --color-blue-970: #3F6CAF;
+    --color-blue-950: #609CFF;
+    --color-blue-980: #3b82f640;
+
+    --color-blue-Violet-450: #F4F6FA;
+
+    --color-red-450: #E81C4D;
+    --color-red-650: #FF2D20;
+    --color-red-700: #DC2626;
+
+    --color-customOrange-700: #FFA826;
+
+    --color-primary-gray-100: #ECEEEF;
+    --color-primary-gray-110: #F4F5F7;
+    --color-primary-gray-120: #CACFD8;
+    --color-primary-gray-180: #F4F5F7;
+    --color-primary-gray-185: #D2D6DE;
+    --color-primary-gray-200: #79899E;
+    --color-primary-gray-300: #647488;
+    --color-biscay-400: #99A0AA;
+    --color-biscay-650: #8390A2;
+    --color-biscay-700: #334155;
+    --color-primary-gray-500: #60749614;
+
+    --color-gray-5: #F0F1F4;
+    --color-gray-20: #CBD1DB;
+    --color-gary-50: #F9FAFB;
+    --color-gray-100: #E3E6EC;
+    --color-gray-200: #F7EEF9;
+    --color-gray-210: #ECEEEF;
+    --color-gray-300: #95A0B1;
+    --color-gray-360: #79899E;
+    --color-gray-400: #8092B0;
+    --color-gray-450: #4E5968;
+    --color-gray-500: #607496;
+    --color-gray-600: #4B5563;
+    --color-gray-700: #374151;
+    --color-gray-800: #475466 ;
+    --color-gray-880: #98a3b8ab;
+    --color-gray-900: #e8eef5;
+    --color-gray-920: #CACFD8;
+    --color-gray-940: #D2DDEC;
+    --color-gray-960: #60749614;
+    --color-gray-970: #62707E;
+    --color-gray-980: #B4C0D4;
+
+    --color-chambray-100: #EDEFF1;
+    --color-chambray-400: #A5ACBB;
+    --color-chambray-700: #4B5A78;
+
+    --color-gray-hover-100: #F7F8F9;
+    --color-gray-hover-150: #CBD1DB;
+    --color-gray-hover-200: #5C6777;
+
+    --color-body: #F4F5F7;
+    --color-dark-body-50: #1A2E42;
+    --color-dark-body-100: #1B314C;
+    --color-dark-body-300: #0F1E2F;
+    --color-dark-890: #0E2338;
+    --color-dark-910: #0C243F;
+    --color-dark-930: #1B344D;
+    --color-dark-200: #D0CFD4;
+    --color-dark-550: #64748B;
+
+    --color-dark-500: #423F51;
+    --color-dark-700: #130F26;
+    --color-dark-950: #0F1E2F;
+
+    --color-border-gray-100: #EBECEE;
+
+    --font-YekanBakh: "YekanBakh Regular";
+    --font-YekanBakh-Medium: "YekanBakh Medium";
+    --font-YekanBakh-Bold: "YekanBakh Bold";
+    --font-YekanBakh-Heavy: "YekanBakh Heavy";
+    --font-YekanBakh-Fat: "YekanBakh Fat";
+    --font-Mult-Font-Bold: "YekanBakh Heavy", "Roboto Bold";
+    --font-Mult-Font-Medium: "YekanBakh Medium", "Roboto Medium";
+
+    --shadow-sm: 0px 24px 45px rgba(0, 0, 0, .06);
+    --shadow-whiteShadow: 0px 4px 60px hsla(0, 0%, 100%, .05);
+    --shadow-contactUsShadow: 0px 4px 45px rgba(59, 130, 246, .41);
+
+    /* ! =========== ! Animation ! =========== ! */
+    --animate-progress: progress 2.5s linear 1;
+    --animate-ripple: at-ripple .6s linear infinite;
+    --animate-grow-width: grow-width 2.5s ease-in-out;
+
+    @keyframes grow-width {
+        0%{
+            width: 0;
+        }
+        100% {
+            width: 100%;
+        }
+    }
+
+    @keyframes progress {
+        100% {
+            width: 100%;
+        }
+    }
+    @keyframes at-ripple {
+        0% {
+            box-shadow: 0 4px 10px rgba(59, 130, 246, .1), 0 0 0 0 rgba(59, 130, 246, .1), 0 0 0 5px rgba(59, 130, 246, .1), 0 0 0 10px rgba(59, 130, 246, .1)
+        }
+
+        to {
+            box-shadow: 0 4px 10px rgba(59, 130, 246, .1), 0 0 0 5px rgba(59, 130, 246, .1), 0 0 0 10px rgba(59, 130, 246, .1), 0 0 0 20px hsla(0, 0%, 40%, 0)
+        }
+    }
+
+}
+
+/* /==================== ! Tailwind Utilitys ! ====================/ */
+
+@utility container {
+    margin-inline: auto;
+    padding-inline: 15px;
+}
+
+/* /==================== ! Custom Class ! ====================/ */
+
+@layer utilities {
+    .flex-center {
+        @apply flex items-center justify-center;
+    }
+
+    .from-gray-80 {
+        background: linear-gradient(180deg, rgba(211, 215, 223, 1) 50%, rgba(243, 244, 246, 1) 100%);
+    }
+
+}
+
+@layer components {
+    .opened {
+        transform: scale(1);
+        opacity: 1;
+        visibility: visible;
+        height: auto;
+    }
+
+    .closed {
+        transform: scale(0);
+        opacity: 0;
+        visibility: hidden;
+        height: 0;
+    }
+
+    .swiper-button-disabled {
+        cursor: auto;
+        opacity: .35;
+        pointer-events: none
+    }
+
+    .step-box-active {
+        @apply bg-blue-700 dark:bg-blue-450 text-white shadow-contactUsShadow;
+    }
+}
+
+/* /==================== ! Swiper ! ====================/ */
+.swiper-pagination {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    bottom: -35px !important;
+}
+
+.swiper-pagination-bullet {
+    width: 9px !important;
+    height: 9px !important;
+    background-color: #64748B !important;
+}
+
+.swiper-pagination-bullet-active {
+    width: 13px !important;
+    height: 13px !important;
+    background-color: #B7BDC4 !important;
+}
+
+.custom-pagination {
+    display: flex;
+    align-items: center;
+    gap: 8px !important;
+
+}
+
+.slide-effect-card{
+    @apply bg-white dark:bg-dark-930 rounded-xl p-9 shadow-sm dark:shadow-[0px_1.60568px_61.0158px_hsla(0,0%,100%,.05)];
+}
+
+/* /==================== ! Scrollbar Style ! ====================/ */
+
+*::-webkit-scrollbar {
+    width: 8px
+}
+
+*::-webkit-scrollbar-track {
+    --tw-bg-opacity: 1;
+    background-color: rgb(228 228 228/var(--tw-bg-opacity))
+}
+
+*::-webkit-scrollbar-thumb {
+    --tw-bg-opacity: 1;
+    background-color: rgb(192 194 197/var(--tw-bg-opacity))
+}
+
+.dark *::-webkit-scrollbar-track {
+    --tw-bg-opacity: 1;
+    background-color: rgb(40 41 61/var(--tw-bg-opacity))
+}
+
+.dark *::-webkit-scrollbar-thumb {
+    --tw-bg-opacity: 1;
+    background-color: rgb(27 49 76/var(--tw-bg-opacity))
+}
+
+/*!* /==================== ! Custom Variant ! ====================/ *!*/
+
+@custom-variant dark (&:where(.dark, .dark *));

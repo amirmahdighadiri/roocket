@@ -1,0 +1,324 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "username": "amirmahdighadiri",
+      "password": "123456789",
+      "email": "amirmahdighadiri@gmail.com",
+      "fullname": "امیرمهدی قدیری"
+    }
+  ],
+  "courses": [
+    {
+      "id": 201,
+      "title": "آموزش جامع ووکامرس",
+      "src": "1",
+      "price": 590000,
+      "type": "Wordpress",
+      "status": true,
+      "description": "با یادگیری ووکامرس می توانید وبسایت های فروشگاهی مد خود را با وردپرس به شکل کامل پیاده سازی کنید.",
+      "courseTime": "03:51:56",
+      "createdAt": "2025-01-15",
+      "coursePrimary": true,
+      "teacher": "حسام موسوی",
+      "searchName": "Wordpress",
+      "userLike": [
+        "1"
+      ]
+    },
+    {
+      "id": 202,
+      "title": "آموزش tailwindcss",
+      "src": "2",
+      "price": 500000,
+      "type": "Front-End",
+      "status": true,
+      "description": "در قالب آموزش tailwind سعی کردیم این ابزار بسیار کاربردی را در قالب پروژه قدم به قدم، به شما آموزش دهیم. با دوره آموزش tailwindcss شما میتوانید به شکل",
+      "courseTime": "07:10:32",
+      "createdAt": "2025-02-03",
+      "coursePrimary": true,
+      "teacher": "حسام موسوی",
+      "searchName": "Tailwind",
+      "userLike": [
+        "1"
+      ]
+    },
+    {
+      "id": 203,
+      "title": "آموزش نود جی اس (node js)",
+      "src": "3",
+      "price": 390000,
+      "type": "Back-End",
+      "status": false,
+      "description": "دوره نود جی اس node js از صفر به شما کار با پلتفرم node را آموزش خواهد داد تا فرابگیرید که چطور از آن در پروژه های مختلف استفاده کنید",
+      "courseTime": "07:05:08",
+      "createdAt": "2025-02-20",
+      "coursePrimary": true,
+      "teacher": "حسام موسوی",
+      "searchName": "Node",
+      "userLike": [
+        "1"
+      ]
+    },
+    {
+      "id": 204,
+      "title": "آموزش انگولار",
+      "src": "4",
+      "price": 390000,
+      "type": "Front-End",
+      "status": true,
+      "description": "در دوره آموزش انگولار ما سعی داریم به شما کمک کنیم Angular را ساده و قدم به قدم به شکل کامل و با جزئیات یاد بگیرید.",
+      "courseTime": "12:17:16",
+      "createdAt": "2025-03-12",
+      "coursePrimary": false,
+      "teacher": "حسام موسوی",
+      "searchName": "Angular",
+      "userLike": [
+        "1"
+      ]
+    },
+    {
+      "id": 205,
+      "title": "آموزش پروژه محور جاوااسکریپت",
+      "src": "5",
+      "price": 590000,
+      "type": "Front-End",
+      "status": true,
+      "description": "در دوره پروژه های جاوااسکریپت ما سعی کرده ایم جاوااسکریپت را در قالب پروژه های بزرگ و کوچک، ساده و پیشرفته به شما آموزش دهیم.",
+      "courseTime": "10:27:00",
+      "createdAt": "2025-04-01",
+      "coursePrimary": true,
+      "teacher": "حسام موسوی",
+      "searchName": "Javascript",
+      "userLike": [
+        "1"
+      ]
+    },
+    {
+      "id": 206,
+      "title": "آموزش تایپ اسکریپت (Typescript)",
+      "src": "6",
+      "price": 590000,
+      "type": "Front-End",
+      "status": true,
+      "description": "دوره آموزش تایپ اسکریپت از صفر تا صد به صورت کاربردی و ساده توسط تیم آموزشی و مجرب مدرسین راکت.",
+      "courseTime": "03:16:48",
+      "createdAt": "2025-04-18",
+      "coursePrimary": false,
+      "teacher": "حسام موسوی",
+      "searchName": "Typescript",
+      "userLike": [
+        "1"
+      ]
+    },
+    {
+      "id": 207,
+      "title": "آموزش HTML",
+      "src": "7",
+      "price": 0,
+      "type": "Front-End",
+      "status": true,
+      "description": "دوره آموزشی HTML با هدف آشنا کردن کامل شما با کدنویسی HTML به صورت رایگان است. بعد از این دوره یاد خواهید گرفت که صفحات وب ساده ای را ایجاد کنید.",
+      "courseTime": "03:16:48",
+      "createdAt": "2025-05-07",
+      "coursePrimary": true,
+      "teacher": "حسام موسوی",
+      "searchName": "HTML",
+      "userLike": [
+        "1"
+      ]
+    },
+    {
+      "id": 208,
+      "title": "آموزش پیشرفته React",
+      "src": "8",
+      "price": 790000,
+      "type": "Front-End",
+      "status": false,
+      "description": "موزش پیشرفته React دوره ای است که در آن شما به صورت عمیق تر و حرفه ای تر با ویژگی React آشنا می شوید و از آن ها به صورت عملی در پروژه های خود استفاده",
+      "courseTime": "06:48:04",
+      "createdAt": "2025-05-25",
+      "coursePrimary": true,
+      "teacher": "حسام موسوی",
+      "searchName": "React",
+      "userLike": [
+        "1"
+      ]
+    },
+    {
+      "id": 209,
+      "title": "آموزش PHP",
+      "src": "9",
+      "price": 0,
+      "type": "Back-End",
+      "status": true,
+      "description": "در دوره آموزش PHP ما سعی می کنیم PHP را به شکل جامع و کاملا رایگان به شما آموزش دهیم تا با استفاده از PHP بتوانید سایت های خود را بسازید و فرایند توسع",
+      "courseTime": "09:12:52",
+      "createdAt": "2025-06-10",
+      "coursePrimary": true,
+      "teacher": "حسام موسوی",
+      "searchName": "PHP",
+      "userLike": [
+        "1"
+      ]
+    },
+    {
+      "id": 210,
+      "title": "آموزش جنگو (Django)",
+      "src": "10",
+      "price": 490000,
+      "type": "Back-End",
+      "status": true,
+      "description": "یادگیری دوره آموزش جنگو از صفر تا صد به صورت راحت و ساده از طریق مدرسین مجرب تیم آموزشی راکت",
+      "courseTime": "11:43:13",
+      "createdAt": "2025-07-02",
+      "coursePrimary": true,
+      "teacher": "حسام موسوی",
+      "searchName": "Django",
+      "userLike": [
+        "1"
+      ]
+    },
+    {
+      "id": 211,
+      "title": "آموزش Redux",
+      "src": "11",
+      "price": 590000,
+      "type": "Front-End",
+      "status": true,
+      "description": "در طول دوره آموزش redux (ریداکس) سعی می کنیم به شکل کامل و کاربردی روش استفاده از کتابخانه redux برای حل مشکل مدیریت stateها را به شما آموزش دهیم.",
+      "courseTime": "02:43:45",
+      "createdAt": "2025-08-14",
+      "coursePrimary": true,
+      "teacher": "حسام موسوی",
+      "searchName": "Redux",
+      "userLike": [
+        "1"
+      ]
+    },
+    {
+      "id": 212,
+      "title": "آموزش کامل Vue",
+      "src": "12",
+      "price": 690000,
+      "type": "ّFront-End",
+      "status": true,
+      "description": "موزش Vue.js قدم ابتدایی از یادگیری Vue است که در طی این دوره قصد داریم به شکل قدم به قدم کار با این کتابخانه پرمخاطب جاوا اسکریپت را به شما آموزش دهی",
+      "courseTime": "15:18:52",
+      "createdAt": "2025-09-01",
+      "coursePrimary": true,
+      "teacher": "حسام موسوی",
+      "searchName": "Vue",
+      "userLike": [
+        "1"
+      ]
+    }
+  ],
+  "learningPath": [
+    {
+      "id": 301,
+      "title": "طراحی سایت",
+      "description": "آموزش طراحی سایت صفر تا صد پروژه محور به صورت کامل را از طریق مدرسین مجرب مجموعه آموزشی راکت یاد بگیرید.",
+      "coursesCount": "9",
+      "boxClass": "bg-green-600 shadow-[-12px_12px_24px_0px_rgba(16,185,129,.2)]",
+      "icon": "/images/SVG/WEB.svg"
+    },
+    {
+      "id": 302,
+      "title": "آموزش جاوا اسکریپت",
+      "description": "آموزش جاوا اسکریپت | دوره جامع جاوا اسکریپت | بهترین دوره جاوا اسکریپت | بازار کار جاوا اسکریپت | دوره جاوا اسکریپت مقدم...",
+      "coursesCount": "12",
+      "boxClass": "bg-yellow-400 shadow-[-12px_12px_24px_0px_rgba(245,158,11,.2)]",
+      "icon": "/images/SVG/JS.svg"
+    },
+    {
+      "id": 303,
+      "title": "آموزش PHP",
+      "description": "PHP محبوب Cترین زبان برنامه نویسی حوزه وب است. بیش از ۵۰ درصد وبسایت های دنیا با استفاده از این زبان و تکنولوژی های مربوط...",
+      "coursesCount": "12",
+      "boxClass": "bg-purple-400 shadow-[-12px_12px_24px_0px_rgba(37,99,235,.2)]",
+      "icon": "/images/SVG/PHP.svg"
+    },
+    {
+      "id": 304,
+      "title": "آمورش React",
+      "description": "React محبوب ترین فریمورک توسعه رابط کاربری و اپلیکیشن Cهای SPA است که توسط شرکت فیسبوک ایجاد شده است. React از زبان جاوا...",
+      "coursesCount": "12",
+      "boxClass": "bg-blue-400 shadow-[-12px_12px_24px_0px_rgba(59,130,246,.2)]",
+      "icon": "/images/SVG/REACT.svg"
+    },
+    {
+      "id": 305,
+      "title": "آموزش لاراول",
+      "description": "لاراول پر استفاده ترین فریمورک زبان برنامه نویسی PHP بوده و در سال های اخیر توسط شرکت ها و استارتاپ های بسیار زیادی مورد...",
+      "coursesCount": "8",
+      "boxClass": "bg-red-650 shadow-[-12px_12px_24px_0px_rgba(239,68,68,.2)]",
+      "icon": "/images/SVG/LARAVEL.svg"
+    }
+  ],
+  "skills": [
+    {
+      "id": 401,
+      "name": "طراحی سایت",
+      "desc": "با آموزش رایگان طراحی سایت مسیر یادگیری فرانت اند را از صفر شروع کن. HTML، CSS، جاوااسکریپت و ابزارهای طراحی وب را قدم به قدم یاد بگیر.",
+      "bannerSrc": "../../../images/skills/banner/web-banner.webp",
+      "iconSrc": "../../../images/skills/icon/web.webp"
+    },
+    {
+      "id": 402,
+      "name": "جاوا اسکریپت",
+      "desc": "آموزش جاوا اسکریپت | دوره جامع جاوا اسکریپت | بهترین دوره جاوا اسکریپت | بازار کار جاوا اسکریپت | دوره جاوا اسکریپت مقدماتی تا پیشرفته",
+      "bannerSrc": "../../../images/skills/banner/js-banner.webp",
+      "iconSrc": "../../../images/skills/icon/js.webp"
+    },
+    {
+      "id": 403,
+      "name": "لاراول",
+      "desc": "لاراول پر استفاده ترین فریمورک زبان برنامه نویسی PHP بوده و در سال های اخیر توسط شرکت ها و استارتاپ های بسیار زیادی مورد استفاده قرار گرفته است. یادگیری لاراول به شما کمک می کند با سرعت بسیار زیادی وبسایت مورد نظرتان را توسعه دهید.",
+      "bannerSrc": "../../../images/skills/banner/laravel-banner.webp",
+      "iconSrc": "../../../images/skills/icon/laravel.webp"
+    },
+    {
+      "id": 404,
+      "name": "php",
+      "desc": "PHP محبوب ترین زبان برنامه نویسی حوزه وب است. بیش از ۵۰ درصد وبسایت های دنیا با استفاده از این زبان و تکنولوژی های مربوط به آن توسعه پیدا کرده اند. یادگیری PHP به شما قابلیت ایجاد انواع وبسایت های مختلف را می دهد.",
+      "bannerSrc": "../../../images/skills/banner/php-banner.webp",
+      "iconSrc": "../../../images/skills/icon/php.webp"
+    },
+    {
+      "id": 405,
+      "name": "React",
+      "desc": "React محبوب ترین فریمورک توسعه رابط کاربری و اپلیکیشن های SPA است که توسط شرکت فیسبوک ایجاد شده است. React از زبان جاوا اسکریپت قدرت می گیرد بنابراین بعد از یادگیری جاوا اسکریپت می توانید به سادگی این فریمورک و ابزارهای مختلف آن را یاد بگیرید.",
+      "bannerSrc": "../../../images/skills/banner/react-banner.webp",
+      "iconSrc": "../../../images/skills/icon/react.webp"
+    },
+    {
+      "id": 406,
+      "name": "Nodejs",
+      "desc": "اگر قصد استفاده از جاوا اسکریپت برای توسعه سمت سرور را دارید پس نیاز است که NodeJS را یاد بگیرید. NodeJS یک محیط اجرایی برای استفاده از کدهای جاوا اسکریپتی در سمت سرور است. فریمورک های بسیار زیادی نیز برای NodeJS ساخته شده که در بین آن ها می توان به ExpressJS اشاره کرد.",
+      "bannerSrc": "../../../images/skills/banner/node-banner.webp",
+      "iconSrc": "../../../images/skills/icon/node.webp"
+    },
+    {
+      "id": 407,
+      "name": "Vue",
+      "desc": "در میان فریمورک های کاربردی جاوا اسکریپت برای توسعه رابط کاربری، ویوجی اس ساده ترین و در عین حال یکی از کاربردی ترین آن ها به شمار می رود. VueJS می تواند برای پروژه هایی با مقیاس متوسط به خوبی مورد استفاده قرار گرفته و از آنجایی که پیچیدگی زیادی به نسبت رُقبا خود ندارد یادگیری آن آسان خواهد بود.",
+      "bannerSrc": "../../../images/skills/banner/vue-banner.webp",
+      "iconSrc": "../../../images/skills/icon/vue.webp"
+    },
+    {
+      "id": 408,
+      "name": "وردپرس",
+      "desc": "آموزش جاوا اسکریپت | دوره جامع جاوا اسکریپت | بهترین دوره جاوا اسکریپت | بازار کار جاوا اسکریپت | دوره جاوا اسکریپت مقدماتی تا پیشرفته",
+      "bannerSrc": "../../../images/skills/banner/wordpress-banner.webp",
+      "iconSrc": "../../../images/skills/icon/wordpress.webp"
+    },
+    {
+      "id": 409,
+      "name": "فلاتر",
+      "desc": "آموزش فلاتر را از مقدماتی تا پیشرفته (صفر تا صد) با مدرسین مجرب مجموعه آموزشی راکت به صورت حرفه ای یاد بگیرید.",
+      "bannerSrc": "../../../images/skills/banner/flutter-banner.webp",
+      "iconSrc": "../../../images/skills/icon/flutter.webp"
+    }
+  ]
+}
