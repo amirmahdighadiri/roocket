@@ -6,6 +6,7 @@ import DynamicIcon from "../../DynamicIcon/DynamicIcon.jsx";
 import chatImage from "../../assets/images/chat_img.png"
 import laravelBanner from "../../assets/images/banner/laravel.jpg"
 import banner1 from "../../assets/images/banner/banner-1.gif"
+import supportImage from "../../assets/images/symbol/suportImg.png"
 import {getCoursesFromServer} from "../../Redux/Store/Courses.jsx";
 import {getLearningPathFromServer} from "../../Redux/Store/LearningPath.jsx";
 
@@ -89,7 +90,7 @@ function ProductPage() {
                 {/*<!-- ! -------------------- Courses Details Right -------------------- ! -->*/}
                 <div className="col-span-9">
                     {/*<!-- ! -------------------- Courses Details Tabs -------------------- ! -->*/}
-                    <div className="sticky top-4 z-10 bg-white dark:bg-dark-930 py-4 shadow-sm rounded">
+                    <div className="sticky top-4 z-10 bg-white dark:bg-dark-930 py-4 shadow-sm rounded mb-8">
                         <ul className="px-6 space-x-8">
                             <li className="inline-block">
                                 <button id="description" type="button" onClick={changeTab} className={`relative ${tab === "description" ? 'text-blue-700 before:opacity-100' : 'text-gray-300 hover:text-gray-700 dark:hover:text-white before:opacity-0'} font-YekanBakh-Bold cursor-pointer pr-2 transition-all before:content-[''] before:absolute before:top-0 before:bottom-0 before:-right-1 before:my-auto before:size-1 before:rounded-full before:bg-blue-700`}>توضیحات</button>
@@ -104,6 +105,54 @@ function ProductPage() {
                                 <button id="reviews" type="button" onClick={changeTab} className={`relative ${tab === "reviews" ? 'text-blue-700 before:opacity-100' : 'text-gray-300 hover:text-gray-700 dark:hover:text-white before:opacity-0'} font-YekanBakh-Bold cursor-pointer pr-2 transition-all before:content-[''] before:absolute before:top-0 before:bottom-0 before:-right-1 before:my-auto before:size-1 before:rounded-full before:bg-blue-700`}>دیدگاه و پرسش</button>
                             </li>
                         </ul>
+                    </div>
+                    {/*<!-- ! -------------------- Courses Description Text -------------------- ! -->*/}
+                    <div className="bg-white dark:bg-dark-930 shadow-sm rounded px-10 py-9">
+                        <span className="relative text-blue-700 dark:text-white text-2xl font-YekanBakh-Heavy pr-2 before:content-[''] before:absolute before:top-0 before:bottom-0 before:-right-1 before:my-auto before:size-2 before:rounded-full dark:before:bg-white before:bg-blue-700">
+                            توضیحات
+                        </span>
+                        <div className="relative max-h-158 overflow-hidden ">
+                            {/*<!-- ! -------------------- Text Overlay -------------------- ! -->*/}
+                            <div className="absolute inset-0"></div>
+                            {/*<!-- ! -------------------- Text Content -------------------- ! -->*/}
+                            <div className="text-gray-700 dark:text-white mt-5 space-y-5 text-lg/9">
+                                <p className="font-Mult-Font-Bold">📢 معرفی دوره پروژه‌های لاراولی</p>
+                                <p className="font-Mult-Font-Medium">اگر می‌خواهید Laravel را به‌صورت عملی و پروژه‌محور یاد بگیرید، این دوره برای شماست! در این دوره، به جای آموزش‌های تئوری، ۱۰ پروژه کاربردی را از صفر تا صد پیاده‌سازی می‌کنیم تا بتوانید در دنیای واقعی از مهارت‌های لاراولی خود استفاده کنید.</p>
+                                <p className="font-Mult-Font-Bold">💡 چه چیزهایی یاد می‌گیرید؟</p>
+                                <p className="font-Mult-Font-Medium *:block space-y-5">
+                                    <span className="">🔹 ساخت سیستم احراز هویت چندگانه (ایمیل، موبایل، رمز، OTP)</span>
+                                    <span className="">🔹 پیاده‌سازی سیستم مدیریت اعلان‌ها (ایمیل، SMS، تلگرام، پوش نوتیفیکیشن)</span>
+                                    <span className="">🔹 طراحی و توسعه API برای اپلیکیشن‌های موبایل با احراز هویت امن</span>
+                                    <span className="">🔹 مدیریت فایل و فضای ذخیره‌سازی (آپلود، فشرده‌سازی، S3)</span>
+                                    <span className=""> 🔹 پیاده‌سازی چت زنده و پیام‌رسان با Laravel Reverb</span>
+                                    <span className="">🔹 اتصال درگاه پرداخت و کیف پول دیجیتال برای مدیریت تراکنش‌ها</span>
+                                    <span className="">🔹 ایجاد سیستم مدیریت محتوا (CMS)‌ و ویرایشگر حرفه‌ای</span>
+                                    <span className="">🔹 مدیریت نقش‌ها و سطوح دسترسی کاربران (ACL) با Spatie Permissions</span>
+                                    <span className="">🔹 بهینه‌سازی عملکرد و کشینگ در لاراول با Redis و Horizon</span>
+                                    <span className="">🔹 ساخت سیستم نظرات و امتیازدهی کاربران</span>
+                                </p>
+                                <p className="font-Mult-Font-Bold">✅ تمام پروژه‌ها به‌صورت عملی پیاده‌سازی می‌شوند و در پایان دوره، مهارت‌های شما به سطح یک توسعه‌دهنده حرفه‌ای ارتقا می‌یابد!</p>
+                                <p className="font-Mult-Font-Medium">⚠️ نکته: این لیست ممکن است در زمان ضبط دوره شامل تغییرات شود و همچنین مواردی اضافه یا تغییر کند.</p>
+                                <p className="font-Mult-Font-Bold">🎥 حتماً ویدیوی معرفی دوره را مشاهده کنید!</p>
+                                <p className="font-Mult-Font-Medium">در ویدیو توضیحات کامل‌تری درباره دوره، نحوه برگزاری، سرفصل‌ها و جزئیات بیشتر ارائه شده است. 🚀</p>
+                                <h2 className="text-2xl font-Mult-Font-Bold">مزایا یادگیری لاراول به‌صورت پروژه محور</h2>
+                                <p className="font-Mult-Font-Medium">یادگیری لاراول به‌صورت پروژه‌محور باعث می‌شود مفاهیم تئوری را به‌طور عمیق‌تر و کاربردی‌تر درک کنید. در این روش، به جای تمرکز صرف بر تعاریف و مفاهیم انتزاعی، با چالش‌های واقعی مواجه می‌شوید و توانایی حل مسئله در شما تقویت می‌شود. همچنین، این سبک آموزش موجب تثبیت بهتر مباحث شده و اعتمادبه‌نفس شما برای ورود به بازار کار را افزایش می‌دهد. علاوه بر این، با انجام پروژه‌های عملی، نمونه‌کارهای ارزشمندی برای نمایش در گیت‌هاب (GitHub) ایجاد خواهید کرد که به تقویت رزومه و افزایش شانس استخدام شما در شرکت‌های معتبر کمک فراوانی می‌کند.</p>
+                            </div>
+                        </div>
+                    </div>
+                    {/*<!-- ! -------------------- Courses Support -------------------- ! -->*/}
+                    <div className="bg-white dark:bg-dark-930 shadow-sm rounded px-9 py-8 my-8">
+                        <h2 className="relative text-blue-700 dark:text-white text-2xl font-YekanBakh-Heavy pr-2 before:content-[''] before:absolute before:top-0 before:bottom-0 before:-right-1 before:my-auto before:size-2 before:rounded-full dark:before:bg-white before:bg-blue-700">گارانتی بازگشت وجه</h2>
+                        <div className="flex items-center mt-6">
+                            <img src={supportImage} alt="support Iamge" className="w-52 h-40 object-cover"/>
+                            <div className="flex flex-col items-start">
+                                <p className="text-gray-360 dark:text-gray-200 text-lg/8 mb-3 text-justify">برای آنکه به شما اطمینان دهیم، که ما از محتوای دوره‌های خود ۱۰۰ درصد مطمئن هستیم، برای این دوره گارانتی بازگشت وجه قرار داده‌ایم و این به این معنی است که اگر شما محتوای این دوره را به شکل کامل مشاهده کنید، اما نتیجه‌ای که به شما قول دادیم را دریافت نکنید ۱۰۰ درصد مبلغ پرداختی شما را برگشت خواهیم زد.</p>
+                                <Link to="/" className="flex items-center justify-center gap-x-2 hover:text-blue-700 text-gray-800 dark:text-white dark:hover:text-blue-450 text-lg font-YekanBakh-Bold transition-all pt-3">
+                                    <span className=""> کلیک کن و وارد شو</span>
+                                    <DynamicIcon name="arrow" className="size-5 text-inherit" />
+                                </Link>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 {/*<!-- ! -------------------- Courses Details Left -------------------- ! -->*/}
