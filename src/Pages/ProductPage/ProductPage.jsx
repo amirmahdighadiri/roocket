@@ -1,4 +1,4 @@
-import React , {useState , useEffect} from 'react';
+import React , {useState , useEffect , useRef} from 'react';
 import {Link} from 'react-router-dom';
 import {useDispatch, useSelector} from "react-redux";
 import DynamicIcon from "../../DynamicIcon/DynamicIcon.jsx";
@@ -14,6 +14,8 @@ function ProductPage() {
     const [tab, setTab] = useState("description")
     const dispatch = useDispatch();
     const {courses , loading} = useSelector(state => state.courses);
+    const triggerRef = useRef(null)
+    const [isSticky, setIsSticky] = useState(false);
 
     useEffect(() => {
         if (!courses.length) {
@@ -21,11 +23,29 @@ function ProductPage() {
         }
     } , [])
 
+    useEffect(() => {
+        const observer = new IntersectionObserver(([entry]) => {
+            setIsSticky(!entry.isIntersecting);
+        });
+
+
+        if (triggerRef.current) {
+            observer.observe(triggerRef.current);
+        }
+
+        console.log(observer)
+
+        return () => {
+            observer.disconnect();
+        };
+    }, []);
+
 
     const changeTab = (event) => {
         event.preventDefault()
         setTab(event.target.id)
     }
+
     return (
         <section className="container">
             {/*<!-- ! -------------------- Courses Intro -------------------- ! -->*/}
@@ -89,8 +109,10 @@ function ProductPage() {
             <div className="grid grid-cols-12 gap-x-3">
                 {/*<!-- ! -------------------- Courses Details Right -------------------- ! -->*/}
                 <div className="col-span-9">
+                    {/*<!-- ! --------------------  Sentinel Element For Detecting Sticky State -------------------- ! -->*/}
+                    <div ref={triggerRef}></div>
                     {/*<!-- ! -------------------- Courses Details Tabs -------------------- ! -->*/}
-                    <div className="sticky top-4 z-10 bg-white dark:bg-dark-930 py-4 shadow-sm rounded mb-8">
+                    <div className={`sticky top-4 z-10 ${isSticky ? 'bg-black/8 dark:bg-black/30 backdrop-blur-xl border-white/10 mx-2' : 'bg-white dark:bg-dark-930 mx-0'} shadow-sm py-4 rounded mb-8 transition-all`}>
                         <ul className="px-6 space-x-8">
                             <li className="inline-block">
                                 <button id="description" type="button" onClick={changeTab} className={`relative ${tab === "description" ? 'text-blue-700 before:opacity-100' : 'text-gray-300 hover:text-gray-700 dark:hover:text-white before:opacity-0'} font-YekanBakh-Bold cursor-pointer pr-2 transition-all before:content-[''] before:absolute before:top-0 before:bottom-0 before:-right-1 before:my-auto before:size-1 before:rounded-full before:bg-blue-700`}>توضیحات</button>
@@ -151,6 +173,37 @@ function ProductPage() {
                                     <span className=""> کلیک کن و وارد شو</span>
                                     <DynamicIcon name="arrow" className="size-5 text-inherit" />
                                 </Link>
+                            </div>
+                        </div>
+                    </div>
+                    {/*<!-- ! -------------------- Courses Curriculum -------------------- ! -->*/}
+                    <div className="bg-white dark:bg-dark-930 shadow-sm rounded px-10 py-7">
+                        <h2 className="relative text-blue-700 dark:text-white text-2xl font-YekanBakh-Heavy pr-2 mb-5 before:content-[''] before:absolute before:top-0 before:bottom-0 before:-right-1 before:my-auto before:size-2 before:rounded-full dark:before:bg-white before:bg-blue-700">جلسات دوره</h2>
+                        
+                        <div className="">
+                            <div className="flex items-center justify-between dark:bg-dark-900 border border-gray-210 dark:border-dark-900 rounded-lg cursor-pointer py-4 px-6 mb-4">
+                                <div className="">
+                                    <span className="inline-block text-chambray-700 dark:text-white text-xl font-Mult-Font-Bold border-l border-gray-200 dark:border-gray-200/30 pl-7 ml-5">بخش اول</span>
+                                    <span className="text-dark-550 dark:text-gray-200 font-Mult-Font-Medium text-xl">معرفی و مقدمه</span>
+                                </div>
+                                <div className="text-dark-550 dark:text-gray-200">
+                                    <DynamicIcon name="arrow" className="size-7 text-inherit" />
+                                </div>
+                            </div>
+
+                            <div className="flex items-center justify-between dark:bg-dark-900 border border-gray-210 dark:border-dark-900 py-3 px-5">
+                                <div className="">
+                                    <div className="w-14 relative flex-center text-gray-500 font-YekanBakh-Heavy text-2xl text-center border-l border-gray-210 pl-4">
+                                        1
+                                        <span className="absolute w-auto bottom-0 right-0 h-1 bg-gray-500 rounded-full mx-auto"></span>
+                                    </div>
+                                    <span className=""></span>
+                                </div>
+                                <div className="">
+                                    <span className=""></span>
+                                    <DynamicIcon name="clock" className="size-7 text-inherit" />
+                                </div>
+                                <button type="button" className=""></button>
                             </div>
                         </div>
                     </div>
