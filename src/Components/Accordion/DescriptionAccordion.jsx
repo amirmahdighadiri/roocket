@@ -1,8 +1,8 @@
-import React, {memo, useEffect, useState} from 'react';
+import React, {memo, useEffect, useState , useRef} from 'react';
 import DynamicIcon from "../../DynamicIcon/DynamicIcon.jsx";
 import useToggle from "../../Hooks/useToggle/useToggle.jsx";
 
-function Accordion({title , message , accordionNum}) {
+function DescriptionAccordion({title , message , accordionNum}) {
     const [isShowMessage, toggleShowMessage] = useToggle(false);
 
     return (
@@ -25,4 +25,4 @@ function Accordion({title , message , accordionNum}) {
     );
 }
 
-export default memo(Accordion);
+export default memo(DescriptionAccordion);

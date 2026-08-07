@@ -446,7 +446,8 @@ const iconsMap = {
             <path stroke='currentColor' strokeLinecap='round' strokeLinejoin='round' strokeWidth='1.4' d='M11.334 14.167h3.333' opacity='0.4'></path>
             <path fill='#fff' fillRule='evenodd' stroke='#FFA826' strokeLinecap='round' strokeLinejoin='round' strokeWidth='1.167' d='m5.46 13.74.762 1.521c.074.15.218.253.385.277l1.704.246c.42.06.588.57.283.863L7.363 17.83a.5.5 0 0 0-.148.448l.29 1.671c.072.413-.368.729-.744.533l-1.522-.79a.52.52 0 0 0-.478 0l-1.522.79c-.376.196-.816-.12-.744-.533l.29-1.67a.5.5 0 0 0-.148-.449l-1.231-1.183a.504.504 0 0 1 .283-.863l1.704-.246a.51.51 0 0 0 .386-.277l.76-1.52a.516.516 0 0 1 .921 0' clipRule='evenodd'></path>
         </svg>
-    )
+    ),
+
 }
 
 function DynamicIcon({name, className}) {

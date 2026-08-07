@@ -9,6 +9,8 @@ import banner1 from "../../assets/images/banner/banner-1.gif"
 import supportImage from "../../assets/images/symbol/suportImg.png"
 import {getCoursesFromServer} from "../../Redux/Store/Courses.jsx";
 import {getLearningPathFromServer} from "../../Redux/Store/LearningPath.jsx";
+import CourseAccordion from "../../Components/Accordion/CourseAccordion/CourseAccordion.jsx";
+import CourseLinkBox from "../../Components/CourseLinkBox/CourseLinkBox.jsx";
 
 function ProductPage() {
     const [tab, setTab] = useState("description")
@@ -112,7 +114,7 @@ function ProductPage() {
                     {/*<!-- ! --------------------  Sentinel Element For Detecting Sticky State -------------------- ! -->*/}
                     <div ref={triggerRef}></div>
                     {/*<!-- ! -------------------- Courses Details Tabs -------------------- ! -->*/}
-                    <div className={`sticky top-4 z-10 ${isSticky ? 'bg-black/8 dark:bg-black/30 backdrop-blur-xl border-white/10 mx-2' : 'bg-white dark:bg-dark-930 mx-0'} shadow-sm py-4 rounded mb-8 transition-all`}>
+                    <div className={`sticky top-4 z-10 ${isSticky ? 'bg-black/8 dark:bg-black/15 backdrop-blur-xl border-white/10 mx-2' : 'bg-white dark:bg-dark-930 mx-0'} shadow-sm py-4 rounded mb-8 transition-all`}>
                         <ul className="px-6 space-x-8">
                             <li className="inline-block">
                                 <button id="description" type="button" onClick={changeTab} className={`relative ${tab === "description" ? 'text-blue-700 before:opacity-100' : 'text-gray-300 hover:text-gray-700 dark:hover:text-white before:opacity-0'} font-YekanBakh-Bold cursor-pointer pr-2 transition-all before:content-[''] before:absolute before:top-0 before:bottom-0 before:-right-1 before:my-auto before:size-1 before:rounded-full before:bg-blue-700`}>توضیحات</button>
@@ -177,34 +179,26 @@ function ProductPage() {
                         </div>
                     </div>
                     {/*<!-- ! -------------------- Courses Curriculum -------------------- ! -->*/}
-                    <div className="bg-white dark:bg-dark-930 shadow-sm rounded px-10 py-7">
+                    <div className="bg-white dark:bg-dark-930 shadow-sm rounded px-10 py-7 mb-8">
                         <h2 className="relative text-blue-700 dark:text-white text-2xl font-YekanBakh-Heavy pr-2 mb-5 before:content-[''] before:absolute before:top-0 before:bottom-0 before:-right-1 before:my-auto before:size-2 before:rounded-full dark:before:bg-white before:bg-blue-700">جلسات دوره</h2>
-                        
+                        {/*<!-- ! -------------------- Courses Curriculum Links -------------------- ! -->*/}
                         <div className="">
-                            <div className="flex items-center justify-between dark:bg-dark-900 border border-gray-210 dark:border-dark-900 rounded-lg cursor-pointer py-4 px-6 mb-4">
-                                <div className="">
-                                    <span className="inline-block text-chambray-700 dark:text-white text-xl font-Mult-Font-Bold border-l border-gray-200 dark:border-gray-200/30 pl-7 ml-5">بخش اول</span>
-                                    <span className="text-dark-550 dark:text-gray-200 font-Mult-Font-Medium text-xl">معرفی و مقدمه</span>
-                                </div>
-                                <div className="text-dark-550 dark:text-gray-200">
-                                    <DynamicIcon name="arrow" className="size-7 text-inherit" />
-                                </div>
+                            <CourseAccordion />
+                            <CourseAccordion />
+                        </div>
+                    </div>
+                    {/*<!-- ! -------------------- Courses comments Wrapper -------------------- ! -->*/}
+                    <div className="bg-white dark:bg-dark-930 shadow-sm rounded px-10 py-7">
+                        <h2 className="relative text-blue-700 dark:text-white text-2xl font-YekanBakh-Heavy pr-2 mb-5 before:content-[''] before:absolute before:top-0 before:bottom-0 before:-right-1 before:my-auto before:size-2 before:rounded-full dark:before:bg-white before:bg-blue-700">دیدگاه و پرسش</h2>
+                        <div className="flex items-center justify-between px-8 py-5 bg-customOrange-550 text-white rounded-lg text-xl font-Mult-Font-Medium mb-6">
+                            <div className="flex items-center gap-x-2">
+                                <DynamicIcon name="profile" className="size-8 text-inherit" />
+                                <span className="">برای ارسال دیدگاه لازم است وارد شده یا ثبت‌نام کنید</span>
                             </div>
-
-                            <div className="flex items-center justify-between dark:bg-dark-900 border border-gray-210 dark:border-dark-900 py-3 px-5">
-                                <div className="">
-                                    <div className="w-14 relative flex-center text-gray-500 font-YekanBakh-Heavy text-2xl text-center border-l border-gray-210 pl-4">
-                                        1
-                                        <span className="absolute w-auto bottom-0 right-0 h-1 bg-gray-500 rounded-full mx-auto"></span>
-                                    </div>
-                                    <span className=""></span>
-                                </div>
-                                <div className="">
-                                    <span className=""></span>
-                                    <DynamicIcon name="clock" className="size-7 text-inherit" />
-                                </div>
-                                <button type="button" className=""></button>
-                            </div>
+                            <Link to="/" className="flex items-center gap-x-2 hover:text-gray-700 transition-all">
+                                <span className="underline  font-YekanBakh-Bold">ورود یا ثبت‌نام</span>
+                                <DynamicIcon name="arrow" className="size-7 text-inherit" />
+                            </Link>
                         </div>
                     </div>
                 </div>

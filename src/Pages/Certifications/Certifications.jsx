@@ -1,7 +1,7 @@
 import React, {useEffect, useRef, useState} from 'react';
 import {Link} from "react-router-dom";
 import DynamicIcon from "../../DynamicIcon/DynamicIcon.jsx";
-import Accordion from "../../Components/Accordion/Accordion.jsx";
+import Accordion from "../../Components/Accordion/DescriptionAccordion.jsx";
 import {accordions} from "../../data.jsx";
 
 function Certifications(props) {
