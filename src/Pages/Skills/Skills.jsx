@@ -6,7 +6,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {getSkillsFromServer} from "../../Redux/Store/Skills.jsx";
 import RoadmapBanner from "../../Components/RoadmapBanner/RoadmapBanner.jsx";
 import {Swiper, SwiperSlide} from "swiper/react";
-import Accordion from "../../Components/Accordion/Accordion.jsx";
+import Accordion from "../../Components/Accordion/DescriptionAccordion.jsx";
 import { accordions } from '../../data.jsx';
 
 function Skills(props) {
