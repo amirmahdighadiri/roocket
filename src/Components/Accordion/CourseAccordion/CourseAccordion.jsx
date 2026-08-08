@@ -9,9 +9,6 @@ function CourseAccordion(props) {
     const [height, setHeight] = useState(0);
 
     const showAccordionHandler =async () =>{
-        // if (isShowMessage){
-        //
-        // }
         await setHeight(contentRef.current.scrollHeight);
         toggleShowMessage();
     }
