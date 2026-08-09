@@ -12,6 +12,7 @@ import {getLearningPathFromServer} from "../../Redux/Store/LearningPath.jsx";
 import CourseAccordion from "../../Components/Accordion/CourseAccordion/CourseAccordion.jsx";
 import CourseLinkBox from "../../Components/CourseLinkBox/CourseLinkBox.jsx";
 import useToggle from "../../Hooks/useToggle/useToggle.jsx";
+import CommentBox from "../../Components/CommentBox/CommentBox.jsx";
 
 function ProductPage() {
     const [tab, setTab] = useState("description")
@@ -242,8 +243,8 @@ function ProductPage() {
                     <div className="bg-white dark:bg-dark-930 shadow-sm rounded px-10 py-7">
                         <h2 className="relative text-blue-700 dark:text-white text-2xl font-YekanBakh-Heavy pr-2 mb-5 before:content-[''] before:absolute before:top-0 before:bottom-0 before:-right-1 before:my-auto before:size-2 before:rounded-full dark:before:bg-white before:bg-blue-700">دیدگاه
                             و پرسش</h2>
-                        <div
-                            className="flex items-center justify-between px-8 py-5 bg-customOrange-550 text-white rounded-lg text-xl font-Mult-Font-Medium mb-6">
+                        {/*<!-- ! -------------------- sign-up wrapper -------------------- ! -->*/}
+                        <div className="flex items-center justify-between px-8 py-5 bg-customOrange-550 text-white rounded-lg text-xl font-Mult-Font-Medium mb-6">
                             <div className="flex items-center gap-x-2">
                                 <DynamicIcon name="profile" className="size-8 text-inherit"/>
                                 <span className="">برای ارسال دیدگاه لازم است وارد شده یا ثبت‌نام کنید</span>
@@ -252,6 +253,10 @@ function ProductPage() {
                                 <span className="underline  font-YekanBakh-Bold">ورود یا ثبت‌نام</span>
                                 <DynamicIcon name="arrow" className="size-7 text-inherit"/>
                             </Link>
+                        </div>
+                        {/*<!-- ! -------------------- comments Wrapper -------------------- ! -->*/}
+                        <div className="">
+                            <CommentBox />
                         </div>
                     </div>
                 </div>
