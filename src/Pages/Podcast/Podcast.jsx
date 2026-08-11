@@ -53,7 +53,52 @@ function Podcast(props) {
                         </div>
                     </div>
                 </aside>
-                <div className="col-span-9"></div>
+                <div className="col-span-9">
+                    {/*<!-- ! -------------------- Filter Wrapper -------------------- ! -->*/}
+                    <div className="flex items-center gap-x-2 pb-6 border-b border-biscay-700/30 mb-7">
+                        <div className="relative inline-block group">
+                            <div className="inline-flex items-center gap-x-2 h-11 px-3 border border-biscay-700 dark:border-white/20 cursor-pointer rounded-md">
+                                <div className="flex items-center gap-x-1 text-biscay-700 dark:text-white text-sm font-YekanBakh-Bold pl-2 border-l border-biscay-700 dark:border-white/20">
+                                    <span className="">فیلتر زمانی</span>
+                                    <span className="text-dark-550 dark:text-gray-920 text-xs">( بروزترین‌ )</span>
+                                </div>
+                                <div className="">
+                                    <DynamicIcon name="chartCircle" className="size-5 text-biscay-700 dark:text-white" />
+                                </div>
+                            </div>
+                            {/*<!-- ! -------------------- Sub Filter Wrapper -------------------- ! -->*/}
+                            <div className="invisible opacity-0 group-hover:visible group-hover:opacity-100 absolute w-full p-3 bg-white dark:bg-dark-930 shadow-sm rounded-md mt-2 transition-all">
+                                <ul className="">
+                                    <li className="py-2 px-3 font-YekanBakh-Bold text-sm text-biscay-700 dark:text-gray-920 dark:hover:text-white hover:bg-gray-5 dark:hover:bg-dark-890 rounded-md transition-all cursor-pointer"><span className="">بروزترین</span></li>
+                                    <li className="py-2 px-3 font-YekanBakh-Bold text-sm text-biscay-700 dark:text-gray-920 dark:hover:text-white hover:bg-gray-5 dark:hover:bg-dark-890 rounded-md transition-all cursor-pointer"><span className="">جدیدترین</span></li>
+                                    <li className="py-2 px-3 font-YekanBakh-Bold text-sm text-biscay-700 dark:text-gray-920 dark:hover:text-white hover:bg-gray-5 dark:hover:bg-dark-890 rounded-md transition-all cursor-pointer"><span className="">قدیمی ترین</span></li>
+                                    <li className="py-2 px-3 font-YekanBakh-Bold text-sm text-biscay-700 dark:text-gray-920 dark:hover:text-white hover:bg-gray-5 dark:hover:bg-dark-890 rounded-md transition-all cursor-pointer"><span className="">هفته پیش</span></li>
+                                    <li className="py-2 px-3 font-YekanBakh-Bold text-sm text-biscay-700 dark:text-gray-920 dark:hover:text-white hover:bg-gray-5 dark:hover:bg-dark-890 rounded-md transition-all cursor-pointer"><span className="">ماه پیش</span></li>
+                                    <li className="py-2 px-3 font-YekanBakh-Bold text-sm text-biscay-700 dark:text-gray-920 dark:hover:text-white hover:bg-gray-5 dark:hover:bg-dark-890 rounded-md transition-all cursor-pointer"><span className="">سال پیش</span></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div className="relative inline-block group">
+                            <div className="inline-flex items-center gap-x-2 h-11 px-3 border border-biscay-700 dark:border-white/20 cursor-pointer rounded-md">
+                                <div className="flex items-center gap-x-1 text-biscay-700 dark:text-white text-sm font-YekanBakh-Bold pl-2 border-l border-biscay-700 dark:border-white/20">
+                                    <span className="">فیلتر نمایش</span>
+                                    <span className="text-dark-550 dark:text-gray-920 text-xs">( همه )</span>
+                                </div>
+                                <div className="">
+                                    <DynamicIcon name="chartCircle" className="size-5 text-biscay-700 dark:text-white" />
+                                </div>
+                            </div>
+                            {/*<!-- ! -------------------- Sub Filter Wrapper -------------------- ! -->*/}
+                            <div className="invisible opacity-0 group-hover:visible group-hover:opacity-100 absolute w-full p-3 bg-white dark:bg-dark-930 shadow-sm rounded-md mt-2 transition-all">
+                                <ul className="">
+                                    <li className="py-2 px-3 font-YekanBakh-Bold text-sm text-biscay-700 dark:text-gray-920 dark:hover:text-white hover:bg-gray-5 dark:hover:bg-dark-890 rounded-md transition-all cursor-pointer"><span className="">همه</span></li>
+                                    <li className="py-2 px-3 font-YekanBakh-Bold text-sm text-biscay-700 dark:text-gray-920 dark:hover:text-white hover:bg-gray-5 dark:hover:bg-dark-890 rounded-md transition-all cursor-pointer"><span className="">محبوب ترین</span></li>
+                                    <li className="py-2 px-3 font-YekanBakh-Bold text-sm text-biscay-700 dark:text-gray-920 dark:hover:text-white hover:bg-gray-5 dark:hover:bg-dark-890 rounded-md transition-all cursor-pointer"><span className="">پربازدید پیش</span></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </section>
     );
