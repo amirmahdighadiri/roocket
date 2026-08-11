@@ -2,17 +2,18 @@ import React, {useState, useEffect, useRef} from 'react';
 import {Link} from 'react-router-dom';
 import {useDispatch, useSelector} from "react-redux";
 import DynamicIcon from "../../DynamicIcon/DynamicIcon.jsx";
-
-import chatImage from "../../assets/images/chat_img.png"
-import laravelBanner from "../../assets/images/banner/laravel.jpg"
-import banner1 from "../../assets/images/banner/banner-1.gif"
-import supportImage from "../../assets/images/symbol/suportImg.png"
 import {getCoursesFromServer} from "../../Redux/Store/Courses.jsx";
 import {getLearningPathFromServer} from "../../Redux/Store/LearningPath.jsx";
 import CourseAccordion from "../../Components/Accordion/CourseAccordion/CourseAccordion.jsx";
 import CourseLinkBox from "../../Components/CourseLinkBox/CourseLinkBox.jsx";
 import useToggle from "../../Hooks/useToggle/useToggle.jsx";
 import CommentBox from "../../Components/CommentBox/CommentBox.jsx";
+{/*<!-- ! -------------------- Images -------------------- ! -->*/}
+import chatImage from "../../assets/images/chat_img.png"
+import laravelBanner from "../../assets/images/banner/laravel.jpg"
+import banner1 from "../../assets/images/banner/banner-1.gif"
+import supportImage from "../../assets/images/symbol/suportImg.png"
+
 
 function ProductPage() {
     const [tab, setTab] = useState("description")
@@ -263,8 +264,7 @@ function ProductPage() {
                 {/*<!-- ! -------------------- Courses Details Left -------------------- ! -->*/}
                 <div className="col-span-3">
                     {/*<!-- ! -------------------- Score Wrapper -------------------- ! -->*/}
-                    <div
-                        className="flex justify-between bg-white dark:bg-dark-930 py-4 px-5 shadow-sm rounded overflow-hidden mb-4">
+                    <div className="flex justify-between bg-white dark:bg-dark-930 py-4 px-5 shadow-sm rounded overflow-hidden mb-4">
                         {/*<!-- ! -------------------- Course Status -------------------- ! -->*/}
                         <div className="w-full h-full relative">
                             <div className="inline-block absolute -top-7 -right-12">
@@ -347,8 +347,7 @@ function ProductPage() {
                         </Link>
                     </div>
                     {/*<!-- ! -------------------- Teacher Wrapper -------------------- ! -->*/}
-                    <div
-                        className="flex flex-col items-center bg-white dark:bg-dark-930 py-4 px-5 shadow-sm rounded mb-4">
+                    <div className="flex flex-col items-center bg-white dark:bg-dark-930 py-4 px-5 shadow-sm rounded mb-4">
                         <div className="size-16 border-3 border-gray-200 rounded-full overflow-hidden mb-1">
                             <img src="/images/team-profile/hesam-mosavi.png" alt="hesam-mosavi" className=""/>
                         </div>
@@ -366,8 +365,7 @@ function ProductPage() {
                             علاقه خاصی دارم و دوست دارم دانشی ک...</p>
                     </div>
                     {/*<!-- ! -------------------- Chat Wrapper -------------------- ! -->*/}
-                    <div
-                        className="flex flex-col items-center border border-primary-gray-185/60 dark:border-primary-gray-185/5 py-4 px-12 shadow-sm rounded mb-4">
+                    <div className="flex flex-col items-center border border-primary-gray-185/60 dark:border-primary-gray-185/5 py-4 px-12 shadow-sm rounded mb-4">
                         <img src={chatImage} alt="chat Image" className=""/>
                         <h6 className="text-chambray-700 dark:text-white font-YekanBakh-Heavy text-2xl mb-2">گفتگوی‌
                             برنامه نویسان</h6>

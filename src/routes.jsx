@@ -7,6 +7,7 @@ import Skills from "./Pages/Skills/Skills.jsx";
 import ProductsPage from "./Pages/ProductsPage/ProductsPage.jsx";
 import Certifications from "./Pages/Certifications/Certifications.jsx";
 import ProductPage from "./Pages/ProductPage/ProductPage.jsx";
+import Podcast from "./Pages/Podcast/Podcast.jsx";
 
 const routes = [
     {
@@ -16,7 +17,8 @@ const routes = [
             {path: 'skills' , element: <Skills />},
             {path: 'products-page', element: <ProductsPage/>},
             {path: 'product-page', element: <ProductPage/>},
-            {path: 'certifications' , element: <Certifications/>}
+            {path: 'certifications' , element: <Certifications/>},
+            {path: 'podcast' , element: <Podcast/>},
         ]
     },
     {path: '/auth' , element: <Auth/> },
