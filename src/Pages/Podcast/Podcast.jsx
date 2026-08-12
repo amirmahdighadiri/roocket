@@ -7,14 +7,22 @@ import {Link} from 'react-router-dom';
 {/*<!-- ! -------------------- Images -------------------- ! -->*/}
 import instagramPhone from "../../assets/images/instagram.png";
 import banner1 from "../../assets/images/banner/banner-1.gif";
+import podcastImage from "../../assets/images/symbol/podcast-archive.png";
+import PodcastBox from "../../Components/PodcastBox/PodcastBox.jsx";
+import {getPodcastsFromServer} from "../../Redux/Store/Podcasts.jsx";
 
 function Podcast(props) {
 
     const dispatch = useDispatch();
-    const {courses, loading} = useSelector(state => state.courses);
+    const {courses, coursesLoading} = useSelector(state => state.courses);
+    const {podcasts , podcastLoading} = useSelector(state => state.podcasts);
+
     useEffect(() => {
         if (!courses.length) {
             dispatch(getCoursesFromServer("http://localhost:3000/courses"))
+        }
+        if (!podcasts.length) {
+            dispatch(getPodcastsFromServer("http://localhost:3000/episodes"))
         }
     }, [])
 
@@ -96,6 +104,23 @@ function Podcast(props) {
                                     <li className="py-2 px-3 font-YekanBakh-Bold text-sm text-biscay-700 dark:text-gray-920 dark:hover:text-white hover:bg-gray-5 dark:hover:bg-dark-890 rounded-md transition-all cursor-pointer"><span className="">پربازدید پیش</span></li>
                                 </ul>
                             </div>
+                        </div>
+                    </div>
+                    {/*<!-- ! -------------------- Podcast Item Wrapper -------------------- ! -->*/}
+                    <div className="">
+                        {/*<!-- ! -------------------- Section Title -------------------- ! -->*/}
+                        <div className="flex items-center gap-x-1">
+                            <img src={podcastImage} alt="podcast image" className=""/>
+                            <span className="text-biscay-700 dark:text-white font-YekanBakh-Heavy text-3xl">لیست پادکست ها</span>
+                        </div>
+                        {/*<!-- ! -------------------- Podcasts Wrapper -------------------- ! -->*/}
+                        <div className="grid grid-cols-3 gap-x-5 gap-y-12 mt-7">
+                            {
+                                podcasts.map(podcast => (
+                                    <PodcastBox key={podcast.episode_number} {...podcast} />
+                                ))
+                            }
+
                         </div>
                     </div>
                 </div>

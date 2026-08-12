@@ -320,5 +320,87 @@
       "bannerSrc": "../../../images/skills/banner/flutter-banner.webp",
       "iconSrc": "../../../images/skills/icon/flutter.webp"
     }
+  ],
+  "episodes": [
+    {
+      "episode_number": 1062,
+      "title": "چطور اولین پروژه فریلنسری خودمون رو گرفتیم؟",
+      "likes": 27,
+      "duration": "41:12",
+      "type": "audio",
+      "image_url": "1"
+    },
+    {
+      "episode_number": 1063,
+      "title": "مصاحبه فنی؛ چی بپرسیم و چی جواب بدیم؟",
+      "likes": 52,
+      "duration": "38:47",
+      "type": "audio",
+      "image_url": "2"
+    },
+    {
+      "episode_number": 1064,
+      "title": "زبان برنامه‌نویسی اول؛ پایتون یا جاوااسکریپت؟",
+      "likes": 63,
+      "duration": "44:20",
+      "type": "audio",
+      "image_url": "3"
+    },
+    {
+      "episode_number": 1065,
+      "title": "کار ریموت؛ مزایا و چالش‌های واقعی",
+      "likes": 39,
+      "duration": "36:05",
+      "type": "audio",
+      "image_url": "4"
+    },
+    {
+      "episode_number": 1066,
+      "title": "چطور رزومه برنامه‌نویسی حرفه‌ای بنویسیم؟",
+      "likes": 45,
+      "duration": "29:58",
+      "type": "audio",
+      "image_url": "5"
+    },
+    {
+      "episode_number": 1067,
+      "title": "بوت‌کمپ بریم یا خودآموز باشیم؟",
+      "likes": 41,
+      "duration": "50:14",
+      "type": "audio",
+      "image_url": "1"
+    },
+    {
+      "episode_number": 1068,
+      "title": "تجربه‌ی کار در استارتاپ در مقابل شرکت بزرگ",
+      "likes": 33,
+      "duration": "42:37",
+      "type": "audio",
+      "image_url": "2"
+    },
+    {
+      "episode_number": 1069,
+      "title": "زیر و بم فریلنسری! | فریلنسر بشیم یا نه؟",
+      "likes": 35,
+      "duration": "53:55",
+      "type": "audio",
+      "image_url": "3"
+    },
+    {
+      "episode_number": 1070,
+      "title": "برنامه‌نویسی و دانشگاه – دانشگاه بریم یا نه؟",
+      "likes": 48,
+      "duration": "47:31",
+      "type": "audio",
+      "image_url": "4"
+    },
+    {
+      "episode_number": 1071,
+      "title": "مروری بر مهم‌ترین خبرهای دنیای برنامه‌نویسی در 1403",
+      "likes": 18,
+      "duration": "34:29",
+      "type": "audio",
+      "image_url": "5"
+    }
   ]
 }
