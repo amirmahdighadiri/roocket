@@ -2,7 +2,7 @@ import React from 'react';
 import DynamicIcon from "../../DynamicIcon/DynamicIcon.jsx";
 import {Link} from "react-router-dom";
 
-function SectionTitle({title , linkTitle}) {
+function SectionTitle({title , linkTitle , LinkAddress}) {
     return (
         <div className="flex flex-col sm:flex-row items-center justify-between mb-20">
             {/*<!-- ! -------------------- Section Title -------------------- ! -->*/}
@@ -15,7 +15,7 @@ function SectionTitle({title , linkTitle}) {
                 <h3 className="font-YekanBakh-Fat text-2xl sm:text-4xl mr-4">{title}</h3>
             </div>
             {/*<!-- ! -------------------- Section Link -------------------- ! -->*/}
-            <Link to="/" className="inline-flex self-end items-center gap-x-2 text-dark-550 dark:text-white hover:text-dark-700 dark:hover:text-gray-20 transition-all duration-300 font-YekanBakh-Bold">
+            <Link to={LinkAddress ? LinkAddress : '/'} className="inline-flex self-end items-center gap-x-2 text-dark-550 dark:text-white hover:text-dark-700 dark:hover:text-gray-20 transition-all duration-300 font-YekanBakh-Bold">
                 <span className="text-xl md:text-2xl">{linkTitle}</span>
                 <DynamicIcon name={'arrow'} className={'size-6 md:size-7 text-inherit shrink-0'} />
             </Link>

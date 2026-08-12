@@ -16,6 +16,7 @@ function AppProvider({children}) {
     const [userInfo, setUserInfo] = useState({});
 
     useEffect(() => {
+        window.scrollTo(0, 0)
         setIsOpenMenu(false)
         setIsShowOverlay(false)
     }, [location.pathname])
