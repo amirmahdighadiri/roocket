@@ -18,7 +18,7 @@ const routes = [
             {path: 'products-page', element: <ProductsPage/>},
             {path: 'product-page', element: <ProductPage/>},
             {path: 'certifications' , element: <Certifications/>},
-            {path: 'podcast' , element: <Podcast/>},
+            {path: 'podcasts' , element: <Podcast/>},
         ]
     },
     {path: '/auth' , element: <Auth/> },
