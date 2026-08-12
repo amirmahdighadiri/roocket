@@ -23,6 +23,7 @@ import mahdiProfile from "../../assets/images/profile/mahdi.jpg"
 import ArticleBox from "../../Components/ArticleBox/ArticleBox.jsx";
 import useToggle from "../../Hooks/useToggle/useToggle.jsx";
 import PodcastBox from "../../Components/PodcastBox/PodcastBox.jsx";
+import {getPodcastsFromServer} from "../../Redux/Store/Podcasts.jsx";
 
 
 function Home(props) {
@@ -31,11 +32,13 @@ function Home(props) {
     const dispatch = useDispatch();
     const {courses , loading} = useSelector(state => state.courses);
     const learningPath = useSelector(state => state.learningPath);
+    const {podcasts , podcastLoading} = useSelector(state => state.podcasts);
     const [isShowBox , toggleShowBox] = useToggle(false)
 
     useEffect(() => {
         dispatch(getCoursesFromServer("http://localhost:3000/courses"))
         dispatch(getLearningPathFromServer("http://localhost:3000/learningPath"))
+        dispatch(getPodcastsFromServer("http://localhost:3000/episodes"))
     },[])
 
     return (
