@@ -252,7 +252,7 @@ function Home(props) {
             </section>
             {/*<!-- ! -------------------- Podcast Section -------------------- ! -->*/}
             <section className="container">
-                <SectionTitle title="راکت کست" linkTitle="مشاهده همه پادکست های صوتی" linkAddress="/podcats"/>
+                <SectionTitle title="راکت کست" linkTitle="مشاهده همه پادکست های صوتی" LinkAddress="/podcasts"/>
                 {/*<!-- ! -------------------- Swiper Wrapper -------------------- ! -->*/}
                 <div className="">
                     <Swiper
