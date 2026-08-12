@@ -252,7 +252,7 @@ function Home(props) {
             </section>
             {/*<!-- ! -------------------- Podcast Section -------------------- ! -->*/}
             <section className="container">
-                <SectionTitle title="راکت کست" linkTitle="مشاهده همه پادکست های صوتی"/>
+                <SectionTitle title="راکت کست" linkTitle="مشاهده همه پادکست های صوتی" linkAddress="/podcats"/>
                 {/*<!-- ! -------------------- Swiper Wrapper -------------------- ! -->*/}
                 <div className="">
                     <Swiper
@@ -274,21 +274,13 @@ function Home(props) {
                             }
                         }}
                     >
-                        <SwiperSlide >
-                            <PodcastBox />
-                        </SwiperSlide>
-                        <SwiperSlide >
-                            <PodcastBox />
-                        </SwiperSlide>
-                        <SwiperSlide >
-                            <PodcastBox />
-                        </SwiperSlide>
-                        <SwiperSlide >
-                            <PodcastBox />
-                        </SwiperSlide>
-                        <SwiperSlide >
-                            <PodcastBox />
-                        </SwiperSlide>
+                        {
+                            [...podcasts].reverse().slice(0,5).map(podcast => (
+                                <SwiperSlide key={podcast.episode_number}>
+                                    <PodcastBox {...podcast} />
+                                </SwiperSlide>
+                            ))
+                        }
                     </Swiper>
                     <div className="flex items-center justify-center gap-x-5 mt-5">
                         <div className="custom-podcast-prev-btn">
