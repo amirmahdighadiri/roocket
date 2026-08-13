@@ -326,81 +326,101 @@
       "episode_number": 1062,
       "title": "چطور اولین پروژه فریلنسری خودمون رو گرفتیم؟",
       "likes": 27,
+      "views": 1240,
       "duration": "41:12",
       "type": "audio",
-      "image_url": "1"
+      "image_url": "1",
+      "release_date": "2024-08-31"
     },
     {
       "episode_number": 1063,
       "title": "مصاحبه فنی؛ چی بپرسیم و چی جواب بدیم؟",
       "likes": 52,
+      "views": 2380,
       "duration": "38:47",
       "type": "audio",
-      "image_url": "2"
+      "image_url": "2",
+      "release_date": "2024-09-07"
     },
     {
       "episode_number": 1064,
       "title": "زبان برنامه‌نویسی اول؛ پایتون یا جاوااسکریپت؟",
       "likes": 63,
+      "views": 3150,
       "duration": "44:20",
       "type": "audio",
-      "image_url": "3"
+      "image_url": "3",
+      "release_date": "2024-09-14"
     },
     {
       "episode_number": 1065,
       "title": "کار ریموت؛ مزایا و چالش‌های واقعی",
       "likes": 39,
+      "views": 1870,
       "duration": "36:05",
       "type": "audio",
-      "image_url": "4"
+      "image_url": "4",
+      "release_date": "2024-09-21"
     },
     {
       "episode_number": 1066,
       "title": "چطور رزومه برنامه‌نویسی حرفه‌ای بنویسیم؟",
       "likes": 45,
+      "views": 2640,
       "duration": "29:58",
       "type": "audio",
-      "image_url": "5"
+      "image_url": "5",
+      "release_date": "2024-09-28"
     },
     {
       "episode_number": 1067,
       "title": "بوت‌کمپ بریم یا خودآموز باشیم؟",
       "likes": 41,
+      "views": 2210,
       "duration": "50:14",
       "type": "audio",
-      "image_url": "1"
+      "image_url": "1",
+      "release_date": "2024-10-05"
     },
     {
       "episode_number": 1068,
       "title": "تجربه‌ی کار در استارتاپ در مقابل شرکت بزرگ",
       "likes": 33,
+      "views": 1560,
       "duration": "42:37",
       "type": "audio",
-      "image_url": "2"
+      "image_url": "2",
+      "release_date": "2024-10-12"
     },
     {
       "episode_number": 1069,
       "title": "زیر و بم فریلنسری! | فریلنسر بشیم یا نه؟",
       "likes": 35,
+      "views": 1980,
       "duration": "53:55",
       "type": "audio",
-      "image_url": "3"
+      "image_url": "3",
+      "release_date": "2024-10-19"
     },
     {
       "episode_number": 1070,
       "title": "برنامه‌نویسی و دانشگاه – دانشگاه بریم یا نه؟",
       "likes": 48,
+      "views": 2870,
       "duration": "47:31",
       "type": "audio",
-      "image_url": "4"
+      "image_url": "4",
+      "release_date": "2024-10-26"
     },
     {
       "episode_number": 1071,
       "title": "مروری بر مهم‌ترین خبرهای دنیای برنامه‌نویسی در 1403",
       "likes": 18,
+      "views": 980,
       "duration": "34:29",
       "type": "audio",
-      "image_url": "5"
+      "image_url": "5",
+      "release_date": "2024-11-02"
     }
   ]
 }

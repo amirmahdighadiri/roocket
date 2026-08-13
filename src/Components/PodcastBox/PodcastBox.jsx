@@ -2,7 +2,7 @@ import React from 'react';
 import {Link} from "react-router-dom";
 import DynamicIcon from "../../DynamicIcon/DynamicIcon.jsx";
 
-function PodcastBox({episode_number , title , like , duration , image_url}) {
+function PodcastBox({episode_number , title , likes , duration , image_url}) {
 
     return (
         <div className="bg-white dark:bg-dark-930 rounded-md pt-4">
@@ -29,7 +29,7 @@ function PodcastBox({episode_number , title , like , duration , image_url}) {
                         <svg className="size-3" fill="none" viewBox="0 0 13 11">
                             <path stroke="currentColor" d="M3.95 1.229c.87 0 1.662.433 2.263.926.6-.493 1.393-.926 2.262-.926 1.875 0 3.394 1.394 3.394 3.113 0 3.466-3.945 5.485-5.246 6.056a1.02 1.02 0 0 1-.82 0C4.501 9.827.556 7.808.556 4.342c0-1.72 1.519-3.113 3.393-3.113Z"></path>
                         </svg>
-                        <span id="course-like" className="font-YekanBakh-Medium text-xs">{like}</span>
+                        <span id="course-like" className="font-YekanBakh-Medium text-xs">{likes}</span>
                     </button>
                     <button className="h-5 px-1 bg-blue-700/10 dark:bg-blue-700/10 dark:text-blue-970 dark:hover:bg-blue-970 dark:hover:text-blue-700 rounded transition-all xl:cursor-pointer group">
                         <svg xmlns="http://www.w3.org/2000/svg" width="10" height="12" fill="none" viewBox="0 0 10 12">
@@ -43,8 +43,8 @@ function PodcastBox({episode_number , title , like , duration , image_url}) {
                 </div>
             </div>
             {/*<!-- ! -------------------- Box Body -------------------- ! -->*/}
-            <h3 className="pr-5 mt-2 mb-7">
-                <Link to="/" className="inline-block font-YekanBakh-Bold text-biscay-700 hover:text-blue-700 dark:text-white dark:hover:text-gray-20 text-xl line-clamp-2">{title}</Link>
+            <h3 className="h-14 pr-5 mt-2 mb-7 line-clamp-2">
+                <Link to="/" className="block font-YekanBakh-Bold text-biscay-700 hover:text-blue-700 dark:text-white dark:hover:text-gray-20 text-xl">{title}</Link>
             </h3>
             {/*<!-- ! -------------------- Box Footer -------------------- ! -->*/}
             <div className="relative ml-4 border-t border-gray-300/10 dark:border-dark-910 py-2 pr-5">
