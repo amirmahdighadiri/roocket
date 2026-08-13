@@ -42,6 +42,11 @@
         @variant dark {
             @apply bg-dark-890;
         }
+
+    }
+
+    html{
+        @apply scroll-smooth;
     }
 
     /** , *:before, *:after {*/
