@@ -19,54 +19,68 @@ const accordions = [
 const coursesCategory = [
     {
         id: 1,
-        courseName : " لاراول",
-        courseID : "Laravel"
+        courseName: " لاراول",
+        courseID: "Laravel"
     },
     {
         id: 2,
-        courseName : "کاربردی" ,
-        courseID : "Practical"
+        courseName: "کاربردی",
+        courseID: "Practical"
     },
     {
         id: 3,
-        courseName : " وردپرس",
-        courseID : "Wordpress"
+        courseName: " وردپرس",
+        courseID: "Wordpress"
     },
     {
         id: 4,
-        courseName : " جاوا" ,
-        courseID : "java"
+        courseName: " جاوا",
+        courseID: "java"
     },
     {
         id: 5,
-        courseName : " جاوااسکریپت",
-        courseID : "Javascript"
+        courseName: " جاوااسکریپت",
+        courseID: "Javascript"
     },
     {
         id: 6,
-        courseName : "  اندروید",
-        courseID : "Android"
+        courseName: "  اندروید",
+        courseID: "Android"
     },
     {
         id: 7,
-        courseName : "  پایتون",
-        courseID : "python"
+        courseName: "  پایتون",
+        courseID: "python"
     },
     {
         id: 8,
-        courseName : "  طراحی وب",
-        courseID : "Front-end"
+        courseName: "  طراحی وب",
+        courseID: "Front-end"
     },
     {
         id: 9,
-        courseName : "  کسب‌ و کار",
-        courseID : ""
+        courseName: "  کسب‌ و کار",
+        courseID: ""
     },
     {
         id: 10,
-        courseName : "  دواپس",
-        courseID : "DevOps"
+        courseName: "  دواپس",
+        courseID: "DevOps"
     },
 ]
 
-export {accordions , coursesCategory}
+const timeFilters = [
+    {id: 1, label: "بروزترین", value: "newest"},
+    {id: 2, label: "جدیدترین", value: "latest"},
+    {id: 3, label: "قدیمی ترین", value: "oldest"},
+    {id: 4, label: "هفته پیش", value: "week"},
+    {id: 5, label: "ماه پیش", value: "month"},
+    {id: 6, label: "سال پیش", value: "year"},
+];
+
+const displayFilters = [
+    {id: 1, label: "همه", value: "all"},
+    {id: 2, label: "محبوب ترین", value: "popular"},
+    {id: 3, label: "پربازدیدترین", value: "mostViewed"},
+]
+export {accordions, coursesCategory, timeFilters , displayFilters};
