@@ -15,15 +15,13 @@ function CourseAccordion(props) {
 
     return (
         <>
-            <div onClick={showAccordionHandler} className="flex items-center justify-between dark:bg-dark-900 border border-gray-210 dark:border-dark-900 rounded-lg cursor-pointer py-4 px-6 mb-4">
+            <div onClick={showAccordionHandler} className="flex items-center justify-between dark:bg-dark-900 border border-gray-210 dark:border-dark-900 rounded-lg cursor-pointer p-2 md:py-4 md:px-6 mb-4">
                 <div className="">
-                    <span
-                        className="inline-block text-chambray-700 dark:text-white text-xl font-Mult-Font-Bold border-l border-gray-200 dark:border-gray-200/30 pl-7 ml-5">بخش اول</span>
-                    <span
-                        className="text-dark-550 dark:text-gray-200 font-Mult-Font-Medium text-xl">معرفی و مقدمه</span>
+                    <span className="inline-block text-chambray-700 dark:text-white text-sm md:text-xl font-Mult-Font-Bold border-l border-gray-200 dark:border-gray-200/30 pl-2 md:pl-7 ml-2 md:ml-5">بخش اول</span>
+                    <span className="text-dark-550 dark:text-gray-200 font-Mult-Font-Medium text-sm md:text-xl">معرفی و مقدمه</span>
                 </div>
                 <div className="text-dark-550 dark:text-gray-200">
-                    <DynamicIcon name="arrow" className={`size-7 text-inherit ${isShowMessage ? '-rotate-90' : 'rotate-0'} transition-all duration-600`} />
+                    <DynamicIcon name="arrow" className={`size-5 md:size-7 text-inherit ${isShowMessage ? '-rotate-90' : 'rotate-0'} transition-all duration-600`} />
                 </div>
             </div>
             <div ref={contentRef}  className={`${isShowMessage ? `mb-2` : 'mb-0'} overflow-hidden transition-all duration-600 delay-100 pr-8`} style={{height: isShowMessage ? `${height}px` : "0px"}}>

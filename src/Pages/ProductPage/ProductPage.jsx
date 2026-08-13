@@ -46,7 +46,6 @@ function ProductPage() {
 
 
     const changeTab = (event) => {
-        event.preventDefault()
         setTab(event.target.id)
     }
 
@@ -85,8 +84,7 @@ function ProductPage() {
                     </div>
                 </div>
                 {/*<!-- ! -------------------- Courses Meta -------------------- ! -->*/}
-                <div
-                    className="flex items-center justify-between border-t border-gray-100 dark:border-gray-900/10 pt-5 mt-10">
+                <div className="flex items-center justify-between border-t border-gray-100 dark:border-gray-900/10 pt-5 mt-10">
                     {/*<!-- ! -------------------- Courses Action Btn -------------------- ! -->*/}
                     <div className="flex items-center gap-x-5 lg:gap-x-7">
                         <button type="button"
@@ -122,41 +120,40 @@ function ProductPage() {
                 </div>
             </div>
             {/*<!-- ! -------------------- Courses Details -------------------- ! -->*/}
-            <div className="grid grid-cols-12 gap-x-3">
+            <div className="grid grid-cols-12 gap-x-3 gap-y-5">
                 {/*<!-- ! -------------------- Courses Details Right -------------------- ! -->*/}
-                <div className="col-span-9">
+                <div className="col-span-12 lg:col-span-9">
                     {/*<!-- ! --------------------  Sentinel Element For Detecting Sticky State -------------------- ! -->*/}
                     <div ref={triggerRef}></div>
                     {/*<!-- ! -------------------- Courses Details Tabs -------------------- ! -->*/}
                     <div className={`sticky top-4 z-10 ${isSticky ? 'bg-black/8 dark:bg-black/15 backdrop-blur-xl border-white/10 mx-2' : 'bg-white dark:bg-dark-930 mx-0'} shadow-sm py-4 rounded mb-8 transition-all`}>
-                        <ul className="px-6 space-x-8">
+                        <ul className="px-6 space-x-5 md:space-x-8">
                             <li className="inline-block">
-                                <button id="description" type="button" onClick={changeTab}
+                                <a href="#description-text" id="description" type="button" onClick={changeTab}
                                         className={`relative ${tab === "description" ? 'text-blue-700 before:opacity-100' : 'text-gray-300 hover:text-gray-700 dark:hover:text-white before:opacity-0'} font-YekanBakh-Bold cursor-pointer pr-2 transition-all before:content-[''] before:absolute before:top-0 before:bottom-0 before:-right-1 before:my-auto before:size-1 before:rounded-full before:bg-blue-700`}>توضیحات
-                                </button>
+                                </a>
                             </li>
-                            <li className="inline-block">
-                                <button id="guarantee " type="button" onClick={changeTab}
+                            <li className="hidden md:inline-block">
+                                <a href="#guarantee-text" id="guarantee " type="button" onClick={changeTab}
                                         className={`relative ${tab === "guarantee " ? 'text-blue-700 before:opacity-100' : 'text-gray-300 hover:text-gray-700 dark:hover:text-white before:opacity-0'} font-YekanBakh-Bold cursor-pointer pr-2 transition-all before:content-[''] before:absolute before:top-0 before:bottom-0 before:-right-1 before:my-auto before:size-1 before:rounded-full before:bg-blue-700`}>گارانتی
                                     بازگشت وجه
-                                </button>
+                                </a>
                             </li>
                             <li className="inline-block">
-                                <button id="curriculum " type="button" onClick={changeTab}
-                                        className={`relative ${tab === "curriculum " ? 'text-blue-700 before:opacity-100' : 'text-gray-300 hover:text-gray-700 dark:hover:text-white before:opacity-0'} font-YekanBakh-Bold cursor-pointer pr-2 transition-all before:content-[''] before:absolute before:top-0 before:bottom-0 before:-right-1 before:my-auto before:size-1 before:rounded-full before:bg-blue-700`}>جلسات
+                                <a href="#curriculum-content" id="curriculum" type="button" onClick={changeTab}
+                                        className={`relative ${tab === "curriculum" ? 'text-blue-700 before:opacity-100' : 'text-gray-300 hover:text-gray-700 dark:hover:text-white before:opacity-0'} font-YekanBakh-Bold cursor-pointer pr-2 transition-all before:content-[''] before:absolute before:top-0 before:bottom-0 before:-right-1 before:my-auto before:size-1 before:rounded-full before:bg-blue-700`}>جلسات
                                     دوره
-                                </button>
+                                </a>
                             </li>
                             <li className="inline-block">
-                                <button id="reviews" type="button" onClick={changeTab}
-                                        className={`relative ${tab === "reviews" ? 'text-blue-700 before:opacity-100' : 'text-gray-300 hover:text-gray-700 dark:hover:text-white before:opacity-0'} font-YekanBakh-Bold cursor-pointer pr-2 transition-all before:content-[''] before:absolute before:top-0 before:bottom-0 before:-right-1 before:my-auto before:size-1 before:rounded-full before:bg-blue-700`}>دیدگاه
+                                <a href="#reviews-content" id="reviews" type="button" onClick={changeTab} className={`relative ${tab === "reviews" ? 'text-blue-700 before:opacity-100' : 'text-gray-300 hover:text-gray-700 dark:hover:text-white before:opacity-0'} font-YekanBakh-Bold cursor-pointer pr-2 transition-all before:content-[''] before:absolute before:top-0 before:bottom-0 before:-right-1 before:my-auto before:size-1 before:rounded-full before:bg-blue-700`}>دیدگاه
                                     و پرسش
-                                </button>
+                                </a>
                             </li>
                         </ul>
                     </div>
                     {/*<!-- ! -------------------- Courses Description Text -------------------- ! -->*/}
-                    <div className="bg-white dark:bg-dark-930 shadow-sm rounded px-10 py-9">
+                    <div id="description-text" className="bg-white dark:bg-dark-930 shadow-sm rounded px-3 md:px-10 py-9 mb-8 scroll-mt-14">
                         <span className="relative text-blue-700 dark:text-white text-2xl font-YekanBakh-Heavy pr-2 before:content-[''] before:absolute before:top-0 before:bottom-0 before:-right-1 before:my-auto before:size-2 before:rounded-full dark:before:bg-white before:bg-blue-700">
                             توضیحات
                         </span>
@@ -211,7 +208,7 @@ function ProductPage() {
                         </div>
                     </div>
                     {/*<!-- ! -------------------- Courses Support -------------------- ! -->*/}
-                    <div className="bg-white dark:bg-dark-930 shadow-sm rounded px-9 py-8 my-8">
+                    <div id="guarantee-text" className="hidden md:block bg-white dark:bg-dark-930 shadow-sm rounded px-3 md:px-9 py-8 mb-8 scroll-mt-14">
                         <h2 className="relative text-blue-700 dark:text-white text-2xl font-YekanBakh-Heavy pr-2 before:content-[''] before:absolute before:top-0 before:bottom-0 before:-right-1 before:my-auto before:size-2 before:rounded-full dark:before:bg-white before:bg-blue-700">گارانتی
                             بازگشت وجه</h2>
                         <div className="flex items-center mt-6">
@@ -231,7 +228,7 @@ function ProductPage() {
                         </div>
                     </div>
                     {/*<!-- ! -------------------- Courses Curriculum -------------------- ! -->*/}
-                    <div className="bg-white dark:bg-dark-930 shadow-sm rounded px-10 py-7 mb-8">
+                    <div id="curriculum-content" className="bg-white dark:bg-dark-930 shadow-sm rounded px-3 md:px-10 py-7 mb-8 scroll-mt-14">
                         <h2 className="relative text-blue-700 dark:text-white text-2xl font-YekanBakh-Heavy pr-2 mb-5 before:content-[''] before:absolute before:top-0 before:bottom-0 before:-right-1 before:my-auto before:size-2 before:rounded-full dark:before:bg-white before:bg-blue-700">جلسات
                             دوره</h2>
                         {/*<!-- ! -------------------- Courses Curriculum Links -------------------- ! -->*/}
@@ -241,13 +238,13 @@ function ProductPage() {
                         </div>
                     </div>
                     {/*<!-- ! -------------------- Courses comments Wrapper -------------------- ! -->*/}
-                    <div className="bg-white dark:bg-dark-930 shadow-sm rounded px-10 py-7">
+                    <div id="reviews-content" className="bg-white dark:bg-dark-930 shadow-sm rounded px-3 md:px-10 py-7 scroll-mt-14">
                         <h2 className="relative text-blue-700 dark:text-white text-2xl font-YekanBakh-Heavy pr-2 mb-5 before:content-[''] before:absolute before:top-0 before:bottom-0 before:-right-1 before:my-auto before:size-2 before:rounded-full dark:before:bg-white before:bg-blue-700">دیدگاه
                             و پرسش</h2>
                         {/*<!-- ! -------------------- sign-up wrapper -------------------- ! -->*/}
-                        <div className="flex items-center justify-between px-8 py-5 bg-customOrange-550 text-white rounded-lg text-xl font-Mult-Font-Medium mb-6">
+                        <div className="flex flex-col lg:flex-row items-center justify-between gap-y-4 px-8 py-5 bg-customOrange-550 text-white rounded-lg text-xl font-Mult-Font-Medium mb-6">
                             <div className="flex items-center gap-x-2">
-                                <DynamicIcon name="profile" className="size-8 text-inherit"/>
+                                <DynamicIcon name="profile" className="size-8 text-inherit shrink-0"/>
                                 <span className="">برای ارسال دیدگاه لازم است وارد شده یا ثبت‌نام کنید</span>
                             </div>
                             <Link to="/" className="flex items-center gap-x-2 hover:text-gray-700 transition-all">
@@ -262,7 +259,7 @@ function ProductPage() {
                     </div>
                 </div>
                 {/*<!-- ! -------------------- Courses Details Left -------------------- ! -->*/}
-                <div className="col-span-3">
+                <div className="col-span-12 lg:col-span-3">
                     {/*<!-- ! -------------------- Score Wrapper -------------------- ! -->*/}
                     <div className="flex justify-between bg-white dark:bg-dark-930 py-4 px-5 shadow-sm rounded overflow-hidden mb-4">
                         {/*<!-- ! -------------------- Course Status -------------------- ! -->*/}
@@ -367,18 +364,18 @@ function ProductPage() {
                     {/*<!-- ! -------------------- Chat Wrapper -------------------- ! -->*/}
                     <div className="flex flex-col items-center border border-primary-gray-185/60 dark:border-primary-gray-185/5 py-4 px-12 shadow-sm rounded mb-4">
                         <img src={chatImage} alt="chat Image" className=""/>
-                        <h6 className="text-chambray-700 dark:text-white font-YekanBakh-Heavy text-2xl mb-2">گفتگوی‌
+                        <h6 className="text-chambray-700 dark:text-white font-YekanBakh-Heavy text-2xl mb-2 text-center">گفتگوی‌
                             برنامه نویسان</h6>
                         <p className="text-gray-360 dark:text-gray-920  mb-4 text-center">بخشی برای حل مشکلات
                             برنامه‌نویسی و مباحث پیرامون آن</p>
                         <Link to="/"
-                              className="flex items-center justify-center gap-x-2 hovertext-blue-700 text-gray-800 dark:hover:text-white dark:text-blue-450 text-lg font-YekanBakh-Bold transition-all pt-3">
+                              className="flex items-center justify-center gap-x-2 hovertext-blue-700 text-gray-800 dark:hover:text-white dark:text-blue-450 text-sm xl:text-lg font-YekanBakh-Bold transition-all pt-3">
                             <span className=""> کلیک کن و وارد شو</span>
                             <DynamicIcon name="arrow" className="size-5 text-inherit"/>
                         </Link>
                     </div>
                     {/*<!-- ! -------------------- Banner Wrapper -------------------- ! -->*/}
-                    <div className="space-y-4 mb-4">
+                    <div className="hidden lg:block space-y-4 mb-4">
                         <div className="w-full border border-primary-gray-185 rounded-lg overflow-hidden">
                             <Link to="/" className="">
                                 <img src={banner1} alt="" className="w-full h-full object-cover"/>

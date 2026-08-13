@@ -81,6 +81,7 @@ function Podcast(props) {
     return (
         <section className="container">
             <div className="grid grid-cols-12 gap-6 mt-12">
+                {/*<!-- ! -------------------- Tags & Banner -------------------- ! -->*/}
                 <aside className="hidden xl:block xl:col-span-3">
                     {/*<!-- ! -------------------- Aside Wrapper -------------------- ! -->*/}
                     <div className="pt-9 pb-9 px-5 dark:bg-dark-930 border border-primary-gray-185 dark:border-dark-930 mb-8 rounded-md">
@@ -115,6 +116,7 @@ function Podcast(props) {
                         </div>
                     </div>
                 </aside>
+                {/*<!-- ! -------------------- Filter & Podcasts -------------------- ! -->*/}
                 <div className="col-span-12 xl:col-span-9">
                     {/*<!-- ! -------------------- Filter Wrapper -------------------- ! -->*/}
                     <div className="flex flex-col md:flex-row items-center gap-x-2 gap-y-5 pb-6 border-b border-biscay-700/30 mb-7">

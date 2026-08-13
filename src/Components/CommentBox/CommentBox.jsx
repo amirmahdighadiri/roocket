@@ -28,7 +28,7 @@ function CommentBox(props) {
             </div>
             {/*<!-- ! -------------------- Comment Content Wrapper -------------------- ! -->*/}
             <div className="pt-5">
-                <p className="text-lg/9 text-biscay-700 dark:text-white font-Mult-Font-Medium">سلام و وقت بخیر امیدوارم سلامت باشی میخواستم بپرسم api ای که توی این دوره تکمیل میشه قابل استفاده برای vue و react next هم هست ؟</p>
+                <p className="text-base/9 md:text-lg/9 text-biscay-700 dark:text-white font-Mult-Font-Medium">سلام و وقت بخیر امیدوارم سلامت باشی میخواستم بپرسم api ای که توی این دوره تکمیل میشه قابل استفاده برای vue و react next هم هست ؟</p>
             </div>
         </div>
     );
