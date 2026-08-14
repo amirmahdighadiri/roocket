@@ -994,7 +994,6 @@ function Skills(props) {
                 {skills.map((item,index) => (
                     <RoadmapBanner key={item.id} {...item} isEven={index % 2 === 0}/>
                 ))}
-
             </div>
             {/*<!-- ! -------------------- Accordions Wrapper -------------------- ! -->*/}
             <div className="mt-24 lg:px-40 mb-24">

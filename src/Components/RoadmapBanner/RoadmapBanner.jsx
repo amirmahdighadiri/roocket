@@ -2,9 +2,9 @@ import React from 'react';
 import {Link} from "react-router-dom";
 import DynamicIcon from "../../DynamicIcon/DynamicIcon.jsx";
 
-function RoadmapBanner({isEven , name , desc , iconSrc , bannerSrc}) {
+function RoadmapBanner({isEven , skillId, name , desc , iconSrc , bannerSrc}) {
     return (
-        <div className={`flex flex-col ${isEven ? 'lg:flex-row ' : 'lg:flex-row-reverse'} items-center justify-between gap-x-20`}>
+        <div id={skillId} className={`flex flex-col ${isEven ? 'lg:flex-row ' : 'lg:flex-row-reverse'} items-center justify-between gap-x-20 scroll-mt-8`}>
             {/*<!-- ! -------------------- Skill Content -------------------- ! -->*/}
             <div className="w-full relative flex flex-col lg:even:flex-row lg:odd:flex-row-reverse items-start">
                 {/*<!-- ! -------------------- Skill Icon  -------------------- ! -->*/}
