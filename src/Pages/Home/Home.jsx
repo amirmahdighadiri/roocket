@@ -46,7 +46,7 @@ function Home(props) {
             <HeroSection />
             {/*<!-- ! -------------------- Last Course Section -------------------- ! -->*/}
             <section className="container mt-28 xl:mt-50">
-                <SectionTitle title="آخرین دوره ها" linkTitle="مشاهده همه دوره‌ها"/>
+                <SectionTitle title="آخرین دوره ها" linkTitle="مشاهده همه دوره‌ها" LinkAddress="/products-page"/>
                 {/*<!-- ! -------------------- Course Wrapper -------------------- ! -->*/}
                 <div className="grid grid-cols-12 gap-x-6 gap-y-20">
                     {courses.map(course => (
@@ -56,7 +56,7 @@ function Home(props) {
             </section>
             {/*<!-- ! -------------------- Learning Path Section -------------------- ! -->*/}
             <section className="container mt-13 md:mt-32">
-                <SectionTitle title="مسیرهای یادگیری" linkTitle="مشاهده همه مسیر‌های یادگیری"/>
+                <SectionTitle title="مسیرهای یادگیری" linkTitle="مشاهده همه مسیر‌های یادگیری" LinkAddress="/skills"/>
                 {/*<!-- ! -------------------- Swiper Wrapper -------------------- ! -->*/}
                 <div className="-mt-10 md:-mt-5">
                     <Swiper
