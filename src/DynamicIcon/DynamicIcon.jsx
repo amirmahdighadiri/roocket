@@ -371,6 +371,11 @@ const iconsMap = {
             <path stroke="none" d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7l233.4-233.3c12.5-12.5 32.8-12.5 45.3 0z"></path>
         </svg>
     ),
+    checkCircle :(
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
+            <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+        </svg>
+    ),
     microphone :(
         <svg xmlns="http://www.w3.org/2000/svg" width="45" height="45" fill="none" viewBox="0 0 45 45">
             <path fill="currentColor" d="M36.621 18.423a1.805 1.805 0 0 0-1.816 1.794c0 6.7-5.52 12.15-12.304 12.15-6.786 0-12.306-5.45-12.306-12.15 0-.992-.814-1.794-1.816-1.794a1.805 1.805 0 0 0-1.816 1.794c0 8.072 6.186 14.735 14.122 15.63v3.61c0 .99.812 1.793 1.816 1.793a1.806 1.806 0 0 0 1.816-1.794v-3.609c7.934-.895 14.12-7.559 14.12-15.63 0-.992-.813-1.794-1.816-1.794" opacity="0.4"></path>

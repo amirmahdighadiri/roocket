@@ -1,29 +1,64 @@
-import React, {useState} from 'react';
+import React, {useState , useEffect,useContext} from 'react';
 import {Link} from "react-router-dom";
 import DynamicIcon from "../../DynamicIcon/DynamicIcon.jsx";
 import Notification from "../../Components/Notification/Notification.jsx";
+import {AppContext} from "../../Context/AppContext.jsx";
+import {useDispatch, useSelector} from "react-redux";
+import users, {getUsersFromServer} from "../../Redux/Store/Users.jsx";
 
 function Auth() {
+    const dispatch = useDispatch();
+    const users = useSelector(state => state.users);
     const [username, setUsername] = useState("");
-    const [isShowNotification, setIsShowNotification] = useState(false);
+    const {isShowNotification , setIsShowNotification} = useContext(AppContext)
     const [notificationValue, setNotificationValue] = useState({
         title: "خطا !",
         message: "لطفا نام کاربر خود را به درستی وارد کنید.",
         Icon:()=> <DynamicIcon name={'closeCircle'} className={'size-7 text-blue-700'} />
     });
 
+    const showNotificationHandler = ({title, message, Icon})=>{
+        setNotificationValue({
+            title ,
+            message ,
+            Icon
+        })
+        setIsShowNotification(true)
+    }
+
+    useEffect(() => {
+        dispatch(getUsersFromServer("http://localhost:3000/users"))
+    },[])
 
     const checkUserHandler = async (event) => {
         event.preventDefault();
-        if (username){
-            console.log("username already exists");
+        const emailOrPhoneRegex = /^(?:[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}|(?:\+98|0)?9\d{9})$/;
+        const isValid = emailOrPhoneRegex.test(username);
+
+        if (isValid){
+
+            const isUserExist = users.some(user => user.phone === username || user.email === username);
+
+            if (isUserExist){
+                showNotificationHandler({
+                    title: "موفق !",
+                    message: "به سایت راکت خوش آمدید.",
+                    Icon:()=> <DynamicIcon name={'checkCircle'} className={'size-7 text-blue-700'} />
+                })
+            } else {
+                showNotificationHandler({
+                    title: "خطا !",
+                    message: "لطفا ابتدا در سایت ثبت نام نمایید.",
+                    Icon:()=> <DynamicIcon name={'closeCircle'} className={'size-7 text-blue-700'} />
+                })
+            }
+
         }else {
-            setNotificationValue({
+            showNotificationHandler({
                 title: "خطا !",
                 message: "لطفا نام کاربر خود را به درستی وارد کنید.",
                 Icon:()=> <DynamicIcon name={'closeCircle'} className={'size-7 text-blue-700'} />
             })
-            setIsShowNotification(true)
         }
     }
 
@@ -44,7 +79,7 @@ function Auth() {
                 {/*<!-- ! -------------------- Form -------------------- ! -->*/}
                 <form className="mt-5">
                     <span className="block mr-2 mb-2 text-sm text-gray-300 dark:text-gray-210">موبایل یا ایمیل</span>
-                    <input type="text" className="w-full bg-gray-300/10 dark:bg-dark-890 rounded-lg px-4 py-2 outline-0 border border-transparent focus:border-blue-700" required value={username} onChange={(e) => setUsername(e.target.value)}/>
+                    <input type="text" className="w-full bg-gray-300/10 dark:bg-dark-890 rounded-lg px-4 py-2 outline-0 border border-transparent focus:border-blue-700 font-Mult-Font-Medium text-sm" required value={username} onChange={(e) => setUsername(e.target.value)}/>
                     <p className="flex items-center gap-1 mt-4 font-YekanBakh-Medium text-xs text-gray-600 dark:text-gray-50">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="text-blue-600" viewBox="0 0 256 256">
                             <path d="M224 128a96 96 0 1 1-96-96 96 96 0 0 1 96 96" opacity="0.2"></path>
@@ -68,9 +103,6 @@ function Auth() {
             {
                 isShowNotification && <Notification {...notificationValue} isOpen={isShowNotification}/>
             }
-
-
-
         </section>
     );
 }

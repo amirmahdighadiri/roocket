@@ -2,6 +2,7 @@
   "users": [
     {
       "id": 1,
+      "phone": "09199891684",
       "username": "amirmahdighadiri",
       "password": "123456789",
       "email": "amirmahdighadiri@gmail.com",

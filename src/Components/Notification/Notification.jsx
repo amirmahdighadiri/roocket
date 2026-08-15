@@ -1,15 +1,17 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useState,useContext} from 'react';
 import ReactDOM from "react-dom";
+import {AppContext} from "../../Context/AppContext.jsx";
 
 function Notification({title, message, Icon, setIsOpen , isOpen}) {
     const [modalTopPosition, setModalTopPosition] = useState(0);
+    const { setIsShowNotification} = useContext(AppContext)
     useEffect(() => {
 
         setModalTopPosition(window.scrollY + 20)
 
-        // const closeModalTimer = setTimeout(() => {
-        //     setIsOpenNotification(false)
-        // }, 2700)
+        const closeModalTimer = setTimeout(() => {
+            setIsShowNotification(false)
+        }, 2700)
 
         const changgePositionTimer = setTimeout(() => {
             setModalTopPosition(-50)
@@ -17,7 +19,7 @@ function Notification({title, message, Icon, setIsOpen , isOpen}) {
 
 
         return () =>{
-            // clearTimeout(closeModalTimer)
+            clearTimeout(closeModalTimer)
             clearTimeout(changgePositionTimer)
         }
 
@@ -36,8 +38,7 @@ function Notification({title, message, Icon, setIsOpen , isOpen}) {
                 <p className="text-sm">{message}</p>
             </div>
             {/* ! ================== ! Progress Bar ! ================== ! */}
-            <div
-                className={`absolute bottom-0 -right-0 w-full h-0.75 bg-blue-500 animate-grow-width`}></div>
+            <div className={`absolute bottom-0 right-0 w-full h-0.75 bg-blue-500 animate-grow-width`}></div>
         </div>,
         document.getElementById("notification-wrapper"));
 }
