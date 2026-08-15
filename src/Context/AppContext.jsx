@@ -14,6 +14,7 @@ function AppProvider({children}) {
     const [theme, setTheme] = useLocalStorage('theme', 'light');
     const [isLoggin, setIsLoggin] = useState(false);
     const [userInfo, setUserInfo] = useState({});
+    const [isShowNotification, setIsShowNotification] = useState(false);
 
     useEffect(() => {
         window.scrollTo(0, 0)
@@ -30,6 +31,8 @@ function AppProvider({children}) {
         setIsShowOverlay,
         isLoggin,
         userInfo,
+        isShowNotification,
+        setIsShowNotification
     }
 
     useEffect(() => {
