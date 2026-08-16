@@ -1,5 +1,5 @@
 import React, {useState, useEffect, useContext} from 'react';
-import {Link} from "react-router-dom";
+import {Link , useNavigate} from "react-router-dom";
 import DynamicIcon from "../../DynamicIcon/DynamicIcon.jsx";
 import Notification from "../../Components/Notification/Notification.jsx";
 import {AppContext} from "../../Context/AppContext.jsx";
@@ -8,9 +8,10 @@ import users, {getUsersFromServer} from "../../Redux/Store/Users.jsx";
 
 function Auth() {
     const dispatch = useDispatch();
+    const navigate = useNavigate();
     const users = useSelector(state => state.users);
     const [username, setUsername] = useState("");
-    const {isShowNotification, setIsShowNotification} = useContext(AppContext)
+    const {isShowNotification, setIsShowNotification , setIsLogin , setUserInfo} = useContext(AppContext)
     const [notificationValue, setNotificationValue] = useState({
         title: "خطا !",
         message: "لطفا نام کاربر خود را به درستی وارد کنید.",
@@ -36,15 +37,22 @@ function Auth() {
         const isValid = emailOrPhoneRegex.test(username);
 
         if (isValid) {
-
-            const isUserExist = users.some(user => user.phone === username || user.email === username);
+            const isUserExist = users.find(user => user.phone === username || user.email === username);
 
             if (isUserExist) {
+
+                setIsLogin(true);
+                setUserInfo(isUserExist)
+
                 showNotificationHandler({
                     title: "موفق !",
                     message: "به سایت راکت خوش آمدید.",
                     Icon: () => <DynamicIcon name={'checkCircle'} className={'size-7 text-blue-700'}/>
                 })
+
+                setTimeout(() => {
+                    navigate("/");
+                },2600)
             } else {
                 showNotificationHandler({
                     title: "خطا !",
