@@ -12,7 +12,7 @@ function AppProvider({children}) {
     const [isOpenMenu, setIsOpenMenu] = useToggle(false);
     const [isShowOverlay, setIsShowOverlay] = useToggle(false);
     const [theme, setTheme] = useLocalStorage('theme', 'light');
-    const [isLoggin, setIsLoggin] = useState(false);
+    const [isLogin, setIsLogin] = useState(false);
     const [userInfo, setUserInfo] = useState({});
     const [isShowNotification, setIsShowNotification] = useState(false);
 
@@ -29,8 +29,10 @@ function AppProvider({children}) {
         setIsOpenMenu,
         isShowOverlay,
         setIsShowOverlay,
-        isLoggin,
+        isLogin,
+        setIsLogin,
         userInfo,
+        setUserInfo,
         isShowNotification,
         setIsShowNotification
     }
