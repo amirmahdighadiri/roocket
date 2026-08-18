@@ -8,6 +8,7 @@ import ProductsPage from "./Pages/ProductsPage/ProductsPage.jsx";
 import Certifications from "./Pages/Certifications/Certifications.jsx";
 import ProductPage from "./Pages/ProductPage/ProductPage.jsx";
 import Podcast from "./Pages/Podcast/Podcast.jsx";
+import Verify from "./Pages/Auth/Verify.jsx";
 
 const routes = [
     {
@@ -22,6 +23,7 @@ const routes = [
         ]
     },
     {path: '/auth' , element: <Auth/> },
+    {path: '/verify' , element: <Verify/> },
     {path: '/*', element: <Error/>}
 ]
 
