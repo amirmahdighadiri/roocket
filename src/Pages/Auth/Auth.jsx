@@ -116,9 +116,7 @@ function Auth() {
                   </svg>
             </span>
 
-
             <Notification {...notificationValue} isOpen={isShowNotification}/>
-
         </section>
     );
 }

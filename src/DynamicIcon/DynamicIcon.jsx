@@ -464,7 +464,18 @@ const iconsMap = {
             <path stroke='currentColor' strokeLinecap='round' strokeLinejoin='round' strokeWidth='1.5' d='M11 6.417v9.166m4.583-5.5v5.5m-9.166-3.666v3.666' opacity='0.4'
             ></path>
         </svg>
-    )
+    ),
+    informationCircle: (
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
+            <path strokeLinecap="round" strokeLinejoin="round" d="m11.25 11.25.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z" />
+        </svg>
+    ),
+    arrowRight: (
+        <svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' className='transition group-hover:translate-x-0.5' viewBox='0 0 256 256'>
+            <path d='m221.66 133.66-72 72a8 8 0 0 1-11.32-11.32L196.69 136H40a8 8 0 0 1 0-16h156.69l-58.35-58.34a8 8 0 0 1 11.32-11.32l72 72a8 8 0 0 1 0 11.32'></path>
+        </svg>
+     )
+
 
 }
 
