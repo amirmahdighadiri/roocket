@@ -1,9 +1,35 @@
-import React, {useState, useEffect, useContext} from 'react';
+import React, {useState, useEffect, useContext ,useRef} from 'react';
 import {Link , useNavigate} from "react-router-dom"
 import DynamicIcon from "../../DynamicIcon/DynamicIcon.jsx";
 import Notification from "../../Components/Notification/Notification.jsx";
 
 function Verify(props) {
+    const [verifyCode, setVerifyCode] = useState(["" , "" , "" , ""]);
+    const [inputActive, setInputActive] = useState(0)
+    const inputRefs = useRef([]);
+
+    const inputChangeHandler = (event , index)=>{
+
+        const code = [...verifyCode]
+
+        code[index] = event.target.value;
+
+
+
+        if (event.target.value && index < verifyCode.length - 1) {
+            inputRefs.current[index + 1]?.focus();
+        }
+        setVerifyCode(code);
+    }
+
+   const inputKeyDownHandler = (event , index) => {
+        if (event.key === "Backspace") {
+            if (!verifyCode[index] && index > 0){
+                inputRefs.current[index - 1]?.focus();
+            }
+        }
+   }
+
     return (
         <section className="min-h-screen flex flex-col items-center justify-center">
             <div className="w-full lg:w-1/4 flex flex-col items-center">
@@ -26,11 +52,12 @@ function Verify(props) {
                     </div>
                     {/*<!-- ! -------------------- Form -------------------- ! -->*/}
                     <form className="mt-5">
-                        <div className="flex items-center gap-x-4">
-                            <input type="text" inputMode="numeric" className="w-full bg-gray-300/10 dark:bg-dark-890 rounded-lg px-4 py-2 outline-0 border border-transparent focus:border-blue-700 font-Mult-Font-Medium text-center text-lg" maxLength={1} required />
-                            <input type="text" inputMode="numeric" className="w-full bg-gray-300/10 dark:bg-dark-890 rounded-lg px-4 py-2 outline-0 border border-transparent focus:border-blue-700 font-Mult-Font-Medium text-center text-lg" maxLength={1} required />
-                            <input type="text" inputMode="numeric" className="w-full bg-gray-300/10 dark:bg-dark-890 rounded-lg px-4 py-2 outline-0 border border-transparent focus:border-blue-700 font-Mult-Font-Medium text-center text-lg" maxLength={1} required />
-                            <input type="text" inputMode="numeric" className="w-full bg-gray-300/10 dark:bg-dark-890 rounded-lg px-4 py-2 outline-0 border border-transparent focus:border-blue-700 font-Mult-Font-Medium text-center text-lg" maxLength={1} required />
+                        <div dir="ltr" className="flex items-center gap-x-4">
+                            {
+                                verifyCode.map((item , index) => (
+                                    <input value={item} ref={(element => inputRefs.current[index]=element)} key={index} onKeyDown={(event)=>inputKeyDownHandler(event,index)} onChange={(event)=>inputChangeHandler(event , index)} type="text" inputMode="numeric" className="w-full bg-gray-300/10 dark:bg-dark-890 rounded-lg px-4 py-2 outline-0 border border-transparent focus:border-blue-700 font-Mult-Font-Medium text-center text-lg" maxLength={1} required />
+                                ))
+                            }
                         </div>
 
                         <p className="text-center gap-1 mt-4 font-YekanBakh-Medium text-gray-600 dark:text-gray-50">
