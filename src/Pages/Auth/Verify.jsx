@@ -1,20 +1,33 @@
 import React, {useState, useEffect, useContext ,useRef} from 'react';
-import {Link , useNavigate} from "react-router-dom"
+import {Link , useNavigate,useLocation} from "react-router-dom"
 import DynamicIcon from "../../DynamicIcon/DynamicIcon.jsx";
 import Notification from "../../Components/Notification/Notification.jsx";
+import useToggle from "../../Hooks/useToggle/useToggle.jsx";
+import {AppContext} from "../../Context/AppContext.jsx";
 
 function Verify(props) {
     const [verifyCode, setVerifyCode] = useState(["" , "" , "" , ""]);
-    const [inputActive, setInputActive] = useState(0)
+    const [isShowVerifyCode, toggleIsShowVerifyCode] = useToggle()
     const inputRefs = useRef([]);
+    const location = useLocation();
+    const navigate = useNavigate();
+    const [randomNumber] = useState(()=>Math.floor(Math.random()*10000))
+    const {isShowNotification, setIsShowNotification , setIsLogin , setUserInfo} = useContext(AppContext)
+    const [notificationValue, setNotificationValue] = useState({
+        title: "خطا !",
+        message: "لطفا نام کاربر خود را به درستی وارد کنید.",
+        Icon: () => <DynamicIcon name={'closeCircle'} className={'size-7 text-blue-700'}/>
+    });
+
+    useEffect(() => {
+        inputRefs.current[0].focus()
+        toggleIsShowVerifyCode()
+    },[])
 
     const inputChangeHandler = (event , index)=>{
 
         const code = [...verifyCode]
-
         code[index] = event.target.value;
-
-
 
         if (event.target.value && index < verifyCode.length - 1) {
             inputRefs.current[index + 1]?.focus();
@@ -30,8 +43,35 @@ function Verify(props) {
         }
    }
 
+   const showVerifyCodeNotificationHandler = (event)=>{
+        event.preventDefault()
+        toggleIsShowVerifyCode()
+   }
+
+   const checkOPTCodeHandler = (event)=>{
+        event.preventDefault()
+        const code = verifyCode.join("")
+
+       if (code === randomNumber.toString()){
+           toggleIsShowVerifyCode()
+           setIsShowNotification(true)
+           setIsLogin(true);
+           setUserInfo(location.state.userInfo)
+
+           setNotificationValue({
+               title: "موفق !",
+               message: "به سایت راکت خوش آمدید.",
+               Icon: () => <DynamicIcon name={'checkCircle'} className={'size-7 text-blue-700'}/>
+           })
+
+           setTimeout(() => {
+               navigate("/");
+           },2600)
+       }
+   }
+
     return (
-        <section className="min-h-screen flex flex-col items-center justify-center">
+        <section className="relative min-h-screen flex flex-col items-center justify-center">
             <div className="w-full lg:w-1/4 flex flex-col items-center">
                 {/*<!-- ! -------------------- Logo -------------------- ! -->*/}
                 <Link to="/" className="block mb-9">
@@ -48,7 +88,7 @@ function Verify(props) {
                     {/*<!-- ! -------------------- Header Box -------------------- ! -->*/}
                     <div className="pb-5 border-b border-gray-300/30 font-YekanBakh-Bold">
                         <h2 className="mb-2 text-2xl text-dark-550 dark:text-white">کد تایید ارسال شده رو وارد کنید!</h2>
-                        <span className="text-sm text-gray-300 dark:text-gray-210">رمز یک‌بار مصرف به 09199891684 ارسال شد.</span>
+                        <span className="text-sm text-gray-300 dark:text-gray-210">رمز یک‌بار مصرف به {location.state.username} ارسال شد.</span>
                     </div>
                     {/*<!-- ! -------------------- Form -------------------- ! -->*/}
                     <form className="mt-5">
@@ -63,8 +103,7 @@ function Verify(props) {
                         <p className="text-center gap-1 mt-4 font-YekanBakh-Medium text-gray-600 dark:text-gray-50">
                             01:35 مانده تا دریافت مجدد کد تایید
                         </p>
-                        <button
-                            className="w-full h-11 flex-center border text-white border-blue-700 dark:hover:bg-transparent bg-blue-700 hover:text-blue-700 hover:bg-white rounded-lg mt-6 cursor-pointer font-YekanBakh-Bold transition-all">تایید
+                        <button onClick={checkOPTCodeHandler} className="w-full h-11 flex-center border text-white border-blue-700 dark:hover:bg-transparent bg-blue-700 hover:text-blue-700 hover:bg-white rounded-lg mt-6 cursor-pointer font-YekanBakh-Bold transition-all">تایید
                         </button>
                     </form>
                 </div>
@@ -82,7 +121,12 @@ function Verify(props) {
                   </svg>
             </span>
             </div>
-            {/*<Notification {...notificationValue} isOpen={isShowNotification}/>*/}
+
+            <div className={`absolute ${isShowVerifyCode ? 'top-5' : '-top-25'} flex flex-col items-center gap-y-4 w-90 h-25 rounded-lg bg-gray-200 dark:bg-dark-930 shadow p-4 font-YekanBakh-Bold text-biscay-700 dark:text-white transition-all`}>
+                <p className="">کد تایید ورود به راکت : {randomNumber}</p>
+                <button onClick={showVerifyCodeNotificationHandler} className="border border-blue-700 bg-blue-700 hover:bg-transparent rounded-sm cursor-pointer px-3 py-0.5 transition-all">تایید</button>
+            </div>
+            <Notification {...notificationValue} isOpen={isShowNotification}/>
         </section>
     );
 }
