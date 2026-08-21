@@ -37,21 +37,16 @@ function Auth() {
         const isValid = emailOrPhoneRegex.test(username);
 
         if (isValid) {
-            const isUserExist = users.find(user => user.phone === username || user.email === username);
+            const userExist = users.find(user => user.phone === username || user.email === username);
 
-            if (isUserExist) {
-
-                setIsLogin(true);
-                setUserInfo(isUserExist)
-
-                showNotificationHandler({
-                    title: "موفق !",
-                    message: "به سایت راکت خوش آمدید.",
-                    Icon: () => <DynamicIcon name={'checkCircle'} className={'size-7 text-blue-700'}/>
-                })
-
+            if (userExist) {
                 setTimeout(() => {
-                    navigate("/");
+                    navigate("/verify" , {
+                        state: {
+                            username,
+                            userInfo: userExist
+                        }
+                    });
                 },2600)
             } else {
                 showNotificationHandler({
