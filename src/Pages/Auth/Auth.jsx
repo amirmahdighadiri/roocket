@@ -40,6 +40,12 @@ function Auth() {
             const userExist = users.find(user => user.phone === username || user.email === username);
 
             if (userExist) {
+                showNotificationHandler({
+                    title: "موفق !",
+                    message: "کد تایید برای شما ارسال شد!",
+                    Icon: () => <DynamicIcon name={'checkCircle'} className={'size-7 text-blue-700'}/>
+                })
+
                 setTimeout(() => {
                     navigate("/verify" , {
                         state: {

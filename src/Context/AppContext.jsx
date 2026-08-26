@@ -3,6 +3,7 @@ import {createContext, useEffect, useState} from "react";
 import {useLocation} from "react-router-dom";
 import useLocalStorage from "../Hooks/useLocalStorage/useLocalStorage.jsx";
 import useToggle from "../Hooks/useToggle/useToggle.jsx";
+import useCookie from "../Hooks/useCookie/useCookie.jsx";
 
 export const AppContext = createContext()
 
@@ -15,6 +16,7 @@ function AppProvider({children}) {
     const [isLogin, setIsLogin] = useState(false);
     const [userInfo, setUserInfo] = useState({});
     const [isShowNotification, setIsShowNotification] = useState(false);
+    const [userId, setUserId] = useCookie("userID" , "")
 
     useEffect(() => {
         window.scrollTo(0, 0)
@@ -43,20 +45,33 @@ function AppProvider({children}) {
 
     useEffect(() => {
         const userRegistrationHandler = async () => {
-            const userID = document.cookie.substring(document.cookie.indexOf('=') + 1)
-            if (userID) {
-                try {
-                    const res = await fetch(`http://localhost:3000/users/${userID}`)
-                    const data = await res.json()
-                    setIsLoggin(true)
-                    setUserInfo(data)
-                } catch (err){
-                    console.log(err)
-                }
+            if (!userId) {
+                setIsLogin(false);
+                return;
             }
-        }
-        userRegistrationHandler()
-    }, [])
+            try {
+                const res = await fetch(
+                    `http://localhost:3000/users/${userId}`
+                );
+
+                if (!res.ok) {
+                    setIsLogin(false);
+                    return;
+                }
+
+                const data = await res.json();
+
+                setIsLogin(true);
+                setUserInfo(data);
+
+            } catch (err) {
+                console.log(err);
+                setIsLogin(false);
+            }
+        };
+        userRegistrationHandler();
+
+    }, [userId]);
 
     return (
         <AppContext.Provider value={conectValue}>
