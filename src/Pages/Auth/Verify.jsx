@@ -4,6 +4,7 @@ import DynamicIcon from "../../DynamicIcon/DynamicIcon.jsx";
 import Notification from "../../Components/Notification/Notification.jsx";
 import useToggle from "../../Hooks/useToggle/useToggle.jsx";
 import {AppContext} from "../../Context/AppContext.jsx";
+import useCookie from "../../Hooks/useCookie/useCookie.jsx";
 
 function Verify(props) {
     const [verifyCode, setVerifyCode] = useState(["" , "" , "" , ""]);
@@ -18,6 +19,7 @@ function Verify(props) {
         message: "لطفا نام کاربر خود را به درستی وارد کنید.",
         Icon: () => <DynamicIcon name={'closeCircle'} className={'size-7 text-blue-700'}/>
     });
+    const [userId , setUserId] = useCookie("userID" , "")
 
     useEffect(() => {
         inputRefs.current[0].focus()
@@ -63,6 +65,8 @@ function Verify(props) {
                message: "به سایت راکت خوش آمدید.",
                Icon: () => <DynamicIcon name={'checkCircle'} className={'size-7 text-blue-700'}/>
            })
+
+           setUserId(location.state.userInfo.id)
 
            setTimeout(() => {
                navigate("/");
