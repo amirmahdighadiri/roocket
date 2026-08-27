@@ -9,7 +9,7 @@ import Samandehi from "../../assets/images/symbol/samandehi.png"
 function Footer(props) {
     return (
         <footer className="container py-10">
-            {/*<!-- ! -------------------- Icon And Social Lins -------------------- ! -->*/}
+            {/*<!-- ! -------------------- Icon And Social Links -------------------- ! -->*/}
             <div className={`relative flex flex-col sm:flex-row items-center justify-between`}>
                 {/*<!-- ! -------------------- Footer Divider -------------------- ! -->*/}
                 <span className="absolute top-5 w-full h-px bg-chambray-100 dark:bg-blue-980 -z-10"></span>

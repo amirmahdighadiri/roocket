@@ -1,10 +1,10 @@
 import React from 'react';
-import {Link} from "react-router-dom";
+import {Link , Outlet} from "react-router-dom";
 import DynamicIcon from "../../DynamicIcon/DynamicIcon.jsx";
 
 function DashboardLayout(props) {
     return (
-        <section className="bg-white dark:bg-dark-890 grid grid-cols-12">
+        <section className="bg-white dark:bg-dark-body-100 grid grid-cols-12 min-h-screen overflow-hidden">
             <aside className="col-span-2 pt-11 flex flex-col min-h-screen pb-3">
                 <Link to="/" className="flex-center">
                     <svg xmlns='http://www.w3.org/2000/svg' width='202' height='44' fill='none' className='hidden dark:flex' viewBox='0 0 202 44'>
@@ -87,30 +87,34 @@ function DashboardLayout(props) {
                     </ul>
                 </div>
             </aside>
-            <div className="col-span-10">
+            <div className="col-span-10 min-h-screen">
                 <header className="flex items-center justify-between pt-9 pr-16 pb-5 pl-8">
                     <div className="flex items-center gap-x-5">
                         <span className="pl-5 border-l border-gray-300 text-gray-800 dark:text-white font-YekanBakh-Bold text-2xl">امیرمهدی عزیز ؛خوش اومدی. 👋</span>
                         <span className="text-gray-360 dark:text-gray-810">چهارشنبه, 04 شهریور 1405</span>
                     </div>
-                    <div className="flex items-center gap-x-7.5">
-                        <button className="text-white hover:text-blue-450 transition-all cursor-pointer">
-                            <DynamicIcon name="moon" className="size-7 fill-inherit"/>
+                    <div className="flex items-center gap-x-4">
+                        <button className="w-12 h-12 hidden lg:flex items-center justify-center relative dark:bg-dark-900 dark:hover:bg-[#ECEEEF] bg-[#ECEEEF] hover:bg-dark-body-100 rounded-full transition-all shrink-0 group cursor-pointer">
+                            <DynamicIcon name={'moon'} className={'size-4 text-biscay-700 group-hover:text-gray-920 dark:text-gray-920 dark:group-hover:text-biscay-700'}/>
                         </button>
-                        <button className="text-white hover:text-blue-450 transition-all cursor-pointer">
-                            <svg xmlns='http://www.w3.org/2000/svg' width='25' height='27' fill='none' className='' viewBox='0 0 25 27'>
-                                <path stroke='currentColor' strokeLinecap='round' strokeLinejoin='round' strokeWidth='2' d='M17.642 25.875H7.207c-3.833 0-6.773-1.384-5.938-6.956l.973-7.552c.515-2.78 2.288-3.844 3.844-3.844H18.81c1.58 0 3.25 1.144 3.845 3.844l.972 7.552c.71 4.943-2.15 6.956-5.984 6.956' clipRule='evenodd'></path>
-                                <path stroke='currentColor' strokeLinecap='round' strokeLinejoin='round' strokeWidth='2' d='M17.814 7.248a5.4 5.4 0 0 0-5.4-5.4v0a5.4 5.4 0 0 0-5.424 5.4h0M16.12 12.877h-.057M8.832 12.877h-.057'></path>
-                            </svg>
+                        <button className="w-12 h-12 hidden lg:flex items-center justify-center relative dark:bg-dark-900 dark:hover:bg-[#ECEEEF] bg-[#ECEEEF] hover:bg-dark-body-100 rounded-full transition-all shrink-0 group cursor-pointer">
+                            <DynamicIcon name={'shopping'} className={'size-4 text-biscay-700 group-hover:text-gray-920 dark:text-gray-920 dark:group-hover:text-biscay-700'}/>
+                            {/*<!-- ! -------------------- Notification Badge -------------------- ! -->*/}
+                            <span className="size-6 flex-center absolute -top-2 -right-2 bg-red-450 text-white rounded-full font-YekanBakh text-sm">0</span>
                         </button>
-                        <button className="text-white hover:text-blue-450 transition-all cursor-pointer">
-                            <DynamicIcon name="bell" className="size-7 fill-inherit"/>
+                        <button className="w-12 h-12 hidden lg:flex items-center justify-center relative dark:bg-dark-900 dark:hover:bg-[#ECEEEF] bg-[#ECEEEF] hover:bg-dark-body-100 rounded-full transition-all shrink-0 group cursor-pointer">
+                            <DynamicIcon name={'bell'} className={'size-4 text-biscay-700 group-hover:text-gray-920 dark:text-gray-920 dark:group-hover:text-biscay-700'}/>
+                            {/*<!-- ! -------------------- Notification Badge -------------------- ! -->*/}
+                            <span className="size-6 flex-center absolute -top-2 -right-2 bg-red-450 text-white rounded-full font-YekanBakh text-sm">12</span>
                         </button>
-                        <button className="text-white hover:text-blue-450 transition-all cursor-pointer">
-                            <DynamicIcon name="user" className="size-7 fill-inherit"/>
+                        <button className="w-12 h-12 hidden lg:flex items-center justify-center relative dark:bg-dark-900 dark:hover:bg-[#ECEEEF] bg-[#ECEEEF] hover:bg-dark-body-100 rounded-full transition-all shrink-0 group cursor-pointer">
+                            <DynamicIcon name={'user'} className={'size-4 text-biscay-700 group-hover:text-gray-920 dark:text-gray-920 dark:group-hover:text-biscay-700'}/>
                         </button>
                     </div>
                 </header>
+                <section className="h-full bg-gray-200 dark:bg-dark-900 pt-10 px-8 pb-16 rounded-tr-3xl">
+                    <Outlet />
+                </section>
             </div>
         </section>
     );
