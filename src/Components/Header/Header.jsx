@@ -47,8 +47,7 @@ function Header(props) {
         <header className="mt-7">
             <div className="container">
                 {/*<!-- ! -------------------- Header Logo & SearchBox & Buttons -------------------- ! -->*/}
-                <div
-                    className="flex items-center justify-between bg-white dark:bg-dark-890 rounded-2xl p-5 sm:px-11 sm:py-9 shadow-whiteShadow">
+                <div className="flex items-center justify-between bg-white dark:bg-dark-890 rounded-2xl p-5 sm:px-11 sm:py-9 shadow-whiteShadow">
                     {/*<!-- ! -------------------- Header Menu Buttons In Mobile -------------------- ! -->*/}
                     <div onClick={openMenuHandler} className="block lg:hidden dark:text-white text-biscay-700">
                         <DynamicIcon name={'bar3'} className={'w-6 h-4.5'}/>
@@ -116,8 +115,7 @@ function Header(props) {
                     {/*<!-- ! -------------------- The Other Buttons Are Activated When The Users Is Login -------------------- ! -->*/}
                     <div className={`${isLogin ? 'flex' : 'hidden'} items-center gap-x-4`}>
                         {/*<!-- ! -------------------- Basket Btn -------------------- ! -->*/}
-                        <div
-                            className="w-12 h-12 hidden lg:flex items-center justify-center dark:bg-dark-body-100 dark:hover:bg-[#ECEEEF] bg-[#ECEEEF] hover:bg-dark-body-100 rounded-full transition-all shrink-0 group">
+                        <div className="w-12 h-12 hidden lg:flex items-center justify-center dark:bg-dark-body-100 dark:hover:bg-[#ECEEEF] bg-[#ECEEEF] hover:bg-dark-body-100 rounded-full transition-all shrink-0 group">
                             <DynamicIcon name={'shopping'}
                                          className={'w-6 h-6 text-biscay-700 group-hover:text-gray-920 dark:text-gray-920 dark:group-hover:text-biscay-700'}/>
                         </div>
