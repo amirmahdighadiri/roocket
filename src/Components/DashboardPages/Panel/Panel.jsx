@@ -1,5 +1,5 @@
 import React from 'react';
-import DynamicIcon from "../../DynamicIcon/DynamicIcon.jsx";
+import DynamicIcon from "../../../DynamicIcon/DynamicIcon.jsx";
 import {Link} from "react-router-dom";
 
 function Panel(props) {

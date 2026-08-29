@@ -1,8 +1,10 @@
 import React from 'react';
-import {Link , Outlet} from "react-router-dom";
+import {Link , Outlet , useLocation} from "react-router-dom";
 import DynamicIcon from "../../DynamicIcon/DynamicIcon.jsx";
 
 function DashboardLayout(props) {
+
+    const location = useLocation()
     return (
         <section className="bg-white dark:bg-dark-body-100 grid grid-cols-12 min-h-screen overflow-hidden">
             <aside className="col-span-2 pt-11 flex flex-col min-h-screen pb-3">
@@ -12,65 +14,66 @@ function DashboardLayout(props) {
                         <path fill='#fff' d='M28.66 14.442v17.196l-7.146-5.434s.781-6.7.93-11.8c.075-2.53-2.27-4.652-8.114-7.518-5.806 2.903-8.151 5.025-8.077 7.556.112 5.062.93 11.799.93 11.799L0 31.638V14.442C0 11.39 1.303 8.635 3.834 6.29c1.786-1.675 4.243-3.238 8.002-5.062L14.367 0l2.531 1.228c3.723 1.824 6.216 3.387 8.003 5.062 2.494 2.345 3.76 5.1 3.76 8.152'></path>
                     </svg>
                 </Link>
+                {/*<!-- ! -------------------- Menu -------------------- ! -->*/}
                 <div className="mt-16">
-                   <ul className="space-y-2">
+                   <ul className="space-y-2 text-lg">
                        <li className="px-4">
-                           <Link to="/" className="flex items-center gap-x-4 text-white hover:text-blue-450 transition-all px-4 py-3">
+                           <Link to="/dashboard/panel" className={`flex items-center gap-x-4 ${location.pathname.includes('panel') ? 'text-blue-700 bg-blue-700/10' : 'text-white bg-transparent hover:text-blue-450'}  transition-all px-4 py-3 rounded-3xl`}>
                                <DynamicIcon name="home" className="size-5 fill-inherit"/>
                                <span className="inline-block mt-2"> صفحه اصلی پنل</span>
                            </Link>
                        </li>
                        <li className="px-4">
-                           <Link to="/" className="flex items-center gap-x-4 text-white hover:text-blue-450 transition-all px-4 py-3">
+                           <Link to="/" className={`flex items-center gap-x-4 ${location.pathname.includes('courses') ? 'text-blue-700 bg-blue-700/10' : 'text-white bg-transparent hover:text-blue-450'}  transition-all px-4 py-3 rounded-3xl`}>
                                <DynamicIcon name="camera" className="size-5 fill-inherit"/>
                                <span className="inline-block mt-2">دوره ها</span>
                            </Link>
                        </li>
                        <li className="px-4">
-                           <Link to="/" className="flex items-center gap-x-4 text-white hover:text-blue-450 transition-all px-4 py-3">
-                               <DynamicIcon name="question" className="size-5 fill-inherit"/>
+                           <Link to="/" className={`flex items-center gap-x-4 ${location.pathname.includes('questions') ? 'text-blue-700 bg-blue-700/10' : 'text-white bg-transparent hover:text-blue-450'}  transition-all px-4 py-3 rounded-3xl`}>
+                               <DynamicIcon name="questionSquare" className="size-5 fill-inherit"/>
                                <span className="inline-block mt-2">پرسش ها</span>
                            </Link>
                        </li>
                        <li className="px-4">
-                           <Link to="/" className="flex items-center gap-x-4 text-white hover:text-blue-450 transition-all px-4 py-3">
+                           <Link to="/" className={`flex items-center gap-x-4 ${location.pathname.includes('subscription') ? 'text-blue-700 bg-blue-700/10' : 'text-white bg-transparent hover:text-blue-450'}  transition-all px-4 py-3 rounded-3xl`}>
                                <DynamicIcon name="wallet" className="size-5 fill-inherit"/>
                                <span className="inline-block mt-2"> مالی و اشتراک</span>
                            </Link>
                        </li>
                        <li className="px-4">
-                           <Link to="/" className="flex items-center gap-x-4 text-white hover:text-blue-450 transition-all px-4 py-3">
+                           <Link to="/" className={`flex items-center gap-x-4 ${location.pathname.includes('followings') ? 'text-blue-700 bg-blue-700/10' : 'text-white bg-transparent hover:text-blue-450'}  transition-all px-4 py-3 rounded-3xl`}>
                                <DynamicIcon name="userMultiple" className="size-5 dark:fill-inherit"/>
                                <span className="inline-block mt-2">دنبل شده ها</span>
                            </Link>
                        </li>
                        <li className="px-4">
-                           <Link to="/" className="flex items-center gap-x-4 text-white hover:text-blue-450 transition-all px-4 py-3">
+                           <Link to="/" className={`flex items-center gap-x-4 ${location.pathname.includes('comments') ? 'text-blue-700 bg-blue-700/10' : 'text-white bg-transparent hover:text-blue-450'}  transition-all px-4 py-3 rounded-3xl`}>
                                <DynamicIcon name="document" className="size-5 fill-inherit"/>
                                <span className="inline-block mt-2">نظرات شما</span>
                            </Link>
                        </li>
                        <li className="px-4">
-                           <Link to="/" className="flex items-center gap-x-4 text-white hover:text-blue-450 transition-all px-4 py-3">
+                           <Link to="/" className={`flex items-center gap-x-4 ${location.pathname.includes('notifications') ? 'text-blue-700 bg-blue-700/10' : 'text-white bg-transparent hover:text-blue-450'}  transition-all px-4 py-3 rounded-3xl`}>
                                <DynamicIcon name="bell" className="size-5 fill-inherit"/>
                                <span className="inline-block mt-2"> اعلانات</span>
                            </Link>
                        </li>
                        <li className="px-4">
-                           <Link to="/" className="flex items-center gap-x-4 text-white hover:text-blue-450 transition-all px-4 py-3">
+                           <Link to="/" className={`flex items-center gap-x-4 ${location.pathname.includes('missions') ? 'text-blue-700 bg-blue-700/10' : 'text-white bg-transparent hover:text-blue-450'}  transition-all px-4 py-3 rounded-3xl`}>
                                <DynamicIcon name="ticket" className="size-5 fill-inherit"/>
                                <span className="inline-block mt-2">ماموریت ها</span>
                            </Link>
                        </li>
                        <li className="px-4">
-                           <Link to="/" className="flex items-center gap-x-4 text-white hover:text-blue-450 transition-all px-4 py-3">
+                           <Link to="/" className={`flex items-center gap-x-4 ${location.pathname.includes('certificates') ? 'text-blue-700 bg-blue-700/10' : 'text-white bg-transparent hover:text-blue-450'}  transition-all px-4 py-3 rounded-3xl`}>
                                <DynamicIcon name="fileCheck" className="size-6 fill-inherit"/>
                                <span className="inline-block mt-2">گواهی و تاییدیه ها</span>
                            </Link>
                        </li>
                    </ul>
                </div>
-                <div className="mt-auto">
+               <div className="mt-auto">
                     <ul className="space-y-1">
                         <li className="px-4">
                             <Link to="/" className="flex items-center gap-x-4 text-white hover:text-blue-450 transition-all px-4 py-3">
@@ -87,6 +90,7 @@ function DashboardLayout(props) {
                     </ul>
                 </div>
             </aside>
+            {/*<!-- ! -------------------- Header Wrapper -------------------- ! -->*/}
             <div className="col-span-10 min-h-screen">
                 <header className="flex items-center justify-between pt-9 pr-16 pb-5 pl-8">
                     <div className="flex items-center gap-x-5">
