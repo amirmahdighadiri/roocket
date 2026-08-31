@@ -13,6 +13,7 @@ import DashboardLayout from "./Pages/DashboardLayout/DashboardLayout.jsx";
 import Panel from "./Components/DashboardPages/Panel/Panel.jsx";
 import Courses from "./Components/DashboardPages/Courses/Courses.jsx";
 import Questions from "./Components/DashboardPages/Questions/Questions.jsx";
+import Subscription from "./Components/DashboardPages/Subscription/Subscription.jsx";
 
 const routes = [
     {
@@ -30,6 +31,7 @@ const routes = [
             {path: 'panel' , element: <Panel/>},
             {path: 'courses' , element: <Courses/>},
             {path: 'questions' , element: <Questions/>},
+            {path: 'subscription' , element: <Subscription/>},
         ]},
     {path: '/auth' , element: <Auth/> },
     {path: '/verify' , element: <Verify/> },
