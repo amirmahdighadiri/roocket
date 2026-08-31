@@ -12,6 +12,7 @@ import Verify from "./Pages/Auth/Verify.jsx";
 import DashboardLayout from "./Pages/DashboardLayout/DashboardLayout.jsx";
 import Panel from "./Components/DashboardPages/Panel/Panel.jsx";
 import Courses from "./Components/DashboardPages/Courses/Courses.jsx";
+import Questions from "./Components/DashboardPages/Questions/Questions.jsx";
 
 const routes = [
     {
@@ -27,7 +28,8 @@ const routes = [
     },
     {path: '/dashboard' , element: <DashboardLayout/> ,children: [
             {path: 'panel' , element: <Panel/>},
-            {path: 'courses' , element: <Courses/>}
+            {path: 'courses' , element: <Courses/>},
+            {path: 'questions' , element: <Questions/>},
         ]},
     {path: '/auth' , element: <Auth/> },
     {path: '/verify' , element: <Verify/> },
