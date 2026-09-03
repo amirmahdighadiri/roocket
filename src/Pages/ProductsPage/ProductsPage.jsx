@@ -216,7 +216,7 @@ function ProductsPage(props) {
                             ))}
                         </div>
                     </div>
-                    {/*<!-- ! -------------------- Certificate Wrapper -------------------- ! -->*/}
+                    {/*<!-- ! -------------------- Certificates Wrapper -------------------- ! -->*/}
                     <div className="flex flex-col items-center px-7 py-8 rounded-md border border-gray-210 dark:border-transparent bg-white dark:bg-dark-930">
                         <img src={certificateImg} alt="certificate image"/>
                         

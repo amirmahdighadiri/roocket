@@ -16,6 +16,7 @@ import Questions from "./Components/DashboardPages/Questions/Questions.jsx";
 import Subscription from "./Components/DashboardPages/Subscription/Subscription.jsx";
 import Followings from "./Components/DashboardPages/Followings/Followings.jsx";
 import Comments from "./Components/DashboardPages/Comments/Comments.jsx";
+import Certificates from "./Components/DashboardPages/Certificates/Certificates.jsx";
 
 const routes = [
     {
@@ -35,7 +36,8 @@ const routes = [
             {path: 'questions' , element: <Questions/>},
             {path: 'subscription' , element: <Subscription/>},
             {path: 'followings' , element: <Followings/>},
-            {path: 'comments' , element: <Comments/>}
+            {path: 'comments' , element: <Comments/>},
+            {path: 'certificates' , element: <Certificates/>},
         ]},
     {path: '/auth' , element: <Auth/> },
     {path: '/verify' , element: <Verify/> },
