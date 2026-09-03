@@ -318,7 +318,7 @@ function ProductPage() {
                             <span className="text-chambray-700 dark:text-gray-200 font-YekanBakh-Bold">127 نفر</span>
                         </div>
                     </div>
-                    {/*<!-- ! -------------------- Certificate Wrapper -------------------- ! -->*/}
+                    {/*<!-- ! -------------------- Certificates Wrapper -------------------- ! -->*/}
                     <div className="bg-white dark:bg-dark-930 py-4 px-5 shadow-sm rounded mb-4">
                         <div className="flex items-center gap-3 mb-4">
                             <div className="size-12 flex-center rounded-full bg-blue-700/10">
