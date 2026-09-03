@@ -48,7 +48,7 @@ function DashboardLayout(props) {
                            </Link>
                        </li>
                        <li className="px-4">
-                           <Link to="/" className={`flex items-center gap-x-4 ${location.pathname.includes('comments') ? 'text-blue-700 bg-blue-700/10' : 'text-white bg-transparent hover:text-blue-450'}  transition-all px-4 py-3 rounded-3xl`}>
+                           <Link to="/dashboard/comments" className={`flex items-center gap-x-4 ${location.pathname.includes('comments') ? 'text-blue-700 bg-blue-700/10' : 'text-white bg-transparent hover:text-blue-450'}  transition-all px-4 py-3 rounded-3xl`}>
                                <DynamicIcon name="document" className="size-5 fill-inherit"/>
                                <span className="inline-block mt-2">نظرات شما</span>
                            </Link>
