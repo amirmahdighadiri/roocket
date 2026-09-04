@@ -17,6 +17,7 @@ import Subscription from "./Components/DashboardPages/Subscription/Subscription.
 import Followings from "./Components/DashboardPages/Followings/Followings.jsx";
 import Comments from "./Components/DashboardPages/Comments/Comments.jsx";
 import Certificates from "./Components/DashboardPages/Certificates/Certificates.jsx";
+import Missions from "./Components/DashboardPages/Missions/Missions.jsx";
 
 const routes = [
     {
@@ -37,6 +38,7 @@ const routes = [
             {path: 'subscription' , element: <Subscription/>},
             {path: 'followings' , element: <Followings/>},
             {path: 'comments' , element: <Comments/>},
+            {path: 'missions' , element: <Missions/>},
             {path: 'certificates' , element: <Certificates/>},
         ]},
     {path: '/auth' , element: <Auth/> },
