@@ -16,7 +16,7 @@ function DashboardLayout(props) {
                 </Link>
                 {/*<!-- ! -------------------- Menu -------------------- ! -->*/}
                 <div className="mt-16">
-                   <ul className="space-y-2 text-lg">
+                   <ul className="space-y-1 text-lg">
                        <li className="px-4">
                            <Link to="/dashboard/panel" className={`flex items-center gap-x-4 ${location.pathname.includes('panel') ? 'text-blue-700 bg-blue-700/10' : 'text-white bg-transparent hover:text-blue-450'}  transition-all px-4 py-3 rounded-3xl`}>
                                <DynamicIcon name="home" className="size-5 fill-inherit"/>
@@ -54,7 +54,7 @@ function DashboardLayout(props) {
                            </Link>
                        </li>
                        <li className="px-4">
-                           <Link to="/" className={`flex items-center gap-x-4 ${location.pathname.includes('notifications') ? 'text-blue-700 bg-blue-700/10' : 'text-white bg-transparent hover:text-blue-450'}  transition-all px-4 py-3 rounded-3xl`}>
+                           <Link to="/dashboard/notifications" className={`flex items-center gap-x-4 ${location.pathname.includes('notifications') ? 'text-blue-700 bg-blue-700/10' : 'text-white bg-transparent hover:text-blue-450'}  transition-all px-4 py-3 rounded-3xl`}>
                                <DynamicIcon name="bell" className="size-5 fill-inherit"/>
                                <span className="inline-block mt-2"> اعلانات</span>
                            </Link>
@@ -73,15 +73,15 @@ function DashboardLayout(props) {
                        </li>
                    </ul>
                </div>
-               <div className="mt-auto">
-                    <ul className="space-y-1">
-                        <li className="px-4">
+               <div className="mt-auto px-4">
+                    <ul className="space-y-1 border-t border-biscay-700/20 dark:border-white/10">
+                        <li className="">
                             <Link to="/" className="flex items-center gap-x-4 text-white hover:text-blue-450 transition-all px-4 py-3">
                                 <DynamicIcon name="user" className="size-5 fill-inherit"/>
                                 <span className="inline-block mt-2">اطلاغات پروفایل</span>
                             </Link>
                         </li>
-                        <li className="px-4">
+                        <li className="">
                             <Link to="/" className="flex items-center gap-x-4 text-white hover:text-red-450 transition-all px-4 py-3">
                                 <DynamicIcon name="logout" className="size-5 fill-inherit"/>
                                 <span className="inline-block mt-2">خروج</span>

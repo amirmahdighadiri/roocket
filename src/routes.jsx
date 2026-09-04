@@ -15,9 +15,10 @@ import Courses from "./Components/DashboardPages/Courses/Courses.jsx";
 import Questions from "./Components/DashboardPages/Questions/Questions.jsx";
 import Subscription from "./Components/DashboardPages/Subscription/Subscription.jsx";
 import Followings from "./Components/DashboardPages/Followings/Followings.jsx";
-import Comments from "./Components/DashboardPages/Comments/Comments.jsx";
+import Notifications from "./Components/DashboardPages/Notifications/Notifications.jsx";
 import Certificates from "./Components/DashboardPages/Certificates/Certificates.jsx";
 import Missions from "./Components/DashboardPages/Missions/Missions.jsx";
+import Comments from "./Components/DashboardPages/Comments/Comments.jsx";
 
 const routes = [
     {
@@ -38,6 +39,7 @@ const routes = [
             {path: 'subscription' , element: <Subscription/>},
             {path: 'followings' , element: <Followings/>},
             {path: 'comments' , element: <Comments/>},
+            {path: 'notifications' , element: <Notifications/>},
             {path: 'missions' , element: <Missions/>},
             {path: 'certificates' , element: <Certificates/>},
         ]},
