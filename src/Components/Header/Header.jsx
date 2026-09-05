@@ -12,17 +12,18 @@ import useCookie from "../../Hooks/useCookie/useCookie.jsx";
 
 
 function Header(props) {
-    const {theme, setTheme, isOpenMenu, setIsOpenMenu, setIsShowOverlay, isLogin, userInfo} = useContext(AppContext)
+    const {theme, setTheme, isOpenMenu, setIsOpenMenu, setIsShowOverlay, isLogin, userInfo , isOpenProfileMenu , toggleProfileMenu} = useContext(AppContext)
     const [isOpenCoursesSubmenu, toggleCoursesSubmenu] = useToggle(false)
     const [isOpenUsefullSubmenu, toggleUsefullSubmenu] = useToggle(false)
 
-    console.log(isLogin)
+
     const changeThemeHandler = () => theme === "dark" ? setTheme("light") : setTheme("dark")
 
     const openMenuHandler = () => {
         setIsOpenMenu();
         setIsShowOverlay();
     }
+
     const closeMenuHandler = () => {
         setIsOpenMenu()
         setIsShowOverlay();
@@ -34,6 +35,11 @@ function Header(props) {
             toggleCoursesSubmenu(false);
             toggleUsefullSubmenu(false)
         }
+    }
+
+    const toggleProfileHandler = () => {
+        setIsShowOverlay(true)
+        toggleProfileMenu()
     }
 
     useEffect(() => {
@@ -116,39 +122,111 @@ function Header(props) {
                     <div className={`${isLogin ? 'flex' : 'hidden'} items-center gap-x-4`}>
                         {/*<!-- ! -------------------- Basket Btn -------------------- ! -->*/}
                         <div className="w-12 h-12 hidden lg:flex items-center justify-center dark:bg-dark-body-100 dark:hover:bg-[#ECEEEF] bg-[#ECEEEF] hover:bg-dark-body-100 rounded-full transition-all shrink-0 group">
-                            <DynamicIcon name={'shopping'}
-                                         className={'w-6 h-6 text-biscay-700 group-hover:text-gray-920 dark:text-gray-920 dark:group-hover:text-biscay-700'}/>
+                            <DynamicIcon name={'shopping'} className={'w-6 h-6 text-biscay-700 group-hover:text-gray-920 dark:text-gray-920 dark:group-hover:text-biscay-700'}/>
                         </div>
                         {/*<!-- ! -------------------- Message Btn -------------------- ! -->*/}
-                        <div
-                            className="w-12 h-12 hidden lg:flex items-center justify-center relative dark:bg-dark-body-100 dark:hover:bg-[#ECEEEF] bg-[#ECEEEF] hover:bg-dark-body-100 rounded-full transition-all shrink-0 group">
+                        <div className="w-12 h-12 hidden lg:flex items-center justify-center relative dark:bg-dark-body-100 dark:hover:bg-[#ECEEEF] bg-[#ECEEEF] hover:bg-dark-body-100 rounded-full transition-all shrink-0 group">
                             <DynamicIcon name={'bell'}
                                          className={'size-4 text-biscay-700 group-hover:text-gray-920 dark:text-gray-920 dark:group-hover:text-biscay-700'}/>
                             {/*<!-- ! -------------------- Notification Badge -------------------- ! -->*/}
-                            <span
-                                className="size-6 flex-center absolute -top-2 -right-2 bg-red-450 text-white rounded-full font-YekanBakh text-sm">12</span>
+                            <span className="size-6 flex-center absolute -top-2 -right-2 bg-red-450 text-white rounded-full font-YekanBakh text-sm">12</span>
                         </div>
                         {/*<!-- ! -------------------- Users Profile Image And Profile Menu -------------------- ! -->*/}
-                        <div className="relative">
+                        <div className="relative z-20">
                             {/*<!-- ! -------------------- Profile Wrapper -------------------- ! -->*/}
-                            <div className="relative size-12">
+                            <div onClick={toggleProfileHandler} className="relative size-12 cursor-pointer">
                                 {/*<!-- ! -------------------- Profile Image Wrapper -------------------- ! -->*/}
-                                <div
-                                    className="w-full h-full overflow-hidden bg-gray-300 rounded-full border-2 border-primary-gray-185">
+                                <div className="w-full h-full overflow-hidden bg-gray-300 rounded-full border-2 border-primary-gray-185">
                                     <img src={defaultProfile} alt="user defult profile" className=""/>
                                 </div>
                                 {/*<!-- ! -------------------- Notification Badge -------------------- ! -->*/}
-                                <span
-                                    className="size-6 flex-center absolute -top-2 -right-2 bg-yellow-500 text-white rounded-full font-YekanBakh text-sm">6</span>
+                                <span className="size-6 flex-center absolute -top-2 -right-2 bg-yellow-500 text-white rounded-full font-YekanBakh text-sm">6</span>
                             </div>
                             {/*<!-- ! -------------------- Profile Menu -------------------- ! -->*/}
-                            <div className=""></div>
+                            <div className={`${isOpenProfileMenu ? 'opacity-100 visible' : 'opacity-0 invisible'} absolute top-16 -right-40 w-80 bg-white dark:bg-dark-930 rounded-lg shadow-whiteShadow transition-all`}>
+                                <div className="px-5 pt-7">
+                                    <div className="relative">
+                                        <span className="absolute right-6 w-px h-full bg-biscay-100 dark:opacity-10"></span>
+                                        <div className="flex items-start gap-x-4 mb-2">
+                                            <div className="size-12 rounded-full overflow-hidden">
+                                                <img src={defaultProfile} alt="" className=""/>
+                                            </div>
+                                            <div className="flex flex-col gap-y-2">
+                                                <span className="text-biscay-700 dark:text-white font-YekanBakh-Heavy text-xl">امیرمهدی</span>
+                                                <Link to="/" className="flex items-center gap-x-2 text-blue-700 dark:text-blue-450 hover:opacity-80 transition-all">
+                                                    <span className="">مشاهده پنل کاربری</span>
+                                                    <DynamicIcon name="arrowRight" className="size-4 text-inherit rotate-180" />
+                                                </Link>
+                                            </div>
+                                        </div>
+                                        <div className="relative pr-12 space-y-3">
+                                            <div className="flex items-center justify-between">
+                                                <span className="absolute right-4 size-4 bg-blue-700 rounded-full"></span>
+                                                <span className="text-gray-300 dark:text-gray-100 font-YekanBakh-Bold text-sm">کیف پول</span>
+                                                <span className="flex items-center text-sm font-YekanBakh-Bold text-gray-300 dark:text-gray-100">
+                                                0
+                                                <DynamicIcon name="toman" className="size-3 text-inherit" />
+                                            </span>
+                                            </div>
+                                            <div className="flex items-center justify-between">
+                                                <span className="absolute right-4 size-4 bg-green-600 rounded-full"></span>
+                                                <span className="text-gray-300 dark:text-gray-100 font-YekanBakh-Bold text-sm">تجربه کاربری</span>
+                                                <span className="flex items-center text-sm font-YekanBakh-Bold text-green-600">
+                                                    <span className="">0</span>
+                                                    <span className="">تجربه</span>
+                                                </span>
+                                            </div>
+                                            <div className="flex items-center justify-between">
+                                                <span className="absolute right-4 size-4 bg-yellow-500 rounded-full"></span>
+                                                <span className="text-gray-300 dark:text-gray-100 font-YekanBakh-Bold text-sm">باقیمانده اشتراک</span>
+                                                <span className="flex items-center text-sm font-YekanBakh-Bold text-yellow-500">
+                                                    عضو ویژه نیستید
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="mt-5 pt-3 px-5 pb-7 border-t border-biscay-100 dark:border-gray-300/10">
+                                    <ul className="space-y-1 *:hover:bg-dark-550/10 *:dark:hover:bg-dark-450 *:transition-all *:rounded-lg *:px-4 *:py-3">
+                                        <li className="">
+                                            <Link to="/" className="flex items-center gap-x-4 text-gray-500 dark:text-gray-920">
+                                                <DynamicIcon name="camera" className="size-5 text-inherit" />
+                                                <span className="text-lg font-YekanBakh-Bold">دوره ها</span>
+                                            </Link>
+                                        </li>
+                                        <li className="">
+                                            <Link to="/" className="flex items-center gap-x-4 text-gray-500 dark:text-gray-920">
+                                                <DynamicIcon name="wallet" className="size-5 text-inherit" />
+                                                <span className="text-lg font-YekanBakh-Bold">مالی و اشتراک</span>
+                                            </Link>
+                                        </li>
+                                        <li className="">
+                                            <Link to="/" className="flex items-center gap-x-4 text-gray-500 dark:text-gray-920">
+                                                <DynamicIcon name="questionSquare" className="size-5 text-inherit" />
+                                                <span className="text-lg font-YekanBakh-Bold">پرسش‌ها</span>
+                                            </Link>
+                                        </li>
+                                        <li className="flex items-center justify-between">
+                                            <Link to="/" className="flex items-center gap-x-4 text-gray-500 dark:text-gray-920">
+                                                <DynamicIcon name="ticket" className="size-5 text-inherit" />
+                                                <span className="text-lg font-YekanBakh-Bold">ماموریت‌ها</span>
+                                            </Link>
+                                            <span className="size-6 flex-center bg-yellow-500 rounded-full text-white font-YekanBakh-Bold">6</span>
+                                        </li>
+                                        <li className="">
+                                            <Link to="/" className="flex items-center gap-x-4 text-gray-500 dark:text-gray-920">
+                                                <DynamicIcon name="logout" className="size-5 text-inherit" />
+                                                <span className="text-lg font-YekanBakh-Bold">خروج از حساب کاربری</span>
+                                            </Link>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
                 {/*<!-- ! -------------------- Header Menu Item ! =>(in mobile remove closed-position and add opened-position to show mwnu in mobile) ! -------------------- ! -->*/}
-                <nav id="menu"
-                     className={`fixed lg:static top-0 bottom-0 ${isOpenMenu ? 'right-0' : '-right-69'} h-full lg:h-auto w-69 lg:w-[92%] mx-auto bg-white lg:bg-[#CFD3DB] dark:bg-dark-910 lg:dark:bg-dark-body-100 py-5 px-5 lg:px-0 lg:rounded-b-3xl dark:shadow-whiteShadow transition-all z-20 overflow-y-auto lg:overflow-y-visible`}>
+                <nav id="menu" className={`fixed lg:static top-0 bottom-0 ${isOpenMenu ? 'right-0' : '-right-69'} h-full lg:h-auto w-69 lg:w-[92%] mx-auto bg-white lg:bg-[#CFD3DB] dark:bg-dark-910 lg:dark:bg-dark-body-100 py-5 px-5 lg:px-0 lg:rounded-b-3xl dark:shadow-whiteShadow transition-all z-20 overflow-y-auto lg:overflow-y-visible`}>
                     {/*<!-- ! -------------------- More Option Menu Wrapper -------------------- ! -->*/}
                     <div className="block lg:hidden">
                         {/*<!-- ! -------------------- Close Menu Btn In Mobile -------------------- ! -->*/}
@@ -166,9 +244,7 @@ function Header(props) {
                                 <path fill="#E81C4D"
                                       d="M28.802 15.518V33.03l-7.182-5.535s.786-6.823.935-12.016c.075-2.578-2.281-4.739-8.154-7.658-5.835 2.957-8.192 5.118-8.117 7.696.112 5.155.935 12.016.935 12.016L0 33.031V15.518c0-3.109 1.31-5.914 3.853-8.302C5.648 5.51 8.117 3.918 11.895 2.06L14.438.81l2.544 1.25c3.74 1.858 6.247 3.45 8.042 5.156 2.506 2.388 3.778 5.193 3.778 8.301"></path>
                             </svg>
-                            <svg className="blcok dark:hidden w-40 h-9" xmlns="http://www.w3.org/2000/svg"
-                                 xmlSpace="preserve" id="big-logo-light" width="220" x="0" y="0" version="1.1"
-                                 viewBox="0 0 578 128">
+                            <svg className="blcok dark:hidden w-40 h-9" xmlns="http://www.w3.org/2000/svg" xmlSpace="preserve" id="big-logo-light" width="220" x="0" y="0" version="1.1" viewBox="0 0 578 128">
                                 <path fill="#f90" d="m46.3 124.7-14.5-21.3 14.5-14.5 14.6 14.5z"></path>
                                 <path fill="#f33"
                                       d="M86.5 43.7v48l-20-15.1s2.2-18.7 2.6-32.9c.2-7-6.4-13-22.6-21-16.3 8.1-22.8 14-22.6 21 .4 14.2 2.6 32.9 2.6 32.9l-20 15.1v-48c0-8.5 3.6-16.2 10.7-22.8 5-4.7 11.9-9 22.3-14.1l7-3.5 7 3.5c10.4 5.1 17.3 9.5 22.3 14.1 7.1 6.6 10.7 14.3 10.7 22.8"></path>
@@ -177,16 +253,14 @@ function Header(props) {
                             </svg>
                         </Link>
                         {/*<!-- ! -------------------- Header Search Input Wrapper -------------------- ! -->*/}
-                        <div
-                            className="flex w-full h-12 items-center gap-x-2.5 py-4 px-3 bg-gray-210 dark:bg-dark-body-100 rounded-xl font-YekanBakh-Medium">
+                        <div className="flex w-full h-12 items-center gap-x-2.5 py-4 px-3 bg-gray-210 dark:bg-dark-body-100 rounded-xl font-YekanBakh-Medium">
                             <DynamicIcon name={'search'} className={'size-4 text-primary-gray-300 shrink-0'}/>
                             <input type="text"
                                    className="w-full border-none outline-0 dark:text-white dark:placeholder:text-white text-sm"
                                    placeholder="دنبال چی میگردی ؟"/>
                         </div>
                         {/*<!-- ! -------------------- Menu Buttons For Mobile -------------------- ! -->*/}
-                        <div
-                            className="flex lg:hidden flex-col gap-y-5 font-YekanBakh-Medium py-5 border-y border-gray-200 dark:border-border-gray-100/10 mt-5">
+                        <div className="flex lg:hidden flex-col gap-y-5 font-YekanBakh-Medium py-5 border-y border-gray-200 dark:border-biscay-100/10 mt-5">
                             {/*<!-- ! -------------------- Change Them Btn -------------------- ! -->*/}
                             <div onClick={changeThemeHandler} className="change-them-btn flex items-center gap-x-2">
                                 <div
@@ -200,21 +274,16 @@ function Header(props) {
                             </div>
                             {/*<!-- ! -------------------- Basket Btn -------------------- ! -->*/}
                             <div className="flex items-center gap-x-2">
-                                <div
-                                    className="w-12 h-12 flex-center dark:bg-dark-body-100 dark:hover:bg-[#ECEEEF] bg-[#ECEEEF] hover:bg-dark-body-100 rounded-full transition-all shrink-0 group">
-                                    <DynamicIcon name={'bag'}
-                                                 className={'w-6 h-6 text-biscay-700 group-hover:text-gray-920 dark:text-gray-920 dark:group-hover:text-biscay-700'}/>
+                                <div className="w-12 h-12 flex-center dark:bg-dark-body-100 dark:hover:bg-[#ECEEEF] bg-[#ECEEEF] hover:bg-dark-body-100 rounded-full transition-all shrink-0 group">
+                                    <DynamicIcon name={'bag'} className={'w-6 h-6 text-biscay-700 group-hover:text-gray-920 dark:text-gray-920 dark:group-hover:text-biscay-700'}/>
                                 </div>
                                 <span className="text-[#334155] dark:text-white">سبد خرید</span>
                             </div>
                             {/*<!-- ! -------------------- Message Btn -------------------- ! -->*/}
                             <div className="flex items-center gap-x-2">
-                                <div
-                                    className="w-12 h-12 relative flex-center dark:bg-dark-body-100 dark:hover:bg-[#ECEEEF] bg-[#ECEEEF] hover:bg-dark-body-100 rounded-full transition-all shrink-0 group">
-                                    <DynamicIcon name={'bell'}
-                                                 className={'size-4 text-biscay-700 group-hover:text-gray-920 dark:text-gray-920 dark:group-hover:text-biscay-700'}/>
-                                    <span
-                                        className="w-6 h-6 flex-center absolute -top-1.5 -right-1.5 bg-red-450 text-white rounded-full font-YekanBakh text-sm">12</span>
+                                <div className="w-12 h-12 relative flex-center dark:bg-dark-body-100 dark:hover:bg-[#ECEEEF] bg-[#ECEEEF] hover:bg-dark-body-100 rounded-full transition-all shrink-0 group">
+                                    <DynamicIcon name={'bell'} className={'size-4 text-biscay-700 group-hover:text-gray-920 dark:text-gray-920 dark:group-hover:text-biscay-700'}/>
+                                    <span className="w-6 h-6 flex-center absolute -top-1.5 -right-1.5 bg-red-450 text-white rounded-full font-YekanBakh text-sm">12</span>
                                 </div>
                                 <span className="text-[#334155] dark:text-white">اعلانات</span>
                             </div>
@@ -384,8 +453,7 @@ function Header(props) {
                     </ul>
                 </nav>
             </div>
-            <div
-                className="hidden dark:block w-full h-screen absolute top-0 right-0 bg-gradient-to-t from-transparent to-[#324456] -z-20"></div>
+            <div className="hidden dark:block w-full h-screen absolute top-0 right-0 bg-gradient-to-t from-transparent to-[#324456] -z-20"></div>
             <Overlay/>
         </header>
     );

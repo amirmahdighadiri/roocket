@@ -91,6 +91,7 @@
     --color-primary-gray-185: #D2D6DE;
     --color-primary-gray-200: #79899E;
     --color-primary-gray-300: #647488;
+    --color-biscay-100: #EBECEE;
     --color-biscay-400: #99A0AA;
     --color-biscay-650: #8390A2;
     --color-biscay-700: #334155;
@@ -132,6 +133,7 @@
     --color-dark-body-50: #1A2E42;
     --color-dark-body-100: #1B314C;
     --color-dark-body-300: #0F1E2F;
+    --color-dark-450: #536479;
     --color-dark-650: #5B6676;
     --color-dark-890: #0E2338;
     --color-dark-900: #071B33;
@@ -144,7 +146,7 @@
     --color-dark-700: #130F26;
     --color-dark-950: #0F1E2F;
 
-    --color-border-gray-100: #EBECEE;
+
 
     --font-YekanBakh: "YekanBakh Regular";
     --font-YekanBakh-Medium: "YekanBakh Medium";
