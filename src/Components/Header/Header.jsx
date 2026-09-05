@@ -63,8 +63,7 @@ function Header(props) {
                         {/*<!-- ! -------------------- Header Logo In Mobile -------------------- ! -->*/}
                         <DynamicIcon name={'mobileLogo'} className={'sm:ml-0 -ml-6 block sm:hidden w-7 h-10.75'}/>
                         {/*<!-- ! -------------------- Header Logo In Desktop -------------------- ! -->*/}
-                        <DynamicIcon name={'lightLogo'}
-                                     className={'hidden sm:block dark:sm:hidden w-40 h-9 md:w-52 md:h-11.5'}/>
+                        <DynamicIcon name={'lightLogo'} className={'hidden sm:block dark:sm:hidden w-40 h-9 md:w-52 md:h-11.5'}/>
                         <DynamicIcon name={'darkLogo'} className={'hidden sm:dark:block w-40 h-9 md:w-52 md:h-11.5'}/>
                     </Link>
                     {/*<!-- ! -------------------- Header Search Input AND Change Theme Btn -------------------- ! -->*/}
