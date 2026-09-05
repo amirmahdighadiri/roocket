@@ -17,6 +17,7 @@ function AppProvider({children}) {
     const [userInfo, setUserInfo] = useState({});
     const [isShowNotification, setIsShowNotification] = useState(false);
     const [userId, setUserId] = useCookie("userID" , "")
+    const [isOpenProfileMenu , toggleProfileMenu] = useToggle()
 
     useEffect(() => {
         window.scrollTo(0, 0)
@@ -36,7 +37,9 @@ function AppProvider({children}) {
         userInfo,
         setUserInfo,
         isShowNotification,
-        setIsShowNotification
+        setIsShowNotification,
+        isOpenProfileMenu ,
+        toggleProfileMenu
     }
 
     useEffect(() => {

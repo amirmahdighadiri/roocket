@@ -198,7 +198,7 @@ const iconsMap = {
         </svg>
     ),
     login: (
-        <svg xmlns="http://www.w3.org/2000/svg" id="arrow-right-on-retangle" width="22" height="23" fill="none"
+        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="23" fill="none"
              viewBox="0 0 22 23">
             <path fill="currentColor"
                   d="M6.67 6.485c0-2.213 1.86-4.014 4.146-4.014h4.543c2.28 0 4.135 1.796 4.135 4.005V16.51c0 2.214-1.86 4.015-4.145 4.015h-4.543c-2.28 0-4.135-1.797-4.135-4.006V6.485"
