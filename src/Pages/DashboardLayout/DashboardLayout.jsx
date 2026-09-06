@@ -4,9 +4,24 @@ import DynamicIcon from "../../DynamicIcon/DynamicIcon.jsx";
 import {AppContext} from "../../Context/AppContext.jsx";
 
 function DashboardLayout(props) {
-    const {theme, setTheme} = useContext(AppContext)
+    const date = new Date();
+    const {theme, setTheme,userInfo} = useContext(AppContext)
     const location = useLocation()
+    const formatter = new Intl.DateTimeFormat("fa-IR-u-ca-persian", {
+        weekday: "long",
+        year: "numeric",
+        month: "long",
+        day: "2-digit",
+    });
+    const parts = formatter.formatToParts(date);
+
+    const getPart = (id)=>{
+       return  parts.find(item=> item.type === id)?.value
+    }
+    const persianDate = `${getPart("weekday")}, ${getPart("day")} ${getPart("month")} ${getPart("year")}`;
+
     const changeThemeHandler = () => theme === "dark" ? setTheme("light") : setTheme("dark")
+
     return (
         <section className="bg-white dark:bg-dark-body-100 grid grid-cols-12 min-h-screen overflow-hidden">
             <aside className="col-span-2 pt-11 flex flex-col min-h-screen pb-3">
@@ -95,8 +110,8 @@ function DashboardLayout(props) {
                 <header className="flex items-center justify-between pt-9 pr-16 pb-5 pl-8">
                     {/*<!-- ! -------------------- User FullName Wrapper -------------------- ! -->*/}
                     <div className="flex items-center gap-x-5">
-                        <span className="pl-5 border-l border-gray-300 text-gray-800 dark:text-white font-YekanBakh-Bold text-2xl">امیرمهدی عزیز ؛خوش اومدی. 👋</span>
-                        <span className="text-gray-360 dark:text-gray-810">چهارشنبه, 04 شهریور 1405</span>
+                        <span className="pl-5 border-l border-gray-300 text-gray-800 dark:text-white font-YekanBakh-Bold text-2xl">{userInfo.fullName} عزیز ؛خوش اومدی. 👋</span>
+                        <span className="text-gray-360 dark:text-gray-810">{persianDate}</span>
                     </div>
                     {/*<!-- ! -------------------- Header Action Btn -------------------- ! -->*/}
                     <div className="flex items-center gap-x-4">
@@ -112,15 +127,15 @@ function DashboardLayout(props) {
                             <span className="size-6 flex-center absolute -top-2 -right-2 bg-red-450 text-white rounded-full font-YekanBakh text-sm">0</span>
                         </button>
                         {/*<!-- ! -------------------- Notif Btn -------------------- ! -->*/}
-                        <button className="w-12 h-12 hidden lg:flex items-center justify-center relative dark:bg-dark-900 dark:hover:bg-[#ECEEEF] bg-[#ECEEEF] hover:bg-dark-body-100 rounded-full transition-all shrink-0 group cursor-pointer">
+                        <Link to="/dashboard/notifications" className="w-12 h-12 hidden lg:flex items-center justify-center relative dark:bg-dark-900 dark:hover:bg-[#ECEEEF] bg-[#ECEEEF] hover:bg-dark-body-100 rounded-full transition-all shrink-0 group cursor-pointer">
                             <DynamicIcon name={'bell'} className={'size-4 text-biscay-700 group-hover:text-gray-920 dark:text-gray-920 dark:group-hover:text-biscay-700'}/>
                             {/*<!-- ! -------------------- Notification Badge -------------------- ! -->*/}
                             <span className="size-6 flex-center absolute -top-2 -right-2 bg-red-450 text-white rounded-full font-YekanBakh text-sm">12</span>
-                        </button>
+                        </Link>
                         {/*<!-- ! -------------------- Profile Btn -------------------- ! -->*/}
-                        <button className="w-12 h-12 hidden lg:flex items-center justify-center relative dark:bg-dark-900 dark:hover:bg-[#ECEEEF] bg-[#ECEEEF] hover:bg-dark-body-100 rounded-full transition-all shrink-0 group cursor-pointer">
+                        <Link to="/dashboard/panel" className="w-12 h-12 hidden lg:flex items-center justify-center relative dark:bg-dark-900 dark:hover:bg-[#ECEEEF] bg-[#ECEEEF] hover:bg-dark-body-100 rounded-full transition-all shrink-0 group cursor-pointer">
                             <DynamicIcon name={'user'} className={'size-4 text-biscay-700 group-hover:text-gray-920 dark:text-gray-920 dark:group-hover:text-biscay-700'}/>
-                        </button>
+                        </Link>
                     </div>
                 </header>
                 <section className="h-full bg-gray-hover-100 dark:bg-dark-900 pt-10 px-8 pb-16 rounded-tr-3xl">

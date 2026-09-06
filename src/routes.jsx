@@ -19,6 +19,7 @@ import Notifications from "./Components/DashboardPages/Notifications/Notificatio
 import Certificates from "./Components/DashboardPages/Certificates/Certificates.jsx";
 import Missions from "./Components/DashboardPages/Missions/Missions.jsx";
 import Comments from "./Components/DashboardPages/Comments/Comments.jsx";
+import UserProfile from "./Components/DashboardPages/UserProfile/UserProfile.jsx";
 
 const routes = [
     {
@@ -42,6 +43,7 @@ const routes = [
             {path: 'notifications' , element: <Notifications/>},
             {path: 'missions' , element: <Missions/>},
             {path: 'certificates' , element: <Certificates/>},
+            {path: 'user-profile' , element: <UserProfile/>},
         ]},
     {path: '/auth' , element: <Auth/> },
     {path: '/verify' , element: <Verify/> },
