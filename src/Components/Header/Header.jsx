@@ -3,8 +3,7 @@ import {Link} from "react-router-dom";
 import DynamicIcon from "../../DynamicIcon/DynamicIcon.jsx";
 import {AppContext} from "../../Context/AppContext.jsx";
 
-{/*<!-- ! -------------------- Images ! -------------------- ! -->*/
-}
+{/*<!-- ! -------------------- Images ! -------------------- ! -->*/}
 import defaultProfile from "../../assets/images/profile/default.png"
 import Overlay from "../Overlay/Overlay.jsx";
 import useToggle from "../../Hooks/useToggle/useToggle.jsx";
