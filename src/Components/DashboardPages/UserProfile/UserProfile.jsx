@@ -2,6 +2,8 @@ import React , {useState ,useEffect ,useContext} from 'react';
 import DynamicIcon from "../../../DynamicIcon/DynamicIcon.jsx";
 import defaultProfile from "../../../assets/images/profile/default.png"
 import {AppContext} from "../../../Context/AppContext.jsx";
+import {Link} from "react-router-dom";
+
 
 function UserProfile(props) {
     const {userInfo} = useContext(AppContext)
@@ -15,9 +17,20 @@ function UserProfile(props) {
     }, [userInfo]);
     return (
         <div className="container">
-            <div className="grid grid-cols-12">
-                <div className="col-span-4"></div>
-                <div className="col-span-8">
+            <div className="grid grid-cols-12 gap-6">
+                <div className="col-span-3">
+                    <ul className="">
+                        <li className="">
+                            <Link to={"/dashboard/user-profile"} className="flex items-center gap-x-4 text-gary-50 dark:text-gray-810 hover:text-blue-700 bg-white dark:bg-dark-body-100 px-6 py-4 border border-transparent hover:border-blue-700 rounded-2xl font-YekanBakh-Bold transition-all">
+                                <span className="flex-center size-9 bg-blue-700 rounded-lg">
+                                    <DynamicIcon name="calendarList" className="size-5 text-white" />
+                                </span>
+                                <span className="text-lg">اطلاعات حساب</span>
+                            </Link>
+                        </li>
+                    </ul>
+                </div>
+                <div className="col-span-9">
                     <div className="rounded-2xl bg-white dark:bg-dark-body-100 px-11 py-8">
                         <h3 className="relative text-blue-700 dark:text-white text-xl font-YekanBakh-Heavy pr-2 before:content-[''] before:absolute before:top-0 before:bottom-0 before:-right-1 before:my-auto before:size-2 before:rounded-full dark:before:bg-white before:bg-blue-700 mb-4">اطلاعات حساب</h3>
                         {/*<!-- ! -------------------- Chose Image Input -------------------- ! -->*/}
