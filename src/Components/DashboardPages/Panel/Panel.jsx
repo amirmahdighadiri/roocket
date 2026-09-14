@@ -4,7 +4,7 @@ import {Link} from "react-router-dom";
 
 function Panel(props) {
     return (
-        <div className="container">
+        <div className="">
             {/*<!-- ! -------------------- User Activity Details -------------------- ! -->*/}
             <div className="grid grid-cols-12 gap-x-8 mb-12">
                 {/*<!-- ! -------------------- User Activity Summery -------------------- ! -->*/}
