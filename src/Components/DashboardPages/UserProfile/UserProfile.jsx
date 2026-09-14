@@ -25,7 +25,7 @@ function UserProfile(props) {
                                 <span className="flex-center size-9 bg-blue-700 rounded-lg">
                                     <DynamicIcon name="calendarList" className="size-5 text-white" />
                                 </span>
-                                <span className="text-lg">اطلاعات حساب</span>
+                                <span className="inline-block mt-2 text-lg">اطلاعات حساب</span>
                             </Link>
                         </li>
                     </ul>
