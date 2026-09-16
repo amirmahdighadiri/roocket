@@ -18,11 +18,13 @@ function AppProvider({children}) {
     const [isShowNotification, setIsShowNotification] = useState(false);
     const [userId, setUserId] = useCookie("userID" , "")
     const [isOpenProfileMenu , toggleProfileMenu] = useToggle()
+    const [isOpenDashboardMenu , toggleDashboardMenu] = useToggle()
 
     useEffect(() => {
         window.scrollTo(0, 0)
         setIsOpenMenu(false)
         setIsShowOverlay(false)
+        toggleDashboardMenu(false)
     }, [location.pathname])
 
     const conectValue = {
@@ -39,7 +41,9 @@ function AppProvider({children}) {
         isShowNotification,
         setIsShowNotification,
         isOpenProfileMenu ,
-        toggleProfileMenu
+        toggleProfileMenu,
+        isOpenDashboardMenu ,
+        toggleDashboardMenu
     }
 
     useEffect(() => {
