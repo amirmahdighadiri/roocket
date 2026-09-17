@@ -1,36 +1,17 @@
-import React from 'react';
+import React,{useState} from 'react';
 import DynamicIcon from "../../../DynamicIcon/DynamicIcon.jsx";
+import Tabs from "../../Tabs/Tabs.jsx";
+import {notificationTabs} from "../../../data.jsx";
 
 function Notifications(props) {
+    const [activeTab, setActiveTab] = useState({label: 'اعلانات خوانده نشده' , key: 'unread-notifications'});
+
     return (
         <div className="container">
             {/*<!-- ! -------------------- Notifications Details Menu & Notif Btn -------------------- ! -->*/}
             <div className="w-full flex flex-col md:flex-row gap-y-5 items-center justify-between">
-                {/*<!-- ! -------------------- Menu (Desktop) -------------------- ! -->*/}
-                <div className="hidden md:inline-flex items-center px-4 py-2 bg-white dark:bg-dark-body-100 rounded-xl">
-                    <button type="button" className="h-12 flex items-center gap-x-2 text-chambray-400 hover:text-blue-450 text-xl font-YekanBakh-Bold px-5 pt-1 transition-all cursor-pointer">
-                        <DynamicIcon name="document" className="size-5 text-inherit" />
-                        <span className="">اعلانات خوانده نشده</span>
-                    </button>
-                    <button type="button" className="h-12 flex items-center gap-x-2 text-chambray-400 hover:text-blue-450 text-xl font-YekanBakh-Bold px-5 pt-1 transition-all cursor-pointer">
-                        <DynamicIcon name="commentBox" className="size-5 fill-inherit text-inherit" />
-                        <span className="">اعلانات خوانده شده</span>
-                    </button>
-                </div>
-                {/*<!-- ! -------------------- Courses Details Menu (Mobile) -------------------- ! -->*/}
-                <div className="w-full block md:hidden">
-                    <button type="button" className="w-full h-14 flex items-center justify-between px-5 py-3 bg-white dark:bg-dark-body-100 rounded cursor-pointer">
-                    <span className="flex items-center gap-x-2 text-blue-450">
-                        <DynamicIcon name="chartBar" className="size-5 text-inherit" />
-                        <span className="">دوره های جاری</span>
-                    </span>
-                        <span className="flex-center h-full pr-5 border-r border-blue-450 text-blue-450">
-                        <DynamicIcon name="arrowDown" className="size-2 text-inherit" />
-                    </span>
-                    </button>
-                    {/*<!-- ! -------------------- Submenu -------------------- ! -->*/}
-                    <div className=""></div>
-                </div>
+                {/*<!-- ! -------------------- Tabs -------------------- ! -->*/}
+                <Tabs activeTab={activeTab} tabs={notificationTabs} changeTab={setActiveTab}/>
                 {/*<!-- ! -------------------- Notif Btn -------------------- ! -->*/}
                 <button type="button" className="flex-center gap-x-2 text-white bg-blue-700 hover:bg-blue-700/80 dark:bg-transparent dark:hover:bg-dark-body-100/80 border border-white px-4 py-3 text-xl font-YekanBakh-Bold rounded-md shadow-sm cursor-pointer transition-all">
                     <span className="">تنظیمات اعلانات</span>

@@ -1,45 +1,18 @@
-import React from 'react';
+import React ,{useState} from 'react';
 import DynamicIcon from "../../../DynamicIcon/DynamicIcon.jsx";
 import NotfoundContent from "../../../assets/images/Error/notfound-content.svg";
 import {Link} from "react-router-dom";
+import Tabs from "../../Tabs/Tabs.jsx";
+import {commentTabs} from "../../../data.jsx";
 
 
 function Comments(props) {
+    const [activeTab, setActiveTab] = useState({label: 'مقالات' , key: 'articles'});
+
     return (
         <div className="container">
-            {/*<!-- ! -------------------- Following Details Menu (Desktop) -------------------- ! -->*/}
-            <div className="hidden md:inline-flex items-center px-4 py-2 bg-white dark:bg-dark-body-100 rounded-xl">
-                <button type="button" className="h-12 flex items-center gap-x-2 text-chambray-400 hover:text-blue-450 text-xl font-YekanBakh-Bold px-5 pt-1 transition-all cursor-pointer">
-                    <DynamicIcon name="document" className="size-5 text-inherit" />
-                    <span className="">مقالات</span>
-                </button>
-                <button type="button" className="h-12 flex items-center gap-x-2 text-chambray-400 hover:text-blue-450 text-xl font-YekanBakh-Bold px-5 pt-1 transition-all cursor-pointer">
-                    <DynamicIcon name="podcast" className="size-5 fill-inherit text-inherit" />
-                    <span className="">پادکست ها</span>
-                </button>
-                <button type="button" className="h-12 flex items-center gap-x-2 text-chambray-400 hover:text-blue-450 text-xl font-YekanBakh-Bold px-5 pt-1 transition-all cursor-pointer">
-                    <DynamicIcon name="camera" className="size-5 text-inherit" />
-                    <span className="">دوره ها</span>
-                </button>
-                <button type="button" className="h-12 flex items-center gap-x-2 text-chambray-400 hover:text-blue-450 text-xl font-YekanBakh-Bold px-5 pt-1 transition-all cursor-pointer">
-                    <DynamicIcon name="play" className="size-5 text-inherit" />
-                    <span className="">جلسات</span>
-                </button>
-            </div>
-            {/*<!-- ! -------------------- Courses Details Menu (Mobile) -------------------- ! -->*/}
-            <div className="block md:hidden">
-                <button type="button" className="w-full h-14 flex items-center justify-between px-5 py-3 bg-white dark:bg-dark-body-100 rounded cursor-pointer">
-                    <span className="flex items-center gap-x-2 text-blue-450">
-                        <DynamicIcon name="chartBar" className="size-5 text-inherit" />
-                        <span className="">دوره های جاری</span>
-                    </span>
-                    <span className="flex-center h-full pr-5 border-r border-blue-450 text-blue-450">
-                        <DynamicIcon name="arrowDown" className="size-2 text-inherit" />
-                    </span>
-                </button>
-                {/*<!-- ! -------------------- Submenu -------------------- ! -->*/}
-                <div className=""></div>
-            </div>
+            {/*<!-- ! -------------------- Tabs -------------------- ! -->*/}
+            <Tabs activeTab={activeTab} tabs={commentTabs} changeTab={setActiveTab}/>
             {/*<!-- ! -------------------- Following Page Content -------------------- ! -->*/}
             <div className="flex flex-col items-center justify-center mt-14">
                 <p className="text-gray-300 dark:text-gary-70 text-2xl font-YekanBakh-Bold mb-6">هنوز نظری روی جلسات ثبت نکرده‌اید</p>
