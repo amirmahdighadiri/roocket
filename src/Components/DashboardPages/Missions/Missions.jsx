@@ -1,39 +1,15 @@
-import React from 'react';
+import React,{useState} from 'react';
 import DynamicIcon from "../../../DynamicIcon/DynamicIcon.jsx";
 import {Link} from "react-router-dom";
+import Tabs from "../../Tabs/Tabs.jsx";
+import {missionTabs} from "../../../data.jsx";
 
 function Missions(props) {
+    const [activeTab, setActiveTab] = useState({label: 'ماموریت های ضروری' , key: 'urgent-missions'});
     return (
         <div className="container">
-            {/*<!-- ! -------------------- Following Details Menu (Desktop) -------------------- ! -->*/}
-            <div className="hidden md:inline-flex items-center justify-center w-full lg:w-auto px-4 py-2 bg-white dark:bg-dark-body-100 rounded-xl">
-                <button type="button" className="h-12 flex items-center gap-x-2 text-chambray-400 hover:text-blue-450 text-lg lg:text-xl font-YekanBakh-Bold px-5 pt-1 transition-all cursor-pointer">
-                    <span className="">ماموریت های ضروری</span>
-                    <span className="flex-center size-7 rounded-lg text-white bg-dark-900 text-sm">2</span>
-                </button>
-                <button type="button" className="h-12 flex items-center gap-x-2 text-chambray-400 hover:text-blue-450 text-lg lg:text-xl font-YekanBakh-Bold px-5 pt-1 transition-all cursor-pointer">
-                    <span className="">ماموریت های لازم</span>
-                    <span className="flex-center size-7 rounded-lg text-white bg-dark-900 text-sm">2</span>
-                </button>
-                <button type="button" className="h-12 flex items-center gap-x-2 text-chambray-400 hover:text-blue-450 text-lg lg:text-xl font-YekanBakh-Bold px-5 pt-1 transition-all cursor-pointer">
-                    <span className="">ماموریت های معمولی</span>
-                    <span className="flex-center size-7 rounded-lg text-white bg-dark-900 text-sm">2</span>
-                </button>
-            </div>
-            {/*<!-- ! -------------------- Courses Details Menu (Mobile) -------------------- ! -->*/}
-            <div className="block md:hidden">
-                <button type="button" className="w-full h-14 flex items-center justify-between px-5 py-3 bg-white dark:bg-dark-body-100 rounded cursor-pointer">
-                    <span className="flex items-center gap-x-2 text-blue-450">
-                        <DynamicIcon name="chartBar" className="size-5 text-inherit" />
-                        <span className="">دوره های جاری</span>
-                    </span>
-                    <span className="flex-center h-full pr-5 border-r border-blue-450 text-blue-450">
-                        <DynamicIcon name="arrowDown" className="size-2 text-inherit" />
-                    </span>
-                </button>
-                {/*<!-- ! -------------------- Submenu -------------------- ! -->*/}
-                <div className=""></div>
-            </div>
+            {/*<!-- ! -------------------- Tabs -------------------- ! -->*/}
+            <Tabs activeTab={activeTab} tabs={missionTabs} changeTab={setActiveTab}/>
             {/*<!-- ! -------------------- User Missions Content -------------------- ! -->*/}
             <div className="p-6 bg-white dark:bg-dark-body-100 border border-gray-100 dark:border-white/5 rounded-2xl shadow-sm mt-8 space-y-5">
                 <div className="w-full flex flex-col lg:flex-row lg:items-center justify-between gap-4 p-5 rounded-2xl border border-gray-100 dark:border-white/5 bg-white dark:bg-dark-900 hover:border-blue-700/25 dark:hover:border-blue-450/30 transition-all hover:shadow-sm">

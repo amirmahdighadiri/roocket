@@ -1,7 +1,12 @@
-import React from 'react';
+import React ,{useState} from 'react';
 import DynamicIcon from "../../../DynamicIcon/DynamicIcon.jsx";
+import {coursesTabs} from "../../../data.jsx";
+import Tabs from "../../Tabs/Tabs.jsx";
 
 function Courses(props) {
+
+    const [activeTab, setActiveTab] = useState({label: 'دوره های جاری' , key: 'current-courses'});
+
     return (
         <div className="container">
             {/*<!-- ! -------------------- User Courses Details -------------------- ! -->*/}
@@ -52,39 +57,8 @@ function Courses(props) {
                     </div>
                 </div>
             </div>
-            {/*<!-- ! -------------------- Courses Details Menu (Desktop) -------------------- ! -->*/}
-            <div className="hidden md:flex lg:inline-flex justify-center items-center px-4 py-2 bg-white dark:bg-dark-body-100 rounded-xl">
-                <button type="button" className="h-12 flex items-center gap-x-2 text-chambray-400 hover:text-blue-450 text-sm lg:text-xl font-YekanBakh-Bold px-5 pt-1 transition-all cursor-pointer">
-                    <DynamicIcon name="playSquare" className="size-4 xl:size-5 text-inherit" />
-                    <span className="">دوره های جاری</span>
-                </button>
-                <button type="button" className="h-12 flex items-center gap-x-2 text-chambray-400 hover:text-blue-450 text-sm lg:text-xl font-YekanBakh-Bold px-5 pt-1 transition-all cursor-pointer">
-                    <DynamicIcon name="playSquareEye" className="size-4 xl:size-5 text-inherit" />
-                    <span className="">دوره های خریداری شده</span>
-                </button>
-                <button type="button" className="h-12 flex items-center gap-x-2 text-chambray-400 hover:text-blue-450 text-sm lg:text-xl font-YekanBakh-Bold px-5 pt-1 transition-all cursor-pointer">
-                    <DynamicIcon name="playSquareEye" className="size-4 xl:size-5 text-inherit" />
-                    <span className="">دوره های گذرانده شده</span>
-                </button>
-                <button type="button" className="h-12 flex items-center gap-x-2 text-chambray-400 hover:text-blue-450 text-sm lg:text-xl font-YekanBakh-Bold px-5 pt-1 transition-all cursor-pointer">
-                    <DynamicIcon name="playSquareEyeSlash" className="size-4 xl:size-5 text-inherit" />
-                    <span className="">دوره های غیر فعال</span>
-                </button>
-            </div>
-            {/*<!-- ! -------------------- Courses Details Menu (Mobile) -------------------- ! -->*/}
-            <div className="block md:hidden">
-                <button type="button" className="w-full h-14 flex items-center justify-between px-5 py-3 bg-white dark:bg-dark-body-100 rounded cursor-pointer">
-                    <span className="flex items-center gap-x-2 text-blue-450">
-                        <DynamicIcon name="chartBar" className="size-5 text-inherit" />
-                        <span className="">دوره های جاری</span>
-                    </span>
-                    <span className="flex-center h-full pr-5 border-r border-blue-450 text-blue-450">
-                        <DynamicIcon name="arrowDown" className="size-2 text-inherit" />
-                    </span>
-                </button>
-                {/*<!-- ! -------------------- Submenu -------------------- ! -->*/}
-                <div className=""></div>
-            </div>
+            {/*<!-- ! -------------------- Tabs -------------------- ! -->*/}
+            <Tabs activeTab={activeTab} tabs={coursesTabs} changeTab={setActiveTab}/>
             {/*<!-- ! -------------------- User Courses Content -------------------- ! -->*/}
             <div className="p-8 rounded-xl bg-white dark:bg-dark-body-100 mb-24 mt-8">
                 <p className="text-biscay-700 dark:text-white font-YekanBakh-Medium">دوره‌ای در این فهرست نیست.</p>

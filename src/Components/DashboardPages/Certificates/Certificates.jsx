@@ -1,33 +1,15 @@
-import React from 'react';
+import React,{useState} from 'react';
 import DynamicIcon from "../../../DynamicIcon/DynamicIcon.jsx";
 import {Link} from "react-router-dom";
+import Tabs from "../../Tabs/Tabs.jsx";
+import {certificateTabs} from "../../../data.jsx";
 
 function Certificates(props) {
+    const [activeTab, setActiveTab] = useState({label: 'گواهی های مشاهده آنلاین' , key: 'online-certificates'});
     return (
         <div className="container">
-            {/*<!-- ! -------------------- Following Details Menu (Desktop) -------------------- ! -->*/}
-            <div className="hidden md:inline-flex items-center px-4 py-2 bg-white dark:bg-dark-body-100 rounded-xl">
-                <button type="button" className="h-12 flex items-center gap-x-2 text-chambray-400 hover:text-blue-450 text-xl font-YekanBakh-Bold px-5 pt-1 transition-all cursor-pointer">
-                    <span className="">گواهی های مشاهده آنلاین</span>
-                </button>
-                <button type="button" className="h-12 flex items-center gap-x-2 text-chambray-400 hover:text-blue-450 text-xl font-YekanBakh-Bold px-5 pt-1 transition-all cursor-pointer">
-                    <span className="">تاییدیه های فنی</span>
-                </button>
-            </div>
-            {/*<!-- ! -------------------- Courses Details Menu (Mobile) -------------------- ! -->*/}
-            <div className="block md:hidden">
-                <button type="button" className="w-full h-14 flex items-center justify-between px-5 py-3 bg-white dark:bg-dark-body-100 rounded cursor-pointer">
-                    <span className="flex items-center gap-x-2 text-blue-450">
-                        <DynamicIcon name="chartBar" className="size-5 text-inherit" />
-                        <span className="">دوره های جاری</span>
-                    </span>
-                    <span className="flex-center h-full pr-5 border-r border-blue-450 text-blue-450">
-                        <DynamicIcon name="arrowDown" className="size-2 text-inherit" />
-                    </span>
-                </button>
-                {/*<!-- ! -------------------- Submenu -------------------- ! -->*/}
-                <div className=""></div>
-            </div>
+            {/*<!-- ! -------------------- Tabs -------------------- ! -->*/}
+            <Tabs activeTab={activeTab} tabs={certificateTabs} changeTab={setActiveTab}/>
             {/*<!-- ! -------------------- User Certificates Content -------------------- ! -->*/}
             <div className="flex flex-col items-center justify-center px-4 py-20 bg-white dark:bg-dark-body-100 border border-gray-100 dark:border-white/5 rounded-2xl shadow-sm mt-8">
                 <div className="relative size-32 flex-center mb-8">

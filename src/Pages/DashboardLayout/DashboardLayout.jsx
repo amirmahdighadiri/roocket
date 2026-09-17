@@ -78,7 +78,7 @@ function DashboardLayout(props) {
                 </div>
                 {/*<!-- ! -------------------- Menu -------------------- ! -->*/}
                 <div className="flex-1 overflow-y-auto">
-                    <div className="pt-5">
+                    <div className="pt-5 mb-5">
                         <ul className="space-y-1 text-lg">
                             <li className="xl:px-4">
                                 <Link to="/dashboard/panel" className={`flex items-center gap-x-4 ${location.pathname.includes('panel') ? 'text-blue-700 bg-blue-700/10' : 'text-gray-800 dark:text-white bg-transparent hover:text-blue-450'} transition-all px-4 py-3 rounded-3xl`}>
@@ -139,7 +139,7 @@ function DashboardLayout(props) {
                     <div className="mt-auto xl:px-4">
                         <ul className="space-y-1 border-t border-biscay-700/20 dark:border-white/10">
                             <li className="">
-                                <Link to="/" className="flex items-center gap-x-4 text-gray-800 dark:text-white hover:text-blue-450 transition-all px-4 py-3">
+                                <Link to="/dashboard/user-profile" className="flex items-center gap-x-4 text-gray-800 dark:text-white hover:text-blue-450 transition-all px-4 py-3">
                                     <DynamicIcon name="user" className="size-5 fill-inherit"/>
                                     <span className="inline-block mt-2">اطلاغات پروفایل</span>
                                 </Link>
@@ -187,7 +187,7 @@ function DashboardLayout(props) {
                             <span className="size-6 flex-center absolute -top-2 -right-2 bg-red-450 text-white rounded-full font-YekanBakh text-sm">12</span>
                         </Link>
                         {/*<!-- ! -------------------- Profile Btn -------------------- ! -->*/}
-                        <Link to="/dashboard/panel" className="w-12 h-12 flex items-center justify-center relative dark:bg-dark-900 dark:hover:bg-[#ECEEEF] bg-[#ECEEEF] hover:bg-dark-body-100 rounded-full transition-all shrink-0 group cursor-pointer">
+                        <Link to="/dashboard/user-profile" className="w-12 h-12 flex items-center justify-center relative dark:bg-dark-900 dark:hover:bg-[#ECEEEF] bg-[#ECEEEF] hover:bg-dark-body-100 rounded-full transition-all shrink-0 group cursor-pointer">
                             <DynamicIcon name={'user'} className={'size-4 text-biscay-700 group-hover:text-gray-920 dark:text-gray-920 dark:group-hover:text-biscay-700'}/>
                         </Link>
                     </div>

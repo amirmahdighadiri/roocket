@@ -83,4 +83,164 @@ const displayFilters = [
     {id: 2, label: "محبوب ترین", value: "popular"},
     {id: 3, label: "پربازدیدترین", value: "mostViewed"},
 ]
-export {accordions, coursesCategory, timeFilters , displayFilters};
+
+const coursesTabs = [
+    {
+        id: 1,
+        key: "current-courses",
+        label: "دوره های جاری",
+        icon: "playSquare"
+    },
+    {
+        id: 2,
+        key: "purchased-courses",
+        label: "دوره های خریداری شده",
+        icon: "playSquareEye"
+    },
+    {
+        id: 3,
+        key: "completed-courses",
+        label: "دوره های گذرانده شده",
+        icon: "playSquareEye"
+    },
+    {
+        id: 4,
+        key: "inactive-courses",
+        label: "دوره های غیر فعال",
+        icon: "playSquareEyeSlash"
+    },
+]
+
+const questionTabs = [
+    {
+        id: 1,
+        key: "active-questions",
+        label: "پرسش های جاری",
+        icon: "questionSquare",
+    },
+    {
+        id: 2,
+        key: "locked-questions",
+        label: "پرسش های قفل شده",
+        icon: "securityQuestion",
+    },
+    {
+        id: 3,
+        key: "my-answers",
+        label: "پاسخ های من",
+        icon: "commentBox",
+    },
+];
+
+const followingTabs = [
+    {
+        id: 1,
+        key: "articles",
+        label: "مقالات",
+        icon: "document",
+    },
+    {
+        id: 2,
+        key: "podcasts",
+        label: "پادکست ها",
+        icon: "podcast",
+    },
+    {
+        id: 3,
+        key: "questions",
+        label: "پرسش ها",
+        icon: "questionSquare",
+    },
+    {
+        id: 4,
+        key: "comments",
+        label: "نظرات",
+        icon: "commentBox",
+    },
+    {
+        id: 5,
+        key: "people",
+        label: "افراد",
+        icon: "user",
+    },
+];
+
+const commentTabs = [
+    {
+        id: 1,
+        key: "articles",
+        label: "مقالات",
+        icon: "document",
+    },
+    {
+        id: 2,
+        key: "podcasts",
+        label: "پادکست ها",
+        icon: "podcast",
+    },
+    {
+        id: 3,
+        key: "courses",
+        label: "دوره ها",
+        icon: "camera",
+    },
+    {
+        id: 4,
+        key: "sessions",
+        label: "جلسات",
+        icon: "play",
+    },
+];
+
+const notificationTabs = [
+    {
+        id: 1,
+        key: "unread-notifications",
+        label: "اعلانات خوانده نشده",
+        icon: "document",
+    },
+    {
+        id: 2,
+        key: "read-notifications",
+        label: "اعلانات خوانده شده",
+        icon: "commentBox",
+    },
+];
+
+const missionTabs = [
+    {
+        id: 1,
+        key: "urgent-missions",
+        label: "ماموریت های ضروری",
+        value: 2,
+    },
+    {
+        id: 2,
+        key: "required-missions",
+        label: "ماموریت های لازم",
+        value: 2,
+    },
+    {
+        id: 3,
+        key: "normal-missions",
+        label: "ماموریت های معمولی",
+        value: 2,
+    },
+];
+
+const certificateTabs = [
+    {
+        id: 1,
+        key: "online-certificates",
+        label: "گواهی های مشاهده آنلاین",
+    },
+    {
+        id: 2,
+        key: "technical-approvals",
+        label: "تاییدیه های فنی",
+    },
+];
+
+
+
+export {accordions, coursesCategory, timeFilters , displayFilters , coursesTabs, questionTabs , followingTabs ,commentTabs ,notificationTabs,missionTabs,certificateTabs};
