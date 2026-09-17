@@ -5,14 +5,28 @@ import {Link} from "react-router-dom";
 function Certificates(props) {
     return (
         <div className="container">
-            {/*<!-- ! -------------------- Following Details Menu -------------------- ! -->*/}
-            <div className="inline-flex items-center px-4 py-2 bg-white dark:bg-dark-body-100 rounded-xl">
+            {/*<!-- ! -------------------- Following Details Menu (Desktop) -------------------- ! -->*/}
+            <div className="hidden md:inline-flex items-center px-4 py-2 bg-white dark:bg-dark-body-100 rounded-xl">
                 <button type="button" className="h-12 flex items-center gap-x-2 text-chambray-400 hover:text-blue-450 text-xl font-YekanBakh-Bold px-5 pt-1 transition-all cursor-pointer">
                     <span className="">گواهی های مشاهده آنلاین</span>
                 </button>
                 <button type="button" className="h-12 flex items-center gap-x-2 text-chambray-400 hover:text-blue-450 text-xl font-YekanBakh-Bold px-5 pt-1 transition-all cursor-pointer">
                     <span className="">تاییدیه های فنی</span>
                 </button>
+            </div>
+            {/*<!-- ! -------------------- Courses Details Menu (Mobile) -------------------- ! -->*/}
+            <div className="block md:hidden">
+                <button type="button" className="w-full h-14 flex items-center justify-between px-5 py-3 bg-white dark:bg-dark-body-100 rounded cursor-pointer">
+                    <span className="flex items-center gap-x-2 text-blue-450">
+                        <DynamicIcon name="chartBar" className="size-5 text-inherit" />
+                        <span className="">دوره های جاری</span>
+                    </span>
+                    <span className="flex-center h-full pr-5 border-r border-blue-450 text-blue-450">
+                        <DynamicIcon name="arrowDown" className="size-2 text-inherit" />
+                    </span>
+                </button>
+                {/*<!-- ! -------------------- Submenu -------------------- ! -->*/}
+                <div className=""></div>
             </div>
             {/*<!-- ! -------------------- User Certificates Content -------------------- ! -->*/}
             <div className="flex flex-col items-center justify-center px-4 py-20 bg-white dark:bg-dark-body-100 border border-gray-100 dark:border-white/5 rounded-2xl shadow-sm mt-8">
@@ -22,9 +36,9 @@ function Certificates(props) {
                         <DynamicIcon name="checkSquare" className="size-9 text-green-700 dark:text-green-600"/>
                     </div>
                 </div>
-                <p className="text-biscay-700 dark:text-white text-2xl/9 font-YekanBakh-Bold mb-3">هنوز گواهی‌ای ثبت
+                <p className="text-biscay-700 dark:text-white text-xl lg:text-2xl/9 font-YekanBakh-Bold mb-3">هنوز گواهی‌ای ثبت
                     نشده است</p>
-                <p className="w-3/12 text-gray-500 dark:text-gray-360 text-sm/7 text-center mb-8">پس از تکمیل دوره‌ها و دریافت گواهی پایان دوره، فهرست گواهی‌های شما اینجا نمایش داده می‌شود.</p>
+                <p className="w-full lg:w-3/12 text-gray-500 dark:text-gray-360 text-sm/7 text-center mb-8">پس از تکمیل دوره‌ها و دریافت گواهی پایان دوره، فهرست گواهی‌های شما اینجا نمایش داده می‌شود.</p>
                 <Link to="" className="flex-center h-11 px-6 border border-green-600 bg-green-400 text-white hover:bg-transparent hover:text-green-600 transition-all rounded-xl font-YekanBakh-Bold">مشاهده دوره‌های من</Link>
             </div>
         </div>
