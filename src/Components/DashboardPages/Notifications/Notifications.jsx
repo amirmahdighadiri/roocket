@@ -5,9 +5,9 @@ function Notifications(props) {
     return (
         <div className="container">
             {/*<!-- ! -------------------- Notifications Details Menu & Notif Btn -------------------- ! -->*/}
-            <div className="flex items-center justify-between">
-                {/*<!-- ! -------------------- Menu -------------------- ! -->*/}
-                <div className="inline-flex items-center px-4 py-2 bg-white dark:bg-dark-body-100 rounded-xl">
+            <div className="w-full flex flex-col md:flex-row gap-y-5 items-center justify-between">
+                {/*<!-- ! -------------------- Menu (Desktop) -------------------- ! -->*/}
+                <div className="hidden md:inline-flex items-center px-4 py-2 bg-white dark:bg-dark-body-100 rounded-xl">
                     <button type="button" className="h-12 flex items-center gap-x-2 text-chambray-400 hover:text-blue-450 text-xl font-YekanBakh-Bold px-5 pt-1 transition-all cursor-pointer">
                         <DynamicIcon name="document" className="size-5 text-inherit" />
                         <span className="">اعلانات خوانده نشده</span>
@@ -16,6 +16,20 @@ function Notifications(props) {
                         <DynamicIcon name="commentBox" className="size-5 fill-inherit text-inherit" />
                         <span className="">اعلانات خوانده شده</span>
                     </button>
+                </div>
+                {/*<!-- ! -------------------- Courses Details Menu (Mobile) -------------------- ! -->*/}
+                <div className="w-full block md:hidden">
+                    <button type="button" className="w-full h-14 flex items-center justify-between px-5 py-3 bg-white dark:bg-dark-body-100 rounded cursor-pointer">
+                    <span className="flex items-center gap-x-2 text-blue-450">
+                        <DynamicIcon name="chartBar" className="size-5 text-inherit" />
+                        <span className="">دوره های جاری</span>
+                    </span>
+                        <span className="flex-center h-full pr-5 border-r border-blue-450 text-blue-450">
+                        <DynamicIcon name="arrowDown" className="size-2 text-inherit" />
+                    </span>
+                    </button>
+                    {/*<!-- ! -------------------- Submenu -------------------- ! -->*/}
+                    <div className=""></div>
                 </div>
                 {/*<!-- ! -------------------- Notif Btn -------------------- ! -->*/}
                 <button type="button" className="flex-center gap-x-2 text-white bg-blue-700 hover:bg-blue-700/80 dark:bg-transparent dark:hover:bg-dark-body-100/80 border border-white px-4 py-3 text-xl font-YekanBakh-Bold rounded-md shadow-sm cursor-pointer transition-all">
@@ -28,8 +42,8 @@ function Notifications(props) {
                 <div className="flex-center size-24 rounded-full mb-8 bg-blue-700/10 dark:bg-blue-450/10">
                     <DynamicIcon name="bell" className="size-9 text-blue-700 dark:text-blue-450" />
                 </div>
-                <p className="text-biscay-700 dark:text-white text-2xl/9 font-YekanBakh-Bold mb-3">اعلان جدیدی جهت نمایش وجود ندارد</p>
-                <p className="w-3/12 text-gray-500 dark:text-gray-360 text-sm/7 text-center mb-8">فعلاً اعلان خوانده‌نشده‌ای ندارید. اعلان‌های قبلی را می‌توانید در فهرست خوانده‌شده‌ها ببینید.</p>
+                <p className="text-biscay-700 dark:text-white text-xl md:text-2xl/9 font-YekanBakh-Bold mb-3">اعلان جدیدی جهت نمایش وجود ندارد</p>
+                <p className="w-full xl:w-3/12 text-gray-500 dark:text-gray-360 text-sm/7 text-center mb-8">فعلاً اعلان خوانده‌نشده‌ای ندارید. اعلان‌های قبلی را می‌توانید در فهرست خوانده‌شده‌ها ببینید.</p>
                 <button type="button" className="h-11 flex-center gap-x-2 text-white bg-blue-700 hover:bg-blue-700/80 dark:bg-transparent dark:hover:bg-dark-900 border border-white px-5 text-sm font-YekanBakh-Bold rounded-lg shadow-sm cursor-pointer transition-all">مشاهده اعلانات خوانده شده</button>
             </div>
         </div>

@@ -107,7 +107,7 @@ function DashboardLayout(props) {
                             <li className="xl:px-4">
                                 <Link to="/dashboard/followings" className={`flex items-center gap-x-4 ${location.pathname.includes('followings') ? 'text-blue-700 bg-blue-700/10' : 'text-gray-800 dark:text-white bg-transparent hover:text-blue-450'}  transition-all px-4 py-3 rounded-3xl`}>
                                     <DynamicIcon name="userMultiple" className="size-5 dark:fill-inherit"/>
-                                    <span className="inline-block mt-2">دنبل شده ها</span>
+                                    <span className="inline-block mt-2">دنبال شده ها</span>
                                 </Link>
                             </li>
                             <li className="xl:px-4">
@@ -163,8 +163,8 @@ function DashboardLayout(props) {
                             <DynamicIcon name="document" className="size-4 fill-inherit" />
                         </button>
                         <div className="flex flex-col md:flex-row md:items-center gap-x-5 gap-y-1">
-                            <span className="md:pl-5 md:border-l border-gray-300 text-gray-800 dark:text-white font-YekanBakh-Bold text-sm md:text-2xl">{userInfo.fullName} عزیز ؛خوش اومدی. 👋</span>
-                            <span className="text-gray-360 dark:text-gray-810 text-xs md:text-base">{persianDate}</span>
+                            <span className="lg:pl-5 md:border-l border-gray-300 text-gray-800 dark:text-white font-YekanBakh-Bold text-sm lg:text-2xl">{userInfo.fullName} عزیز ؛خوش اومدی. 👋</span>
+                            <span className="text-gray-360 dark:text-gray-810 text-xs md:text-sm lg:text-base">{persianDate}</span>
                         </div>
                     </div>
                     {/*<!-- ! -------------------- Header Action Btn -------------------- ! -->*/}

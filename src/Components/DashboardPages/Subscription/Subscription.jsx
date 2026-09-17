@@ -7,7 +7,7 @@ function Subscription(props) {
         <div className="">
             {/*<!-- ! -------------------- User Wallet Details -------------------- ! -->*/}
             <div className="grid grid-cols-12 gap-7">
-                <div className="col-span-4 pt-7 bg-white dark:bg-dark-body-100 rounded-xl">
+                <div className="col-span-12 md:col-span-6 xl:col-span-4 pt-7 bg-white dark:bg-dark-body-100 rounded-xl">
                     <div className="flex items-center gap-x-4 px-6 pb-6">
                             <div className="size-15 flex-center rounded-2xl bg-customOrange-700">
                                 <DynamicIcon name="calender" className="size-6 text-white" />
@@ -22,7 +22,7 @@ function Subscription(props) {
                         <DynamicIcon name="arrow" className="size-5 text-inherit" />
                     </Link>
                 </div>
-                <div className="col-span-4 pt-7 bg-white dark:bg-dark-body-100 rounded-xl">
+                <div className="col-span-12 md:col-span-6 xl:col-span-4 pt-7 bg-white dark:bg-dark-body-100 rounded-xl">
                     <div className="flex items-center gap-x-4 px-6 pb-6">
                         <div className="size-15 flex-center rounded-2xl bg-blue-700">
                             <DynamicIcon name="calender" className="size-6 text-white" />
@@ -40,7 +40,7 @@ function Subscription(props) {
                         <DynamicIcon name="arrow" className="size-5 text-inherit" />
                     </Link>
                 </div>
-                <div className="col-span-4 pt-7 bg-white dark:bg-dark-body-100 rounded-xl">
+                <div className="col-span-12 md:col-span-6 xl:col-span-4 pt-7 bg-white dark:bg-dark-body-100 rounded-xl">
                     <div className="flex items-center gap-x-4 px-6 pb-6">
                         <div className="size-15 flex-center rounded-2xl bg-red-700">
                             <DynamicIcon name="star" className="size-6 text-white  fill-none" />
@@ -58,7 +58,7 @@ function Subscription(props) {
             </div>
             {/*<!-- ! -------------------- User Wallet Details -------------------- ! -->*/}
             <div className="flex items-center justify-between mt-10">
-                <h3 className="relative text-blue-700 dark:text-white text-2xl font-YekanBakh-Heavy pr-2 before:content-[''] before:absolute before:top-0 before:bottom-0 before:-right-1 before:my-auto before:size-2 before:rounded-full dark:before:bg-white before:bg-blue-700 mb-4">تاریخچه تراکنشها</h3>
+                <h3 className="relative text-blue-700 dark:text-white text-xl md:text-2xl font-YekanBakh-Heavy pr-2 before:content-[''] before:absolute before:top-0 before:bottom-0 before:-right-1 before:my-auto before:size-2 before:rounded-full dark:before:bg-white before:bg-blue-700 ">تاریخچه تراکنشها</h3>
                 <button type="button" className="flex items-center h-10 px-3 border border-blue-450 text-blue-450 hover:text-white bg-transparent hover:bg-blue-450 rounded-md transition-all">
                     <span className="inline-block border-l border-inherit pl-5 ml-3">همه تراکنش ها</span>
                     <DynamicIcon name="arrowDown" className="size-3 text-inherit" />
