@@ -19,7 +19,10 @@ import Notifications from "./Components/DashboardPages/Notifications/Notificatio
 import Certificates from "./Components/DashboardPages/Certificates/Certificates.jsx";
 import Missions from "./Components/DashboardPages/Missions/Missions.jsx";
 import Comments from "./Components/DashboardPages/Comments/Comments.jsx";
-import UserProfile from "./Components/DashboardPages/UserProfile/UserProfile.jsx";
+import UserProfile from "./Components/DashboardPages/UserInfoLayout/UserProfile/UserProfile.jsx";
+import UserInfoLayout from "./Components/DashboardPages/UserInfoLayout/UserInfoLayout.jsx";
+import ChangeNumber from "./Components/DashboardPages/UserInfoLayout/ChangeNumber/ChangeNumber.jsx";
+import ChangePassword from "./Components/DashboardPages/UserInfoLayout/ChangePassword/ChangePassword.jsx";
 
 const routes = [
     {
@@ -43,7 +46,11 @@ const routes = [
             {path: 'notifications' , element: <Notifications/>},
             {path: 'missions' , element: <Missions/>},
             {path: 'certificates' , element: <Certificates/>},
-            {path: 'user-profile' , element: <UserProfile/>},
+            {path: 'user-profile' , element: <UserInfoLayout/> , children:[
+                    {index:true , element: <UserProfile/>},
+                    {path: 'change-number' , element: <ChangeNumber />},
+                    {path: 'change-password' , element: <ChangePassword />}
+                ]},
         ]},
     {path: '/auth' , element: <Auth/> },
     {path: '/verify' , element: <Verify/> },

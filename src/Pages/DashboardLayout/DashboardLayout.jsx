@@ -136,10 +136,10 @@ function DashboardLayout(props) {
                             </li>
                         </ul>
                     </div>
-                    <div className="mt-auto xl:px-4">
-                        <ul className="space-y-1 border-t border-biscay-700/20 dark:border-white/10">
+                    <div className="xl:px-4">
+                        <ul className="space-y-1 border-t border-biscay-700/20 dark:border-white/10 pt-5">
                             <li className="">
-                                <Link to="/dashboard/user-profile" className="flex items-center gap-x-4 text-gray-800 dark:text-white hover:text-blue-450 transition-all px-4 py-3">
+                                <Link to="/dashboard/user-profile" className={`flex items-center gap-x-4 ${location.pathname.includes('user-profile') ? 'text-blue-700 bg-blue-700/10' : 'text-gray-800 dark:text-white bg-transparent hover:text-blue-450'} transition-all px-4 py-3 rounded-3xl`}>
                                     <DynamicIcon name="user" className="size-5 fill-inherit"/>
                                     <span className="inline-block mt-2">اطلاغات پروفایل</span>
                                 </Link>
