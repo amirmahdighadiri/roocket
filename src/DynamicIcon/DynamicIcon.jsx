@@ -699,6 +699,21 @@ const iconsMap = {
             <path stroke='currentColor' strokeLinecap='round' strokeLinejoin='round' strokeWidth='1.5' d='M.75 11c0 2.248.121 4.002.427 5.378.304 1.366.78 2.312 1.456 2.989.677.677 1.623 1.152 2.99 1.456 1.375.306 3.13.427 5.377.427 2.248 0 4.002-.121 5.378-.427 1.366-.304 2.312-.78 2.989-1.456.677-.677 1.152-1.623 1.456-2.99.306-1.375.427-3.13.427-5.377 0-2.248-.121-4.002-.427-5.378-.304-1.366-.78-2.312-1.456-2.989-.677-.677-1.623-1.152-2.99-1.456C15.003.871 13.248.75 11 .75c-2.248 0-4.002.121-5.378.427-1.366.304-2.312.78-2.989 1.456-.677.677-1.152 1.623-1.456 2.99C.871 6.997.75 8.752.75 11'></path>
             <path stroke='currentColor' strokeLinecap='round' strokeLinejoin='round' strokeWidth='1.5' d='M11 6.417v9.166m4.583-5.5v5.5m-9.166-3.666v3.666' opacity='0.4'></path>
         </svg>
+    ),
+    mobile: (
+        <svg width="14" height="20" viewBox="0 0 14 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M1 3.8C1 2.2536 2.2536 1 3.8 1H10.2C11.7464 1 13 2.2536 13 3.8V16.2C13 17.7464 11.7464 19 10.2 19H3.8C2.2536 19 1 17.7464 1 16.2V3.8Z" stroke="currentColor" strokeWidth="1.5"/>
+            <circle cx="7" cy="16" r="1" fill="currentColor"/>
+            <path d="M5 4L9 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
+        </svg>
+    ),
+    password: (
+        <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path fillRule="evenodd" clipRule="evenodd" d="M12.611 1.29175H5.38685C2.86935 1.29175 1.29102 3.07425 1.29102 5.59675V12.4034C1.29102 14.9259 2.86185 16.7084 5.38685 16.7084H12.6102C15.136 16.7084 16.7077 14.9259 16.7077 12.4034V5.59675C16.7077 3.07425 15.136 1.29175 12.611 1.29175Z" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+            <path fillRule="evenodd" clipRule="evenodd" d="M7.90698 9.00012C7.90698 9.85262 7.21615 10.5435 6.36365 10.5435C5.51115 10.5435 4.82031 9.85262 4.82031 9.00012C4.82031 8.14762 5.51115 7.45679 6.36365 7.45679H6.36615C7.21698 7.45762 7.90698 8.14845 7.90698 9.00012Z" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+            <path d="M7.91016 9H13.1752V10.5433" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+            <path d="M10.8171 10.5436V9.00024" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+        </svg>
     )
 
 }
