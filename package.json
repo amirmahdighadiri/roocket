@@ -9,7 +9,7 @@
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "db": "json-server --watch db.json ",
+    "db": "json-server db.json ",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d dist"
   },
