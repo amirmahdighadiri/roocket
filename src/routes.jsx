@@ -23,6 +23,7 @@ import UserProfile from "./Components/DashboardPages/UserInfoLayout/UserProfile/
 import UserInfoLayout from "./Components/DashboardPages/UserInfoLayout/UserInfoLayout.jsx";
 import ChangeNumber from "./Components/DashboardPages/UserInfoLayout/ChangeNumber/ChangeNumber.jsx";
 import ChangePassword from "./Components/DashboardPages/UserInfoLayout/ChangePassword/ChangePassword.jsx";
+import Articles from "./Pages/Articles/Articles.jsx";
 
 const routes = [
     {
@@ -34,6 +35,7 @@ const routes = [
             {path: 'product-page', element: <ProductPage/>},
             {path: 'certifications' , element: <Certifications/>},
             {path: 'podcasts' , element: <Podcast/>},
+            {path: 'articles' , element: <Articles/>},
         ]
     },
     {path: '/dashboard' , element: <DashboardLayout/> ,children: [

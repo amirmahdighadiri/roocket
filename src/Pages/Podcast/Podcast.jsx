@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import DynamicIcon from "../../DynamicIcon/DynamicIcon.jsx";
-import TagBox from "../../Components/TagBox/TagBox.jsx";
+import TagBox from "../../Components/Tags/TagBox/TagBox.jsx";
 import {getCoursesFromServer} from "../../Redux/Store/Courses.jsx";
 import {useDispatch, useSelector} from "react-redux";
 import {Link} from 'react-router-dom';
@@ -14,21 +14,18 @@ import {displayFilters} from "../../data.jsx";
 import instagramPhone from "../../assets/images/instagram.png";
 import banner1 from "../../assets/images/banner/banner-1.gif";
 import podcastImage from "../../assets/images/symbol/podcast-archive.png";
+import Tags from "../../Components/Tags/Tags.jsx";
 
 
 function Podcast(props) {
 
     const dispatch = useDispatch();
-    const {courses, coursesLoading} = useSelector(state => state.courses);
     const {podcasts, podcastLoading} = useSelector(state => state.podcasts);
     const [timeFilter, setTimeFilter] = useState({label: "بروزترین", value: "newest"});
     const [displayFilter, setDisplayFilter] = useState({label: "همه", value: "all"});
     const [finalPodcasts, setFinalPodcasts] = useState([]);
 
     useEffect(() => {
-        if (!courses.length) {
-            dispatch(getCoursesFromServer("http://localhost:3000/courses"))
-        }
         if (!podcasts.length) {
             dispatch(getPodcastsFromServer("http://localhost:3000/episodes"))
         }
@@ -92,11 +89,7 @@ function Podcast(props) {
                                 <span className="inline-block mt-2 text-biscay-700 dark:text-white font-Mult-Font-Bold">تگ های محبوب</span>
                             </div>
                             <div className="flex flex-wrap gap-2">
-                                {
-                                    courses.map(course => (
-                                        <TagBox key={course.id} tag={course.title}/>
-                                    ))
-                                }
+                                <Tags />
                             </div>
                         </div>
                         {/*<!-- ! -------------------- Instagram Section -------------------- ! -->*/}

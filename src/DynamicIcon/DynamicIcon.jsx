@@ -714,6 +714,12 @@ const iconsMap = {
             <path d="M7.91016 9H13.1752V10.5433" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
             <path d="M10.8171 10.5436V9.00024" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
         </svg>
+    ),
+    bookmark: (
+        <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path fillRule="evenodd" clipRule="evenodd" d="M18.094 5.64077C18.094 3.11914 16.3701 2.10828 13.8879 2.10828H8.05895C5.65311 2.10828 3.8501 3.05021 3.8501 5.4726V18.9694C3.8501 19.6348 4.56597 20.0538 5.14584 19.7285L10.996 16.4469L16.7955 19.723C17.3763 20.0501 18.094 19.6311 18.094 18.9648V5.64077Z" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+            <path opacity="0.4" d="M7.58203 8.27564H14.2905" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+        </svg>
     )
 
 }
