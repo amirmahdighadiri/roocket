@@ -11,7 +11,7 @@ import {getPodcastsFromServer} from "../../Redux/Store/Podcasts.jsx";
 import {useDispatch, useSelector} from "react-redux";
 import PodcastBox from "../../Components/PodcastBox/PodcastBox.jsx";
 import ArticleBox from "../../Components/ArticleBox/ArticleBox.jsx";
-import {getArticlesFromServer} from "../../Redux/Store/Articles.jsx";
+import articles, {getArticlesFromServer} from "../../Redux/Store/Articles.jsx";
 
 function Articles(props) {
     const dispatch = useDispatch();
@@ -22,9 +22,9 @@ function Articles(props) {
         if (!podcasts.length) {
             dispatch(getPodcastsFromServer("http://localhost:3000/episodes"))
         }
-        // if (!articles.length) {
+        if (!articles.length) {
             dispatch(getArticlesFromServer("http://localhost:3000/articles"))
-        // }
+        }
     }, [])
 
     return (
@@ -175,7 +175,7 @@ function Articles(props) {
                         <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-x-5 gap-y-12 mt-7">
                             {
                                 articles.map(article => (
-                                    <ArticleBox key={article.id} />
+                                    <ArticleBox key={article.id} {...article} />
                                 ))
                             }
                         </div>

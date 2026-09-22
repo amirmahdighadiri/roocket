@@ -1,27 +1,39 @@
 import React from 'react';
 import {Link} from "react-router-dom";
 
-function ArticleBox() {
+function ArticleBox({title,description,image_url,likes,comments_count,author,author_avatar,read_time,category}) {
+
+    const categories = {
+        freelancing: "فریلنسری",
+        react: "ری‌اکت",
+        javascript: "جاوااسکریپت",
+        redux: "رداکس",
+        next: "نکست جی‌اس",
+        programming: "برنامه‌نویسی",
+        css: "CSS",
+        career: "مسیر شغلی",
+    };
+
     return (
         <div className=" bg-white dark:bg-dark-930 p-4 rounded">
             {/*<!-- ! -------------------- Article Image -------------------- ! -->*/}
             <div className="rounded overflow-hidden">
                 <Link to="/" className="">
-                    <img src="/images/article/1.webp" alt="" className="hover:scale-110 transition-all"/>
+                    <img src={`/images/article/${image_url}.webp`} alt={title} className="hover:scale-110 transition-all"/>
                 </Link>
             </div>
             {/*<!-- ! -------------------- Article Content -------------------- ! -->*/}
             <div className="">
-                {/*<!-- ! -------------------- Article Tite -------------------- ! -->*/}
+                {/*<!-- ! -------------------- Article Title -------------------- ! -->*/}
                 <h4 className="h-16 mt-3 mb-4">
-                    <Link to="/" className="font-Mult-Font-Bold text-xl line-clamp-2 text-gray-800 hover:text-blue-700 dark:text-white dark:hover:text-blue-450 transition-all">بررسی فریم‌ورک Remix و تفاوت آن با Next.js</Link>
+                    <Link to="/" className="font-Mult-Font-Bold text-xl line-clamp-2 text-gray-800 hover:text-blue-700 dark:text-white dark:hover:text-blue-450 transition-all">{title}</Link>
                 </h4>
                 {/*<!-- ! -------------------- Author Info -------------------- ! -->*/}
                 <div className="flex items-center justify-between mb-4">
                     {/*<!-- ! -------------------- Author Info -------------------- ! -->*/}
                     <div className="flex items-center gap-x-1">
-                        <img src="/images/team-profile/arasto-abbasi.png" alt="" className="size-6 border-2 border-white rounded-full"/>
-                        <Link to="/" className="text-gray-400 hover:text-gray-800 dark:text-white dark:hover:text-blue-450 font-YekanBakh-Bold text-xs transition-all">ارسطو عباسی</Link>
+                        <img src={`/images/team-profile/${author_avatar}`} alt={author_avatar} className="size-6 border-2 border-white rounded-full"/>
+                        <Link to="/" className="text-gray-400 hover:text-gray-800 dark:text-white dark:hover:text-blue-450 font-YekanBakh-Bold text-xs transition-all">{author}</Link>
                     </div>
                     {/*<!-- ! -------------------- Article Category -------------------- ! -->*/}
                     <Link to="/" className="group inline-flex items-center font-Mult-Font-Bold text-xs bg-blue-40 hover:bg-blue-700 dark:bg-blue-700/10 dark:hover:bg-blue-700/10 text-blue-700 hover:text-white dark:text-blue-950 dark:hover:text-white px-2 py-1 transition-all rounded">
@@ -29,7 +41,7 @@ function ArticleBox() {
                             <path d="M5.005 5a.417.417 0 1 0 0 .833h1.672a.417.417 0 0 0 0-.833zM3.334 6.672a.417.417 0 0 0 0 .834h3.344a.417.417 0 1 0 0-.834z" className="fill-current transition-all text-inherit"></path>
                             <path d="M7.083 2.178c-.447-.042-.965-.059-1.561-.059-3.682 0-4.563.659-4.993 3.732q-.1.702-.111 1.244m6.665-4.917c2.317.218 2.748 1.097 2.388 3.673-.43 3.074-1.311 3.732-4.993 3.732-3.12 0-4.097-.473-4.06-2.488m6.665-4.917s.064-.383 0-.888C6.927.046 1.793.208 1.25 1.29.417 2.948.418 7.095.418 7.095" className="stroke-current transition-all text-inherit"></path>
                         </svg>
-                        جاوااسکریپت
+                        {categories[category]}
                     </Link>
                 </div>
                 {/*<!-- ! -------------------- Article Info -------------------- ! -->*/}
@@ -42,13 +54,13 @@ function ArticleBox() {
                                 <path stroke="#607496" strokeLinecap="round" strokeLinejoin="round" strokeWidth="0.961"
                                       d="M5.996.828c1.179 0 2.096.053 2.813.191.715.138 1.196.353 1.532.65.669.589.94 1.654.94 3.802 0 1.384-.125 2.403-.46 3.066-.16.319-.363.543-.62.692-.258.151-.605.245-1.082.245-.615 0-1.077.138-1.439.383-.352.239-.565.552-.723.8l-.068.107c-.132.21-.218.347-.337.454-.106.095-.255.177-.555.177s-.45-.082-.556-.177c-.119-.107-.205-.243-.337-.454l-.068-.107c-.158-.248-.37-.561-.723-.8-.361-.245-.823-.383-1.439-.383-.475 0-.82-.096-1.079-.25-.256-.153-.461-.383-.623-.706-.336-.671-.46-1.692-.46-3.047 0-2.12.27-3.189.941-3.785.338-.3.82-.52 1.533-.66C3.903.884 4.82.828 5.996.828M6.477 4.67h1.921M3.595 6.592h4.803"></path>
                             </svg>
-                            <span className="">0</span>
+                            <span className="font-YekanBakh-Medium text-xs">{comments_count}</span>
                         </button>
                         <button className="h-5 inline-flex items-center gap-x-1 rounded-sm px-1 bg-red-700/10 hover:bg-red-700 dark:hover:bg-red-650 hover:text-white text-red-450 dark:text-red-650 xl:cursor-pointer transition-all cursor-pointer">
                             <svg className="size-3" fill="none" viewBox="0 0 13 11">
                                 <path stroke="currentColor" d="M3.95 1.229c.87 0 1.662.433 2.263.926.6-.493 1.393-.926 2.262-.926 1.875 0 3.394 1.394 3.394 3.113 0 3.466-3.945 5.485-5.246 6.056a1.02 1.02 0 0 1-.82 0C4.501 9.827.556 7.808.556 4.342c0-1.72 1.519-3.113 3.393-3.113Z"></path>
                             </svg>
-                            <span id="course-like" className="font-YekanBakh-Medium text-xs">1</span>
+                            <span id="course-like" className="font-YekanBakh-Medium text-xs">{likes}</span>
                         </button>
                         <button className="h-5 px-1 bg-blue-700/10 dark:bg-blue-700/10 dark:text-blue-970 dark:hover:bg-blue-970 dark:hover:text-blue-700 rounded transition-all xl:cursor-pointer group">
                             <svg xmlns="http://www.w3.org/2000/svg" width="10" height="12" fill="none" viewBox="0 0 10 12">
@@ -70,7 +82,7 @@ function ArticleBox() {
                         </svg>
                         <span className="text-xs font-YekanBakh-Medium">
                             <span className="">زمان مطالعه:</span>
-                            <span className=""> 9 </span>
+                            <span className=""> {read_time} </span>
                             <span className="">دقیقه</span>
                         </span>
                     </div>
