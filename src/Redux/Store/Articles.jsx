@@ -9,7 +9,7 @@ export const getArticlesFromServer = createAsyncThunk(
 const slice = createSlice({
     name: "articles",
     initialState: {
-        courses: [],
+        articles: [],
         loading: false,
     },
     reducers: {},
