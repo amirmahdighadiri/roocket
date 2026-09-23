@@ -411,7 +411,7 @@ function Header(props) {
                         <li className="flex items-center h-6 gap-x-2 text-biscay-700 hover:text-gray-hover-200 dark:text-white dark:hover:text-gray-hover-150 transition-all">
                             <DynamicIcon name={'document'}
                                          className={'block lg:hidden w-5 h-5 dark:text-white text-biscay-700'}/>
-                            <Link to="/" className="">مقالات</Link>
+                            <Link to="/articles" className="">مقالات</Link>
                         </li>
                         <li className="flex items-center h-6 gap-x-2 text-biscay-700 hover:text-gray-hover-200 dark:text-white dark:hover:text-gray-hover-150 transition-all">
                             <DynamicIcon name={'podcast'}
