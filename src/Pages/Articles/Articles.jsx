@@ -12,6 +12,7 @@ import {useDispatch, useSelector} from "react-redux";
 import PodcastBox from "../../Components/PodcastBox/PodcastBox.jsx";
 import ArticleBox from "../../Components/ArticleBox/ArticleBox.jsx";
 import articles, {getArticlesFromServer} from "../../Redux/Store/Articles.jsx";
+import ContentList from "../../Components/ContentList/ContentList.jsx";
 
 function Articles(props) {
     const dispatch = useDispatch();
@@ -107,79 +108,7 @@ function Articles(props) {
                 </aside>
                 {/*<!-- ! -------------------- Filter & Articles -------------------- ! -->*/}
                 <div className="col-span-12 xl:col-span-9">
-                    {/*<!-- ! -------------------- Filter Wrapper -------------------- ! -->*/}
-                    <div className="flex flex-col md:flex-row items-center gap-x-2 gap-y-5 pb-6 border-b border-biscay-700/30 mb-7">
-                        <div className="relative w-full xl:w-auto inline-block group">
-                            {/*<!-- ! -------------------- Filter Button -------------------- ! -->*/}
-                            <div className="w-full inline-flex items-center justify-between gap-x-2 h-11 px-3 border border-biscay-700 dark:border-white/20 cursor-pointer rounded-md">
-                                <div className="flex items-center gap-x-1 text-biscay-700 dark:text-white text-sm font-YekanBakh-Bold pl-2 border-0 xl:border-l border-biscay-700 dark:border-white/20">
-                                    <span className="">فیلتر زمانی</span>
-                                    <span className="text-dark-550 dark:text-gray-920 text-xs">(  )</span>
-                                </div>
-                                <div className="">
-                                    <DynamicIcon name="chartCircle" className="size-5 text-biscay-700 dark:text-white"/>
-                                </div>
-                            </div>
-                            {/*<!-- ! -------------------- Sub Filter Wrapper -------------------- ! -->*/}
-                            <div className="invisible opacity-0 group-hover:visible group-hover:opacity-100 absolute w-full p-3 bg-white dark:bg-dark-930 shadow-sm rounded-md mt-2 transition-all delay-75 z-10">
-                                <ul className="">
-                                    {/*{*/}
-                                    {/*    timeFilters.map(time => (*/}
-                                    {/*        <li key={time.id} onClick={() => setTimeFilter({*/}
-                                    {/*            label: time.label,*/}
-                                    {/*            value: time.value*/}
-                                    {/*        })}*/}
-                                    {/*            className="py-2 px-3 font-YekanBakh-Bold text-sm text-biscay-700 dark:text-gray-920 dark:hover:text-white hover:bg-gray-5 dark:hover:bg-dark-890 rounded-md transition-all cursor-pointer">*/}
-                                    {/*            <span className="">{time.label}</span></li>*/}
-                                    {/*    ))*/}
-                                    {/*}*/}
-                                </ul>
-                            </div>
-                        </div>
-                        <div className="relative w-full xl:w-auto inline-block group">
-                            {/*<!-- ! -------------------- Filter Button -------------------- ! -->*/}
-                            <div className="w-full inline-flex items-center justify-between gap-x-2 h-11 px-3 border border-biscay-700 dark:border-white/20 cursor-pointer rounded-md">
-                                <div className="flex items-center gap-x-1 text-biscay-700 dark:text-white text-sm font-YekanBakh-Bold pl-2 border-0 xl:border-l border-biscay-700 dark:border-white/20">
-                                    <span className="">فیلتر نمایش</span>
-                                    <span className="text-dark-550 dark:text-gray-920 text-xs">(  )</span>
-                                </div>
-                                <div className="">
-                                    <DynamicIcon name="chartCircle" className="size-5 text-biscay-700 dark:text-white"/>
-                                </div>
-                            </div>
-                            {/*<!-- ! -------------------- Sub Filter Wrapper -------------------- ! -->*/}
-                            <div className="invisible opacity-0 group-hover:visible group-hover:opacity-100 absolute w-full p-3 bg-white dark:bg-dark-930 shadow-sm rounded-md mt-2 transition-all delay-75 z-10">
-                                <ul className="">
-                                    {/*{*/}
-                                    {/*    displayFilters.map(filter => (*/}
-                                    {/*        <li key={filter.id} onClick={() => setDisplayFilter({*/}
-                                    {/*            label: filter.label,*/}
-                                    {/*            value: filter.value*/}
-                                    {/*        })}*/}
-                                    {/*            className="py-2 px-3 font-YekanBakh-Bold text-sm text-biscay-700 dark:text-gray-920 dark:hover:text-white hover:bg-gray-5 dark:hover:bg-dark-890 rounded-md transition-all cursor-pointer">*/}
-                                    {/*            <span className="">{filter.label}</span></li>*/}
-                                    {/*    ))*/}
-                                    {/*}*/}
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    {/*<!-- ! -------------------- Article Item Wrapper -------------------- ! -->*/}
-                    <div className="">
-                        {/*<!-- ! -------------------- Section Title -------------------- ! -->*/}
-                        <div className="flex items-center gap-x-1">
-                            <img src={podcastImage} alt="podcast image" className=""/>
-                            <span className="text-biscay-700 dark:text-white font-YekanBakh-Heavy text-3xl">آرشیو مقالات</span>
-                        </div>
-                        {/*<!-- ! -------------------- Articles Wrapper -------------------- ! -->*/}
-                        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-x-5 gap-y-12 mt-7">
-                            {
-                                articles.map(article => (
-                                    <ArticleBox key={article.id} {...article} />
-                                ))
-                            }
-                        </div>
-                    </div>
+                    <ContentList itemsContent={articles} BoxComponent={ArticleBox} title="آرشیو مقالات"/>
                 </div>
             </div>
         </section>
