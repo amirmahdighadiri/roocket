@@ -44,8 +44,7 @@ function Footer(props) {
                         یکی از پرتلاش‌ترین و بروزترین وبسایت های آموزشی در سطح ایران است که همیشه تلاش کرده تا بتواند
                         جدیدترین و بروزترین مقالات و دوره‌های آموزشی را در اختیار علاقه‌مندان ایرانی قرار دهد. تبدیل
                         کردن برنامه نویسان ایرانی به بهترین برنامه نویسان جهان هدف ماست.</p>
-                    <Link to="/"
-                          className="inline-flex items-center gap-x-1 text-blue-700 dark:text-blue-950 xl:hover:text-dark-700 xl:dark:hover:text-gray-210 text-xs transition-all">
+                    <Link to="/" className="inline-flex items-center gap-x-1 text-blue-700 dark:text-blue-950 xl:hover:text-dark-700 xl:dark:hover:text-gray-210 text-xs transition-all">
                         مشاهده اطلاعات مسیریادگیری
                         <DynamicIcon name={'arrow'} className={'size-4 text-inherit'} />
                     </Link>
@@ -53,7 +52,6 @@ function Footer(props) {
                 {/*<!-- ! -------------------- Roocket Services -------------------- ! -->*/}
                 <div className="col-span-12 lg:col-span-4 flex flex-col sm:flex-row items-center lg:items-start justify-between gap-y-7 font-Mult-Font-Medium">
                     <div className="">
-                        {/*<FooterSectionTitle title="بخش های سایت"/>*/}
                         <ul className="flex flex-col items-center sm:items-start space-y-3">
                             <li className="">
                                 <Link to="/" className={`relative pr-2 text-biscay-650 dark:text-gray-920 dark:hover:text-blue-450 hover:text-dark-700 transition-all before:hidden sm:before:inline-block before:content-[""] before:absolute before:top-2 before:-right-2 before:size-1 before:bg-blue-700/30`}>قوانین و مقررات</Link>
@@ -70,19 +68,18 @@ function Footer(props) {
                         </ul>
                     </div>
                     <div className="">
-                        {/*<FooterSectionTitle title="محبوب‌ترین آموزش‌ها"/>*/}
                         <ul className="flex flex-col items-center sm:items-start space-y-3">
                             <li className="">
-                                <Link to="/" className={`relative pr-2 text-biscay-650 dark:text-gray-920 dark:hover:text-blue-450 hover:text-dark-700 transition-all before:hidden sm:before:inline-block before:content-[""] before:absolute before:top-2 before:-right-2 before:size-1 before:bg-blue-700/30`}>آموزش جاوا اسکریپت</Link>
+                                <Link to={`/products-page/آموزش-پروژه-محور-جاوااسکریپت`} className={`relative pr-2 text-biscay-650 dark:text-gray-920 dark:hover:text-blue-450 hover:text-dark-700 transition-all before:hidden sm:before:inline-block before:content-[""] before:absolute before:top-2 before:-right-2 before:size-1 before:bg-blue-700/30`}>آموزش جاوا اسکریپت</Link>
                             </li>
                             <li className="">
-                                <Link to="/" className={`relative pr-2 text-biscay-650 dark:text-gray-920 dark:hover:text-blue-450 hover:text-dark-700 transition-all before:hidden sm:before:inline-block before:content-[""] before:absolute before:top-2 before:-right-2 before:size-1 before:bg-blue-700/30`}>آموزش لاراول</Link>
+                                <Link to={`/products-page/آموزش-انگولار`} className={`relative pr-2 text-biscay-650 dark:text-gray-920 dark:hover:text-blue-450 hover:text-dark-700 transition-all before:hidden sm:before:inline-block before:content-[""] before:absolute before:top-2 before:-right-2 before:size-1 before:bg-blue-700/30`}>آموزش انگولار</Link>
                             </li>
                             <li className="">
-                                <Link to="/" className={`relative pr-2 text-biscay-650 dark:text-gray-920 dark:hover:text-blue-450 hover:text-dark-700 transition-all before:hidden sm:before:inline-block before:content-[""] before:absolute before:top-2 before:-right-2 before:size-1 before:bg-blue-700/30`}>آموزش وردپرس</Link>
+                                <Link to={`/products-page/آموزش-جامع-ووکامرس`} className={`relative pr-2 text-biscay-650 dark:text-gray-920 dark:hover:text-blue-450 hover:text-dark-700 transition-all before:hidden sm:before:inline-block before:content-[""] before:absolute before:top-2 before:-right-2 before:size-1 before:bg-blue-700/30`}>آموزش وردپرس</Link>
                             </li>
                             <li className="">
-                                <Link to="/" className={`relative pr-2 text-biscay-650 dark:text-gray-920 dark:hover:text-blue-450 hover:text-dark-700 transition-all before:hidden sm:before:inline-block before:content-[""] before:absolute before:top-2 before:-right-2 before:size-1 before:bg-blue-700/30`}>آموزش react</Link>
+                                <Link to={`/products-page/آموزش-پیشرفته-React`} className={`relative pr-2 text-biscay-650 dark:text-gray-920 dark:hover:text-blue-450 hover:text-dark-700 transition-all before:hidden sm:before:inline-block before:content-[""] before:absolute before:top-2 before:-right-2 before:size-1 before:bg-blue-700/30`}>آموزش react</Link>
                             </li>
                         </ul>
                     </div>

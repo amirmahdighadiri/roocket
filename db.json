@@ -6,213 +6,230 @@
       "username": "amirmahdighadiri",
       "password": "Ss12345678",
       "email": "amirmahdighadiri@gmail.com",
-      "fullName": "امیرمهدی قدیری"
+      "fullName": "امیرمهدی قدیری",
+      "purchasedCourses": [
+        201,
+        208,
+        211
+      ]
     }
   ],
   "courses": [
     {
       "id": 201,
-      "title": "آموزش جامع ووکامرس",
+      "title": "آموزش-جامع-ووکامرس",
       "src": "1",
       "price": 590000,
       "type": "Wordpress",
       "status": true,
       "description": "با یادگیری ووکامرس می توانید وبسایت های فروشگاهی مد خود را با وردپرس به شکل کامل پیاده سازی کنید.",
       "courseTime": "03:51:56",
+      "duration": "03:51:56",
+      "participants": 124,
+      "sessions": 38,
       "createdAt": "2025-01-15",
       "coursePrimary": true,
       "teacher": "حسام موسوی",
       "searchName": "Wordpress",
-      "userLike": [
-        "1"
-      ]
+      "userLike": ["1"]
     },
     {
       "id": 202,
-      "title": "آموزش tailwindcss",
+      "title": "آموزش-tailwindcss",
       "src": "2",
       "price": 500000,
       "type": "Front-End",
       "status": true,
       "description": "در قالب آموزش tailwind سعی کردیم این ابزار بسیار کاربردی را در قالب پروژه قدم به قدم، به شما آموزش دهیم. با دوره آموزش tailwindcss شما میتوانید به شکل",
       "courseTime": "07:10:32",
+      "duration": "07:10:32",
+      "participants": 286,
+      "sessions": 64,
       "createdAt": "2025-02-03",
       "coursePrimary": true,
       "teacher": "حسام موسوی",
       "searchName": "Tailwind",
-      "userLike": [
-        "1"
-      ]
+      "userLike": ["1"]
     },
     {
       "id": 203,
-      "title": "آموزش نود جی اس (node js)",
+      "title": "آموزش-نود-جی-اس-(node-js)",
       "src": "3",
       "price": 390000,
       "type": "Back-End",
       "status": false,
       "description": "دوره نود جی اس node js از صفر به شما کار با پلتفرم node را آموزش خواهد داد تا فرابگیرید که چطور از آن در پروژه های مختلف استفاده کنید",
       "courseTime": "07:05:08",
+      "duration": "07:05:08",
+      "participants": 173,
+      "sessions": 57,
       "createdAt": "2025-02-20",
       "coursePrimary": true,
       "teacher": "حسام موسوی",
       "searchName": "Node",
-      "userLike": [
-        "1"
-      ]
+      "userLike": ["1"]
     },
     {
       "id": 204,
-      "title": "آموزش انگولار",
+      "title": "آموزش-انگولار",
       "src": "4",
       "price": 390000,
       "type": "Front-End",
       "status": true,
       "description": "در دوره آموزش انگولار ما سعی داریم به شما کمک کنیم Angular را ساده و قدم به قدم به شکل کامل و با جزئیات یاد بگیرید.",
       "courseTime": "12:17:16",
+      "duration": "12:17:16",
+      "participants": 341,
+      "sessions": 82,
       "createdAt": "2025-03-12",
       "coursePrimary": false,
       "teacher": "حسام موسوی",
       "searchName": "Angular",
-      "userLike": [
-        "1"
-      ]
+      "userLike": ["1"]
     },
     {
       "id": 205,
-      "title": "آموزش پروژه محور جاوااسکریپت",
+      "title": "آموزش-پروژه-محور-جاوااسکریپت",
       "src": "5",
       "price": 590000,
       "type": "Front-End",
       "status": true,
       "description": "در دوره پروژه های جاوااسکریپت ما سعی کرده ایم جاوااسکریپت را در قالب پروژه های بزرگ و کوچک، ساده و پیشرفته به شما آموزش دهیم.",
       "courseTime": "10:27:00",
+      "duration": "10:27:00",
+      "participants": 427,
+      "sessions": 76,
       "createdAt": "2025-04-01",
       "coursePrimary": true,
       "teacher": "حسام موسوی",
       "searchName": "Javascript",
-      "userLike": [
-        "1"
-      ]
+      "userLike": ["1"]
     },
     {
       "id": 206,
-      "title": "آموزش تایپ اسکریپت (Typescript)",
+      "title": "آموزش-تایپ-اسکریپت-(Typescript)",
       "src": "6",
       "price": 590000,
       "type": "Front-End",
       "status": true,
       "description": "دوره آموزش تایپ اسکریپت از صفر تا صد به صورت کاربردی و ساده توسط تیم آموزشی و مجرب مدرسین راکت.",
       "courseTime": "03:16:48",
+      "duration": "03:16:48",
+      "participants": 198,
+      "sessions": 35,
       "createdAt": "2025-04-18",
       "coursePrimary": false,
       "teacher": "حسام موسوی",
       "searchName": "Typescript",
-      "userLike": [
-        "1"
-      ]
+      "userLike": ["1"]
     },
     {
       "id": 207,
-      "title": "آموزش HTML",
+      "title": "آموزش-HTML",
       "src": "7",
       "price": 0,
       "type": "Front-End",
       "status": true,
       "description": "دوره آموزشی HTML با هدف آشنا کردن کامل شما با کدنویسی HTML به صورت رایگان است. بعد از این دوره یاد خواهید گرفت که صفحات وب ساده ای را ایجاد کنید.",
       "courseTime": "03:16:48",
+      "duration": "03:16:48",
+      "participants": 512,
+      "sessions": 41,
       "createdAt": "2025-05-07",
       "coursePrimary": true,
       "teacher": "حسام موسوی",
       "searchName": "HTML",
-      "userLike": [
-        "1"
-      ]
+      "userLike": ["1"]
     },
     {
       "id": 208,
-      "title": "آموزش پیشرفته React",
+      "title": "آموزش-پیشرفته-React",
       "src": "8",
       "price": 790000,
       "type": "Front-End",
       "status": false,
       "description": "موزش پیشرفته React دوره ای است که در آن شما به صورت عمیق تر و حرفه ای تر با ویژگی React آشنا می شوید و از آن ها به صورت عملی در پروژه های خود استفاده",
       "courseTime": "06:48:04",
+      "duration": "06:48:04",
+      "participants": 364,
+      "sessions": 59,
       "createdAt": "2025-05-25",
       "coursePrimary": true,
       "teacher": "حسام موسوی",
       "searchName": "React",
-      "userLike": [
-        "1"
-      ]
+      "userLike": ["1"]
     },
     {
       "id": 209,
-      "title": "آموزش PHP",
+      "title": "آموزش-PHP",
       "src": "9",
       "price": 0,
       "type": "Back-End",
       "status": true,
-      "description": "در دوره آموزش PHP ما سعی می کنیم PHP را به شکل جامع و کاملا رایگان به شما آموزش دهیم تا با استفاده از PHP بتوانید سایت های خود را بسازید و فرایند توسع",
+      "description": "در دوره آموزش PHP ما سعی می کنیم PHP را به شکل جامع و کاملا رایگان به شما آموزش دهیم تا با استفاده از PHP بتوانید سایت های خود را بسازید و فرایند توسعه",
       "courseTime": "09:12:52",
+      "duration": "09:12:52",
+      "participants": 295,
+      "sessions": 73,
       "createdAt": "2025-06-10",
       "coursePrimary": true,
       "teacher": "حسام موسوی",
       "searchName": "PHP",
-      "userLike": [
-        "1"
-      ]
+      "userLike": ["1"]
     },
     {
       "id": 210,
-      "title": "آموزش جنگو (Django)",
+      "title": "آموزش-جنگو-(Django)",
       "src": "10",
       "price": 490000,
       "type": "Back-End",
       "status": true,
       "description": "یادگیری دوره آموزش جنگو از صفر تا صد به صورت راحت و ساده از طریق مدرسین مجرب تیم آموزشی راکت",
       "courseTime": "11:43:13",
+      "duration": "11:43:13",
+      "participants": 187,
+      "sessions": 91,
       "createdAt": "2025-07-02",
       "coursePrimary": true,
       "teacher": "حسام موسوی",
       "searchName": "Django",
-      "userLike": [
-        "1"
-      ]
+      "userLike": ["1"]
     },
     {
       "id": 211,
-      "title": "آموزش Redux",
+      "title": "آموزش-Redux",
       "src": "11",
       "price": 590000,
       "type": "Front-End",
       "status": true,
       "description": "در طول دوره آموزش redux (ریداکس) سعی می کنیم به شکل کامل و کاربردی روش استفاده از کتابخانه redux برای حل مشکل مدیریت stateها را به شما آموزش دهیم.",
       "courseTime": "02:43:45",
+      "duration": "02:43:45",
+      "participants": 453,
+      "sessions": 32,
       "createdAt": "2025-08-14",
       "coursePrimary": true,
       "teacher": "حسام موسوی",
       "searchName": "Redux",
-      "userLike": [
-        "1"
-      ]
+      "userLike": ["1"]
     },
     {
       "id": 212,
-      "title": "آموزش کامل Vue",
+      "title": "آموزش-کامل-Vue",
       "src": "12",
       "price": 690000,
       "type": "ّFront-End",
       "status": true,
       "description": "موزش Vue.js قدم ابتدایی از یادگیری Vue است که در طی این دوره قصد داریم به شکل قدم به قدم کار با این کتابخانه پرمخاطب جاوا اسکریپت را به شما آموزش دهی",
       "courseTime": "15:18:52",
+      "duration": "15:18:52",
+      "participants": 216,
+      "sessions": 104,
       "createdAt": "2025-09-01",
       "coursePrimary": true,
       "teacher": "حسام موسوی",
       "searchName": "Vue",
-      "userLike": [
-        "1"
-      ]
+      "userLike": ["1"]
     }
   ],
   "learningPath": [
@@ -593,6 +610,148 @@
       "category": "career",
       "tags": ["Resume", "Career", "Frontend"],
       "release_date": "2024-11-02"
+    }
+  ],
+  "comments": [
+    {
+      "id": 1,
+      "courseId": 201,
+      "userId": 1,
+      "text": "دوره خیلی کامل و کاربردی بود. مخصوصاً بخش ساخت فروشگاه خیلی خوب توضیح داده شده بود.",
+      "createdAt": "2025-02-02"
+    },
+    {
+      "id": 2,
+      "courseId": 201,
+      "userId": 2,
+      "text": "توضیحات مدرس روان بود و برای شروع ووکامرس خیلی کمکم کرد.",
+      "createdAt": "2025-02-05"
+    },
+    {
+      "id": 3,
+      "courseId": 202,
+      "userId": 1,
+      "text": "قسمت پروژه محور Tailwind خیلی خوب بود. مثال‌ها هم کاملاً قابل استفاده بودند.",
+      "createdAt": "2025-02-12"
+    },
+    {
+      "id": 4,
+      "courseId": 202,
+      "userId": 3,
+      "text": "قبل از این دوره Tailwind بلد نبودم، ولی الان خیلی راحت‌تر باهاش کار می‌کنم.",
+      "createdAt": "2025-02-15"
+    },
+    {
+      "id": 5,
+      "courseId": 203,
+      "userId": 4,
+      "text": "برای کسی که تازه می‌خواد Node.js رو شروع کنه، مطالب خیلی خوب و مرحله به مرحله توضیح داده شده.",
+      "createdAt": "2025-02-25"
+    },
+    {
+      "id": 6,
+      "courseId": 204,
+      "userId": 2,
+      "text": "Angular رو قبلاً سخت می‌دیدم، ولی بعد از این دوره خیلی بهتر مفهومش رو فهمیدم.",
+      "createdAt": "2025-03-20"
+    },
+    {
+      "id": 7,
+      "courseId": 204,
+      "userId": 5,
+      "text": "بخش کامپوننت‌ها و سرویس‌ها خیلی خوب توضیح داده شده بود.",
+      "createdAt": "2025-03-22"
+    },
+    {
+      "id": 8,
+      "courseId": 205,
+      "userId": 1,
+      "text": "پروژه‌های دوره واقعاً کمک کردند مفاهیم JavaScript رو بهتر درک کنم.",
+      "createdAt": "2025-04-08"
+    },
+    {
+      "id": 9,
+      "courseId": 205,
+      "userId": 3,
+      "text": "دوره برای تمرین و ساخت پروژه خیلی مناسبه.",
+      "createdAt": "2025-04-11"
+    },
+    {
+      "id": 10,
+      "courseId": 206,
+      "userId": 4,
+      "text": "TypeScript خیلی بهتر از چیزی بود که فکر می‌کردم. توضیحات کاملاً قابل فهم بود.",
+      "createdAt": "2025-04-25"
+    },
+    {
+      "id": 11,
+      "courseId": 207,
+      "userId": 2,
+      "text": "برای شروع HTML عالیه و مطالب از پایه توضیح داده شده.",
+      "createdAt": "2025-05-12"
+    },
+    {
+      "id": 12,
+      "courseId": 207,
+      "userId": 5,
+      "text": "رایگان بودن دوره واقعاً برای شروع خیلی خوبه.",
+      "createdAt": "2025-05-14"
+    },
+    {
+      "id": 13,
+      "courseId": 208,
+      "userId": 1,
+      "text": "مباحث پیشرفته React خیلی خوب توضیح داده شده و مثال‌ها کاربردی هستند.",
+      "createdAt": "2025-06-01"
+    },
+    {
+      "id": 14,
+      "courseId": 208,
+      "userId": 3,
+      "text": "بخش مربوط به مدیریت state و بهینه‌سازی خیلی برام مفید بود.",
+      "createdAt": "2025-06-04"
+    },
+    {
+      "id": 15,
+      "courseId": 209,
+      "userId": 4,
+      "text": "برای یادگیری PHP از صفر دوره خیلی مناسبیه.",
+      "createdAt": "2025-06-18"
+    },
+    {
+      "id": 16,
+      "courseId": 210,
+      "userId": 2,
+      "text": "Django خیلی خوب و قدم به قدم توضیح داده شده.",
+      "createdAt": "2025-07-10"
+    },
+    {
+      "id": 17,
+      "courseId": 210,
+      "userId": 5,
+      "text": "بخش ساخت پروژه واقعی خیلی جذاب بود.",
+      "createdAt": "2025-07-13"
+    },
+    {
+      "id": 18,
+      "courseId": 211,
+      "userId": 1,
+      "text": "Redux رو بالاخره با این دوره درست فهمیدم. توضیحات خیلی خوب بود.",
+      "createdAt": "2025-08-20"
+    },
+    {
+      "id": 19,
+      "courseId": 211,
+      "userId": 3,
+      "text": "مثال‌های عملی دوره برای یادگیری Redux خیلی مفید بودند.",
+      "createdAt": "2025-08-22"
+    },
+    {
+      "id": 20,
+      "courseId": 212,
+      "userId": 4,
+      "text": "Vue رو خیلی ساده و قابل فهم توضیح داده بودید.",
+      "createdAt": "2025-09-08"
     }
   ]
 }

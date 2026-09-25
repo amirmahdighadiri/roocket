@@ -32,7 +32,7 @@ const routes = [
             {path: 'about-us', element: <AboutUs />},
             {path: 'skills' , element: <Skills />},
             {path: 'products-page', element: <ProductsPage/>},
-            {path: 'product-page', element: <ProductPage/>},
+            {path: 'products-page/:id', element: <ProductPage/>},
             {path: 'certifications' , element: <Certifications/>},
             {path: 'podcasts' , element: <Podcast/>},
             {path: 'articles' , element: <Articles/>},
