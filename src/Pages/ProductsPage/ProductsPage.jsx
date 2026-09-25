@@ -13,7 +13,7 @@ import {Swiper, SwiperSlide} from "swiper/react";
 import {Navigation, Pagination} from "swiper/modules";
 import LearningPathsBox from "../../Components/LearningPathBox/LearningPathBox.jsx";
 import {getLearningPathFromServer} from "../../Redux/Store/LearningPath.jsx";
-import NoResults from "../../Components/NoResults/NoResults.jsx";
+import NoResults from "../../Components/Template/NoResults/NoResults.jsx";
 
 function ProductsPage(props) {
     const [categories, setCategories] = useState(coursesCategory);
