@@ -1,19 +1,9 @@
 import HeroSection from '../../Components/HeroSection/HeroSection.jsx'
-import DynamicIcon from "../../DynamicIcon/DynamicIcon.jsx";
 import useTitle from "../../Hooks/useTitle/useTitle.jsx";
-import SectionTitle from "../../Components/Title/sectionTitle.jsx";
-import {Link} from "react-router-dom";
 import {useEffect, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {getCoursesFromServer} from "../../Redux/Store/Courses.jsx";
-import {Swiper, SwiperSlide} from 'swiper/react';
-import {EffectCards, Navigation, Pagination} from 'swiper/modules';
-import CoursesBox from "../../Components/CoursesBox/CoursesBox.jsx";
-import LearningPathsBox from "../../Components/LearningPathBox/LearningPathBox.jsx";
 import LearningPath, {getLearningPathFromServer} from "../../Redux/Store/LearningPath.jsx";
-import ArticleBox from "../../Components/ArticleBox/ArticleBox.jsx";
-import useToggle from "../../Hooks/useToggle/useToggle.jsx";
-import PodcastBox from "../../Components/PodcastBox/PodcastBox.jsx";
 import {getPodcastsFromServer} from "../../Redux/Store/Podcasts.jsx";
 import {getArticlesFromServer} from "../../Redux/Store/Articles.jsx";
 import LastCourseSection from "../../Components/Template/LastCourseSection/LastCourseSection.jsx";
@@ -23,9 +13,6 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 import 'swiper/css/effect-cards';
 {/*<!-- ! -------------------- Images -------------------- ! -->*/}
-import instagramPhone from "../../assets/images/instagram.png"
-import vahidProfile from "../../assets/images/profile/vahid.jpg"
-import mahdiProfile from "../../assets/images/profile/mahdi.jpg"
 import LearningPathSection from "../../Components/Template/LearningPathSection/LearningPathSection.jsx";
 import AboutSection from "../../Components/Template/AboutSection/AboutSection.jsx";
 import ArticleSection from "../../Components/Template/ArticleSection/ArticleSection.jsx";

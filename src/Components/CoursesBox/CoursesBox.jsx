@@ -1,5 +1,6 @@
 import React, {memo} from 'react';
 import DynamicIcon from "../../DynamicIcon/DynamicIcon.jsx";
+import {Link} from "react-router-dom";
 
 function CoursesBox({title, src, price, status, description, courseTime, coursePrimary, userLike , gridClass}) {
 
@@ -11,11 +12,11 @@ function CoursesBox({title, src, price, status, description, courseTime, courseP
             {/*<!-- ! -------------------- Image Wrapper -------------------- ! -->*/}
             <div className="absolute -top-12 px-4 w-full">
                 {/*<!-- ! -------------------- Image Link -------------------- ! -->*/}
-                <a href="#" className="block h-45 overflow-hidden rounded-lg group">
+                <Link to={`/products-page/${title}`} className="block h-45 overflow-hidden rounded-lg group">
                     {/*<!-- ! -------------------- Image Link -------------------- ! -->*/}
                     <img id="course-image" src={`/images/courses/${src}.jpg`} alt=""
                          className="w-full h-full xl:group-hover:scale-110 transition-all object-cover"/>
-                </a>
+                </Link>
             </div>
             {/*<!-- ! -------------------- Box Content Wrapper -------------------- ! -->*/}
             <div className="h-full flex flex-col justify-between">
@@ -29,8 +30,8 @@ function CoursesBox({title, src, price, status, description, courseTime, courseP
                         <span>{status ? "تکمیل ضبط" : "در حال برگزاری"}</span>
                     </span>
                     {/*<!-- ! -------------------- Title Of Course -------------------- ! -->*/}
-                    <a href="" id="course-title"
-                       className="course-shearch-name inline-block font-Mult-Font-Bold text-xl text-gray-800 hover:text-blue-700 dark:text-white dark:hover:text-blue-450 transition-all hover:text-primary-blue-200 dark:hover:text-primary-blue-100 mb-2">{title}</a>
+                    <Link to={`/products-page/${title}`}
+                       className="course-shearch-name inline-block font-Mult-Font-Bold text-xl text-gray-800 hover:text-blue-700 dark:text-white dark:hover:text-blue-450 transition-all hover:text-primary-blue-200 dark:hover:text-primary-blue-100 mb-2">{title.replace(/-/g, " ")}</Link>
                     {/*<!-- ! -------------------- Description Of Course -------------------- ! -->*/}
                     <p id="course-description"
                        className="h-24 text-sm/6 text-gray-360 dark:text-gray-940 font-Mult-Font-Medium text-justify line-clamp-4">{description}</p>
