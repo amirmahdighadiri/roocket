@@ -26,9 +26,11 @@ function ProductsPage(props) {
     const learningPath = useSelector(state => state.learningPath);
     const courseFilterChangeHandler = () => setFilteredType(prev => prev === "current" ? "archive" : "current")
     const [finalCourses , setFinalCourses] = useState([])
-    const location = useLocation();
-
-
+    const [currentPage, setCurrentPage] = useState(1);
+    const location = useLocation()
+    const coursesPerPage = 9
+    let pageCount= Math.ceil(finalCourses.length / coursesPerPage);
+    const startIndex = (currentPage - 1) * coursesPerPage;
 
     const changeSortHandler = (value) => {
         setPlan(null)
@@ -38,6 +40,31 @@ function ProductsPage(props) {
     const changePlanHandler = (event) => {
         setSortBy(null)
         setPlan(event.target.value)
+    }
+
+    const increaseCurrentPageHandler =(event) => {
+        event.preventDefault()
+        setCurrentPage(prev => {
+            if (prev < pageCount) {
+                return prev + 1;
+            }
+            return prev;
+        })
+    }
+
+    const changeCurrentPageHandler=(event , pageId)=>{
+        event.preventDefault()
+        setCurrentPage(pageId)
+    }
+
+    const decreaseCurrentPageHandler = (event) => {
+        event.preventDefault()
+        setCurrentPage(prev => {
+            if (prev >= pageCount ) {
+                return prev - 1;
+            }
+            return prev;
+        })
     }
 
     useEffect(() => {
@@ -92,6 +119,7 @@ function ProductsPage(props) {
     useEffect(() => {
         location.state === 'free' ? setPlan('free') : setPlan('')
     }, [location.state]);
+
 
     return (
         <section className="container">
@@ -238,13 +266,34 @@ function ProductsPage(props) {
                 </div>
                 {/*<!-- ! -------------------- Products Wrapper -------------------- ! -->*/}
                 <div className="col-span-12 xl:col-span-9">
-
-                    {finalCourses.length ? (<div className="grid grid-cols-12 gap-x-6 gap-y-20">
-                        {finalCourses.map(course =>(
-                            <CoursesBox key={course.id} {...course} gridClass={'sm:col-span-6 xl:col-span-4'}/>
-                        ))}
-                    </div>) : <NoResults />}
-
+                    {finalCourses.length ? (
+                        <div className="grid grid-cols-12 gap-x-6 gap-y-20">
+                            {finalCourses
+                                .slice(startIndex, startIndex + coursesPerPage)
+                                .map(course => (
+                                    <CoursesBox key={course.id}{...course} gridClass="sm:col-span-6 xl:col-span-4"/>
+                                ))
+                            }
+                            <div className={`${pageCount > 1 ? 'flex-center' : 'hidden'} col-span-12 gap-2`}>
+                                {/*<!-- ! -------------------- Next BTn -------------------- ! -->*/}
+                                <button type="button" onClick={increaseCurrentPageHandler} className="flex items-center justify-center size-10 rounded-md border border-gray-210 dark:border-gray-360/20 bg-white dark:bg-dark-930 text-biscay-700 dark:text-white hover:bg-biscay-700 hover:text-white dark:hover:bg-biscay-700 transition-all cursor-pointer">
+                                    <DynamicIcon name="arrow" className="size-5 rotate-180"/>
+                                </button>
+                                {/*<!-- ! -------------------- Other Btn -------------------- ! -->*/}
+                                <div dir="ltr" className="flex items-center gap-x-2">
+                                    {Array.from({ length: pageCount }, (_, index) => (
+                                        <button onClick={(event) => changeCurrentPageHandler(event , index+1)} key={index + '01'} type="button" className={`size-10 rounded-md font-YekanBakh-Bold transition-all ${currentPage === index + 1  ? 'bg-biscay-700 text-white' : 'bg-white dark:bg-dark-930 text-biscay-700 dark:text-white border border-gray-210 dark:border-gray-360/20 hover:bg-biscay-700 hover:text-white'} cursor-pointer`}>
+                                            {index + 1}
+                                        </button>
+                                    ))}
+                                </div>
+                                {/*<!-- ! -------------------- Prev Btn -------------------- ! -->*/}
+                                <button type="button" onClick={decreaseCurrentPageHandler} className=" flex items-center justify-center size-10 rounded-md border border-gray-210 dark:border-gray-360/20 bg-white dark:bg-dark-930 text-biscay-700 dark:text-white hover:bg-biscay-700 hover:text-white transition-all cursor-pointer">
+                                    <DynamicIcon name="arrow" className="size-5"/>
+                                </button>
+                            </div>
+                        </div>
+                    ) : <NoResults />}
                 </div>
             </div>
         </section>
