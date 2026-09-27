@@ -14,6 +14,7 @@ import laravelBanner from "../../assets/images/banner/laravel.jpg"
 import banner1 from "../../assets/images/banner/banner-1.gif"
 import supportImage from "../../assets/images/symbol/suportImg.png"
 import {AppContext} from "../../Context/AppContext.jsx";
+import useTitle from "../../Hooks/useTitle/useTitle.jsx";
 
 
 function ProductPage() {
@@ -27,6 +28,8 @@ function ProductPage() {
     const URLTitle = decodeURIComponent(location.pathname.split("/").pop());
     const [targetCourse, setTargetCourse] = useState({});
     const {isLogin, userInfo} = useContext(AppContext)
+
+    useTitle(`راکت | ${URLTitle}`)
 
     useEffect(() => {
         if (!courses.length) {

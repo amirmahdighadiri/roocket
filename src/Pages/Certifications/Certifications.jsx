@@ -3,6 +3,7 @@ import {Link} from "react-router-dom";
 import DynamicIcon from "../../DynamicIcon/DynamicIcon.jsx";
 import Accordion from "../../Components/Accordion/DescriptionAccordion.jsx";
 import {accordions} from "../../data.jsx";
+import useTitle from "../../Hooks/useTitle/useTitle.jsx";
 
 function Certifications(props) {
 
@@ -49,6 +50,8 @@ function Certifications(props) {
 
         return () =>  document.body.classList.remove('overflow-x-hidden');
     }, [])
+
+    useTitle('راکت | گواهی پایان دوره')
 
     return (
         <section className="container">

@@ -5,6 +5,7 @@ import Notification from "../../Components/Notification/Notification.jsx";
 import useToggle from "../../Hooks/useToggle/useToggle.jsx";
 import {AppContext} from "../../Context/AppContext.jsx";
 import useCookie from "../../Hooks/useCookie/useCookie.jsx";
+import useTitle from "../../Hooks/useTitle/useTitle.jsx";
 
 function Verify(props) {
     const [verifyCode, setVerifyCode] = useState(["" , "" , "" , ""]);
@@ -73,6 +74,8 @@ function Verify(props) {
            },2600)
        }
    }
+
+    useTitle('راکت | تایید')
 
     return (
         <section className="relative min-h-screen flex flex-col items-center justify-center">

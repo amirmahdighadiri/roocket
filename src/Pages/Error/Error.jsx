@@ -25,14 +25,14 @@ function Error() {
                         <Link to="/" className="text-biscay-700 hover:text-biscay-400 transition-all">صفحه اصلی</Link>
                     </li>
                     <li className="">
-                        <Link to="" className="text-biscay-700 hover:text-biscay-400 transition-all">دوره‌های
+                        <Link to="/products-page" className="text-biscay-700 hover:text-biscay-400 transition-all">دوره‌های
                             آموزشی</Link>
                     </li>
                     <li className="">
                         <Link to="" className="text-biscay-700 hover:text-biscay-400 transition-all">پرسش و پاسخ</Link>
                     </li>
                     <li className="">
-                        <Link to="" className="text-biscay-700 hover:text-biscay-400 transition-all">مقالات سایت</Link>
+                        <Link to="/articles" className="text-biscay-700 hover:text-biscay-400 transition-all">مقالات سایت</Link>
                     </li>
                 </ul>
                 <Link to="">
