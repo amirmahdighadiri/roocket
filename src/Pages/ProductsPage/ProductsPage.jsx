@@ -14,6 +14,7 @@ import {Navigation, Pagination} from "swiper/modules";
 import LearningPathsBox from "../../Components/LearningPathBox/LearningPathBox.jsx";
 import {getLearningPathFromServer} from "../../Redux/Store/LearningPath.jsx";
 import NoResults from "../../Components/Template/NoResults/NoResults.jsx";
+import useTitle from "../../Hooks/useTitle/useTitle.jsx";
 
 function ProductsPage(props) {
     const [categories, setCategories] = useState(coursesCategory);
@@ -31,6 +32,8 @@ function ProductsPage(props) {
     const coursesPerPage = 9
     let pageCount= Math.ceil(finalCourses.length / coursesPerPage);
     const startIndex = (currentPage - 1) * coursesPerPage;
+
+    useTitle('راکت | دوره ها')
 
     const changeSortHandler = (value) => {
         setPlan(null)
@@ -129,7 +132,7 @@ function ProductsPage(props) {
                     <h3 className="text-3xl font-YekanBakh-Fat text-biscay-700 dark:text-white mb-3">مسیر های یادگیری</h3>
                     <p className="text-xl font-YekanBakh-Medium text-gray-300 dark:text-gray-920 mb-3 text-center lg:text-right">در مسیرهای یادگیری شما با گذراندن چند دوره از دوره‌های آموزشی راکت و یادگیری موضوعات بصورت منظم به موضوع آن مسیر کاملا مسلط می‌شوید.</p>
                     <div className="flex flex-col lg:flex-row items-center gap-x-5 gap-y-6">
-                        <Link to="/" className="text-white hover:text-blue-700 text-xs bg-blue-700 hover:bg-white dark:hover:bg-transparent border border-blue-700 hover:shadow py-3 px-5 rounded-md transition-all">مشاهده همه مسیرها</Link>
+                        <Link to="/skills" className="text-white hover:text-blue-700 text-xs bg-blue-700 hover:bg-white dark:hover:bg-transparent border border-blue-700 hover:shadow py-3 px-5 rounded-md transition-all">مشاهده همه مسیرها</Link>
                         {/*<!-- ! -------------------- Custom Swiper Btn -------------------- ! -->*/}
                         <div className="flex items-center gap-x-1.5">
                             <div className="custom-learnin-path-prev-btn">

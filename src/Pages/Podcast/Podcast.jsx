@@ -6,8 +6,6 @@ import {useDispatch, useSelector} from "react-redux";
 import {Link} from 'react-router-dom';
 import PodcastBox from "../../Components/PodcastBox/PodcastBox.jsx";
 import {getPodcastsFromServer} from "../../Redux/Store/Podcasts.jsx";
-import {timeFilters} from "../../data.jsx";
-import {displayFilters} from "../../data.jsx";
 
 {/*<!-- ! -------------------- Images -------------------- ! -->*/
 }
@@ -16,10 +14,12 @@ import banner1 from "../../assets/images/banner/banner-1.gif";
 import podcastImage from "../../assets/images/symbol/podcast-archive.png";
 import Tags from "../../Components/Tags/Tags.jsx";
 import ContentList from "../../Components/ContentList/ContentList.jsx";
+import useTitle from "../../Hooks/useTitle/useTitle.jsx";
 
 
 function Podcast(props) {
 
+    useTitle('راکت | پادکست')
     const dispatch = useDispatch();
     const {podcasts, podcastLoading} = useSelector(state => state.podcasts);
 

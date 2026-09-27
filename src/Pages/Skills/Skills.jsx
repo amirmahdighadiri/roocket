@@ -8,6 +8,7 @@ import RoadmapBanner from "../../Components/RoadmapBanner/RoadmapBanner.jsx";
 import {Swiper, SwiperSlide} from "swiper/react";
 import Accordion from "../../Components/Accordion/DescriptionAccordion.jsx";
 import { accordions } from '../../data.jsx';
+import useTitle from "../../Hooks/useTitle/useTitle.jsx";
 
 function Skills(props) {
     const dispatch = useDispatch();
@@ -17,6 +18,8 @@ function Skills(props) {
     useEffect(() => {
         dispatch(getSkillsFromServer("http://localhost:3000/skills"))
     }, [])
+
+    useTitle('راکت | مسیر یادگیری')
 
     return (
         <section className="container">
@@ -32,8 +35,7 @@ function Skills(props) {
                         یادگیری
                         برنامه‌ نویسی می‌تواند کمک کند تا شما بتوانید راحت‌تر در حوزه برنامه‌ نویسی مورد نظر خود وارد
                         شوید. راکت این نقشه راه را در اخیتار شما قرار میدهد</p>
-                    <div
-                        className="flex flex-col lg:flex-row items-center justify-center xl:justify-start gap-x-8 gap-y-4">
+                    <div className="flex flex-col lg:flex-row items-center justify-center xl:justify-start gap-x-8 gap-y-4">
                         <Link to="/"
                               className="inline-flex items-center justify-center gap-x-2.5 w-full border border-blue-700 font-bold px-7 rounded-lg h-16 transition-all bg-blue-700 hover:bg-transparent text-white hover:text-blue-700">
                             شروع مسیر یادگیری

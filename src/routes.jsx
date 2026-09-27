@@ -24,6 +24,7 @@ import UserInfoLayout from "./Components/DashboardPages/UserInfoLayout/UserInfoL
 import ChangeNumber from "./Components/DashboardPages/UserInfoLayout/ChangeNumber/ChangeNumber.jsx";
 import ChangePassword from "./Components/DashboardPages/UserInfoLayout/ChangePassword/ChangePassword.jsx";
 import Articles from "./Pages/Articles/Articles.jsx";
+import ComingSoon from "./Pages/ComingSoon/ComingSoon.jsx";
 
 const routes = [
     {
@@ -56,6 +57,7 @@ const routes = [
         ]},
     {path: '/auth' , element: <Auth/> },
     {path: '/verify' , element: <Verify/> },
+    {path: 'coming-soon' , element: <ComingSoon/>},
     {path: '/*', element: <Error/>}
 ]
 

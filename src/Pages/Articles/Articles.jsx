@@ -13,6 +13,7 @@ import PodcastBox from "../../Components/PodcastBox/PodcastBox.jsx";
 import ArticleBox from "../../Components/ArticleBox/ArticleBox.jsx";
 import articles, {getArticlesFromServer} from "../../Redux/Store/Articles.jsx";
 import ContentList from "../../Components/ContentList/ContentList.jsx";
+import useTitle from "../../Hooks/useTitle/useTitle.jsx";
 
 function Articles(props) {
     const dispatch = useDispatch();
@@ -27,6 +28,8 @@ function Articles(props) {
             dispatch(getArticlesFromServer("http://localhost:3000/articles"))
         }
     }, [])
+
+    useTitle('راکت | مقالات')
 
     return (
         <section className="container">

@@ -3,8 +3,11 @@ import {Link} from "react-router-dom";
 {/*<!-- ! -------------------- Images -------------------- ! -->*/}
 import AboutUsIntro from '../../assets/images/about-us-image/aboutUsIntro.png'
 import DynamicIcon from "../../DynamicIcon/DynamicIcon.jsx";
+import useTitle from "../../Hooks/useTitle/useTitle.jsx";
 
 function AboutUs(props) {
+
+    useTitle('راکت | درباره ما')
     return (
         <section className="container">
             {/*<!-- ! -------------------- AboutUS Intro -------------------- ! -->*/}

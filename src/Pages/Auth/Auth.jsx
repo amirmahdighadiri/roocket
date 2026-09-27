@@ -5,6 +5,7 @@ import Notification from "../../Components/Notification/Notification.jsx";
 import {AppContext} from "../../Context/AppContext.jsx";
 import {useDispatch, useSelector} from "react-redux";
 import users, {getUsersFromServer} from "../../Redux/Store/Users.jsx";
+import useTitle from "../../Hooks/useTitle/useTitle.jsx";
 
 function Auth() {
     const dispatch = useDispatch();
@@ -70,6 +71,8 @@ function Auth() {
             })
         }
     }
+
+    useTitle('راکت | ورود')
 
     return (
         <section className="min-h-screen flex flex-col items-center justify-center">
