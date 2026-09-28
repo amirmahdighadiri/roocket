@@ -1,17 +1,13 @@
 import React ,{useEffect} from 'react';
 import DynamicIcon from "../../DynamicIcon/DynamicIcon.jsx";
-import TagBox from "../../Components/Tags/TagBox/TagBox.jsx";
 import {Link} from 'react-router-dom';
 import instagramPhone from "../../assets/images/instagram.png";
 import banner1 from "../../assets/images/banner/banner-1.gif";
-import {displayFilters, timeFilters} from "../../data.jsx";
-import podcastImage from "../../assets/images/symbol/podcast-archive.png";
 import Tags from "../../Components/Tags/Tags.jsx";
 import {getPodcastsFromServer} from "../../Redux/Store/Podcasts.jsx";
 import {useDispatch, useSelector} from "react-redux";
-import PodcastBox from "../../Components/PodcastBox/PodcastBox.jsx";
 import ArticleBox from "../../Components/ArticleBox/ArticleBox.jsx";
-import articles, {getArticlesFromServer} from "../../Redux/Store/Articles.jsx";
+import {getArticlesFromServer} from "../../Redux/Store/Articles.jsx";
 import ContentList from "../../Components/ContentList/ContentList.jsx";
 import useTitle from "../../Hooks/useTitle/useTitle.jsx";
 

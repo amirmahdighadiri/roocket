@@ -1,7 +1,7 @@
 import React from 'react';
 import {Link} from "react-router-dom";
 
-function ArticleBox({title,description,image_url,likes,comments_count,author,author_avatar,read_time,category}) {
+function ArticleBox({title,description,image_url,likes,comments_count,author,author_avatar,read_time,category , gridClass}) {
 
     const categories = {
         freelancing: "فریلنسری",
@@ -15,7 +15,7 @@ function ArticleBox({title,description,image_url,likes,comments_count,author,aut
     };
 
     return (
-        <div className=" bg-white dark:bg-dark-930 p-4 rounded">
+        <div className={`${gridClass && gridClass} bg-white dark:bg-dark-930 p-4 rounded`}>
             {/*<!-- ! -------------------- Article Image -------------------- ! -->*/}
             <div className="rounded overflow-hidden">
                 <Link to="/" className="">

@@ -23,6 +23,7 @@ function Podcast(props) {
     const dispatch = useDispatch();
     const {podcasts, podcastLoading} = useSelector(state => state.podcasts);
 
+
     useEffect(() => {
         if (!podcasts.length){
             dispatch(getPodcastsFromServer("http://localhost:3000/episodes"));
@@ -48,8 +49,7 @@ function Podcast(props) {
                             </div>
                         </div>
                         {/*<!-- ! -------------------- Instagram Section -------------------- ! -->*/}
-                        <div
-                            className="relative flex items-center justify-between p-5 bg-gradient-to-r from-purple-500 via-pink-500 to-orange-500 rounded-md">
+                        <div className="relative flex items-center justify-between p-5 bg-gradient-to-r from-purple-500 via-pink-500 to-orange-500 rounded-md">
                             <img src={instagramPhone} alt="instagram" className="absolute -top-7 -right-1 w-32 h-25"/>
                             <Link to="/"
                                   className="inline-block mr-auto p-2 font-YekanBakh-Bold text-purple-600 bg-white rounded text-xs border border-white hover:bg-transparent hover:text-white transition-all">
