@@ -3,16 +3,20 @@ import DynamicIcon from "../../DynamicIcon/DynamicIcon.jsx";
 import podcastImage from "../../assets/images/symbol/podcast-archive.png";
 import {timeFilters} from "../../data.jsx";
 import {displayFilters} from "../../data.jsx";
+import PaginationBtn from "../PaginationBtn/PaginationBtn.jsx";
 
 function ContentList({itemsContent , BoxComponent , title}) {
     const [timeFilter, setTimeFilter] = useState({label: "بروزترین", value: "newest"});
     const [displayFilter, setDisplayFilter] = useState({label: "همه", value: "all"});
     const [finalItems, setFinalItems] = useState([]);
+    const [currentPage, setCurrentPage] = useState(1);
+    const itemsPerPage = 9
+    let pageCount= Math.ceil(finalItems.length / itemsPerPage);
+    const startIndex = (currentPage - 1) * itemsPerPage;
 
     useEffect(() => {
         setFinalItems([...itemsContent].reverse());
     },[itemsContent])
-
 
     useEffect(() => {
         if (displayFilter.value === "popular") {
@@ -62,7 +66,7 @@ function ContentList({itemsContent , BoxComponent , title}) {
                     <div className="w-full inline-flex items-center justify-between gap-x-2 h-11 px-3 border border-biscay-700 dark:border-white/20 cursor-pointer rounded-md">
                         <div className="flex items-center gap-x-1 text-biscay-700 dark:text-white text-sm font-YekanBakh-Bold pl-2 border-0 xl:border-l border-biscay-700 dark:border-white/20">
                             <span className="">فیلتر زمانی</span>
-                            <span className="text-dark-550 dark:text-gray-920 text-xs">(  )</span>
+                            <span className="text-dark-550 dark:text-gray-920 text-xs">( {timeFilter.label} )</span>
                         </div>
                         <div className="">
                             <DynamicIcon name="chartCircle" className="size-5 text-biscay-700 dark:text-white"/>
@@ -87,7 +91,7 @@ function ContentList({itemsContent , BoxComponent , title}) {
                     <div className="w-full inline-flex items-center justify-between gap-x-2 h-11 px-3 border border-biscay-700 dark:border-white/20 cursor-pointer rounded-md">
                         <div className="flex items-center gap-x-1 text-biscay-700 dark:text-white text-sm font-YekanBakh-Bold pl-2 border-0 xl:border-l border-biscay-700 dark:border-white/20">
                             <span className="">فیلتر نمایش</span>
-                            <span className="text-dark-550 dark:text-gray-920 text-xs">(  )</span>
+                            <span className="text-dark-550 dark:text-gray-920 text-xs">( {displayFilter.label} )</span>
                         </div>
                         <div className="">
                             <DynamicIcon name="chartCircle" className="size-5 text-biscay-700 dark:text-white"/>
@@ -118,12 +122,14 @@ function ContentList({itemsContent , BoxComponent , title}) {
                     <span className="text-biscay-700 dark:text-white font-YekanBakh-Heavy text-3xl">{title}</span>
                 </div>
                 {/*<!-- ! -------------------- Items Wrapper -------------------- ! -->*/}
-                <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-x-5 gap-y-12 mt-7">
-                    {
-                        finalItems.map(item => (
-                            <BoxComponent key={item.id} {...item} />
+                <div className="grid grid-cols-12 gap-x-5 gap-y-12 mt-7">
+                    {finalItems
+                        .slice(startIndex, startIndex + itemsPerPage)
+                        .map(item => (
+                            <BoxComponent key={item.id} {...item} gridClass="col-span-12 sm:col-span-6 xl:col-span-4"/>
                         ))
                     }
+                    <PaginationBtn pageCount={pageCount} currentPage={currentPage} setCurrentPage={setCurrentPage} />
                 </div>
             </div>
         </>

@@ -2,10 +2,10 @@ import React from 'react';
 import {Link} from "react-router-dom";
 import DynamicIcon from "../../DynamicIcon/DynamicIcon.jsx";
 
-function PodcastBox({episode_number , title , likes , duration , image_url}) {
+function PodcastBox({episode_number , title , likes , duration , image_url , gridClass}) {
 
     return (
-        <div className="bg-white dark:bg-dark-930 rounded-md pt-4">
+        <div className={`${gridClass && gridClass} bg-white dark:bg-dark-930 rounded-md pt-4`}>
             {/*<!-- ! -------------------- Box Header-------------------- ! -->*/}
             <div className="flex items-center justify-between px-5">
                 <div className="inline-flex border border-biscay-700/10 dark:border-dark-910 text-gray-450 dark:text-white pt-1 pl-2 rounded text-xs font-bold">
