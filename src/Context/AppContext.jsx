@@ -27,7 +27,7 @@ function AppProvider({children}) {
         toggleDashboardMenu(false)
     }, [location.pathname])
 
-    const conectValue = {
+    const contentValue = {
         theme,
         setTheme,
         isOpenMenu,
@@ -81,7 +81,7 @@ function AppProvider({children}) {
     }, [userId]);
 
     return (
-        <AppContext.Provider value={conectValue}>
+        <AppContext.Provider value={contentValue}>
             {children}
         </AppContext.Provider>
     );

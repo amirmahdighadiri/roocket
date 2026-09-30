@@ -1,5 +1,5 @@
 import React, {useContext, useEffect, useState} from 'react';
-import {Link} from "react-router-dom";
+import {Link,useNavigate} from "react-router-dom";
 import DynamicIcon from "../../DynamicIcon/DynamicIcon.jsx";
 import {AppContext} from "../../Context/AppContext.jsx";
 
@@ -8,12 +8,16 @@ import defaultProfile from "../../assets/images/profile/default.png"
 import Overlay from "../Overlay/Overlay.jsx";
 import useToggle from "../../Hooks/useToggle/useToggle.jsx";
 import useCookie from "../../Hooks/useCookie/useCookie.jsx";
+import ConfirmModal from "../Modals/ConfirmModal/ConfirmModal.jsx";
 
 
 function Header(props) {
     const {theme, setTheme, isOpenMenu, setIsOpenMenu, setIsShowOverlay, isLogin, userInfo , isOpenProfileMenu , toggleProfileMenu} = useContext(AppContext)
     const [isOpenCoursesSubmenu, toggleCoursesSubmenu] = useToggle(false)
-    const [isOpenUsefullSubmenu, toggleUsefullSubmenu] = useToggle(false)
+    const [isOpenUsefulSubmenu, toggleUsefulSubmenu] = useToggle(false)
+    const [, , removeUserID] = useCookie("userID", "");
+    const [isShowModal, toggleIsShowModal] = useToggle();
+
 
 
     const changeThemeHandler = () => theme === "dark" ? setTheme("light") : setTheme("dark")
@@ -32,12 +36,21 @@ function Header(props) {
         const target = event.target.closest("#useful-link-btn") || event.target.closest("#courses-btn")
         if (!target) {
             toggleCoursesSubmenu(false);
-            toggleUsefullSubmenu(false)
+            toggleUsefulSubmenu(false)
         }
     }
 
     const toggleProfileHandler = () => {
         setIsShowOverlay(true)
+        toggleProfileMenu()
+    }
+
+    const showModalConfirmHandler = (event)=>{
+        document.documentElement.classList.add('min-h-screen')
+        document.documentElement.classList.add('overflow-hidden')
+        event.preventDefault()
+        setIsShowOverlay(true)
+        toggleIsShowModal()
         toggleProfileMenu()
     }
 
@@ -47,6 +60,16 @@ function Header(props) {
         return () => window.removeEventListener("click", closeSubMenus);
 
     }, [])
+
+    const logoutHandler = (status) => {
+        if (status){
+            removeUserID()
+            window.location.reload();
+        }
+        setIsShowOverlay()
+        toggleIsShowModal()
+    }
+
 
     return (
         <header className="mt-7">
@@ -68,16 +91,14 @@ function Header(props) {
                     {/*<!-- ! -------------------- Header Search Input AND Change Theme Btn -------------------- ! -->*/}
                     <div className="hidden lg:flex w-1/2 items-center gap-x-4 font-YekanBakh-Medium text-xs">
                         {/*<!-- ! -------------------- Header Search Inpu Wrapper -------------------- ! -->*/}
-                        <div
-                            className="flex w-full h-12 items-center gap-x-2.5 py-4 px-3 bg-gray-210 dark:bg-dark-body-100 rounded-xl">
+                        <div className="flex w-full h-12 items-center gap-x-2.5 py-4 px-3 bg-gray-210 dark:bg-dark-body-100 rounded-xl">
                             <DynamicIcon name={'search'} className={'dark:text-white w-4 h-4 text-primary-gray-300'}/>
                             <input type="text"
                                    className="w-full border-none outline-0 dark:text-white dark:placeholder:text-white"
                                    placeholder="دنبال چی میگردی ؟"/>
                         </div>
                         {/*<!-- ! -------------------- Change Them Btn -------------------- ! -->*/}
-                        <div onClick={changeThemeHandler}
-                             className="change-them-btn flex-center w-12 h-12 dark:bg-dark-body-100 dark:hover:bg-[#ECEEEF] bg-[#ECEEEF] hover:bg-dark-body-100 rounded-full cursor-auto md:cursor-pointer transition-all shrink-0 group">
+                        <div onClick={changeThemeHandler} className="change-them-btn flex-center w-12 h-12 dark:bg-dark-body-100 dark:hover:bg-[#ECEEEF] bg-[#ECEEEF] hover:bg-dark-body-100 rounded-full cursor-auto md:cursor-pointer transition-all shrink-0 group">
                             <DynamicIcon name={'sun'}
                                          className={'block dark:hidden w-6 h-6 text-biscay-700 group-hover:text-gray-920'}/>
                             <DynamicIcon name={'moon'}
@@ -130,7 +151,7 @@ function Header(props) {
                             <span className="size-6 flex-center absolute -top-2 -right-2 bg-red-450 text-white rounded-full font-YekanBakh text-sm">12</span>
                         </div>
                         {/*<!-- ! -------------------- Users Profile Image And Profile Menu -------------------- ! -->*/}
-                        <div className="relative z-20">
+                        <div className={`relative ${isOpenProfileMenu ? 'z-20' : 'z-0'}`}>
                             {/*<!-- ! -------------------- Profile Wrapper -------------------- ! -->*/}
                             <div onClick={toggleProfileHandler} className="relative size-12 cursor-pointer">
                                 {/*<!-- ! -------------------- Profile Image Wrapper -------------------- ! -->*/}
@@ -147,11 +168,11 @@ function Header(props) {
                                         <span className="absolute right-6 w-px h-full bg-biscay-100 dark:opacity-10"></span>
                                         <div className="flex items-start gap-x-4 mb-2">
                                             <div className="size-12 rounded-full overflow-hidden">
-                                                <img src={defaultProfile} alt="" className=""/>
+                                                <img src={defaultProfile} alt="default profile" className=""/>
                                             </div>
                                             <div className="flex flex-col gap-y-2">
-                                                <span className="text-biscay-700 dark:text-white font-YekanBakh-Heavy text-xl">امیرمهدی</span>
-                                                <Link to="/" className="flex items-center gap-x-2 text-blue-700 dark:text-blue-450 hover:opacity-80 transition-all">
+                                                <span className="text-biscay-700 dark:text-white font-YekanBakh-Heavy text-xl">{userInfo.fullName}</span>
+                                                <Link to="/dashboard/panel" className="flex items-center gap-x-2 text-blue-700 dark:text-blue-450 hover:opacity-80 transition-all">
                                                     <span className="">مشاهده پنل کاربری</span>
                                                     <DynamicIcon name="arrowRight" className="size-4 text-inherit rotate-180" />
                                                 </Link>
@@ -187,35 +208,35 @@ function Header(props) {
                                 <div className="mt-5 pt-3 px-5 pb-7 border-t border-biscay-100 dark:border-gray-300/10">
                                     <ul className="space-y-1 *:hover:bg-dark-550/10 *:dark:hover:bg-dark-450 *:transition-all *:rounded-lg *:px-4 *:py-3">
                                         <li className="">
-                                            <Link to="/" className="flex items-center gap-x-4 text-gray-500 dark:text-gray-920">
+                                            <Link to="/dashboard/courses" className="flex items-center gap-x-4 text-gray-500 dark:text-gray-920">
                                                 <DynamicIcon name="camera" className="size-5 text-inherit" />
                                                 <span className="text-lg font-YekanBakh-Bold">دوره ها</span>
                                             </Link>
                                         </li>
                                         <li className="">
-                                            <Link to="/" className="flex items-center gap-x-4 text-gray-500 dark:text-gray-920">
+                                            <Link to="/dashboard/dashboard" className="flex items-center gap-x-4 text-gray-500 dark:text-gray-920">
                                                 <DynamicIcon name="wallet" className="size-5 text-inherit" />
                                                 <span className="text-lg font-YekanBakh-Bold">مالی و اشتراک</span>
                                             </Link>
                                         </li>
                                         <li className="">
-                                            <Link to="/" className="flex items-center gap-x-4 text-gray-500 dark:text-gray-920">
+                                            <Link to="/dashboard/questions" className="flex items-center gap-x-4 text-gray-500 dark:text-gray-920">
                                                 <DynamicIcon name="questionSquare" className="size-5 text-inherit" />
                                                 <span className="text-lg font-YekanBakh-Bold">پرسش‌ها</span>
                                             </Link>
                                         </li>
                                         <li className="flex items-center justify-between">
-                                            <Link to="/" className="flex items-center gap-x-4 text-gray-500 dark:text-gray-920">
+                                            <Link to="/dashboard/missions" className="flex items-center gap-x-4 text-gray-500 dark:text-gray-920">
                                                 <DynamicIcon name="ticket" className="size-5 text-inherit" />
                                                 <span className="text-lg font-YekanBakh-Bold">ماموریت‌ها</span>
                                             </Link>
                                             <span className="size-6 flex-center bg-yellow-500 rounded-full text-white font-YekanBakh-Bold">6</span>
                                         </li>
                                         <li className="">
-                                            <Link to="/" className="flex items-center gap-x-4 text-gray-500 dark:text-gray-920">
+                                            <button type="button" onClick={showModalConfirmHandler} className="flex items-center gap-x-4 text-gray-500 dark:text-gray-920">
                                                 <DynamicIcon name="logout" className="size-5 text-inherit" />
                                                 <span className="text-lg font-YekanBakh-Bold">خروج از حساب کاربری</span>
-                                            </Link>
+                                            </button>
                                         </li>
                                     </ul>
                                 </div>
@@ -418,8 +439,8 @@ function Header(props) {
                                          className={'block lg:hidden w-5 h-5 dark:text-white text-biscay-700'}/>
                             <Link to="/podcasts" className="">راکت کست</Link>
                         </li>
-                        <li className={`lg:relative ${isOpenUsefullSubmenu ? 'h-auto' : 'h-6'}  text-biscay-700 hover:text-gray-hover-200 dark:text-white dark:hover:text-gray-hover-150 transition-all`}>
-                            <div onClick={toggleUsefullSubmenu} id="usefull-submenu-btn"
+                        <li className={`lg:relative ${isOpenUsefulSubmenu ? 'h-auto' : 'h-6'}  text-biscay-700 hover:text-gray-hover-200 dark:text-white dark:hover:text-gray-hover-150 transition-all`}>
+                            <div onClick={toggleUsefulSubmenu} id="usefull-submenu-btn"
                                  className="flex items-center gap-x-2">
                                 <DynamicIcon name={'link'}
                                              className={'block lg:hidden w-5 h-5 dark:text-white text-biscay-700'}/>
@@ -428,12 +449,12 @@ function Header(props) {
                                         className="flex items-center gap-x-2 cursor-pointer">
                                     لینک های مفید
                                     <DynamicIcon name={'arrowDown'}
-                                                 className={`w-3.5 h-2 text-biscay-700 dark:text-white dark:group-hover:text-gray-20 transition-all ${isOpenUsefullSubmenu ? 'rotate-180' : 'rotate-0'}`}/>
+                                                 className={`w-3.5 h-2 text-biscay-700 dark:text-white dark:group-hover:text-gray-20 transition-all ${isOpenUsefulSubmenu ? 'rotate-180' : 'rotate-0'}`}/>
                                 </button>
                             </div>
                             {/*<!-- ! -------------------- Useful Links Sub Menu =>( remove closed class and add opened class to show submenu) -------------------- ! -->*/}
                             <div id="useful-link-submenu"
-                                 className={`${isOpenUsefullSubmenu ? 'opened' : 'closed'} w-full lg:w-52 lg:absolute lg:-right-2 lg:top-14 bg-white dark:bg-dark-890 lg:dark:bg-dark-body-100 p-3 mt-2.5 lg:mt-0 pt-2.5 rounded-lg z-20 transition-all origin-[50%-0px]`}>
+                                 className={`${isOpenUsefulSubmenu ? 'opened' : 'closed'} w-full lg:w-52 lg:absolute lg:-right-2 lg:top-14 bg-white dark:bg-dark-890 lg:dark:bg-dark-body-100 p-3 mt-2.5 lg:mt-0 pt-2.5 rounded-lg z-20 transition-all origin-[50%-0px]`}>
                                 <ul className="flex flex-col font-YekanBakh-Medium text-lg">
                                     <li className="text-primary-gray-300 pr-3 py-4 hover:bg-gray-hover-100 rounded-md dark:hover:bg-dark-950 lg:dark:hover:bg-drak-890 dark:text-white transition-all">
                                         <Link to="/" className="block">کانال تلگرام</Link></li>
@@ -453,6 +474,7 @@ function Header(props) {
             </div>
             <div className="hidden dark:block w-full h-screen absolute top-0 right-0 bg-gradient-to-t from-transparent to-[#324456] -z-20"></div>
             <Overlay/>
+            <ConfirmModal isShowModal={isShowModal} logoutHandler={logoutHandler}/>
         </header>
     );
 }
