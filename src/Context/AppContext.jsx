@@ -19,12 +19,14 @@ function AppProvider({children}) {
     const [userId, setUserId] = useCookie("userID" , "")
     const [isOpenProfileMenu , toggleProfileMenu] = useToggle()
     const [isOpenDashboardMenu , toggleDashboardMenu] = useToggle()
+    const [isOpenCartDropDown , toggleCartDropDown] = useToggle();
 
     useEffect(() => {
         window.scrollTo(0, 0)
         setIsOpenMenu(false)
         setIsShowOverlay(false)
         toggleDashboardMenu(false)
+        toggleProfileMenu(false)
     }, [location.pathname])
 
     const contentValue = {
@@ -43,7 +45,9 @@ function AppProvider({children}) {
         isOpenProfileMenu ,
         toggleProfileMenu,
         isOpenDashboardMenu ,
-        toggleDashboardMenu
+        toggleDashboardMenu,
+        isOpenCartDropDown,
+        toggleCartDropDown
     }
 
     useEffect(() => {

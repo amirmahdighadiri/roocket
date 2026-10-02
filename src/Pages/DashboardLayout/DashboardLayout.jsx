@@ -1,9 +1,11 @@
 import React , {useContext} from 'react';
-import {Link , Outlet , useLocation} from "react-router-dom";
+import {Link , Outlet , useLocation,useNavigate} from "react-router-dom";
 import DynamicIcon from "../../DynamicIcon/DynamicIcon.jsx";
 import {AppContext} from "../../Context/AppContext.jsx";
 import useToggle from "../../Hooks/useToggle/useToggle.jsx";
 import Overlay from "../../Components/Overlay/Overlay.jsx";
+import ConfirmModal from "../../Components/Modals/ConfirmModal/ConfirmModal.jsx";
+import useCookie from "../../Hooks/useCookie/useCookie.jsx";
 
 function DashboardLayout(props) {
     const date = new Date();
@@ -16,6 +18,9 @@ function DashboardLayout(props) {
         day: "2-digit",
     });
     const parts = formatter.formatToParts(date);
+    const [isShowModal, toggleIsShowModal] = useToggle();
+    const [, , removeUserID] = useCookie("userID", "");
+    const navigate = useNavigate();
 
     const getPart = (id)=>{
        return  parts.find(item=> item.type === id)?.value
@@ -31,10 +36,28 @@ function DashboardLayout(props) {
         toggleDashboardMenu()
     }
 
+    const showModalConfirmHandler = (event)=>{
+        document.documentElement.classList.add('min-h-screen')
+        document.documentElement.classList.add('overflow-hidden')
+        event.preventDefault()
+        setIsShowOverlay(true)
+        toggleIsShowModal()
+    }
+
+    const logoutHandler = (status) => {
+        if (status){
+            removeUserID()
+            window.location.href = "/"
+            return
+        }
+        setIsShowOverlay()
+        toggleIsShowModal()
+    }
+
     return (
         <section className="relative bg-white dark:bg-dark-body-100 grid grid-cols-12 min-h-screen overflow-hidden">
             {/*<!-- ! -------------------- Dashboard Menu -------------------- ! -->*/}
-            <aside className={`absolute z-20 xl:static ${isOpenDashboardMenu ? 'right-0' : '-right-75'} xl:right-0 w-75 xl:w-auto h-screen xl:min-h-screen xl:col-span-2 pt-5 xl:pt-11 flex flex-col bg-white dark:bg-dark-body-100 !xl:bg-transparent pb-3 px-4 xl:px-0 transition-all`}>
+            <aside className={`absolute z-10 xl:static ${isOpenDashboardMenu ? 'right-0' : '-right-75'} xl:right-0 w-75 xl:w-auto h-screen xl:min-h-screen xl:col-span-2 pt-5 xl:pt-11 flex flex-col bg-white dark:bg-dark-body-100 !xl:bg-transparent pb-3 px-4 xl:px-0 transition-all`}>
                 {/*<!-- ! -------------------- Close Btn -------------------- ! -->*/}
                 <button onClick={toggleOpenDashboardMenuHandler} className="block xl:hidden mr-auto cursor-pointer text-biscay-700 dark:text-white mb-5">
                     <DynamicIcon name="xMark" className="size-5 text-inherit"/>
@@ -145,10 +168,10 @@ function DashboardLayout(props) {
                                 </Link>
                             </li>
                             <li className="">
-                                <Link to="/" className="flex items-center gap-x-4 text-gray-800 dark:text-white hover:text-red-450 transition-all px-4 py-3">
+                                <button onClick={showModalConfirmHandler} type="button" className="flex items-center gap-x-4 text-gray-800 dark:text-white hover:text-red-450 transition-all px-4 py-3">
                                     <DynamicIcon name="logout" className="size-5 fill-inherit"/>
                                     <span className="inline-block mt-2">خروج</span>
-                                </Link>
+                                </button>
                             </li>
                         </ul>
                     </div>
@@ -197,6 +220,7 @@ function DashboardLayout(props) {
                 </section>
             </div>
             <Overlay />
+            <ConfirmModal isShowModal={isShowModal} logoutHandler={logoutHandler}/>
         </section>
     );
 }
