@@ -720,6 +720,12 @@ const iconsMap = {
             <path fillRule="evenodd" clipRule="evenodd" d="M18.094 5.64077C18.094 3.11914 16.3701 2.10828 13.8879 2.10828H8.05895C5.65311 2.10828 3.8501 3.05021 3.8501 5.4726V18.9694C3.8501 19.6348 4.56597 20.0538 5.14584 19.7285L10.996 16.4469L16.7955 19.723C17.3763 20.0501 18.094 19.6311 18.094 18.9648V5.64077Z" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
             <path opacity="0.4" d="M7.58203 8.27564H14.2905" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
         </svg>
+    ),
+    trash: (
+        <svg fill='none' aria-hidden='true' className='w-4 h-4' viewBox='0 0 20 20'>
+            <path stroke='currentColor' strokeLinecap='round' strokeLinejoin='round' strokeOpacity='0.9' strokeWidth='1.5' d='M16.104 7.89s-.452 5.613-.715 7.977c-.125 1.129-.822 1.79-1.965 1.811-2.174.04-4.35.042-6.524-.004-1.1-.022-1.785-.692-1.908-1.801-.264-2.385-.714-7.983-.714-7.983' opacity='0.4'></path>
+            <path stroke='currentColor' strokeLinecap='round' strokeLinejoin='round' strokeOpacity='0.9' strokeWidth='1.5' d='M17.257 5.2H3.125M14.534 5.2a1.37 1.37 0 0 1-1.346-1.104l-.203-1.013a1.066 1.066 0 0 0-1.03-.79H8.427c-.482 0-.906.323-1.03.79l-.203 1.013A1.37 1.37 0 0 1 5.848 5.2'></path>
+        </svg>
     )
 
 }

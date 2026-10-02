@@ -3,13 +3,14 @@ import ReactDOM from 'react-dom';
 import {AppContext} from "../../Context/AppContext.jsx";
 
 function MenuOverlay() {
-    const {setIsOpenMenu,isShowOverlay,setIsShowOverlay,toggleProfileMenu , toggleDashboardMenu} = useContext(AppContext);
+    const {setIsOpenMenu,isShowOverlay,setIsShowOverlay,toggleProfileMenu , toggleDashboardMenu, toggleCartDropDown} = useContext(AppContext);
 
     const hiddenOverlayHandler = () => {
         setIsShowOverlay(false);
         setIsOpenMenu(false);
-        toggleProfileMenu()
-        toggleDashboardMenu()
+        toggleProfileMenu(false)
+        toggleDashboardMenu(false)
+        toggleCartDropDown(false)
     }
 
     return ReactDOM.createPortal(
