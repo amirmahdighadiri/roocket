@@ -69,16 +69,32 @@ function ProductPage() {
                     {/*<!-- ! -------------------- Courses Description -------------------- ! -->*/}
                     <div className="col-span-12 lg:col-span-8">
                         <h1 className="text-biscay-700 dark:text-white font-Mult-Font-Bold text-2xl lg:text-5xl mb-5 text-center lg:text-right">{targetCourse?.title?.replace(/-/g, " ")}</h1>
-                        <p className="text-gray-300 dark:text-gray-920 font-Mult-Font-Medium text-base lg:text-xl/8 mb-5 text-center lg:text-right">{targetCourse?.description}</p>
+                        <p className="h-24 text-gray-300 dark:text-gray-920 font-Mult-Font-Medium text-base lg:text-xl/8 mb-5 text-center lg:text-right line-clamp-3">{targetCourse?.description}</p>
                         <div className="flex flex-col lg:flex-row gap-y-5 items-center justify-between">
-                            {!isLogin &&
-                                <Link to="/" className="inline-flex items-center justify-center gap-x-2 bg-blue-700 border border-blue-700 text-white hover:text-blue-700 hover:bg-transparent rounded h-10 lg:h-14 px-9 transition-all">
+                            {!isLogin && <Link to="/auth" className="inline-flex items-center justify-center gap-x-2 bg-blue-700 border border-blue-700 text-white hover:text-blue-700 hover:bg-transparent rounded h-10 lg:h-14 px-9 transition-all">
                                     <DynamicIcon name="educationIcon" className="size-5 text-inherit"/>
                                     <span className="font-YekanBakh-Bold">برای یادگیری وارد سایت شوید</span>
-                                </Link>
-                            }
+                                </Link>}
                             {
-                                isLogin
+                                isLogin && targetCourse.price === 0 ? <div className="flex items-center gap-x-3">
+                                    <Link to="/" className="inline-flex items-center justify-center gap-x-2 bg-blue-700 border border-blue-700 text-white hover:text-blue-700 hover:bg-transparent rounded h-10 lg:h-14 px-9 transition-all">
+                                        <span className="font-YekanBakh-Bold">ثبت نام رایگان</span>
+                                        <DynamicIcon name="educationIcon" className="size-5 text-inherit"/>
+                                    </Link>
+                                    <a href="#curriculum-content" className="flex items-center gap-x-1 text-blue-700 hover:text-gray-900 font-YekanBakh-Bold transition-all">
+                                        <span className="">مشاهده سر فصل ها</span>
+                                        <DynamicIcon name="bookText" className="size-4 text-inherit mb-1"/>
+                                    </a>
+                                </div> : <div className="flex items-center gap-x-3">
+                                    <button type="button" className="inline-flex items-center justify-center gap-x-2 bg-blue-700 border border-blue-700 text-white hover:text-blue-700 hover:bg-transparent rounded h-10 lg:h-14 px-9 transition-all cursor-pointer">
+                                        <span className="font-YekanBakh-Bold">خرید نقدی دوره (امکان دانلود)</span>
+                                        <DynamicIcon name="educationIcon" className="size-5 text-inherit"/>
+                                    </button>
+                                    <span className="flex items-center gap-x-1 text-customOrange-700 font-YekanBakh-Bold">
+                                    <span className="">رایگان برای اعضای ویژه</span>
+                                    <DynamicIcon name="star" className="size-4 text-inherit mb-1"/>
+                                </span>
+                                </div>
                             }
                             <div className="inline-flex items-center gap-x-2 text-biscay-700 dark:text-white">
                                 <span className="text-5xl font-YekanBakh-Heavy">{targetCourse?.price === 0 ? 'رایگان !' : String(targetCourse?.price)?.replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</span>
@@ -102,10 +118,10 @@ function ProductPage() {
                             <DynamicIcon name="heart" className="size-6 text-inherit"/>
                             <span className="">{targetCourse?.userLike?.length}</span>
                         </button>
-                        <button type="button" className="flex items-center gap-x-1 text-dark-550 dark:text-dark-200 hover:text-green-700 transition-all cursor-pointer">
+                        <a href="#reviews-content" className="flex items-center gap-x-1 text-dark-550 dark:text-dark-200 hover:text-green-700 transition-all cursor-pointer">
                             <DynamicIcon name="document" className="size-6 text-inherit"/>
                             <span className="">53</span>
-                        </button>
+                        </a>
                         <button type="button" className="flex items-center gap-x-1 text-dark-550 dark:text-dark-200 hover:text-blue-700 transition-all cursor-pointer">
                             <DynamicIcon name="bell" className="size-6 text-inherit"/>
                             <span className="">23</span>
@@ -405,7 +421,7 @@ function ProductPage() {
                             {
                                 courses.map(course => (
                                     <div key={course.id} className="bg-white dark:bg-dark-890 rounded shadow-sm p-4">
-                                        <Link to="/"
+                                        <Link to={`/products-page/${course.title}`}
                                               className="relative text-biscay-700 dark:text-white hover:text-blue-700 dark:hover:text-blue-450 font-Mult-Font-Bold transition-all">
                                             <span
                                                 className="absolute -right-4 w-1 h-full bg-blue-700 dark:bg-blue-450"></span>

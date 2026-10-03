@@ -25,6 +25,7 @@ import ChangeNumber from "./Components/DashboardPages/UserInfoLayout/ChangeNumbe
 import ChangePassword from "./Components/DashboardPages/UserInfoLayout/ChangePassword/ChangePassword.jsx";
 import Articles from "./Pages/Articles/Articles.jsx";
 import ComingSoon from "./Pages/ComingSoon/ComingSoon.jsx";
+import CartPage from "./Pages/CartPage/CartPage.jsx";
 
 const routes = [
     {
@@ -37,6 +38,7 @@ const routes = [
             {path: 'certifications' , element: <Certifications/>},
             {path: 'podcasts' , element: <Podcast/>},
             {path: 'articles' , element: <Articles/>},
+            {path: 'cart-page' , element: <CartPage/>},
         ]
     },
     {path: '/dashboard' , element: <DashboardLayout/> ,children: [
