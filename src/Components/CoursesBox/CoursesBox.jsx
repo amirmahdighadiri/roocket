@@ -30,11 +30,11 @@ function CoursesBox({title, src, price, status, description, courseTime, courseP
                         <span>{status ? "تکمیل ضبط" : "در حال برگزاری"}</span>
                     </span>
                     {/*<!-- ! -------------------- Title Of Course -------------------- ! -->*/}
-                    <Link to={`/products-page/${title}`}
-                       className="course-shearch-name inline-block font-Mult-Font-Bold text-xl text-gray-800 hover:text-blue-700 dark:text-white dark:hover:text-blue-450 transition-all hover:text-primary-blue-200 dark:hover:text-primary-blue-100 mb-2">{title.replace(/-/g, " ")}</Link>
+                    <Link to={`/products-page/${title}`} className="course-shearch-name inline-block font-Mult-Font-Bold text-xl text-gray-800 hover:text-blue-700 dark:text-white dark:hover:text-blue-450 transition-all hover:text-primary-blue-200 dark:hover:text-primary-blue-100 mb-2">{title.replace(/-/g, " ")}</Link>
                     {/*<!-- ! -------------------- Description Of Course -------------------- ! -->*/}
-                    <p id="course-description"
-                       className="h-24 text-sm/6 text-gray-360 dark:text-gray-940 font-Mult-Font-Medium text-justify line-clamp-4">{description}</p>
+                    <div className="h-24">
+                        <p className="text-sm/6 text-gray-360 dark:text-gray-940 font-Mult-Font-Medium text-justify line-clamp-3">{description}</p>
+                    </div>
                 </div>
                 {/*<!-- ! -------------------- Box Content Body -------------------- ! -->*/}
                 <div className="mt-2 px-4">
@@ -83,13 +83,12 @@ function CoursesBox({title, src, price, status, description, courseTime, courseP
                             </svg>
                         </div>) : (<span className="text-blue-700 font-YekanBakh-Bold text-xl">رایگان!</span>)}
                     </div>
-                    {/*<!-- ! -------------------- Box Content linke -------------------- ! -->*/}
+                    {/*<!-- ! -------------------- Box Content links -------------------- ! -->*/}
                     <div className="flex-center border-t border-gray-400/10 mt-2">
-                        <a href="#"
-                           className="course-shearch-name flex items-center gap-x-1 my-4 font-YekanBakh-Bold text-blue-700 hover:text-dark-700 dark:text-blue-950 dark:hover:text-gray-20 transition-all">
+                        <Link to={`/products-page/${title}`} className="course-shearch-name flex items-center gap-x-1 my-4 font-YekanBakh-Bold text-blue-700 hover:text-dark-700 dark:text-blue-950 dark:hover:text-gray-20 transition-all">
                             <span className="">مشاهده اطلاعات دوره</span>
                             <DynamicIcon name={'arrow'} className={'size-6 text-inherit'} />
-                        </a>
+                        </Link>
                     </div>
                 </div>
             </div>

@@ -5,6 +5,7 @@ import learningPath from "./Store/LearningPath.jsx";
 import skills from "./Store/Skills.jsx";
 import podcasts from "./Store/Podcasts.jsx";
 import articles from "./Store/Articles.jsx";
+import carts from "./Store/Carts.jsx";
 
 const store = configureStore({
     reducer: {
@@ -13,7 +14,8 @@ const store = configureStore({
         learningPath,
         skills,
         podcasts,
-        articles
+        articles,
+        carts
     }
 })
 

@@ -162,7 +162,7 @@ function Header(props) {
                                     <Link to="/products-page" className="w-full flex-center rounded-lg bg-blue-60 hover:bg-blue-200 dark:hover:bg-dark-900 text-blue-700 dark:hover:text-white text-lg transition-all py-4 mt-5">مشاهده دوره های آموزشی</Link>
                                 </div>
                                 <div className="">
-                                    <div className="max-h-61 overflow-auto divide-y divide-biscay-100 dark:divide-white/15">
+                                    <div className="max-h-45 overflow-auto divide-y divide-biscay-100 dark:divide-white/15">
                                         <div className="w-full flex items-center justify-between py-5 px-2.5">
                                             <div className="flex items-center gap-x-4">
                                                 <div className="rounded-md overflow-hidden">
