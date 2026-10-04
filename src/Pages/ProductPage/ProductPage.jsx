@@ -263,10 +263,21 @@ function ProductPage() {
                     </div>
                     {/*<!-- ! -------------------- Courses comments Wrapper -------------------- ! -->*/}
                     <div id="reviews-content" className="bg-white dark:bg-dark-930 shadow-sm rounded px-3 md:px-10 py-7 scroll-mt-14">
-                        <h2 className="relative text-blue-700 dark:text-white text-2xl font-YekanBakh-Heavy pr-2 mb-5 before:content-[''] before:absolute before:top-0 before:bottom-0 before:-right-1 before:my-auto before:size-2 before:rounded-full dark:before:bg-white before:bg-blue-700">دیدگاه
-                            و پرسش</h2>
+                        {/*<!-- ! -------------------- Title & Add Comment Buttons -------------------- ! -->*/}
+                        <div className="flex items-center justify-between mb-6">
+                            {/*<!-- ! -------------------- Title  -------------------- ! -->*/}
+                            <h2 className="relative text-blue-700 dark:text-white text-2xl font-YekanBakh-Heavy pr-2 before:content-[''] before:absolute before:top-0 before:bottom-0 before:-right-1 before:my-auto before:size-2 before:rounded-full dark:before:bg-white before:bg-blue-700">دیدگاه و پرسش</h2>
+                            {/*<!-- ! -------------------- Add Comment Buttons -------------------- ! -->*/}
+                            {isLogin && <div className="flex items-center gap-x-2">
+                                <button type="button" className="h-12 px-3 border border-blue-700 dark:border-white text-blue-700 dark:text-white hover:text-white hover:bg-blue-700 rounded cursor-pointer font-Mult-Font-Bold text-sm transition-all">دنبال کردن نظرات</button>
+                                <button type="button" className="flex items-center gap-x-2 h-12 px-3 border border-blue-700 text-white bg-blue-700 hover:text-blue-700 hover:bg-transparent rounded cursor-pointer font-Mult-Font-Bold text-sm transition-all">
+                                    <span className="">افزودن دیدگاه و پرسش جدید</span>
+                                    <DynamicIcon name="addCircle" className="size-6 text-inherit" />
+                                </button>
+                            </div>}
+                        </div>
                         {/*<!-- ! -------------------- sign-up wrapper -------------------- ! -->*/}
-                        <div className="flex flex-col lg:flex-row items-center justify-between gap-y-4 px-8 py-5 bg-customOrange-550 text-white rounded-lg text-xl font-Mult-Font-Medium mb-6">
+                        {!isLogin && <div className="flex flex-col lg:flex-row items-center justify-between gap-y-4 px-8 py-5 bg-customOrange-550 text-white rounded-lg text-xl font-Mult-Font-Medium mb-6">
                             <div className="flex items-center gap-x-2">
                                 <DynamicIcon name="profile" className="size-8 text-inherit shrink-0"/>
                                 <span className="">برای ارسال دیدگاه لازم است وارد شده یا ثبت‌نام کنید</span>
@@ -275,7 +286,7 @@ function ProductPage() {
                                 <span className="underline  font-YekanBakh-Bold">ورود یا ثبت‌نام</span>
                                 <DynamicIcon name="arrow" className="size-7 text-inherit"/>
                             </Link>
-                        </div>
+                        </div>}
                         {/*<!-- ! -------------------- comments Wrapper -------------------- ! -->*/}
                         <div className="">
                             <CommentBox />
