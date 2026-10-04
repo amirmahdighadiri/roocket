@@ -1000,5 +1000,56 @@
       "quantity": 1,
       "addedAt": "2026-09-10"
     }
+  ],
+  "discounts": [
+    {
+      "id": 501,
+      "title": "تخفیف ویژه نیم‌بها",
+      "code": null,
+      "percent": 50,
+      "active": true,
+      "startsAt": "2026-10-01",
+      "endsAt": "2026-10-31"
+    },
+    {
+      "id": 502,
+      "title": "تخفیف ویژه ۳۰ درصدی",
+      "code": null,
+      "percent": 30,
+      "active": true,
+      "startsAt": "2026-10-01",
+      "endsAt": "2026-11-15"
+    },
+    {
+      "id": 503,
+      "title": "تخفیف ویژه ۲۰ درصدی",
+      "code": null,
+      "percent": 20,
+      "active": true,
+      "startsAt": "2026-10-01",
+      "endsAt": "2026-10-20"
+    },
+    {
+      "id": 504,
+      "title": "کد تخفیف خوش‌آمدگویی",
+      "code": "ROOCKET10",
+      "percent": 10,
+      "active": true,
+      "startsAt": "2026-10-01",
+      "endsAt": "2026-12-30",
+      "maxUses": 100,
+      "usedCount": 0
+    },
+    {
+      "id": 505,
+      "title": "کد تخفیف ویژه مهر",
+      "code": "MEHR25",
+      "percent": 25,
+      "active": true,
+      "startsAt": "2026-10-01",
+      "endsAt": "2026-10-31",
+      "maxUses": 50,
+      "usedCount": 0
+    }
   ]
 }
