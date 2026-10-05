@@ -15,12 +15,14 @@ import banner1 from "../../assets/images/banner/banner-1.gif"
 import supportImage from "../../assets/images/symbol/suportImg.png"
 import {AppContext} from "../../Context/AppContext.jsx";
 import useTitle from "../../Hooks/useTitle/useTitle.jsx";
+import {getCommentsFromServer} from "../../Redux/Store/Comments.jsx";
 
 
 function ProductPage() {
     const [tab, setTab] = useState("description")
     const dispatch = useDispatch();
     const {courses, loading} = useSelector(state => state.courses);
+    const {comments , commentsLoading} = useSelector(state => state.comments);
     const triggerRef = useRef(null)
     const [isSticky, setIsSticky] = useState(false);
     const [showMoreContent, toggleShowMoreContent] = useToggle();
@@ -28,6 +30,7 @@ function ProductPage() {
     const URLTitle = decodeURIComponent(location.pathname.split("/").pop());
     const [targetCourse, setTargetCourse] = useState({});
     const {isLogin, userInfo} = useContext(AppContext)
+    const [mainComments, setMainComments] = useState([]);
 
     useTitle(`راکت | ${URLTitle}`)
 
@@ -35,12 +38,21 @@ function ProductPage() {
         if (!courses.length) {
             dispatch(getCoursesFromServer("http://localhost:3000/courses"))
         }
-    }, [])
+        if (!comments.length) {
+            dispatch(getCommentsFromServer(targetCourse?.id))
+        }
+    }, [targetCourse])
 
     useEffect(() => {
         const findCourse = courses.find(courses => courses.title === URLTitle)
         setTargetCourse(findCourse)
     }, [courses,URLTitle]);
+
+    useEffect(() => {
+        setMainComments(prev =>{
+            return prev.filter(comment => comment.parentId === null)
+        })
+    }, [comments]);
 
     useEffect(() => {
         const observer = new IntersectionObserver(([entry]) => {
@@ -59,6 +71,8 @@ function ProductPage() {
     const changeTab = (event) => {
         setTab(event.target.id)
     }
+
+    console.log(comments)
 
     return (
         <section className="container">
@@ -289,6 +303,9 @@ function ProductPage() {
                         </div>}
                         {/*<!-- ! -------------------- comments Wrapper -------------------- ! -->*/}
                         <div className="">
+                            {/*{*/}
+                            {/*    comments*/}
+                            {/*}*/}
                             <CommentBox />
                         </div>
                     </div>

@@ -6,6 +6,7 @@ import skills from "./Store/Skills.jsx";
 import podcasts from "./Store/Podcasts.jsx";
 import articles from "./Store/Articles.jsx";
 import carts from "./Store/Carts.jsx";
+import comments from "./Store/Comments.jsx";
 
 const store = configureStore({
     reducer: {
@@ -15,7 +16,8 @@ const store = configureStore({
         skills,
         podcasts,
         articles,
-        carts
+        carts,
+        comments
     }
 })
 
