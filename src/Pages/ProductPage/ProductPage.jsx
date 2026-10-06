@@ -30,6 +30,7 @@ function ProductPage() {
     const URLTitle = decodeURIComponent(location.pathname.split("/").pop());
     const [targetCourse, setTargetCourse] = useState({});
     const {isLogin, userInfo} = useContext(AppContext)
+    const [courseComments, setCourseComments] = useState([]);
     const [mainComments, setMainComments] = useState([]);
 
     useTitle(`راکت | ${URLTitle}`)
@@ -39,7 +40,7 @@ function ProductPage() {
             dispatch(getCoursesFromServer("http://localhost:3000/courses"))
         }
         if (!comments.length) {
-            dispatch(getCommentsFromServer(targetCourse?.id))
+            dispatch(getCommentsFromServer())
         }
     }, [targetCourse])
 
@@ -49,10 +50,16 @@ function ProductPage() {
     }, [courses,URLTitle]);
 
     useEffect(() => {
-        setMainComments(prev =>{
-            return prev.filter(comment => comment.parentId === null)
+        setCourseComments(() =>{
+            return comments.filter(comment => comment.courseId === targetCourse?.id)
         })
     }, [comments]);
+
+    useEffect(() => {
+        setMainComments(() =>{
+            return courseComments.filter(comment => comment.parentId === null)
+        })
+    }, [courseComments]);
 
     useEffect(() => {
         const observer = new IntersectionObserver(([entry]) => {
@@ -72,7 +79,6 @@ function ProductPage() {
         setTab(event.target.id)
     }
 
-    console.log(comments)
 
     return (
         <section className="container">
@@ -302,11 +308,12 @@ function ProductPage() {
                             </Link>
                         </div>}
                         {/*<!-- ! -------------------- comments Wrapper -------------------- ! -->*/}
-                        <div className="">
-                            {/*{*/}
-                            {/*    comments*/}
-                            {/*}*/}
-                            <CommentBox />
+                        <div className="space-y-5">
+                            {
+                                mainComments.map(comment => (
+                                    <CommentBox key={comment.id} comments={courseComments} {...comment} />
+                                ))
+                            }
                         </div>
                     </div>
                 </div>

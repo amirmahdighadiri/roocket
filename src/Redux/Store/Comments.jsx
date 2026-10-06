@@ -2,9 +2,9 @@ import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
 
 export const getCommentsFromServer = createAsyncThunk(
     "getCommentsFromServer",
-    async (courseId) => {
+    async () => {
         const [commentsRes, usersRes] = await Promise.all([
-            fetch(`http://localhost:3000/comments?courseId=${courseId}`),
+            fetch(`http://localhost:3000/comments`),
             fetch(`http://localhost:3000/users`)
         ]);
 

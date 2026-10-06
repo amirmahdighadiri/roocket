@@ -740,6 +740,12 @@ const iconsMap = {
             <path stroke='currentColor' strokeLinecap='round' strokeLinejoin='round' strokeWidth='1.5' d='M7.02 17.98c1.225 1.226 2.24 2.108 3.143 2.682.895.57 1.64.81 2.337.81s1.442-.24 2.337-.81c.903-.574 1.918-1.456 3.143-2.682s2.107-2.24 2.682-3.142c.57-.896.81-1.64.81-2.338 0-.697-.24-1.442-.81-2.337-.575-.903-1.457-1.918-2.682-3.143s-2.24-2.107-3.143-2.682c-.895-.57-1.64-.81-2.337-.81s-1.442.24-2.337.81C9.26 4.913 8.245 5.795 7.02 7.02s-2.107 2.24-2.682 3.143c-.57.895-.81 1.64-.81 2.337s.24 1.442.81 2.338c.575.902 1.457 1.917 2.682 3.142' opacity='0.5'></path>
             <path stroke='currentColor' strokeLinecap='round' strokeLinejoin='round' strokeWidth='1.5' d='M9.667 12.5H12.5m2.834 0H12.5m0 0V9.666v5.667'></path>
         </svg>
+    ),
+    reply:(
+        <svg xmlns='http://www.w3.org/2000/svg' width='14' height='15' fill='none' className='ml-1' viewBox='0 0 14 15'>
+            <path stroke='currentColor' strokeLinecap='round' strokeLinejoin='round' strokeWidth='0.858' d='m5.25 8.233-2.916-2.94 2.917-2.94'></path>
+            <path stroke='currentColor' strokeLinecap='round' strokeLinejoin='round' strokeWidth='0.858' d='M11.667 11.76V7.646c0-.624-.245-1.223-.683-1.664a2.32 2.32 0 0 0-1.65-.689h-7'></path>
+        </svg>
     )
 
 }
