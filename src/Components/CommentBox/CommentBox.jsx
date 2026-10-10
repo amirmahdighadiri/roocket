@@ -3,45 +3,17 @@ import {Link} from 'react-router-dom';
 import DynamicIcon from "../../DynamicIcon/DynamicIcon.jsx";
 import defaultProfile from "../../assets/images/profile/default.png"
 import ReplayBox from "../ReplyBox/ReplayBox.jsx";
+import {getTimeAgo} from "../../Utils/getTimeAgo/getTimeAgo.js";
 
-function CommentBox({text,createdAt , user, comments}) {
+function CommentBox({id,text,createdAt , user, comments}) {
 
-    const getTimeAgo = (date) => {
-        const diff = Date.now() - new Date(date).getTime();
+    const replyComments = comments.filter(comment => comment.parentId === id)
 
-        const seconds = Math.floor(diff / 1000);
-        const minutes = Math.floor(seconds / 60);
-        const hours = Math.floor(minutes / 60);
-        const days = Math.floor(hours / 24);
-        const months = Math.floor(days / 30);
-        const years = Math.floor(months / 12);
 
-        if (seconds < 60) {
-            return "همین الان";
-        }
-
-        if (minutes < 60) {
-            return `${minutes} دقیقه پیش`;
-        }
-
-        if (hours < 24) {
-            return `${hours} ساعت پیش`;
-        }
-
-        if (days < 30) {
-            return `${days} روز پیش`;
-        }
-
-        if (months < 12) {
-            return `${months} ماه پیش`;
-        }
-
-        return `${years} سال پیش`;
-    };
     return (
 
             <div className="overflow-hidden">
-                <div className="p-6 border border-gray-210 dark:border-transparent rounded-lg bg-white dark:bg-dark-900">
+                <div className="relative z-10 p-6 border border-gray-210 dark:border-transparent rounded-lg bg-white dark:bg-dark-900">
                     {/*<!-- ! -------------------- Profile & Comment Details -------------------- ! -->*/}
                     <div className="flex items-start justify-between border-b border-gray-210 dark:border-gray-210/20 pb-5">
                         {/*<!-- ! -------------------- User Profile details -------------------- ! -->*/}
@@ -74,12 +46,11 @@ function CommentBox({text,createdAt , user, comments}) {
                     </div>
                 </div>
                 <div className="relative">
-                    <span className="absolute -top-32.5 right-7 w-0.75 h-full bg-white dark:bg-dark-900"></span>
-                    <ReplayBox />
-                    <ReplayBox />
-                    <ReplayBox />
+                    <span className="absolute -top-32.5 right-7 w-0.75 h-full bg-white dark:bg-dark-900 "></span>
+                    {replyComments.map(comment => (
+                        <ReplayBox key={comment.id} {...comment} />
+                    ))}
                 </div>
-
             </div>
     );
 }
