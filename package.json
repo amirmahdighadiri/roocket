@@ -16,6 +16,7 @@
   "dependencies": {
     "@reduxjs/toolkit": "^2.11.2",
     "@tailwindcss/vite": "^4.3.1",
+    "@uiw/react-md-editor": "^4.1.2",
     "bootstrap": "^5.3.8",
     "gh-pages": "^6.3.0",
     "json-server": "^0.17.4",
