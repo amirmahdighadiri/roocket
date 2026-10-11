@@ -271,6 +271,31 @@
 .slide-effect-card{
     @apply bg-white dark:bg-dark-930 rounded-xl p-9 shadow-sm dark:shadow-[0px_1.60568px_61.0158px_hsla(0,0%,100%,.05)];
 }
+/* /==================== ! Tiptap ! ====================/ */
+.tiptap p.is-editor-empty:first-child::before {
+    content: attr(data-placeholder);
+    color: var(--color-dark-550);
+    float: right;
+    height: 0;
+    pointer-events: none;
+}
+
+.tiptap h2 { font-size: 1.25rem; font-weight: 700; margin: 0.5rem 0; }
+.tiptap ul { list-style: disc; padding-inline-start: 1.5rem; }
+.tiptap ol { list-style: decimal; padding-inline-start: 1.5rem; }
+.tiptap blockquote {
+    border-inline-start: 3px solid var(--color-blue-700);
+    padding-inline-start: 1rem;
+    color: var(--color-gray-980);
+}
+.tiptap code {
+    background: var(--color-dark-body-300);
+    padding: 2px 6px;
+    border-radius: 4px;
+}
+.tiptap a { color: var(--color-blue-450); text-decoration: underline; }
+.tiptap img { max-width: 100%; border-radius: 6px; }
+.tiptap hr { border-color: var(--color-dark-450); margin: 1rem 0; }
 
 /* /==================== ! Scrollbar Style ! ====================/ */
 
