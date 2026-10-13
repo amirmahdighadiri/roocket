@@ -35,6 +35,7 @@ function ProductPage() {
     const {isLogin, userInfo} = useContext(AppContext)
     const [courseComments, setCourseComments] = useState([]);
     const [mainComments, setMainComments] = useState([]);
+    const [isShowEditor, toggleShowEditor] = useToggle();
 
     useTitle(`راکت | ${URLTitle}`)
 
@@ -294,34 +295,34 @@ function ProductPage() {
                                 {/*<!-- ! -------------------- Add Comment Buttons -------------------- ! -->*/}
                                 {isLogin && <div className="flex items-center gap-x-2">
                                     <button type="button" className="h-12 px-3 border border-blue-700 dark:border-white text-blue-700 dark:text-white hover:text-white hover:bg-blue-700 rounded cursor-pointer font-Mult-Font-Bold text-sm transition-all">دنبال کردن نظرات</button>
-                                    <button type="button" className="flex items-center gap-x-2 h-12 px-3 border border-blue-700 text-white bg-blue-700 hover:text-blue-700 hover:bg-transparent rounded cursor-pointer font-Mult-Font-Bold text-sm transition-all">
+                                    <button onClick={toggleShowEditor} type="button" className="flex items-center gap-x-2 h-12 px-3 border border-blue-700 text-white bg-blue-700 hover:text-blue-700 hover:bg-transparent rounded cursor-pointer font-Mult-Font-Bold text-sm transition-all">
                                         <span className="">افزودن دیدگاه و پرسش جدید</span>
                                         <DynamicIcon name="addCircle" className="size-6 text-inherit" />
                                     </button>
                                 </div>}
                             </div>
 
-                            <div className="border border-gray-210 dark:border-gray-210/10 rounded-lg px-7 p-9 pb-8 mb-8">
-                                <div className="">
-                                    <ul className="border border-blue-700 bg-blue-700/5 rounded-md p-4 mb-6 font-YekanBakh-Bold text-sm/7 text-blue-700">
-                                        <li className="">۱.دیدگاه شما بعد از تایید در قسمت نظرات نمایش داده خواهد شد.</li>
-                                        <li className="">۲.قبل از ارسال حتما از دکمه "پیش نمایش" استفاده کنید تا از درست بودن استایل مطمئن شوید.</li>
-                                        <li className="">۳.برای ارسال بهتر دیدگاه بر روی آیکون راهنما در ویرایشگر بالا کلیک کنید.</li>
-                                    </ul>
-                                    <div className="flex items-center gap-x-2 border-b border-gray-210 dark:border-gray-210/10 pb-4">
-                                        {/*<!-- ! -------------------- Profile Image -------------------- ! -->*/}
-                                        <div className="size-14 rounded-full border-4 border-primary-gray-185 bg-gray-300 overflow-hidden">
-                                            <img src={defaultProfile} alt="default profile" className="w-full h-full object-cover"/>
-                                        </div>
-                                        {/*<!-- ! -------------------- Profile Name -------------------- ! -->*/}
-                                        <div className="flex flex-col items-start gap-y-1">
-                                            <Link to="/" className="text-biscay-700 dark:text-white hover:text-blue-700 dark:hover:text-blue-450 transition-all font-Mult-Font-Bold text-lg">{userInfo.fullName}</Link>
-                                            <span className="font-Mult-Font-Bold text-gray-360 dark:text-gray-200 text-xs">amir._.mahdi@</span>
+                            {isShowEditor &&   <div className="border border-gray-210 dark:border-gray-210/10 rounded-lg px-7 p-9 pb-8 mb-8">
+                                    <div className="">
+                                        <ul className="border border-blue-700 bg-blue-700/5 rounded-md p-4 mb-6 font-YekanBakh-Bold text-sm/7 text-blue-700">
+                                            <li className="">۱.دیدگاه شما بعد از تایید در قسمت نظرات نمایش داده خواهد شد.</li>
+                                            <li className="">۲.قبل از ارسال حتما از دکمه "پیش نمایش" استفاده کنید تا از درست بودن استایل مطمئن شوید.</li>
+                                            <li className="">۳.برای ارسال بهتر دیدگاه بر روی آیکون راهنما در ویرایشگر بالا کلیک کنید.</li>
+                                        </ul>
+                                        <div className="flex items-center gap-x-2 border-b border-gray-210 dark:border-gray-210/10 pb-4">
+                                            {/*<!-- ! -------------------- Profile Image -------------------- ! -->*/}
+                                            <div className="size-14 rounded-full border-4 border-primary-gray-185 bg-gray-300 overflow-hidden">
+                                                <img src={defaultProfile} alt="default profile" className="w-full h-full object-cover"/>
+                                            </div>
+                                            {/*<!-- ! -------------------- Profile Name -------------------- ! -->*/}
+                                            <div className="flex flex-col items-start gap-y-1">
+                                                <Link to="/" className="text-biscay-700 dark:text-white hover:text-blue-700 dark:hover:text-blue-450 transition-all font-Mult-Font-Bold text-lg">{userInfo.fullName}</Link>
+                                                <span className="font-Mult-Font-Bold text-gray-360 dark:text-gray-200 text-xs">amir._.mahdi@</span>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                                <CommentEditor />
-                            </div>
+                                    <CommentEditor toggleShowEditor={toggleShowEditor}/>
+                                </div>}
                         </div>
                         {/*<!-- ! -------------------- sign-up wrapper -------------------- ! -->*/}
                         {!isLogin && <div className="flex flex-col lg:flex-row items-center justify-between gap-y-4 px-8 py-5 bg-customOrange-550 text-white rounded-lg text-xl font-Mult-Font-Medium mb-6">
