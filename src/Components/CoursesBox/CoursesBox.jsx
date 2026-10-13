@@ -8,7 +8,7 @@ function CoursesBox({title, src, price, status, description, courseTime, courseP
     const newPrice = String(price).replace(regex , ',')
 
     return (
-        <div className={`col-span-12 ${gridClass} w-full h-full relative bg-white dark:bg-dark-930 rounded-lg shadow-whiteShadow pt-38`}>
+        <article className={`col-span-12 ${gridClass} w-full h-full relative bg-white dark:bg-dark-930 rounded-lg shadow-whiteShadow pt-38 hover:-translate-y-1 transition-all delay-100 cursor-pointer group`}>
             {/*<!-- ! -------------------- Image Wrapper -------------------- ! -->*/}
             <div className="absolute -top-12 px-4 w-full">
                 {/*<!-- ! -------------------- Image Link -------------------- ! -->*/}
@@ -85,14 +85,14 @@ function CoursesBox({title, src, price, status, description, courseTime, courseP
                     </div>
                     {/*<!-- ! -------------------- Box Content links -------------------- ! -->*/}
                     <div className="flex-center border-t border-gray-400/10 mt-2">
-                        <Link to={`/products-page/${title}`} className="course-shearch-name flex items-center gap-x-1 my-4 font-YekanBakh-Bold text-blue-700 hover:text-dark-700 dark:text-blue-950 dark:hover:text-gray-20 transition-all">
+                        <Link to={`/products-page/${title}`} className="course-shearch-name flex items-center gap-x-1 my-4 font-YekanBakh-Bold text-blue-700 group-hover:text-dark-700 dark:text-blue-950 dark:group-hover:text-gray-20 transition-all">
                             <span className="">مشاهده اطلاعات دوره</span>
                             <DynamicIcon name={'arrow'} className={'size-6 text-inherit'} />
                         </Link>
                     </div>
                 </div>
             </div>
-        </div>
+        </article>
     );
 }
 
