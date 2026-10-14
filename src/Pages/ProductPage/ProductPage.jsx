@@ -302,27 +302,7 @@ function ProductPage() {
                                 </div>}
                             </div>
 
-                            {isShowEditor &&   <div className="border border-gray-210 dark:border-gray-210/10 rounded-lg px-7 p-9 pb-8 mb-8">
-                                    <div className="">
-                                        <ul className="border border-blue-700 bg-blue-700/5 rounded-md p-4 mb-6 font-YekanBakh-Bold text-sm/7 text-blue-700">
-                                            <li className="">۱.دیدگاه شما بعد از تایید در قسمت نظرات نمایش داده خواهد شد.</li>
-                                            <li className="">۲.قبل از ارسال حتما از دکمه "پیش نمایش" استفاده کنید تا از درست بودن استایل مطمئن شوید.</li>
-                                            <li className="">۳.برای ارسال بهتر دیدگاه بر روی آیکون راهنما در ویرایشگر بالا کلیک کنید.</li>
-                                        </ul>
-                                        <div className="flex items-center gap-x-2 border-b border-gray-210 dark:border-gray-210/10 pb-4">
-                                            {/*<!-- ! -------------------- Profile Image -------------------- ! -->*/}
-                                            <div className="size-14 rounded-full border-4 border-primary-gray-185 bg-gray-300 overflow-hidden">
-                                                <img src={defaultProfile} alt="default profile" className="w-full h-full object-cover"/>
-                                            </div>
-                                            {/*<!-- ! -------------------- Profile Name -------------------- ! -->*/}
-                                            <div className="flex flex-col items-start gap-y-1">
-                                                <Link to="/" className="text-biscay-700 dark:text-white hover:text-blue-700 dark:hover:text-blue-450 transition-all font-Mult-Font-Bold text-lg">{userInfo.fullName}</Link>
-                                                <span className="font-Mult-Font-Bold text-gray-360 dark:text-gray-200 text-xs">amir._.mahdi@</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <CommentEditor toggleShowEditor={toggleShowEditor}/>
-                                </div>}
+                            {isShowEditor && <CommentEditor toggleShowEditor={toggleShowEditor}/>}
                         </div>
                         {/*<!-- ! -------------------- sign-up wrapper -------------------- ! -->*/}
                         {!isLogin && <div className="flex flex-col lg:flex-row items-center justify-between gap-y-4 px-8 py-5 bg-customOrange-550 text-white rounded-lg text-xl font-Mult-Font-Medium mb-6">
