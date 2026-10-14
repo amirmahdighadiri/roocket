@@ -4,10 +4,13 @@ import DynamicIcon from "../../DynamicIcon/DynamicIcon.jsx";
 import defaultProfile from "../../assets/images/profile/default.png"
 import ReplayBox from "../ReplyBox/ReplayBox.jsx";
 import {getTimeAgo} from "../../Utils/getTimeAgo/getTimeAgo.js";
+import useToggle from "../../Hooks/useToggle/useToggle.jsx";
+import CommentEditor from "../CommentEditor/CommentEditor.jsx";
 
 function CommentBox({id,text,createdAt , user, comments}) {
 
     const replyComments = comments.filter(comment => comment.parentId === id)
+    const [isShowEditor , toggleShowEditor] = useToggle()
 
 
     return (
@@ -30,7 +33,7 @@ function CommentBox({id,text,createdAt , user, comments}) {
                         </div>
                         {/*<!-- ! -------------------- Comment Like Count Btn -------------------- ! -->*/}
                         <div className="flex items-center gap-x-2">
-                            <button type="button" className="h-6 flex items-center gap-x-2 px-2 text-gray-450 hover:text-white dark:text-gray-920 bg-gray-500/10 dark:bg-dark-930 hover:bg-gray-500 dark:hover:bg-dark-450 cursor-pointer rounded transition-all">
+                            <button onClick={toggleShowEditor} type="button" className="h-6 flex items-center gap-x-2 px-2 text-gray-450 hover:text-white dark:text-gray-920 bg-gray-500/10 dark:bg-dark-930 hover:bg-gray-500 dark:hover:bg-dark-450 cursor-pointer rounded transition-all">
                                 <DynamicIcon name="reply" className="size-4 text-inherit"/>
                                 <span className="text-sm">پاسخ</span>
                             </button>
@@ -45,12 +48,15 @@ function CommentBox({id,text,createdAt , user, comments}) {
                         <p className="text-base/9 md:text-lg/9 text-biscay-700 dark:text-white font-Mult-Font-Medium">{text}</p>
                     </div>
                 </div>
-                <div className="relative">
+
+                <div className="relative mb-5">
                     <span className="absolute -top-32.5 right-7 w-0.75 h-full bg-white dark:bg-dark-900 "></span>
                     {replyComments.map(comment => (
-                        <ReplayBox key={comment.id} {...comment} />
+                        <ReplayBox key={comment.id} {...comment} toggleShowEditor={toggleShowEditor}/>
                     ))}
                 </div>
+
+                {isShowEditor && <CommentEditor toggleShowEditor={toggleShowEditor} /> }
             </div>
     );
 }

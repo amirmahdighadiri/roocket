@@ -4,7 +4,7 @@ import DynamicIcon from "../../DynamicIcon/DynamicIcon.jsx";
 import {Link} from 'react-router-dom';
 import {getTimeAgo} from "../../Utils/getTimeAgo/getTimeAgo.js";
 
-function ReplayBox({text,createdAt , user}) {
+function ReplayBox({text,createdAt , user , toggleShowEditor}) {
 
     return (
         <div className="relative p-6 border border-gray-210 dark:border-transparent rounded-lg bg-gray-210 dark:bg-dark-950/50 mt-5 mr-14 before:absolute before:-right-7 before:top-12.5 before:content-[''] before:w-7 before:h-0.75 before:bg-white dark:before:bg-dark-900">
@@ -24,7 +24,7 @@ function ReplayBox({text,createdAt , user}) {
                 </div>
                 {/*<!-- ! -------------------- Comment Like Count Btn -------------------- ! -->*/}
                 <div className="flex items-center gap-x-2">
-                    <button type="button" className="h-6 flex items-center gap-x-2 px-2 text-gray-450 hover:text-white dark:text-gray-920 bg-gray-500/10 dark:bg-dark-930 hover:bg-gray-500 dark:hover:bg-dark-450 cursor-pointer rounded transition-all">
+                    <button type="button" onClick={toggleShowEditor} className="h-6 flex items-center gap-x-2 px-2 text-gray-450 hover:text-white dark:text-gray-920 bg-gray-500/10 dark:bg-dark-930 hover:bg-gray-500 dark:hover:bg-dark-450 cursor-pointer rounded transition-all">
                         <DynamicIcon name="reply" className="size-4 text-inherit"/>
                         <span className="text-sm">پاسخ</span>
                     </button>

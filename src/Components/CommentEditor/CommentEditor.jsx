@@ -1,12 +1,16 @@
-import { useEditor, EditorContent, useEditorState } from "@tiptap/react";
-import StarterKit from "@tiptap/starter-kit";
-import Placeholder from "@tiptap/extension-placeholder";
-import Image from "@tiptap/extension-image";
+import { useEditor, EditorContent, useEditorState } from "@tiptap/react"
+import {Link} from 'react-router-dom'
+import StarterKit from "@tiptap/starter-kit"
+import {useContext} from "react"
+import Placeholder from "@tiptap/extension-placeholder"
+import Image from "@tiptap/extension-image"
 import {
     Bold, Italic, Link2, Quote, Code, Image as ImageIcon,
     ListOrdered, List, Heading, Minus, Undo2, Redo2,
 } from "lucide-react";
 import DynamicIcon from "../../DynamicIcon/DynamicIcon.jsx";
+import defaultProfile from "../../assets/images/profile/default.png";
+import {AppContext} from "../../Context/AppContext.jsx";
 
 function ToolbarButton({ onClick, active, disabled, title, children }) {
     return (
@@ -25,6 +29,7 @@ function ToolbarButton({ onClick, active, disabled, title, children }) {
 }
 
 function CommentEditor({toggleShowEditor}) {
+    const {userInfo} = useContext(AppContext)
     const editor = useEditor({
         extensions: [
             StarterKit.configure({ link: { openOnClick: false } }),
@@ -71,72 +76,93 @@ function CommentEditor({toggleShowEditor}) {
 
     const submit = () => {
         const html = editor.getHTML();
-        console.log(html); // اینجا بعداً می‌فرستی به بک‌اند
+        console.log(html)
     };
 
     return (
-        <div className="w-full" dir="rtl">
-            {/*<!-- ! -------------------- Editor Actions Buttons -------------------- ! -->*/}
-            <div className="flex items-center justify-between mt-5">
-                <div className="">
-                    <button className="flex items-center gap-x-2 bg-gray-500/5 hover:bg-blue-500 dark:bg-dark-900 dark:hover:bg-blue-700 text-biscay-700 dark:text-white hover:text-white transition-all p-2 cursor-pointer rounded-md">
-                        <DynamicIcon name="document" className="size-4 text-inherit"/>
-                        <span className="text-sm font-YekanBakh-Bold">راهنما</span>
+        <div className="border border-gray-210 dark:border-gray-210/10 bg-gray-210/20 dark:bg-dark-950/50 rounded-lg px-7 p-9 pb-8 mb-8">
+            <div className="">
+                <ul className="border border-blue-700 bg-blue-700/5 rounded-md p-4 mb-6 font-YekanBakh-Bold text-sm/7 text-blue-700">
+                    <li className="">۱.دیدگاه شما بعد از تایید در قسمت نظرات نمایش داده خواهد شد.</li>
+                    <li className="">۲.قبل از ارسال حتما از دکمه "پیش نمایش" استفاده کنید تا از درست بودن استایل مطمئن شوید.</li>
+                    <li className="">۳.برای ارسال بهتر دیدگاه بر روی آیکون راهنما در ویرایشگر بالا کلیک کنید.</li>
+                </ul>
+                <div className="flex items-center gap-x-2 border-b border-gray-210 dark:border-gray-210/10 pb-4">
+                    {/*<!-- ! -------------------- Profile Image -------------------- ! -->*/}
+                    <div className="size-14 rounded-full border-4 border-primary-gray-185 bg-gray-300 overflow-hidden">
+                        <img src={defaultProfile} alt="default profile" className="w-full h-full object-cover"/>
+                    </div>
+                    {/*<!-- ! -------------------- Profile Name -------------------- ! -->*/}
+                    <div className="flex flex-col items-start gap-y-1">
+                        <Link to="/" className="text-biscay-700 dark:text-white hover:text-blue-700 dark:hover:text-blue-450 transition-all font-Mult-Font-Bold text-lg">{userInfo.fullName}</Link>
+                        <span className="font-Mult-Font-Bold text-gray-360 dark:text-gray-200 text-xs">amir._.mahdi@</span>
+                    </div>
+                </div>
+            </div>
+            <div className="w-full" dir="rtl">
+                {/*<!-- ! -------------------- Editor Actions Buttons -------------------- ! -->*/}
+                <div className="flex items-center justify-between mt-5">
+                    <div className="">
+                        <button className="flex items-center gap-x-2 bg-gray-500/5 hover:bg-blue-500 dark:bg-dark-900 dark:hover:bg-blue-700 text-biscay-700 dark:text-white hover:text-white transition-all p-2 cursor-pointer rounded-md">
+                            <DynamicIcon name="document" className="size-4 text-inherit"/>
+                            <span className="text-sm font-YekanBakh-Bold">راهنما</span>
+                        </button>
+                    </div>
+                    <div className="inline-flex items-center gap-1 rounded-lg bg-gray-500/5 dark:bg-dark-900 px-3 py-2" dir="ltr">
+                        <ToolbarButton title="ضخیم" active={state?.bold} onClick={() => editor.chain().focus().toggleBold().run()}>
+                            <Bold size={18} />
+                        </ToolbarButton>
+                        <ToolbarButton title="کج" active={state?.italic} onClick={() => editor.chain().focus().toggleItalic().run()}>
+                            <Italic size={18} />
+                        </ToolbarButton>
+                        <ToolbarButton title="لینک" onClick={setLink}>
+                            <Link2 size={18} />
+                        </ToolbarButton>
+                        <ToolbarButton title="نقل‌قول" active={state?.quote} onClick={() => editor.chain().focus().toggleBlockquote().run()}>
+                            <Quote size={18} />
+                        </ToolbarButton>
+                        <ToolbarButton title="کد" active={state?.code} onClick={() => editor.chain().focus().toggleCode().run()}>
+                            <Code size={18} />
+                        </ToolbarButton>
+                        <ToolbarButton title="تصویر" onClick={addImage}>
+                            <ImageIcon size={18} />
+                        </ToolbarButton>
+                        <ToolbarButton title="لیست شماره‌دار" active={state?.ol} onClick={() => editor.chain().focus().toggleOrderedList().run()}>
+                            <ListOrdered size={18} />
+                        </ToolbarButton>
+                        <ToolbarButton title="لیست" active={state?.ul} onClick={() => editor.chain().focus().toggleBulletList().run()}>
+                            <List size={18} />
+                        </ToolbarButton>
+                        <ToolbarButton title="عنوان" active={state?.h} onClick={() => editor.chain().focus().toggleHeading({ level: 2 }).run()}>
+                            <Heading size={18} />
+                        </ToolbarButton>
+                        <ToolbarButton title="خط جداکننده" onClick={() => editor.chain().focus().setHorizontalRule().run()}>
+                            <Minus size={18} />
+                        </ToolbarButton>
+                        <ToolbarButton title="بازگشت" disabled={!state?.canUndo} onClick={() => editor.chain().focus().undo().run()}>
+                            <Undo2 size={18} />
+                        </ToolbarButton>
+                        <ToolbarButton title="تکرار" disabled={!state?.canRedo} onClick={() => editor.chain().focus().redo().run()}>
+                            <Redo2 size={18} />
+                        </ToolbarButton>
+                    </div>
+                </div>
+                {/*<!-- ! -------------------- Editor Wrapper -------------------- ! -->*/}
+                <div className="mt-4">
+                    <EditorContent editor={editor} />
+                </div>
+                {/*<!-- ! -------------------- Send Comments Buttons -------------------- ! -->*/}
+                <div className="mt-6 flex justify-end gap-3">
+                    <button type="button" onClick={submit} className="rounded-md border border-blue-700 bg-blue-700 hover:bg-transparent px-6 py-3 text-sm text-white hover:text-blue-700 cursor-pointer font-YekanBakh-Bold transition-all">
+                        ثبت دیدگاه
+                    </button>
+                    <button type="button" onClick={toggleShowEditor} className="rounded-md font-YekanBakh-Bold border border-gray-300 hover:bg-gray-300 px-6 py-3 text-sm text-gray-300 hover:text-white transition-all cursor-pointer">
+                        انصراف
                     </button>
                 </div>
-                <div className="inline-flex items-center gap-1 rounded-lg bg-gray-500/5 dark:bg-dark-900 px-3 py-2" dir="ltr">
-                    <ToolbarButton title="ضخیم" active={state?.bold} onClick={() => editor.chain().focus().toggleBold().run()}>
-                        <Bold size={18} />
-                    </ToolbarButton>
-                    <ToolbarButton title="کج" active={state?.italic} onClick={() => editor.chain().focus().toggleItalic().run()}>
-                        <Italic size={18} />
-                    </ToolbarButton>
-                    <ToolbarButton title="لینک" onClick={setLink}>
-                        <Link2 size={18} />
-                    </ToolbarButton>
-                    <ToolbarButton title="نقل‌قول" active={state?.quote} onClick={() => editor.chain().focus().toggleBlockquote().run()}>
-                        <Quote size={18} />
-                    </ToolbarButton>
-                    <ToolbarButton title="کد" active={state?.code} onClick={() => editor.chain().focus().toggleCode().run()}>
-                        <Code size={18} />
-                    </ToolbarButton>
-                    <ToolbarButton title="تصویر" onClick={addImage}>
-                        <ImageIcon size={18} />
-                    </ToolbarButton>
-                    <ToolbarButton title="لیست شماره‌دار" active={state?.ol} onClick={() => editor.chain().focus().toggleOrderedList().run()}>
-                        <ListOrdered size={18} />
-                    </ToolbarButton>
-                    <ToolbarButton title="لیست" active={state?.ul} onClick={() => editor.chain().focus().toggleBulletList().run()}>
-                        <List size={18} />
-                    </ToolbarButton>
-                    <ToolbarButton title="عنوان" active={state?.h} onClick={() => editor.chain().focus().toggleHeading({ level: 2 }).run()}>
-                        <Heading size={18} />
-                    </ToolbarButton>
-                    <ToolbarButton title="خط جداکننده" onClick={() => editor.chain().focus().setHorizontalRule().run()}>
-                        <Minus size={18} />
-                    </ToolbarButton>
-                    <ToolbarButton title="بازگشت" disabled={!state?.canUndo} onClick={() => editor.chain().focus().undo().run()}>
-                        <Undo2 size={18} />
-                    </ToolbarButton>
-                    <ToolbarButton title="تکرار" disabled={!state?.canRedo} onClick={() => editor.chain().focus().redo().run()}>
-                        <Redo2 size={18} />
-                    </ToolbarButton>
-                </div>
-            </div>
-            {/*<!-- ! -------------------- Editor Wrapper -------------------- ! -->*/}
-            <div className="mt-4">
-                <EditorContent editor={editor} />
-            </div>
-            {/*<!-- ! -------------------- Send Comments Buttons -------------------- ! -->*/}
-            <div className="mt-6 flex justify-end gap-3">
-                <button type="button" onClick={submit} className="rounded-md border border-blue-700 bg-blue-700 hover:bg-transparent px-6 py-3 text-sm text-white hover:text-blue-700 cursor-pointer font-YekanBakh-Bold transition-all">
-                    ثبت دیدگاه
-                </button>
-                <button type="button" onClick={toggleShowEditor} className="rounded-md font-YekanBakh-Bold border border-gray-300 hover:bg-gray-300 px-6 py-3 text-sm text-gray-300 hover:text-white transition-all cursor-pointer">
-                    انصراف
-                </button>
             </div>
         </div>
+
     );
 }
 
