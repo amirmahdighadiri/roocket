@@ -1,14 +1,17 @@
 import React, {useContext, useEffect, useState} from 'react';
-import {Link,useNavigate} from "react-router-dom";
+import {Link} from "react-router-dom";
 import DynamicIcon from "../../DynamicIcon/DynamicIcon.jsx";
 import {AppContext} from "../../Context/AppContext.jsx";
-
-{/*<!-- ! -------------------- Images ! -------------------- ! -->*/}
-import defaultProfile from "../../assets/images/profile/default.png"
+import {useDispatch, useSelector} from "react-redux";
 import Overlay from "../Overlay/Overlay.jsx";
 import useToggle from "../../Hooks/useToggle/useToggle.jsx";
 import useCookie from "../../Hooks/useCookie/useCookie.jsx";
 import ConfirmModal from "../Modals/ConfirmModal/ConfirmModal.jsx";
+import {getCartsFromServer} from "../../Redux/Store/Carts.jsx";
+
+{/*<!-- ! -------------------- Images ! -------------------- ! -->*/}
+import defaultProfile from "../../assets/images/profile/default.png"
+
 
 
 function Header(props) {
@@ -17,7 +20,22 @@ function Header(props) {
     const [isOpenUsefulSubmenu, toggleUsefulSubmenu] = useToggle(false)
     const [, , removeUserID] = useCookie("userID", "");
     const [isShowModal, toggleIsShowModal] = useToggle();
+    const dispatch = useDispatch();
+    const {carts , loadingCarts} = useSelector(state => state.carts);
+    const [mainCarts, setMainCarts] = useState([]);
 
+
+    useEffect(() => {
+        if(!carts.length && isLogin){
+            dispatch(getCartsFromServer())
+        }
+    }, [userInfo]);
+
+    useEffect(() => {
+        setMainCarts(()=>{
+            return carts?.filter(cart => +cart.userId === userInfo.id)
+        })
+    }, [carts]);
 
     useEffect(() => {
         window.addEventListener("click", closeSubMenus);
@@ -112,19 +130,9 @@ function Header(props) {
                     {/*<!-- ! -------------------- Header Sign-in OR Sign-up Buttons -------------------- ! -->*/}
                     <div className={`${isLogin ? 'hidden' : 'flex'} items-center gap-x-1 font-YekanBakh-Medium`}>
                         <Link to="/auth">
-                            <button
-                                type="button"
-                                data-href="login"
-                                className="auth-buttons h-10 flex items-center justify-center gap-1 rounded-lg px-3 bg-blue-700/10 text-blue-700 hover:bg-blue-700 hover:text-white transition-all"
-                            >
-            <span className="hidden lg:block">
-                ورود
-            </span>
-
-                                <DynamicIcon
-                                    name="login"
-                                    className="w-5.5 h-5.75"
-                                />
+                            <button type="button" data-href="login" className="auth-buttons h-10 flex items-center justify-center gap-1 rounded-lg px-3 bg-blue-700/10 text-blue-700 hover:bg-blue-700 hover:text-white transition-all">
+                                <span className="hidden lg:block">ورود</span>
+                                <DynamicIcon name="login" className="w-5.5 h-5.75"/>
                             </button>
                         </Link>
                         <Link to="/auth">
@@ -237,11 +245,12 @@ function Header(props) {
                                     <Link to="/products-page" className="w-full flex-center rounded-lg bg-blue-60 hover:bg-blue-200 dark:hover:bg-dark-900 text-blue-700 dark:hover:text-white text-lg transition-all py-4 mt-3">تکمیل فرایند خرید</Link>
                                 </div>
                             </div>
+                            {/*<!-- ! -------------------- Course Count Badge -------------------- ! -->*/}
+                            <span className="size-6 flex-center absolute -top-2 -right-2 bg-red-450 text-white rounded-full font-YekanBakh text-sm">{mainCarts.length}</span>
                         </div>
                         {/*<!-- ! -------------------- Message Btn -------------------- ! -->*/}
                         <Link to="/dashboard/notifications" className="w-12 h-12 hidden lg:flex items-center justify-center relative dark:bg-dark-body-100 dark:hover:bg-[#ECEEEF] bg-[#ECEEEF] hover:bg-dark-body-100 rounded-full transition-all shrink-0 group">
-                            <DynamicIcon name={'bell'}
-                                         className={'size-4 text-biscay-700 group-hover:text-gray-920 dark:text-gray-920 dark:group-hover:text-biscay-700'}/>
+                            <DynamicIcon name={'bell'} className={'size-4 text-biscay-700 group-hover:text-gray-920 dark:text-gray-920 dark:group-hover:text-biscay-700'}/>
                             {/*<!-- ! -------------------- Notification Badge -------------------- ! -->*/}
                             <span className="size-6 flex-center absolute -top-2 -right-2 bg-red-450 text-white rounded-full font-YekanBakh text-sm">12</span>
                         </Link>
