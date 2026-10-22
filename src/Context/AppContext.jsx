@@ -27,6 +27,7 @@ function AppProvider({children}) {
         setIsShowOverlay(false)
         toggleDashboardMenu(false)
         toggleProfileMenu(false)
+        toggleCartDropDown(false)
     }, [location.pathname])
 
     const contentValue = {

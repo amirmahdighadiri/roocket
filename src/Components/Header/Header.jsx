@@ -11,6 +11,7 @@ import {getCartsFromServer} from "../../Redux/Store/Carts.jsx";
 
 {/*<!-- ! -------------------- Images ! -------------------- ! -->*/}
 import defaultProfile from "../../assets/images/profile/default.png"
+import MiniCourseBox from "../CoursesBox/MiniCourseBox.jsx";
 
 
 
@@ -22,7 +23,7 @@ function Header(props) {
     const [isShowModal, toggleIsShowModal] = useToggle();
     const dispatch = useDispatch();
     const {carts , loadingCarts} = useSelector(state => state.carts);
-    const [mainCarts, setMainCarts] = useState([]);
+    const mainCarts = carts?.filter(cart => +cart.userId === userInfo.id)
 
 
     useEffect(() => {
@@ -32,17 +33,12 @@ function Header(props) {
     }, [userInfo]);
 
     useEffect(() => {
-        setMainCarts(()=>{
-            return carts?.filter(cart => +cart.userId === userInfo.id)
-        })
-    }, [carts]);
-
-    useEffect(() => {
         window.addEventListener("click", closeSubMenus);
 
         return () => window.removeEventListener("click", closeSubMenus);
 
     }, [])
+
 
     const changeThemeHandler = () => theme === "dark" ? setTheme("light") : setTheme("dark")
 
@@ -159,81 +155,17 @@ function Header(props) {
                             {/*<!-- ! -------------------- Shopping Cart Dropdown -------------------- ! -->*/}
                             <div className={`${isOpenCartDropDown ? 'visible opacity-100' : 'invisible opacity-0'} absolute top-16 -left-4 z-10 w-96 px-7 pt-5 pb-8 rounded-lg bg-white dark:bg-dark-body-100 shadow-lg`}>
                                 <div className="flex items-center justify-between font-YekanBakh-Bold pb-4 border-b border-biscay-100 dark:border-gray-300">
-                                    <span className="text-lg text-gray-300">0 مورد</span>
-                                    <Link to="/" className="flex items-center gap-x-1 text-sm text-blue-700 dark:text-blue-450 hover:text-biscay-700 dark:hover:text-white transition-all">
+                                    <span className="text-lg text-gray-300">{mainCarts.length} مورد</span>
+                                    <Link to="/cart-page" className="flex items-center gap-x-1 text-sm text-blue-700 dark:text-blue-450 hover:text-biscay-700 dark:hover:text-white transition-all">
                                         <span className="">مشاهده سید خرید</span>
                                         <DynamicIcon name="arrowDown" className="size-3 rotate-90 text-inherit"/>
                                     </Link>
                                 </div>
-                                <div className="hidden">
-                                    <span className="text-gray-300 font-YekanBakh-Medium">هنوز محصولی به سبد خرید اضافه نشده</span>
-                                    <Link to="/products-page" className="w-full flex-center rounded-lg bg-blue-60 hover:bg-blue-200 dark:hover:bg-dark-900 text-blue-700 dark:hover:text-white text-lg transition-all py-4 mt-5">مشاهده دوره های آموزشی</Link>
-                                </div>
-                                <div className="">
+                                {mainCarts.length > 0 ? <div className="">
                                     <div className="max-h-45 overflow-auto divide-y divide-biscay-100 dark:divide-white/15">
-                                        <div className="w-full flex items-center justify-between py-5 px-2.5">
-                                            <div className="flex items-center gap-x-4">
-                                                <div className="rounded-md overflow-hidden">
-                                                    <img src="/images/courses/4.jpg" alt="" className="w-28 h-20 object-cover"/>
-                                                </div>
-                                                <div className="">
-                                                    <Link to="" className="block mb-2 text-biscay-700 dark:text-white text-lg font-YekanBakh-Medium line-clamp-1">آموزش پروژه‌های لاراولی</Link>
-                                                    <span className="flex items-center gap-x-1 text-biscay-650 text-sm line-through decoration-2 decoration-gray-20 dark:decoration-biscay-650">
-                                                    <span className="text-gray-20">۱٬۳۹۰٬۰۰۰</span>
-                                                    <DynamicIcon name="toman" className="size-3 text-inherit"/>
-                                                </span>
-                                                    <span className="flex items-center gap-x-1 text-biscay-650">
-                                                    <span className="text-gray-20">۱٬۳۹۰٬۰۰۰</span>
-                                                    <DynamicIcon name="toman" className="size-3 text-inherit"/>
-                                                </span>
-                                                </div>
-                                            </div>
-                                            <button type="button" className="text-gray-300 cursor-pointer">
-                                                <DynamicIcon name="trash" className="size-4 text-inherit"/>
-                                            </button>
-                                        </div>
-                                        <div className="w-full flex items-center justify-between py-5 px-2.5">
-                                            <div className="flex items-center gap-x-4">
-                                                <div className="rounded-md overflow-hidden">
-                                                    <img src="/images/courses/4.jpg" alt="" className="w-28 h-20 object-cover"/>
-                                                </div>
-                                                <div className="">
-                                                    <Link to="" className="block mb-2 text-biscay-700 dark:text-white text-lg font-YekanBakh-Medium line-clamp-1">آموزش پروژه‌های لاراولی</Link>
-                                                    <span className="flex items-center gap-x-1 text-biscay-650 text-sm line-through decoration-2 decoration-gray-20 dark:decoration-biscay-650">
-                                                    <span className="text-gray-20">۱٬۳۹۰٬۰۰۰</span>
-                                                    <DynamicIcon name="toman" className="size-3 text-inherit"/>
-                                                </span>
-                                                    <span className="flex items-center gap-x-1 text-biscay-650">
-                                                    <span className="text-gray-20">۱٬۳۹۰٬۰۰۰</span>
-                                                    <DynamicIcon name="toman" className="size-3 text-inherit"/>
-                                                </span>
-                                                </div>
-                                            </div>
-                                            <button type="button" className="text-gray-300 cursor-pointer">
-                                                <DynamicIcon name="trash" className="size-4 text-inherit"/>
-                                            </button>
-                                        </div>
-                                        <div className="w-full flex items-center justify-between py-5 px-2.5">
-                                            <div className="flex items-center gap-x-4">
-                                                <div className="rounded-md overflow-hidden">
-                                                    <img src="/images/courses/4.jpg" alt="" className="w-28 h-20 object-cover"/>
-                                                </div>
-                                                <div className="">
-                                                    <Link to="" className="block mb-2 text-biscay-700 dark:text-white text-lg font-YekanBakh-Medium line-clamp-1">آموزش پروژه‌های لاراولی</Link>
-                                                    <span className="flex items-center gap-x-1 text-biscay-650 text-sm line-through decoration-2 decoration-gray-20 dark:decoration-biscay-650">
-                                                    <span className="text-gray-20">۱٬۳۹۰٬۰۰۰</span>
-                                                    <DynamicIcon name="toman" className="size-3 text-inherit"/>
-                                                </span>
-                                                    <span className="flex items-center gap-x-1 text-biscay-650">
-                                                    <span className="text-gray-20">۱٬۳۹۰٬۰۰۰</span>
-                                                    <DynamicIcon name="toman" className="size-3 text-inherit"/>
-                                                </span>
-                                                </div>
-                                            </div>
-                                            <button type="button" className="text-gray-300 cursor-pointer">
-                                                <DynamicIcon name="trash" className="size-4 text-inherit"/>
-                                            </button>
-                                        </div>
+                                        {mainCarts.map(cart=>(
+                                            <MiniCourseBox key={cart.id} {...cart} />
+                                        ))}
                                     </div>
                                     <span className="flex items-center justify-between text-gray-300 font-YekanBakh-Medium border-t border-biscay-100 dark:border-white/15 pt-4">
                                         <span className="">مجموع :</span>
@@ -242,8 +174,11 @@ function Header(props) {
                                             <DynamicIcon name="toman" className="size-3 text-inherit" />
                                         </span>
                                     </span>
-                                    <Link to="/products-page" className="w-full flex-center rounded-lg bg-blue-60 hover:bg-blue-200 dark:hover:bg-dark-900 text-blue-700 dark:hover:text-white text-lg transition-all py-4 mt-3">تکمیل فرایند خرید</Link>
-                                </div>
+                                    <Link to="/cart-page" className="w-full flex-center rounded-lg bg-blue-60 hover:bg-blue-200 dark:hover:bg-dark-900 text-blue-700 dark:hover:text-white text-lg transition-all py-4 mt-3">تکمیل فرایند خرید</Link>
+                                </div> : <div className="mt-6">
+                                    <span className="block text-gray-300 font-YekanBakh-Medium text-center">هنوز محصولی به سبد خرید اضافه نشده</span>
+                                    <Link to="/products-page" className="w-full flex-center rounded-lg bg-blue-60 hover:bg-blue-200 dark:hover:bg-dark-900 text-blue-700 dark:hover:text-white text-lg transition-all py-4 mt-5">مشاهده دوره های آموزشی</Link>
+                                </div>}
                             </div>
                             {/*<!-- ! -------------------- Course Count Badge -------------------- ! -->*/}
                             <span className="size-6 flex-center absolute -top-2 -right-2 bg-red-450 text-white rounded-full font-YekanBakh text-sm">{mainCarts.length}</span>

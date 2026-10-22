@@ -142,6 +142,20 @@
         209,
         212
       ]
+    },
+    {
+      "id": 11,
+      "phone": "09192799059",
+      "username": "amirmahdighadiri",
+      "password": "Ss12345678",
+      "email": "amirmahdighadiri@gmail.com",
+      "fullName": "امیرمهدی قدیری",
+      "avatar": "amirmahdi-ghadiri.png",
+      "purchasedCourses": [
+        201,
+        208,
+        211
+      ]
     }
   ],
   "courses": [
