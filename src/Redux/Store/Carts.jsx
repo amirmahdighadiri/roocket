@@ -3,7 +3,7 @@ import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
 export const getCartsFromServer = createAsyncThunk(
     "getCartsFromServer",
     async (userId)=>{
-        return await fetch(`http://localhost:3000/carts`).then(res => res.json()).then(data => data)
+        return await fetch(`http://localhost:3000/carts?_expand=course`).then(res => res.json()).then(data => data)
     }
 )
 
