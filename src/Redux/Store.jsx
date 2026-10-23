@@ -7,6 +7,7 @@ import podcasts from "./Store/Podcasts.jsx";
 import articles from "./Store/Articles.jsx";
 import carts from "./Store/Carts.jsx";
 import comments from "./Store/Comments.jsx";
+import discount from "./Store/Discount.jsx";
 
 const store = configureStore({
     reducer: {
@@ -17,7 +18,8 @@ const store = configureStore({
         podcasts,
         articles,
         carts,
-        comments
+        comments,
+        discount
     }
 })
 

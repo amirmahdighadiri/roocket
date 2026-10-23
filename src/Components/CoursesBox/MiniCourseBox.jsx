@@ -1,8 +1,14 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
 import DynamicIcon from "../../DynamicIcon/DynamicIcon.jsx";
+import {useDispatch} from "react-redux";
+import {removeCartToServer} from "../../Redux/Store/Carts.jsx";
+function MiniCourseBox({id,course}) {
+    const dispatch = useDispatch()
 
-function MiniCourseBox({course}) {
+    const removeCartItem = ()=>{
+        dispatch(removeCartToServer(id))
+    }
     return (
         <div className="w-full flex items-center justify-between py-5 px-2.5">
             <div className="flex items-center gap-x-4">
@@ -25,7 +31,7 @@ function MiniCourseBox({course}) {
                 </div>
             </div>
             {/*<!-- ! -------------------- Remove Course Box -------------------- ! -->*/}
-            <button type="button" className="text-gray-300 cursor-pointer">
+            <button type="button" onClick={removeCartItem} className="text-gray-300 cursor-pointer">
                 <DynamicIcon name="trash" className="size-4 text-inherit"/>
             </button>
         </div>
