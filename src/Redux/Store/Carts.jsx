@@ -19,6 +19,16 @@ export const addCartToServer = createAsyncThunk(
     }
 );
 
+export const removeCartToServer = createAsyncThunk(
+    "carts/removeCartToServer",
+    async (cartId) => {
+        const res = await fetch(`http://localhost:3000/carts/${cartId}`, {
+            method: "DELETE"
+        });
+        return cartId;
+    }
+);
+
 const slice = createSlice({
     name: "carts",
     initialState: {
@@ -39,6 +49,10 @@ const slice = createSlice({
 
         builder.addCase(addCartToServer.fulfilled, (state, action) => {
             state.carts.push(action.payload);
+        })
+
+        builder.addCase(removeCartToServer.fulfilled, (state, action) => {
+            state.carts = state.carts.filter((item) => item.id !== action.payload);
         })
     }
 })

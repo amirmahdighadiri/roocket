@@ -12,6 +12,7 @@ import {getCartsFromServer} from "../../Redux/Store/Carts.jsx";
 {/*<!-- ! -------------------- Images ! -------------------- ! -->*/}
 import defaultProfile from "../../assets/images/profile/default.png"
 import MiniCourseBox from "../CoursesBox/MiniCourseBox.jsx";
+import {calculateTotal} from "../../Utils/calculateTotal/calculateTotal.js";
 
 
 
@@ -24,6 +25,7 @@ function Header(props) {
     const dispatch = useDispatch();
     const {carts , loadingCarts} = useSelector(state => state.carts);
     const mainCarts = carts?.filter(cart => +cart.userId === userInfo.id)
+    const totalPrice = calculateTotal(mainCarts)
 
 
     useEffect(() => {
@@ -170,7 +172,7 @@ function Header(props) {
                                     <span className="flex items-center justify-between text-gray-300 font-YekanBakh-Medium border-t border-biscay-100 dark:border-white/15 pt-4">
                                         <span className="">مجموع :</span>
                                         <span className="flex items-center gap-x-1">
-                                            ۶٬۲۹۰٬۰۰۰
+                                            {totalPrice.toLocaleString()}
                                             <DynamicIcon name="toman" className="size-3 text-inherit" />
                                         </span>
                                     </span>
