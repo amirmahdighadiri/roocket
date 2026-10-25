@@ -2,6 +2,7 @@ import { useEditor, EditorContent, useEditorState } from "@tiptap/react"
 import {Link} from 'react-router-dom'
 import StarterKit from "@tiptap/starter-kit"
 import {useContext} from "react"
+import {useDispatch} from "react-redux"
 import Placeholder from "@tiptap/extension-placeholder"
 import Image from "@tiptap/extension-image"
 import {
@@ -11,6 +12,7 @@ import {
 import DynamicIcon from "../../DynamicIcon/DynamicIcon.jsx";
 import defaultProfile from "../../assets/images/profile/default.png";
 import {AppContext} from "../../Context/AppContext.jsx";
+import {addCommentToServer} from "../../Redux/Store/Comments.jsx";
 
 function ToolbarButton({ onClick, active, disabled, title, children }) {
     return (
@@ -28,8 +30,9 @@ function ToolbarButton({ onClick, active, disabled, title, children }) {
     );
 }
 
-function CommentEditor({toggleShowEditor}) {
-    const {userInfo} = useContext(AppContext)
+function CommentEditor({toggleShowEditor , parentId , courseCommentLen,courseId}) {
+    const {userInfo ,setIsShowNotification} = useContext(AppContext)
+    const dispatch = useDispatch()
     const editor = useEditor({
         extensions: [
             StarterKit.configure({ link: { openOnClick: false } }),
@@ -66,17 +69,37 @@ function CommentEditor({toggleShowEditor}) {
 
     const setLink = () => {
         const url = window.prompt("آدرس لینک:");
-        if (url) editor.chain().focus().setLink({ href: url }).run();
+        if (url && /^https?:\/\//i.test(url)) editor.chain().focus().setLink({ href: url }).run();
     };
 
     const addImage = () => {
         const url = window.prompt("آدرس تصویر:");
-        if (url) editor.chain().focus().setImage({ src: url }).run();
+        if (url && /^https?:\/\//i.test(url)) editor.chain().focus().setImage({ src: url }).run();
     };
 
-    const submit = () => {
-        const html = editor.getHTML();
-        console.log(html)
+    const submit = async () => {
+        const text = editor.getText().trim();
+
+
+        if (!text) return
+
+        const newComment = {
+            id: courseCommentLen +1,
+            courseId: courseId,
+            userId: userInfo.id,
+            parentId: parentId ? parentId : null,
+            text: editor.getHTML(),
+            createdAt: new Date().toISOString()
+        }
+
+        try{
+            await dispatch(addCommentToServer(newComment)).unwrap()
+
+            editor.commands.clearContent();
+            toggleShowEditor(false)
+        }catch(e){
+            setIsShowNotification(true);
+        }
     };
 
     return (

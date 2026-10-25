@@ -44,8 +44,8 @@ function CartPage() {
                     <span className="">شروع یادگیری برنامه‌نویسی</span>
                 </Link>
             </div>}
-            <div className="grid grid-cols-12 gap-10 mt-10 mb-20">
-                <div className="col-span-8">
+            <div className="grid grid-cols-12 gap-y-10 lg:gap-x-10 mt-10 mb-20">
+                <div className="col-span-12 lg:col-span-8">
                     <div className="space-y-4">
                         {mainCarts.map(cart => (
                             <BigCourseBox key={cart.id} {...cart}/>
@@ -53,7 +53,7 @@ function CartPage() {
                     </div>
                 </div>
                 {/*<!-- ! -------------------- Payment Info -------------------- ! -->*/}
-                <div className="col-span-4">
+                <div className="col-span-12 lg:col-span-4">
                     <div className="relative bg-white dark:bg-dark-body-100 p-6 rounded-xl overflow-hidden">
                         {/*<!-- ! -------------------- Circle Effect -------------------- ! -->*/}
                         <span className="absolute -top-13 -left-14 flex-center size-28 rounded-full bg-blue-700/5">
