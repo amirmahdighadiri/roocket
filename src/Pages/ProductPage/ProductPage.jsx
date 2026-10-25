@@ -20,6 +20,7 @@ import defaultProfile from "../../assets/images/profile/default.png";
 import {getTimeAgo} from "../../Utils/getTimeAgo/getTimeAgo.js";
 import CommentEditor from "../../Components/CommentEditor/CommentEditor.jsx";
 import {addCartToServer, getCartsFromServer} from "../../Redux/Store/Carts.jsx";
+import Notification from "../../Components/Notification/Notification.jsx";
 
 
 function ProductPage() {
@@ -33,16 +34,20 @@ function ProductPage() {
     const location = useLocation()
     const URLTitle = decodeURIComponent(location.pathname.split("/").pop());
     const [targetCourse, setTargetCourse] = useState({});
-    const {isLogin, userInfo} = useContext(AppContext)
-    const [courseComments, setCourseComments] = useState([]);
-    const [mainComments, setMainComments] = useState([]);
+    const {isLogin, userInfo ,isShowNotification, setIsShowNotification} = useContext(AppContext)
+    const courseComments = comments.filter(comment => comment.courseId === targetCourse?.id)
+    const mainComments = courseComments.filter(comment => comment.parentId === null)
     const [isShowEditor, toggleShowEditor] = useToggle();
     const {carts , loadingCarts} = useSelector(state => state.carts);
     const [mainCarts, setMainCarts] = useState([]);
     const isFindCourseInCart = mainCarts.some(
         cart => cart.courseId === targetCourse.id
     );
-    console.log(isFindCourseInCart);
+    const [notificationValue, setNotificationValue] = useState({
+        title: "خطا !",
+        message: "خطا در برقراری ارتباط.لطفا دوباره تلاش کنید!",
+        Icon: () => <DynamicIcon name={'closeCircle'} className={'size-7 text-blue-700'}/>
+    });
 
     useEffect(() => {
         if(!carts.length && isLogin){
@@ -73,18 +78,6 @@ function ProductPage() {
     }, [courses,URLTitle]);
 
     useEffect(() => {
-        setCourseComments(() =>{
-            return comments.filter(comment => comment.courseId === targetCourse?.id)
-        })
-    }, [comments]);
-
-    useEffect(() => {
-        setMainComments(() =>{
-            return courseComments.filter(comment => comment.parentId === null)
-        })
-    }, [courseComments]);
-
-    useEffect(() => {
         const observer = new IntersectionObserver(([entry]) => {
             setIsSticky(!entry.isIntersecting);
         });
@@ -113,7 +106,7 @@ function ProductPage() {
             "userId": userInfo.id,
             "courseId": targetCourse.id,
             "quantity": 1,
-            "addedAt": new Date().toISOString().slice(0, 10),
+            "addedAt": new Date().toISOString()
         }
         dispatch(addCartToServer(newCartItem));
     }
@@ -354,7 +347,7 @@ function ProductPage() {
                                 </div>}
                             </div>
 
-                            {isShowEditor && <CommentEditor toggleShowEditor={toggleShowEditor}/>}
+                            {isShowEditor && <CommentEditor toggleShowEditor={toggleShowEditor} courseCommentLen={comments.length} courseId={targetCourse.id}/>}
                         </div>
                         {/*<!-- ! -------------------- sign-up wrapper -------------------- ! -->*/}
                         {!isLogin && <div className="flex flex-col lg:flex-row items-center justify-between gap-y-4 px-8 py-5 bg-customOrange-550 text-white rounded-lg text-xl font-Mult-Font-Medium mb-6">
@@ -371,7 +364,7 @@ function ProductPage() {
                         <div className="space-y-5">
                             {
                                 mainComments.map(comment => (
-                                    <CommentBox key={comment.id} comments={courseComments} {...comment} />
+                                    <CommentBox key={comment.id} comments={courseComments} {...comment} courseCommentLen={comments.length} courseId={targetCourse.id}/>
                                 ))
                             }
                         </div>
@@ -528,6 +521,8 @@ function ProductPage() {
                     </div>
                 </div>
             </div>
+
+            <Notification {...notificationValue} isOpen={isShowNotification}/>
         </section>
     );
 }

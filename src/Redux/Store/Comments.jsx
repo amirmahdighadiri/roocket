@@ -17,6 +17,19 @@ export const getCommentsFromServer = createAsyncThunk(
         }));
     }
 )
+
+export const addCommentToServer = createAsyncThunk(
+    "comments/addCommentToServer",
+    async (newComment) => {
+        const res = await fetch("http://localhost:3000/comments", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(newComment),
+        });
+        return await res.json();
+    }
+
+)
 const slice = createSlice({
     name: "comments",
     initialState: {
@@ -33,6 +46,10 @@ const slice = createSlice({
         builder.addCase(getCommentsFromServer.fulfilled , (state, action) => {
             state.loading = false;
             state.comments = action.payload;
+        })
+
+        builder.addCase(addCommentToServer.fulfilled, (state, action) => {
+            state.comments.push(action.payload);
         })
     }
 })

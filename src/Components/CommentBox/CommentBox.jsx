@@ -1,5 +1,6 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
+import DOMPurify from "dompurify";
 import DynamicIcon from "../../DynamicIcon/DynamicIcon.jsx";
 import defaultProfile from "../../assets/images/profile/default.png"
 import ReplayBox from "../ReplyBox/ReplayBox.jsx";
@@ -7,7 +8,7 @@ import {getTimeAgo} from "../../Utils/getTimeAgo/getTimeAgo.js";
 import useToggle from "../../Hooks/useToggle/useToggle.jsx";
 import CommentEditor from "../CommentEditor/CommentEditor.jsx";
 
-function CommentBox({id,text,createdAt , user, comments}) {
+function CommentBox({id,text,createdAt , user, comments , courseCommentLen , courseId}) {
 
     const replyComments = comments.filter(comment => comment.parentId === id)
     const [isShowEditor , toggleShowEditor] = useToggle()
@@ -27,7 +28,7 @@ function CommentBox({id,text,createdAt , user, comments}) {
                             </div>
                             {/*<!-- ! -------------------- Profile Name -------------------- ! -->*/}
                             <div className="flex flex-col items-start gap-y-1">
-                                <Link to="/" className="text-biscay-700 dark:text-white hover:text-blue-700 dark:hover:text-blue-450 transition-all font-Mult-Font-Bold text-lg">{user.fullName}</Link>
+                                <Link to="/" className="text-biscay-700 dark:text-white hover:text-blue-700 dark:hover:text-blue-450 transition-all font-Mult-Font-Bold text-lg">{user?.fullName}</Link>
                                 <span className="text-gray-360 dark:text-gray-200 text-sm">{getTimeAgo(createdAt)}</span>
                             </div>
                         </div>
@@ -45,7 +46,7 @@ function CommentBox({id,text,createdAt , user, comments}) {
                     </div>
                     {/*<!-- ! -------------------- Comment Content Wrapper -------------------- ! -->*/}
                     <div className="pt-5">
-                        <p className="text-base/9 md:text-lg/9 text-biscay-700 dark:text-white font-Mult-Font-Medium">{text}</p>
+                        <div className="text-base/9 md:text-lg/9 text-biscay-700 dark:text-white font-Mult-Font-Medium" dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(text) }} />
                     </div>
                 </div>
 
@@ -56,7 +57,7 @@ function CommentBox({id,text,createdAt , user, comments}) {
                     ))}
                 </div>
 
-                {isShowEditor && <CommentEditor toggleShowEditor={toggleShowEditor} /> }
+                {isShowEditor && <CommentEditor toggleShowEditor={toggleShowEditor} courseCommentLen={courseCommentLen} parentId={id} courseId={courseId}/> }
             </div>
     );
 }

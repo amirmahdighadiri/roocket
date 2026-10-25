@@ -23,7 +23,7 @@ function Notification({title, message, Icon, setIsOpen, isOpen}) {
 
     return ReactDOM.createPortal(
         <div
-            className={`w-90 h-20 absolute top-4 ${isShowNotification ? 'right-4' : '-right-90'}  z-20 mx-auto flex items-center gap-x-3 p-3.5 pr-7 rounded-lg bg-gray-200 dark:bg-dark-930 shadow overflow-hidden duration-200 transition-all`}>
+            className={`w-90 h-20 fixed top-4 ${isShowNotification ? 'right-4' : '-right-90'}  z-20 mx-auto flex items-center gap-x-3 p-3.5 pr-7 rounded-lg bg-gray-200 dark:bg-dark-930 shadow overflow-hidden duration-200 transition-all`}>
             {/* ! ================== ! Notification Icon ! ================== ! */}
             <div className="relative h-full flex-center">
                 <div className="absolute -right-1/2 -z-10 w-8 h-full rounded-sm bg-gray-300 dark:bg-dark-890"></div>

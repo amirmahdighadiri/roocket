@@ -150,8 +150,8 @@ function Header(props) {
                     {/*<!-- ! -------------------- The Other Buttons Are Activated When The Users Is Login -------------------- ! -->*/}
                     <div className={`${isLogin ? 'flex' : 'hidden'} items-center gap-x-4`}>
                         {/*<!-- ! -------------------- Basket Btn -------------------- ! -->*/}
-                        <div className={`relative ${isOpenCartDropDown ? 'z-20' : 'z-0'}`}>
-                            <button onClick={openCartDropDownHandler} type="button" className="w-12 h-12 hidden lg:flex items-center justify-center dark:bg-dark-body-100 dark:hover:bg-[#ECEEEF] bg-[#ECEEEF] hover:bg-dark-body-100 rounded-full transition-all shrink-0 cursor-pointer group">
+                        <div className={`relative ${isOpenCartDropDown ? 'z-20' : 'z-0'} hidden lg:block`}>
+                            <button onClick={openCartDropDownHandler} type="button" className="w-12 h-12 flex items-center justify-center dark:bg-dark-body-100 dark:hover:bg-[#ECEEEF] bg-[#ECEEEF] hover:bg-dark-body-100 rounded-full transition-all shrink-0 cursor-pointer group">
                                 <DynamicIcon name={'shopping'} className={'w-6 h-6 text-biscay-700 group-hover:text-gray-920 dark:text-gray-920 dark:group-hover:text-biscay-700'}/>
                             </button>
                             {/*<!-- ! -------------------- Shopping Cart Dropdown -------------------- ! -->*/}
@@ -203,7 +203,7 @@ function Header(props) {
                                 <span className="size-6 flex-center absolute -top-2 -right-2 bg-yellow-500 text-white rounded-full font-YekanBakh text-sm">6</span>
                             </div>
                             {/*<!-- ! -------------------- Profile Menu -------------------- ! -->*/}
-                            <div className={`${isOpenProfileMenu ? 'opacity-100 visible' : 'opacity-0 invisible'} absolute top-16 -right-40 w-80 bg-white dark:bg-dark-930 rounded-lg shadow-whiteShadow transition-all`}>
+                            <div className={`${isOpenProfileMenu ? 'opacity-100 visible' : 'opacity-0 invisible'} absolute top-16 left-0 lg:-left-11 w-80 bg-white dark:bg-dark-930 rounded-lg shadow-whiteShadow transition-all`}>
                                 <div className="px-5 pt-7">
                                     <div className="relative">
                                         <span className="absolute right-6 w-px h-full bg-biscay-100 dark:opacity-10"></span>
@@ -285,7 +285,7 @@ function Header(props) {
                         </div>
                     </div>
                 </div>
-                {/*<!-- ! -------------------- Header Menu Item ! =>(in mobile remove closed-position and add opened-position to show mwnu in mobile) ! -------------------- ! -->*/}
+                {/*<!-- ! -------------------- Header Menu Item ! =>(in mobile remove closed-position and add opened-position to show menu in mobile) ! -------------------- ! -->*/}
                 <nav id="menu" className={`fixed lg:static top-0 bottom-0 ${isOpenMenu ? 'right-0' : '-right-69'} h-full lg:h-auto w-69 lg:w-[92%] mx-auto bg-white lg:bg-[#CFD3DB] dark:bg-dark-910 lg:dark:bg-dark-body-100 py-5 px-5 lg:px-0 lg:rounded-b-3xl dark:shadow-whiteShadow transition-all z-20 overflow-y-auto lg:overflow-y-visible`}>
                     {/*<!-- ! -------------------- More Option Menu Wrapper -------------------- ! -->*/}
                     <div className="block lg:hidden">
