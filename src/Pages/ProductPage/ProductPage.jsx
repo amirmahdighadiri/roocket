@@ -64,15 +64,6 @@ function ProductPage() {
     useTitle(`راکت | ${URLTitle}`)
 
     useEffect(() => {
-        if (!courses.length) {
-            dispatch(getCoursesFromServer("http://localhost:3000/courses"))
-        }
-        if (!comments.length) {
-            dispatch(getCommentsFromServer())
-        }
-    }, [targetCourse])
-
-    useEffect(() => {
         const findCourse = courses.find(courses => courses.title === URLTitle)
         setTargetCourse(findCourse)
     }, [courses,URLTitle]);

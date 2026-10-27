@@ -1,14 +1,24 @@
 import {ApiProvider} from "@reduxjs/toolkit/query/react";
 import {createContext, useEffect, useState} from "react";
 import {useLocation} from "react-router-dom";
+import {useDispatch} from "react-redux";
 import useLocalStorage from "../Hooks/useLocalStorage/useLocalStorage.jsx";
 import useToggle from "../Hooks/useToggle/useToggle.jsx";
 import useCookie from "../Hooks/useCookie/useCookie.jsx";
+import {getCoursesFromServer} from "../Redux/Store/Courses.jsx";
+import {getCommentsFromServer} from "../Redux/Store/Comments.jsx";
+import {getPodcastsFromServer} from "../Redux/Store/Podcasts.jsx";
+import {getLearningPathFromServer} from "../Redux/Store/LearningPath.jsx";
+import {getArticlesFromServer} from "../Redux/Store/Articles.jsx";
+import {getUsersFromServer} from "../Redux/Store/Users.jsx";
+import {getCartsFromServer} from "../Redux/Store/Carts.jsx";
+import {getDiscountFromServer} from "../Redux/Store/Discount.jsx";
 
 export const AppContext = createContext()
 
 
 function AppProvider({children}) {
+    const dispatch = useDispatch();
     const location = useLocation();
     const [isOpenMenu, setIsOpenMenu] = useToggle(false);
     const [isShowOverlay, setIsShowOverlay] = useToggle(false);
@@ -84,6 +94,20 @@ function AppProvider({children}) {
         userRegistrationHandler();
 
     }, [userId]);
+
+    useEffect(() => {
+        dispatch(getUsersFromServer())
+        dispatch(getCoursesFromServer())
+        dispatch(getPodcastsFromServer())
+        dispatch(getLearningPathFromServer())
+        dispatch(getArticlesFromServer())
+        dispatch(getCommentsFromServer())
+        dispatch(getDiscountFromServer())
+    } , [])
+
+    useEffect(() => {
+        if (isLogin) dispatch(getCartsFromServer())
+    }, [isLogin])
 
     return (
         <AppContext.Provider value={contentValue}>

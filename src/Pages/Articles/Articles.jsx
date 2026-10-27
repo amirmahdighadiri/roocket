@@ -12,18 +12,8 @@ import ContentList from "../../Components/ContentList/ContentList.jsx";
 import useTitle from "../../Hooks/useTitle/useTitle.jsx";
 
 function Articles(props) {
-    const dispatch = useDispatch();
     const {podcasts, podcastLoading} = useSelector(state => state.podcasts);
     const {articles , articlesLoading} = useSelector(state => state.articles);
-
-    useEffect(() => {
-        if (!podcasts.length) {
-            dispatch(getPodcastsFromServer("http://localhost:3000/episodes"))
-        }
-        if (!articles.length) {
-            dispatch(getArticlesFromServer("http://localhost:3000/articles"))
-        }
-    }, [])
 
     useTitle('راکت | مقالات')
 

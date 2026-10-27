@@ -31,14 +31,6 @@ function Home(props) {
     const {podcasts , podcastLoading} = useSelector(state => state.podcasts);
     const {articles,articlesLoading} = useSelector(state => state.articles);
 
-
-    useEffect(() => {
-        dispatch(getCoursesFromServer("http://localhost:3000/courses"))
-        dispatch(getLearningPathFromServer("http://localhost:3000/learningPath"))
-        dispatch(getPodcastsFromServer("http://localhost:3000/episodes"))
-        dispatch(getArticlesFromServer("http://localhost:3000/articles"))
-    },[])
-
     return (
         <main className="">
             <HeroSection />

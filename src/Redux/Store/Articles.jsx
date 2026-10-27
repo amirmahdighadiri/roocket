@@ -2,8 +2,8 @@ import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
 
 export const getArticlesFromServer = createAsyncThunk(
     "getArticlesFromServer",
-    async (url)=>{
-        return await fetch(url).then(res => res.json()).then(data => data)
+    async ()=>{
+        return await fetch("http://localhost:3000/articles").then(res => res.json()).then(data => data)
     }
 )
 const slice = createSlice({

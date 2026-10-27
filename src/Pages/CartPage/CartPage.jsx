@@ -20,15 +20,6 @@ function CartPage() {
     const {discounts , discountLoading} = useSelector(state => state.discount)
     const [totalDiscount , setTotalDiscount] = useState(0);
 
-    useEffect(() => {
-        if (!carts.length) {
-            dispatch(getCartsFromServer())
-        }
-    }, [userInfo]);
-    useEffect(() => {
-        dispatch(getDiscountFromServer())
-    }, [])
-
     const submitDiscountCodeHandler = (e)=>{
         e.preventDefault()
         const discountCode = discounts.find(discount => discountInput === discount.code)
