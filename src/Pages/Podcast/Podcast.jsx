@@ -24,13 +24,6 @@ function Podcast(props) {
     const {podcasts, podcastLoading} = useSelector(state => state.podcasts);
 
 
-    useEffect(() => {
-        if (!podcasts.length){
-            dispatch(getPodcastsFromServer("http://localhost:3000/episodes"));
-        }
-    },[])
-
-
     return (
         <section className="container">
             <div className="grid grid-cols-12 gap-6 mt-12">

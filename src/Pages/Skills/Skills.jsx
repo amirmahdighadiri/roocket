@@ -15,10 +15,6 @@ function Skills(props) {
     const skills = useSelector(state => state.skills);
     const [accordionItems , setAccordionItems] = useState(accordions)
 
-    useEffect(() => {
-        dispatch(getSkillsFromServer("http://localhost:3000/skills"))
-    }, [])
-
     useTitle('راکت | مسیر یادگیری')
 
     return (

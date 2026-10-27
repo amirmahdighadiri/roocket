@@ -28,10 +28,6 @@ function Auth() {
         setIsShowNotification(true)
     }
 
-    useEffect(() => {
-        dispatch(getUsersFromServer("http://localhost:3000/users"))
-    }, [])
-
     const checkUserHandler = async (event) => {
         event.preventDefault();
         const emailOrPhoneRegex = /^(?:[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}|(?:\+98|0)?9\d{9})$/;

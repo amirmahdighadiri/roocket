@@ -47,16 +47,6 @@ function ProductsPage(props) {
     }
 
     useEffect(() => {
-        if (!courses.length) {
-            dispatch(getCoursesFromServer("http://localhost:3000/courses"))
-        }
-
-        if (!learningPath.length) {
-            dispatch(getLearningPathFromServer("http://localhost:3000/learningPath"))
-        }
-    } , [])
-
-    useEffect(() => {
         let result = [...courses]
 
         if (plan === 'free') {
