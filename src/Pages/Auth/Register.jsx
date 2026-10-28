@@ -28,7 +28,7 @@ function Register() {
             message,
             Icon: () => (
                 <DynamicIcon
-                    name={success ? "checkCircle" : "closeCircle"}
+                    name={success ? "checkSquare" : "closeCircle"}
                     className="size-7 text-blue-700"
                 />
             ),
