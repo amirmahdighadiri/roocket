@@ -2,6 +2,7 @@ import Home from "./Pages/Home/Home.jsx";
 import Error from "./Pages/Error/Error.jsx";
 import Layout from "./Components/Layout/Layout.jsx";
 import Auth from "./Pages/Auth/Auth.jsx";
+import Register from "./Pages/Auth/Register.jsx";
 import AboutUs from "./Pages/AboutUs/AboutUs.jsx";
 import Skills from "./Pages/Skills/Skills.jsx";
 import ProductsPage from "./Pages/ProductsPage/ProductsPage.jsx";
@@ -58,6 +59,7 @@ const routes = [
                 ]},
         ]},
     {path: '/auth' , element: <Auth/> },
+    {path: '/register' , element: <Register/> },
     {path: '/verify' , element: <Verify/> },
     {path: 'coming-soon' , element: <ComingSoon/>},
     {path: '/*', element: <Error/>}
