@@ -1,5 +1,5 @@
 import React, {useState, useContext} from 'react';
-import {Link, useNavigate} from "react-router-dom";
+import {Link, useNavigate ,useLocation} from "react-router-dom";
 import DynamicIcon from "../../DynamicIcon/DynamicIcon.jsx";
 import Notification from "../../Components/Notification/Notification.jsx";
 import {AppContext} from "../../Context/AppContext.jsx";
@@ -8,7 +8,8 @@ import {registerUser} from "../../Lib/Services/authService.js";
 
 function Register() {
     const navigate = useNavigate();
-    const [username, setUsername] = useState("");
+    const location = useLocation();
+    const [fullName, setFullName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
@@ -19,6 +20,7 @@ function Register() {
         message: "لطفا اطلاعات خود را به درستی وارد کنید.",
         Icon: () => <DynamicIcon name={'closeCircle'} className={'size-7 text-blue-700'}/>
     });
+    const from = location.state?.from;
 
     const showNotificationHandler = ({title, message, Icon}) => {
         setNotificationValue({
@@ -32,7 +34,6 @@ function Register() {
     const registerHandler = async (event) => {
         event.preventDefault();
 
-        // ! بررسی رمز عبور قبل از ارسال به سرور
         if (password.length < 8) {
             showNotificationHandler({
                 title: "خطا!",
@@ -55,17 +56,35 @@ function Register() {
             setLoading(true);
 
             await registerUser({
-                username,
+                fullName,
                 email,
                 password,
             });
 
-            navigate("/");
-        } catch (error) {
+            navigate(
+                from
+                    ? `${from.pathname}${from.search}${from.hash}`
+                    : "/",
+                { replace: true }
+            );
+        }catch (error) {
+            let message = "ثبت‌نام انجام نشد. لطفاً دوباره تلاش کنید.";
+
+            if (error.message?.includes("email rate limit exceeded")) {
+                message = "تعداد درخواست‌ها زیاد شده؛ لطفاً کمی بعد دوباره تلاش کنید.";
+            } else if (!navigator.onLine) {
+                message = "اتصال اینترنت خود را بررسی کنید.";
+            }
+
             showNotificationHandler({
                 title: "خطا!",
-                message: "ثبت نام انجام نشد. ممکن است این ایمیل قبلا ثبت شده باشد.",
-                Icon: () => <DynamicIcon name="closeCircle" className="size-7 text-blue-700"/>,
+                message,
+                Icon: () => (
+                    <DynamicIcon
+                        name="closeCircle"
+                        className="size-7 text-blue-700"
+                    />
+                ),
             });
         } finally {
             setLoading(false);
@@ -92,8 +111,8 @@ function Register() {
                 <form className="mt-5" onSubmit={registerHandler}>
                     <input
                         type="text"
-                        value={username}
-                        onChange={(e) => setUsername(e.target.value)}
+                        value={fullName}
+                        onChange={(e) => setFullName(e.target.value)}
                         required
                         className="w-full h-12 bg-gray-300/10 dark:bg-dark-890 rounded-xl px-4 outline-0 border border-gray-300/30 hover:border-gray-300/60 focus:border-blue-700 focus:ring-4 focus:ring-blue-700/10 placeholder:text-gray-300 font-Mult-Font-Medium text-sm transition-all duration-200"
                         placeholder="نام کاربری"
