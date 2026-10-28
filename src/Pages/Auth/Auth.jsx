@@ -1,5 +1,5 @@
 import React, {useState, useEffect, useContext} from 'react';
-import {Link , useNavigate} from "react-router-dom";
+import {Link , useNavigate,useLocation} from "react-router-dom";
 import DynamicIcon from "../../DynamicIcon/DynamicIcon.jsx";
 import Notification from "../../Components/Notification/Notification.jsx";
 import {AppContext} from "../../Context/AppContext.jsx";
@@ -8,6 +8,7 @@ import { loginUser } from "../../Lib/Services/authService.js";
 
 function Auth() {
     const navigate = useNavigate();
+    const location = useLocation();
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [loading, setLoading] = useState(false);
@@ -18,6 +19,7 @@ function Auth() {
         message: "لطفا نام کاربر خود را به درستی وارد کنید.",
         Icon: () => <DynamicIcon name={'closeCircle'} className={'size-7 text-blue-700'}/>
     });
+    const from = location.state?.from;
 
     const showNotificationHandler = ({title, message, Icon}) => {
         setNotificationValue({
@@ -32,6 +34,24 @@ function Auth() {
     const checkUserHandler = async (event) => {
         event.preventDefault();
 
+        if (password.length < 8){
+            showNotificationHandler({
+                title: "خطا!",
+                message: "رمز عبور باید حداقل ۸ کاراکتر باشد.",
+                Icon: () => <DynamicIcon name="closeCircle" className="size-7 text-blue-700"/>,
+            });
+            return;
+        }
+
+        if (!password.trim() || !email.trim()){
+            showNotificationHandler({
+                title: "خطا!",
+                message: "لطفاً تمام فیلدهای ضروری را تکمیل کنید.",
+                Icon: () => <DynamicIcon name="closeCircle" className="size-7 text-blue-700"/>,
+            });
+            return;
+        }
+
         try {
             setLoading(true);
 
@@ -40,11 +60,33 @@ function Auth() {
                 password,
             });
 
-            navigate("/");
+            showNotificationHandler({
+                title: "موفق!",
+                message: "با موفقیت وارد حساب کاربری خود شدید.",
+                Icon: () => <DynamicIcon name="checkCircle" className="size-7 text-blue-700"/>,
+            });
+
+            setTimeout(() => {
+                navigate(
+                    from
+                        ? `${from.pathname}${from.search}${from.hash}`
+                        : "/",
+                    { replace: true }
+                );
+            }, 2000);
         } catch (error) {
+            let message = "ورود ناموفق.لطفا دوباره تلاش کنید.";
+
+            if (error.message?.includes("Invalid login credentials")) {
+                message = "ایمیل یا رمز عبور صحیح نیست."
+            } else if (!navigator.onLine) {
+                message = "اتصال اینترنت خود را بررسی کنید.";
+            }else {
+                message = "ورود ناموفق.لطفا دوباره تلاش کنید.";
+            }
             showNotificationHandler({
                 title: "خطا!",
-                message: "ایمیل یا رمز عبور صحیح نیست.",
+                message,
                 Icon: () => (
                     <DynamicIcon
                         name="closeCircle"
@@ -52,6 +94,7 @@ function Auth() {
                     />
                 ),
             });
+            console.log(error.message);
         } finally {
             setLoading(false);
         }
