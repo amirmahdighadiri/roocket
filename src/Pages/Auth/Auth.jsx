@@ -3,14 +3,14 @@ import {Link , useNavigate} from "react-router-dom";
 import DynamicIcon from "../../DynamicIcon/DynamicIcon.jsx";
 import Notification from "../../Components/Notification/Notification.jsx";
 import {AppContext} from "../../Context/AppContext.jsx";
-import {useDispatch, useSelector} from "react-redux";
-import users, {getUsersFromServer} from "../../Redux/Store/Users.jsx";
 import useTitle from "../../Hooks/useTitle/useTitle.jsx";
+import { loginUser } from "../../Lib/Services/authService.js";
 
 function Auth() {
-    const dispatch = useDispatch();
     const navigate = useNavigate();
-    const users = useSelector(state => state.users);
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const [loading, setLoading] = useState(false);
     const [username, setUsername] = useState("");
     const {isShowNotification, setIsShowNotification , setIsLogin , setUserInfo} = useContext(AppContext)
     const [notificationValue, setNotificationValue] = useState({
@@ -28,45 +28,34 @@ function Auth() {
         setIsShowNotification(true)
     }
 
+
     const checkUserHandler = async (event) => {
         event.preventDefault();
-        const emailOrPhoneRegex = /^(?:[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}|(?:\+98|0)?9\d{9})$/;
-        const isValid = emailOrPhoneRegex.test(username);
 
-        if (isValid) {
-            const userExist = users.find(user => user.phone === username || user.email === username);
+        try {
+            setLoading(true);
 
-            if (userExist) {
-                showNotificationHandler({
-                    title: "موفق !",
-                    message: "کد تایید برای شما ارسال شد!",
-                    Icon: () => <DynamicIcon name={'checkCircle'} className={'size-7 text-blue-700'}/>
-                })
+            await loginUser({
+                email,
+                password,
+            });
 
-                setTimeout(() => {
-                    navigate("/verify" , {
-                        state: {
-                            username,
-                            userInfo: userExist
-                        }
-                    });
-                },2600)
-            } else {
-                showNotificationHandler({
-                    title: "خطا !",
-                    message: "لطفا ابتدا در سایت ثبت نام نمایید.",
-                    Icon: () => <DynamicIcon name={'closeCircle'} className={'size-7 text-blue-700'}/>
-                })
-            }
-
-        } else {
+            navigate("/");
+        } catch (error) {
             showNotificationHandler({
-                title: "خطا !",
-                message: "لطفا نام کاربر خود را به درستی وارد کنید.",
-                Icon: () => <DynamicIcon name={'closeCircle'} className={'size-7 text-blue-700'}/>
-            })
+                title: "خطا!",
+                message: "ایمیل یا رمز عبور صحیح نیست.",
+                Icon: () => (
+                    <DynamicIcon
+                        name="closeCircle"
+                        className="size-7 text-blue-700"
+                    />
+                ),
+            });
+        } finally {
+            setLoading(false);
         }
-    }
+    };
 
     useTitle('راکت | ورود')
 
@@ -82,15 +71,26 @@ function Auth() {
                 {/*<!-- ! -------------------- Header Box -------------------- ! -->*/}
                 <div className="pb-5 border-b border-gray-300/30 font-YekanBakh-Bold">
                     <h2 className="mb-2 text-2xl text-dark-550 dark:text-white">ورود/ثبت نام</h2>
-                    <span
-                        className="text-sm text-gray-300 dark:text-gray-210">شماره موبایل یا ایمیل خود را وارد کنید</span>
+                    <span className="text-sm text-gray-300 dark:text-gray-210">شماره موبایل یا ایمیل خود را وارد کنید</span>
                 </div>
                 {/*<!-- ! -------------------- Form -------------------- ! -->*/}
-                <form className="mt-5">
-                    <span className="block mr-2 mb-2 text-sm text-gray-300 dark:text-gray-210">موبایل یا ایمیل</span>
-                    <input type="text"
-                           className="w-full bg-gray-300/10 dark:bg-dark-890 rounded-lg px-4 py-2 outline-0 border border-transparent focus:border-blue-700 font-Mult-Font-Medium text-sm"
-                           required value={username} onChange={(e) => setUsername(e.target.value)}/>
+                <form className="mt-5" onSubmit={checkUserHandler}>
+                    <input
+                        type="email"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                        required
+                        className="w-full h-12 bg-gray-300/10 dark:bg-dark-890 rounded-xl px-4 outline-0 border border-gray-300/30 hover:border-gray-300/60 focus:border-blue-700 focus:ring-4 focus:ring-blue-700/10 placeholder:text-gray-300 font-Mult-Font-Medium text-sm transition-all duration-200"
+                        placeholder="ایمیل"
+                    />
+                    <input
+                        type="password"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                        required
+                        className="w-full h-12 bg-gray-300/10 dark:bg-dark-890 rounded-xl px-4 outline-0 border border-gray-300/30 hover:border-gray-300/60 focus:border-blue-700 focus:ring-4 focus:ring-blue-700/10 placeholder:text-gray-300 font-Mult-Font-Medium text-sm transition-all duration-200 mt-4"
+                        placeholder="رمز عبور"
+                    />
                     <p className="flex items-center gap-1 mt-4 font-YekanBakh-Medium text-xs text-gray-600 dark:text-gray-50">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                              className="text-blue-600" viewBox="0 0 256 256">
@@ -102,8 +102,12 @@ function Auth() {
                         <Link to="/" className="inline-block font-YekanBakh-Bold text-blue-700 underline"> قوانین</Link>
                         میباشد
                     </p>
-                    <button onClick={checkUserHandler}
-                            className="w-full h-11 flex-center border text-white border-blue-700 dark:hover:bg-transparent bg-blue-700 hover:text-blue-700 hover:bg-white rounded-lg mt-6 cursor-pointer font-YekanBakh-Bold transition-all">ادامه
+                    <button
+                        type="submit"
+                        disabled={loading}
+                        className="w-full h-11 flex-center border text-white border-blue-700 dark:hover:bg-transparent bg-blue-700 hover:text-blue-700 hover:bg-white rounded-lg mt-6 cursor-pointer font-YekanBakh-Bold transition-all disabled:opacity-50"
+                    >
+                        {loading ? "در حال ورود..." : "ورود"}
                     </button>
                 </form>
             </div>
