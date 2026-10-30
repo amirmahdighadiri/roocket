@@ -13,11 +13,12 @@ import {getCartsFromServer} from "../../Redux/Store/Carts.jsx";
 import defaultProfile from "../../assets/images/profile/default.png"
 import MiniCourseBox from "../CoursesBox/MiniCourseBox.jsx";
 import {calculateTotal} from "../../Utils/calculateTotal/calculateTotal.js";
+import HeaderSkeleton from "../Loader/HeaderSkeleton.jsx";
 
 
 
 function Header(props) {
-    const {theme, setTheme, isOpenMenu, setIsOpenMenu, setIsShowOverlay, isLogin, userInfo , isOpenProfileMenu , toggleProfileMenu , isOpenCartDropDown , toggleCartDropDown} = useContext(AppContext)
+    const {theme, setTheme, isOpenMenu, setIsOpenMenu, setIsShowOverlay, isLogin, userInfo , isOpenProfileMenu , toggleProfileMenu , isOpenCartDropDown , toggleCartDropDown,isAuthLoading} = useContext(AppContext)
     const [isOpenCoursesSubmenu, toggleCoursesSubmenu] = useToggle(false)
     const [isOpenUsefulSubmenu, toggleUsefulSubmenu] = useToggle(false)
     const [, , removeUserID] = useCookie("userID", "");
@@ -125,30 +126,7 @@ function Header(props) {
                                          className={'hidden dark:block w-6 h-6 text-gray-920 group-hover:text-biscay-700 pt-0.5 pr-0.5'}/>
                         </div>
                     </div>
-                    {/*<!-- ! -------------------- Header Sign-in OR Sign-up Buttons -------------------- ! -->*/}
-                    <div className={`${isLogin ? 'hidden' : 'flex'} items-center gap-x-1 font-YekanBakh-Medium`}>
-                        <Link to="/auth">
-                            <button type="button" data-href="login" className="auth-buttons h-10 flex items-center justify-center gap-1 rounded-lg px-3 bg-blue-700/10 text-blue-700 hover:bg-blue-700 hover:text-white transition-all">
-                                <span className="hidden lg:block">ورود</span>
-                                <DynamicIcon name="login" className="w-5.5 h-5.75"/>
-                            </button>
-                        </Link>
-                        <Link to="/auth">
-                            <button
-                                type="button"
-                                data-href="register"
-                                className="auth-buttons hidden lg:flex items-center justify-center h-10 gap-1 rounded-lg px-3 bg-blue-700 text-white transition-all hover:opacity-80">
-                                <span>عضویت</span>
-
-                                <DynamicIcon
-                                    name="profile"
-                                    className="w-5.5 h-5.75"
-                                />
-                            </button>
-                        </Link>
-                    </div>
-                    {/*<!-- ! -------------------- The Other Buttons Are Activated When The Users Is Login -------------------- ! -->*/}
-                    <div className={`${isLogin ? 'flex' : 'hidden'} items-center gap-x-4`}>
+                    {isAuthLoading ? <HeaderSkeleton/> : isLogin ? (<div className={`flex items-center gap-x-4`}>
                         {/*<!-- ! -------------------- Basket Btn -------------------- ! -->*/}
                         <div className={`relative ${isOpenCartDropDown ? 'z-20' : 'z-0'} hidden lg:block`}>
                             <button onClick={openCartDropDownHandler} type="button" className="w-12 h-12 flex items-center justify-center dark:bg-dark-body-100 dark:hover:bg-[#ECEEEF] bg-[#ECEEEF] hover:bg-dark-body-100 rounded-full transition-all shrink-0 cursor-pointer group">
@@ -283,7 +261,30 @@ function Header(props) {
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div>) : (<div className={`flex items-center gap-x-1 font-YekanBakh-Medium`}>
+                        <Link to="/auth">
+                            <button type="button" data-href="login" className="auth-buttons h-10 flex items-center justify-center gap-1 rounded-lg px-3 bg-blue-700/10 text-blue-700 hover:bg-blue-700 hover:text-white transition-all">
+                                <span className="hidden lg:block">ورود</span>
+                                <DynamicIcon name="login" className="w-5.5 h-5.75"/>
+                            </button>
+                        </Link>
+                        <Link to="/auth">
+                            <button
+                                type="button"
+                                data-href="register"
+                                className="auth-buttons hidden lg:flex items-center justify-center h-10 gap-1 rounded-lg px-3 bg-blue-700 text-white transition-all hover:opacity-80">
+                                <span>عضویت</span>
+
+                                <DynamicIcon
+                                    name="profile"
+                                    className="w-5.5 h-5.75"
+                                />
+                            </button>
+                        </Link>
+                    </div>)}
+
+
+
                 </div>
                 {/*<!-- ! -------------------- Header Menu Item ! =>(in mobile remove closed-position and add opened-position to show menu in mobile) ! -------------------- ! -->*/}
                 <nav id="menu" className={`fixed lg:static top-0 bottom-0 ${isOpenMenu ? 'right-0' : '-right-69'} h-full lg:h-auto w-69 lg:w-[92%] mx-auto bg-white lg:bg-[#CFD3DB] dark:bg-dark-910 lg:dark:bg-dark-body-100 py-5 px-5 lg:px-0 lg:rounded-b-3xl dark:shadow-whiteShadow transition-all z-20 overflow-y-auto lg:overflow-y-visible`}>
@@ -494,8 +495,7 @@ function Header(props) {
                                 </button>
                             </div>
                             {/*<!-- ! -------------------- Useful Links Sub Menu =>( remove closed class and add opened class to show submenu) -------------------- ! -->*/}
-                            <div id="useful-link-submenu"
-                                 className={`${isOpenUsefulSubmenu ? 'opened' : 'closed'} w-full lg:w-52 lg:absolute lg:-right-2 lg:top-14 bg-white dark:bg-dark-890 lg:dark:bg-dark-body-100 p-3 mt-2.5 lg:mt-0 pt-2.5 rounded-lg z-20 transition-all origin-[50%-0px]`}>
+                            <div id="useful-link-submenu" className={`${isOpenUsefulSubmenu ? 'opened' : 'closed'} w-full lg:w-52 lg:absolute lg:-right-2 lg:top-14 bg-white dark:bg-dark-890 lg:dark:bg-dark-body-100 p-3 mt-2.5 lg:mt-0 pt-2.5 rounded-lg z-20 transition-all origin-[50%-0px]`}>
                                 <ul className="flex flex-col font-YekanBakh-Medium text-lg">
                                     <li className="text-primary-gray-300 pr-3 py-4 hover:bg-gray-hover-100 rounded-md dark:hover:bg-dark-950 lg:dark:hover:bg-drak-890 dark:text-white transition-all">
                                         <Link to="/" className="block">کانال تلگرام</Link></li>

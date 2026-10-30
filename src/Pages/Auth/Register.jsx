@@ -61,12 +61,14 @@ function Register() {
                 password,
             });
 
-            navigate(
-                from
-                    ? `${from.pathname}${from.search}${from.hash}`
-                    : "/",
-                { replace: true }
-            );
+            setTimeout(() => {
+                navigate(
+                    from
+                        ? `${from.pathname}${from.search}${from.hash}`
+                        : "/",
+                    { replace: true }
+                );
+            }, 2500);
         }catch (error) {
             let message = "ثبت‌نام انجام نشد. لطفاً دوباره تلاش کنید.";
 

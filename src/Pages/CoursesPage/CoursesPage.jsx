@@ -16,15 +16,17 @@ import {getLearningPathFromServer} from "../../Redux/Store/LearningPath.jsx";
 import NoResults from "../../Components/Template/NoResults/NoResults.jsx";
 import useTitle from "../../Hooks/useTitle/useTitle.jsx";
 import PaginationBtn from "../../Components/PaginationBtn/PaginationBtn.jsx";
+import CourseBoxSkeleton from "../../Components/Loader/CourseBoxSkeleton.jsx";
+import CoursesBoxSkeleton from "../../Components/Loader/CourseBoxSkeleton.jsx";
 
-function ProductsPage(props) {
+function CoursesPage(props) {
     const [categories, setCategories] = useState(coursesCategory);
     const [filteredType , setFilteredType] = useState("current");
     const [plan , setPlan ] = useState("");
     const [sortBy, setSortBy] = useState("");
     const [activeIndexTab , setActiveIndexTab] = useState(0);
     const dispatch = useDispatch();
-    const {courses , loading} = useSelector(state => state.courses);
+    const {courses , courseLoading , courseHasFetched} = useSelector(state => state.courses);
     const learningPath = useSelector(state => state.learningPath);
     const courseFilterChangeHandler = () => setFilteredType(prev => prev === "current" ? "archive" : "current")
     const [finalCourses , setFinalCourses] = useState([])
@@ -35,6 +37,12 @@ function ProductsPage(props) {
     const startIndex = (currentPage - 1) * coursesPerPage;
 
     useTitle('راکت | دوره ها')
+
+   useEffect(() => {
+       if (!courseHasFetched && !courseLoading){
+           dispatch(getCoursesFromServer());
+       }
+   },[courseHasFetched , courseLoading])
 
     const changeSortHandler = (value) => {
         setPlan(null)
@@ -235,21 +243,25 @@ function ProductsPage(props) {
                 </div>
                 {/*<!-- ! -------------------- Products Wrapper -------------------- ! -->*/}
                 <div className="col-span-12 xl:col-span-9">
-                    {finalCourses.length ? (
+                    {courseLoading ?
                         <div className="grid grid-cols-12 gap-x-6 gap-y-20">
-                            {finalCourses
-                                .slice(startIndex, startIndex + coursesPerPage)
-                                .map(course => (
-                                    <CoursesBox key={course.id}{...course} gridClass="sm:col-span-6 xl:col-span-4"/>
-                                ))
-                            }
-                            <PaginationBtn pageCount={pageCount} currentPage={currentPage} setCurrentPage={setCurrentPage} />
-                        </div>
-                    ) : <NoResults />}
+                            {Array.from({length: 6}).map((_, i) => (
+                                <CoursesBoxSkeleton key={i} gridClass="sm:col-span-6 xl:col-span-4"/>
+                            ))}
+                        </div> : finalCourses.length ? <div className="grid grid-cols-12 gap-x-6 gap-y-20">
+                                {finalCourses
+                                    .slice(startIndex, startIndex + coursesPerPage)
+                                    .map(course => (
+                                        <CoursesBox key={course.id}{...course} gridClass="sm:col-span-6 xl:col-span-4"/>
+                                    ))
+                                }
+                                <PaginationBtn pageCount={pageCount} currentPage={currentPage} setCurrentPage={setCurrentPage} />
+                            </div> : <NoResults />
+                    }
                 </div>
             </div>
         </section>
     );
 }
 
-export default ProductsPage;
+export default CoursesPage;

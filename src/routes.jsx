@@ -4,9 +4,9 @@ import Layout from "./Components/Layout/Layout.jsx";
 import Auth from "./Pages/Auth/Auth.jsx";
 import AboutUs from "./Pages/AboutUs/AboutUs.jsx";
 import Skills from "./Pages/Skills/Skills.jsx";
-import ProductsPage from "./Pages/ProductsPage/ProductsPage.jsx";
+import CoursesPage from "./Pages/CoursesPage/CoursesPage.jsx";
 import Certifications from "./Pages/Certifications/Certifications.jsx";
-import ProductPage from "./Pages/ProductPage/ProductPage.jsx";
+import CoursePage from "./Pages/CoursePage/CoursePage.jsx";
 import Podcast from "./Pages/Podcast/Podcast.jsx";
 import Verify from "./Pages/Auth/Verify.jsx";
 import DashboardLayout from "./Pages/DashboardLayout/DashboardLayout.jsx";
@@ -34,8 +34,8 @@ const routes = [
             {path: '/', element: <Home/>},
             {path: 'about-us', element: <AboutUs />},
             {path: 'skills' , element: <Skills />},
-            {path: 'products-page', element: <ProductsPage/>},
-            {path: 'products-page/:id', element: <ProductPage/>},
+            {path: 'products-page', element: <CoursesPage/>},
+            {path: 'products-page/:id', element: <CoursePage/>},
             {path: 'certifications' , element: <Certifications/>},
             {path: 'podcasts' , element: <Podcast/>},
             {path: 'articles' , element: <Articles/>},

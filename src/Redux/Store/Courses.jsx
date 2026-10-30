@@ -1,28 +1,48 @@
 import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
+import { supabase } from "../../Lib/supabaseClient";
 
 export const getCoursesFromServer = createAsyncThunk(
     "getCoursesFromServer",
-    async ()=>{
-        return await fetch("http://localhost:3000/courses").then(res => res.json()).then(data => data)
+    async (_, { rejectWithValue }) => {
+
+        const { data, error } = await supabase
+            .from("courses")
+            .select("*")
+            .order("id", { ascending: true });
+
+        if (error) {
+            return rejectWithValue(error.message);
+        }
+
+        return data;
     }
 )
 const slice = createSlice({
     name: "courses",
     initialState: {
         courses: [],
-        loading: false,
+        courseLoading: false,
+        courseError: null,
+        courseHasFetched: false,
     },
     reducers: {},
-    loading : false,
     extraReducers: builder => {
-        builder.addCase(getCoursesFromServer.pending , (state, action) => {
-            state.loading = true
-        })
 
-        builder.addCase(getCoursesFromServer.fulfilled , (state, action) => {
-            state.loading = false;
+        builder.addCase(getCoursesFromServer.pending, state => {
+            state.courseLoading = true;
+            state.courseError = null;
+        });
+
+        builder.addCase(getCoursesFromServer.fulfilled, (state, action) => {
+            state.courseLoading = false;
             state.courses = action.payload;
-        })
+            state.courseHasFetched = true;
+        });
+
+        builder.addCase(getCoursesFromServer.rejected, (state, action) => {
+            state.courseLoading  = false;
+            state.courseError = action.payload || action.error.message;
+        });
     }
 })
 
