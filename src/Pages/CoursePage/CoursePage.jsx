@@ -165,7 +165,7 @@ function CoursePage() {
                     {/*<!-- ! -------------------- Courses Image -------------------- ! -->*/}
                     <div className="col-span-12 lg:col-span-4 ">
                         <div className=" w-full h-full rounded overflow-hidden group">
-                            <img src={`/images/courses/${targetCourse?.src}.jpg`} alt={targetCourse?.title}
+                            <img src={`/images/courses-pages/${targetCourse?.src}.jpg`} alt={targetCourse?.title}
                                  className="w-full h-full object-cover group-hover:scale-110 transition-all"/>
                         </div>
                     </div>
@@ -499,7 +499,7 @@ function CoursePage() {
                             {
                                 courses.map(course => (
                                     <div key={course.id} className="bg-white dark:bg-dark-890 rounded shadow-sm p-4">
-                                        <Link to={`/course/${course.title}`}
+                                        <Link to={`/courses-page/${course.title}`}
                                               className="relative text-biscay-700 dark:text-white hover:text-blue-700 dark:hover:text-blue-450 font-Mult-Font-Bold transition-all">
                                             <span
                                                 className="absolute -right-4 w-1 h-full bg-blue-700 dark:bg-blue-450"></span>
