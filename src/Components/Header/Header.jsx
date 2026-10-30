@@ -157,7 +157,7 @@ function Header(props) {
                                     <Link to="/cart-page" className="w-full flex-center rounded-lg bg-blue-60 hover:bg-blue-200 dark:hover:bg-dark-900 text-blue-700 dark:hover:text-white text-lg transition-all py-4 mt-3">تکمیل فرایند خرید</Link>
                                 </div> : <div className="mt-6">
                                     <span className="block text-gray-300 font-YekanBakh-Medium text-center">هنوز محصولی به سبد خرید اضافه نشده</span>
-                                    <Link to="/products-page" className="w-full flex-center rounded-lg bg-blue-60 hover:bg-blue-200 dark:hover:bg-dark-900 text-blue-700 dark:hover:text-white text-lg transition-all py-4 mt-5">مشاهده دوره های آموزشی</Link>
+                                    <Link to="/course" className="w-full flex-center rounded-lg bg-blue-60 hover:bg-blue-200 dark:hover:bg-dark-900 text-blue-700 dark:hover:text-white text-lg transition-all py-4 mt-5">مشاهده دوره های آموزشی</Link>
                                 </div>}
                             </div>
                             {/*<!-- ! -------------------- Course Count Badge -------------------- ! -->*/}
@@ -375,7 +375,7 @@ function Header(props) {
                                 {/*<!-- ! -------------------- Courses Items Wrapper -------------------- ! -->*/}
                                 <div className="grid grid-cols-12">
                                     <div className="col-span-12 lg:col-span-6">
-                                        <Link to="/products-page"
+                                        <Link to="/course"
                                               className="flex items-start gap-x-2 pt-4 px-2 pb-2 hover:bg-gray-hover-100 dark:hover:bg-dark-950 lg:dark:hover:bg-drak-890 rounded-md transition-all">
                                             <DynamicIcon name={'courses'} className={'w-6.25 h-5.75 fill-blue-600'}/>
                                             <div className="">
@@ -416,7 +416,7 @@ function Header(props) {
                                         </Link>
                                     </div>
                                     <div className="col-span-12 lg:col-span-6">
-                                        <Link to="/products-page" state="free"
+                                        <Link to="/course" state="free"
                                               className="flex items-start gap-x-2 pt-4 px-2 pb-2 hover:bg-gray-hover-100 dark:hover:bg-dark-950 lg:dark:hover:bg-drak-890 rounded-md transition-all">
                                             <DynamicIcon name={'courses'} className={'w-6.25 h-5.75 fill-purple-600'}/>
                                             <div className="">
