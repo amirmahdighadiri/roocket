@@ -227,7 +227,7 @@ function Header(props) {
                                 <div className="mt-5 pt-3 px-5 pb-7 border-t border-biscay-100 dark:border-gray-300/10">
                                     <ul className="space-y-1 *:hover:bg-dark-550/10 *:dark:hover:bg-dark-450 *:transition-all *:rounded-lg *:px-4 *:py-3">
                                         <li className="">
-                                            <Link to="/dashboard/courses-pages" className="flex items-center gap-x-4 text-gray-500 dark:text-gray-920">
+                                            <Link to="/dashboard/courses" className="flex items-center gap-x-4 text-gray-500 dark:text-gray-920">
                                                 <DynamicIcon name="camera" className="size-5 text-inherit" />
                                                 <span className="text-lg font-YekanBakh-Bold">دوره ها</span>
                                             </Link>
