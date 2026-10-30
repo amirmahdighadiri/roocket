@@ -9,7 +9,7 @@ function BigCourseBox({course}) {
             <div className="flex items-center gap-x-4">
                 {/*<!-- ! -------------------- Image -------------------- ! -->*/}
                 <Link to={`/courses-page/${course.title}`}>
-                    <img src={`/images/courses-pages/${course.src}.jpg`} alt={course.title} className="w-42 h-24 object-cover rounded shrink-0"/>
+                    <img src={`/images/courses/${course.src}.jpg`} alt={course.title} className="w-42 h-24 object-cover rounded shrink-0"/>
                 </Link>
                 {/*<!-- ! -------------------- Title & Teacher -------------------- ! -->*/}
                 <div>
