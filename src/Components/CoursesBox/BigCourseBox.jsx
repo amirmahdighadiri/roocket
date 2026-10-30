@@ -8,13 +8,13 @@ function BigCourseBox({course}) {
             {/*<!-- ! -------------------- Image & Title -------------------- ! -->*/}
             <div className="flex items-center gap-x-4">
                 {/*<!-- ! -------------------- Image -------------------- ! -->*/}
-                <Link to={`/course/${course.title}`}>
-                    <img src={`/images/courses/${course.src}.jpg`} alt={course.title} className="w-42 h-24 object-cover rounded shrink-0"/>
+                <Link to={`/courses-page/${course.title}`}>
+                    <img src={`/images/courses-pages/${course.src}.jpg`} alt={course.title} className="w-42 h-24 object-cover rounded shrink-0"/>
                 </Link>
                 {/*<!-- ! -------------------- Title & Teacher -------------------- ! -->*/}
                 <div>
                     <h4 className="text-gray-800 dark:text-white hover:text-blue-700 dark:hover:text-blue-450 font-Mult-Font-Bold text-2xl transition-all mb-3 line-clamp-1">
-                        <Link to={`/course/${course.title}`}>{course.title.replace(/-/g, " ")}</Link>
+                        <Link to={`/courses-page/${course.title}`}>{course.title.replace(/-/g, " ")}</Link>
                     </h4>
                     <div className="flex items-center gap-x-2 text-dark-550 dark:text-gray-200 text-sm font-YekanBakh-Bold">
                         <DynamicIcon name="courses" className="size-4 text-blue-700 dark:text-gray-200"/>
