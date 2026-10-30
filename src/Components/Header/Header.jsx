@@ -157,7 +157,7 @@ function Header(props) {
                                     <Link to="/cart-page" className="w-full flex-center rounded-lg bg-blue-60 hover:bg-blue-200 dark:hover:bg-dark-900 text-blue-700 dark:hover:text-white text-lg transition-all py-4 mt-3">تکمیل فرایند خرید</Link>
                                 </div> : <div className="mt-6">
                                     <span className="block text-gray-300 font-YekanBakh-Medium text-center">هنوز محصولی به سبد خرید اضافه نشده</span>
-                                    <Link to="/course" className="w-full flex-center rounded-lg bg-blue-60 hover:bg-blue-200 dark:hover:bg-dark-900 text-blue-700 dark:hover:text-white text-lg transition-all py-4 mt-5">مشاهده دوره های آموزشی</Link>
+                                    <Link to="/courses-page" className="w-full flex-center rounded-lg bg-blue-60 hover:bg-blue-200 dark:hover:bg-dark-900 text-blue-700 dark:hover:text-white text-lg transition-all py-4 mt-5">مشاهده دوره های آموزشی</Link>
                                 </div>}
                             </div>
                             {/*<!-- ! -------------------- Course Count Badge -------------------- ! -->*/}
@@ -227,7 +227,7 @@ function Header(props) {
                                 <div className="mt-5 pt-3 px-5 pb-7 border-t border-biscay-100 dark:border-gray-300/10">
                                     <ul className="space-y-1 *:hover:bg-dark-550/10 *:dark:hover:bg-dark-450 *:transition-all *:rounded-lg *:px-4 *:py-3">
                                         <li className="">
-                                            <Link to="/dashboard/courses" className="flex items-center gap-x-4 text-gray-500 dark:text-gray-920">
+                                            <Link to="/dashboard/courses-pages" className="flex items-center gap-x-4 text-gray-500 dark:text-gray-920">
                                                 <DynamicIcon name="camera" className="size-5 text-inherit" />
                                                 <span className="text-lg font-YekanBakh-Bold">دوره ها</span>
                                             </Link>
@@ -375,7 +375,7 @@ function Header(props) {
                                 {/*<!-- ! -------------------- Courses Items Wrapper -------------------- ! -->*/}
                                 <div className="grid grid-cols-12">
                                     <div className="col-span-12 lg:col-span-6">
-                                        <Link to="/course"
+                                        <Link to="/courses-page"
                                               className="flex items-start gap-x-2 pt-4 px-2 pb-2 hover:bg-gray-hover-100 dark:hover:bg-dark-950 lg:dark:hover:bg-drak-890 rounded-md transition-all">
                                             <DynamicIcon name={'courses'} className={'w-6.25 h-5.75 fill-blue-600'}/>
                                             <div className="">
@@ -416,7 +416,7 @@ function Header(props) {
                                         </Link>
                                     </div>
                                     <div className="col-span-12 lg:col-span-6">
-                                        <Link to="/course" state="free"
+                                        <Link to="/courses-page" state="free"
                                               className="flex items-start gap-x-2 pt-4 px-2 pb-2 hover:bg-gray-hover-100 dark:hover:bg-dark-950 lg:dark:hover:bg-drak-890 rounded-md transition-all">
                                             <DynamicIcon name={'courses'} className={'w-6.25 h-5.75 fill-purple-600'}/>
                                             <div className="">
