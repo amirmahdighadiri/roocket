@@ -70,16 +70,16 @@ function Footer(props) {
                     <div className="">
                         <ul className="flex flex-col items-center sm:items-start space-y-3">
                             <li className="">
-                                <Link to={`/course/آموزش-پروژه-محور-جاوااسکریپت`} className={`relative pr-2 text-biscay-650 dark:text-gray-920 dark:hover:text-blue-450 hover:text-dark-700 transition-all before:hidden sm:before:inline-block before:content-[""] before:absolute before:top-2 before:-right-2 before:size-1 before:bg-blue-700/30`}>آموزش جاوا اسکریپت</Link>
+                                <Link to={`/courses-page/آموزش-پروژه-محور-جاوااسکریپت`} className={`relative pr-2 text-biscay-650 dark:text-gray-920 dark:hover:text-blue-450 hover:text-dark-700 transition-all before:hidden sm:before:inline-block before:content-[""] before:absolute before:top-2 before:-right-2 before:size-1 before:bg-blue-700/30`}>آموزش جاوا اسکریپت</Link>
                             </li>
                             <li className="">
-                                <Link to={`/course/آموزش-انگولار`} className={`relative pr-2 text-biscay-650 dark:text-gray-920 dark:hover:text-blue-450 hover:text-dark-700 transition-all before:hidden sm:before:inline-block before:content-[""] before:absolute before:top-2 before:-right-2 before:size-1 before:bg-blue-700/30`}>آموزش انگولار</Link>
+                                <Link to={`/courses-page/آموزش-انگولار`} className={`relative pr-2 text-biscay-650 dark:text-gray-920 dark:hover:text-blue-450 hover:text-dark-700 transition-all before:hidden sm:before:inline-block before:content-[""] before:absolute before:top-2 before:-right-2 before:size-1 before:bg-blue-700/30`}>آموزش انگولار</Link>
                             </li>
                             <li className="">
-                                <Link to={`/course/آموزش-جامع-ووکامرس`} className={`relative pr-2 text-biscay-650 dark:text-gray-920 dark:hover:text-blue-450 hover:text-dark-700 transition-all before:hidden sm:before:inline-block before:content-[""] before:absolute before:top-2 before:-right-2 before:size-1 before:bg-blue-700/30`}>آموزش وردپرس</Link>
+                                <Link to={`/courses-page/آموزش-جامع-ووکامرس`} className={`relative pr-2 text-biscay-650 dark:text-gray-920 dark:hover:text-blue-450 hover:text-dark-700 transition-all before:hidden sm:before:inline-block before:content-[""] before:absolute before:top-2 before:-right-2 before:size-1 before:bg-blue-700/30`}>آموزش وردپرس</Link>
                             </li>
                             <li className="">
-                                <Link to={`/course/آموزش-پیشرفته-React`} className={`relative pr-2 text-biscay-650 dark:text-gray-920 dark:hover:text-blue-450 hover:text-dark-700 transition-all before:hidden sm:before:inline-block before:content-[""] before:absolute before:top-2 before:-right-2 before:size-1 before:bg-blue-700/30`}>آموزش react</Link>
+                                <Link to={`/courses-page/آموزش-پیشرفته-React`} className={`relative pr-2 text-biscay-650 dark:text-gray-920 dark:hover:text-blue-450 hover:text-dark-700 transition-all before:hidden sm:before:inline-block before:content-[""] before:absolute before:top-2 before:-right-2 before:size-1 before:bg-blue-700/30`}>آموزش react</Link>
                             </li>
                         </ul>
                     </div>
