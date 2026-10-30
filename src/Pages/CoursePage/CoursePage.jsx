@@ -165,7 +165,7 @@ function CoursePage() {
                     {/*<!-- ! -------------------- Courses Image -------------------- ! -->*/}
                     <div className="col-span-12 lg:col-span-4 ">
                         <div className=" w-full h-full rounded overflow-hidden group">
-                            <img src={`/images/courses-pages/${targetCourse?.src}.jpg`} alt={targetCourse?.title}
+                            <img src={`/images/courses/${targetCourse?.src}.jpg`} alt={targetCourse?.title}
                                  className="w-full h-full object-cover group-hover:scale-110 transition-all"/>
                         </div>
                     </div>
