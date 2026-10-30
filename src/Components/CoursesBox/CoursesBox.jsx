@@ -11,7 +11,7 @@ function CoursesBox({title, src, price, status, description, courseTime, courseP
                 {/*<!-- ! -------------------- Image Link -------------------- ! -->*/}
                 <Link to={`/courses-page/${title}`} className="block h-45 overflow-hidden rounded-lg group">
                     {/*<!-- ! -------------------- Image Link -------------------- ! -->*/}
-                    <img id="course-image" src={`/images/courses-pages/${src}.jpg`} alt=""
+                    <img id="course-image" src={`/images/courses/${src}.jpg`} alt=""
                          className="w-full h-full xl:group-hover:scale-110 transition-all object-cover"/>
                 </Link>
             </div>
