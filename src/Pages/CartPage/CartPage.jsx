@@ -30,7 +30,7 @@ function CartPage() {
             {!carts.length && <div className="flex flex-col items-center justify-center my-50">
                 <span className="block text-gray-300 text-2xl font-YekanBakh-Bold mb-8">سبد خرید شما خالی است!</span>
                 <DynamicIcon name="trash" className="size-30 opacity-60 mb-8"/>
-                <Link to="/course"
+                <Link to="/courses-page"
                       className="inline-flex items-center justify-center text-white bg-blue-700 hover:bg-gray-800 px-4 py-2 rounded-lg mt-6 transition-all">
                     <span className="">شروع یادگیری برنامه‌نویسی</span>
                 </Link>
