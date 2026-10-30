@@ -499,7 +499,7 @@ function CoursePage() {
                             {
                                 courses.map(course => (
                                     <div key={course.id} className="bg-white dark:bg-dark-890 rounded shadow-sm p-4">
-                                        <Link to={`/products-page/${course.title}`}
+                                        <Link to={`/course/${course.title}`}
                                               className="relative text-biscay-700 dark:text-white hover:text-blue-700 dark:hover:text-blue-450 font-Mult-Font-Bold transition-all">
                                             <span
                                                 className="absolute -right-4 w-1 h-full bg-blue-700 dark:bg-blue-450"></span>
