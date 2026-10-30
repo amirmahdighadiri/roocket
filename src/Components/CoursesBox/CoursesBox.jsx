@@ -9,9 +9,9 @@ function CoursesBox({title, src, price, status, description, courseTime, courseP
             {/*<!-- ! -------------------- Image Wrapper -------------------- ! -->*/}
             <div className="absolute -top-12 px-4 w-full">
                 {/*<!-- ! -------------------- Image Link -------------------- ! -->*/}
-                <Link to={`/course/${title}`} className="block h-45 overflow-hidden rounded-lg group">
+                <Link to={`/courses-page/${title}`} className="block h-45 overflow-hidden rounded-lg group">
                     {/*<!-- ! -------------------- Image Link -------------------- ! -->*/}
-                    <img id="course-image" src={`/images/courses/${src}.jpg`} alt=""
+                    <img id="course-image" src={`/images/courses-pages/${src}.jpg`} alt=""
                          className="w-full h-full xl:group-hover:scale-110 transition-all object-cover"/>
                 </Link>
             </div>
@@ -27,7 +27,7 @@ function CoursesBox({title, src, price, status, description, courseTime, courseP
                         <span>{status ? "تکمیل ضبط" : "در حال برگزاری"}</span>
                     </span>
                     {/*<!-- ! -------------------- Title Of Course -------------------- ! -->*/}
-                    <Link to={`/course/${title}`} className="course-shearch-name inline-block font-Mult-Font-Bold text-xl text-gray-800 hover:text-blue-700 dark:text-white dark:hover:text-blue-450 transition-all hover:text-primary-blue-200 dark:hover:text-primary-blue-100 mb-2">{title.replace(/-/g, " ")}</Link>
+                    <Link to={`/courses-page/${title}`} className="course-shearch-name inline-block font-Mult-Font-Bold text-xl text-gray-800 hover:text-blue-700 dark:text-white dark:hover:text-blue-450 transition-all hover:text-primary-blue-200 dark:hover:text-primary-blue-100 mb-2">{title.replace(/-/g, " ")}</Link>
                     {/*<!-- ! -------------------- Description Of Course -------------------- ! -->*/}
                     <div className="h-24">
                         <p className="text-sm/6 text-gray-360 dark:text-gray-940 font-Mult-Font-Medium text-justify line-clamp-3">{description}</p>
@@ -82,7 +82,7 @@ function CoursesBox({title, src, price, status, description, courseTime, courseP
                     </div>
                     {/*<!-- ! -------------------- Box Content links -------------------- ! -->*/}
                     <div className="flex-center border-t border-gray-400/10 mt-2">
-                        <Link to={`/course/${title}`} className="course-shearch-name flex items-center gap-x-1 my-4 font-YekanBakh-Bold text-blue-700 group-hover:text-dark-700 dark:text-blue-950 dark:group-hover:text-gray-20 transition-all">
+                        <Link to={`/courses-page/${title}`} className="course-shearch-name flex items-center gap-x-1 my-4 font-YekanBakh-Bold text-blue-700 group-hover:text-dark-700 dark:text-blue-950 dark:group-hover:text-gray-20 transition-all">
                             <span className="">مشاهده اطلاعات دوره</span>
                             <DynamicIcon name={'arrow'} className={'size-6 text-inherit'} />
                         </Link>
