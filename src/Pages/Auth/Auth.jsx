@@ -73,7 +73,7 @@ function Auth() {
                         : "/",
                     { replace: true }
                 );
-            }, 2000);
+            }, 2500);
         } catch (error) {
             let message = "ورود ناموفق.لطفا دوباره تلاش کنید.";
 
@@ -152,6 +152,11 @@ function Auth() {
                     >
                         {loading ? "در حال ورود..." : "ورود"}
                     </button>
+                    {/*<!-- ! -------------------- Register Link -------------------- ! -->*/}
+                    <p className="mt-5 text-center font-YekanBakh-Medium text-xs text-gray-600 dark:text-gray-50">
+                        حساب کاربری ندارید؟
+                        <Link to="/register" className="inline-block mr-1 font-YekanBakh-Bold text-blue-700 underline">ثبت نام کنید</Link>
+                    </p>
                 </form>
             </div>
             {/*<!-- ! -------------------- Copy Right Text -------------------- ! -->*/}

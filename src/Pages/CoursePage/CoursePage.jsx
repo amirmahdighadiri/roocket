@@ -23,7 +23,7 @@ import {addCartToServer, getCartsFromServer} from "../../Redux/Store/Carts.jsx";
 import Notification from "../../Components/Notification/Notification.jsx";
 
 
-function ProductPage() {
+function CoursePage() {
     const [tab, setTab] = useState("description")
     const dispatch = useDispatch();
     const {courses, loading} = useSelector(state => state.courses);
@@ -518,4 +518,4 @@ function ProductPage() {
     );
 }
 
-export default ProductPage;
+export default CoursePage;
