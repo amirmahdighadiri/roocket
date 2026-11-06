@@ -48,12 +48,6 @@ function CoursePage() {
     });
 
     useEffect(() => {
-        if(!courseLoading && !courseHasFetched){
-            dispatch(getCoursesFromServer())
-        }
-    }, [courseLoading , courseHasFetched]);
-
-    useEffect(() => {
         setMainCarts(()=>{
             return carts.filter(cart => +cart.userId === userInfo.id)
         })
