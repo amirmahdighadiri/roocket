@@ -1,10 +1,11 @@
-import {ApiProvider} from "@reduxjs/toolkit/query/react";
 import {createContext, useEffect, useState} from "react";
 import {useLocation} from "react-router-dom";
 import {useDispatch} from "react-redux";
 import useLocalStorage from "../Hooks/useLocalStorage/useLocalStorage.jsx";
 import useToggle from "../Hooks/useToggle/useToggle.jsx";
 import { supabase } from "../Lib/supabaseClient.js";
+import {useSelector} from "react-redux";
+import {getCoursesFromServer} from "../Redux/Store/Courses.jsx";
 export const AppContext = createContext()
 
 
@@ -21,6 +22,9 @@ function AppProvider({children}) {
     const [isOpenDashboardMenu , toggleDashboardMenu] = useToggle()
     const [isOpenCartDropDown , toggleCartDropDown] = useToggle();
     const [isAuthLoading, setIsAuthLoading] = useToggle(true);
+    const {courseLoading, courseHasFetched} = useSelector(
+        state => state.courses
+    );
 
     useEffect(() => {
         window.scrollTo(0, 0)
@@ -71,6 +75,12 @@ function AppProvider({children}) {
             subscription.unsubscribe();
         };
     }, []);
+
+    useEffect(() => {
+        if (!courseHasFetched && !courseLoading) {
+            dispatch(getCoursesFromServer());
+        }
+    }, [dispatch, courseHasFetched, courseLoading]);
 
 
     return (

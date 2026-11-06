@@ -42,6 +42,7 @@ const slice = createSlice({
         builder.addCase(getCoursesFromServer.rejected, (state, action) => {
             state.courseLoading  = false;
             state.courseError = action.payload || action.error.message;
+            state.courseHasFetched = true;
         });
     }
 })

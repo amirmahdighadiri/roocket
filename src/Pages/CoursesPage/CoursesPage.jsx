@@ -38,12 +38,6 @@ function CoursesPage(props) {
 
     useTitle('راکت | دوره ها')
 
-   useEffect(() => {
-       if (!courseHasFetched && !courseLoading){
-           dispatch(getCoursesFromServer());
-       }
-   },[courseHasFetched , courseLoading])
-
     const changeSortHandler = (value) => {
         setPlan(null)
         setSortBy(value)
