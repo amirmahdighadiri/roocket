@@ -1,30 +1,57 @@
 import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
+import { supabase } from "../../Lib/supabaseClient";
 
-export const getCartsFromServer = createAsyncThunk(
-    "getCartsFromServer",
-    async (userId)=>{
-        return await fetch(`http://localhost:3000/carts?_expand=course`).then(res => res.json()).then(data => data)
-    }
-)
 
-export const addCartToServer = createAsyncThunk(
-    "carts/addCartToServer",
-    async (newCartItem) => {
-        const res = await fetch("http://localhost:3000/carts", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(newCartItem),
-        });
-        return await res.json();
+export const getUserCartsFromServer = createAsyncThunk(
+    "carts/getUserCartsFromServer",
+    async (userId, { rejectWithValue }) => {
+        const { data, error } = await supabase
+            .from("carts")
+            .select(` *, course:courses(*) `)
+            .eq("user_id", userId)
+            .order("id", { ascending: true });
+
+        if (error) {
+            return rejectWithValue(error.message);
+        }
+
+        return data;
     }
 );
 
-export const removeCartToServer = createAsyncThunk(
-    "carts/removeCartToServer",
-    async (cartId) => {
-        const res = await fetch(`http://localhost:3000/carts/${cartId}`, {
-            method: "DELETE"
-        });
+
+export const addUserCartToServer = createAsyncThunk(
+    "carts/addUserCartToServer",
+    async (newCartItem, { rejectWithValue }) => {
+        const { data, error } = await supabase
+            .from("carts")
+            .insert(newCartItem)
+            .select(`
+        *,
+        course:courses(*)
+      `)
+            .single();
+
+        if (error) {
+            return rejectWithValue(error.message);
+        }
+
+        return data;
+    }
+);
+
+export const removeUserCartFromServer = createAsyncThunk(
+    "carts/removeUserCartFromServer",
+    async (cartId, { rejectWithValue }) => {
+        const { error } = await supabase
+            .from("carts")
+            .delete()
+            .eq("id", cartId);
+
+        if (error) {
+            return rejectWithValue(error.message);
+        }
+
         return cartId;
     }
 );
@@ -33,27 +60,64 @@ const slice = createSlice({
     name: "carts",
     initialState: {
         carts: [],
-        loading: false,
+        cartsLoading: false,
+        cartsError: false,
+        cartsHasFetched: false,
+        cartsAddLoading: false,
+        cartsAddError: false,
+        cartsRemoveLoading: false,
+        cartsRemoveError: false,
     },
     reducers: {},
     loading : false,
     extraReducers: builder => {
-        builder.addCase(getCartsFromServer.pending , (state, action) => {
-            state.loading = true
+        {/*<!-- ! -------------------- Get User Cart Extra Reducer -------------------- ! -->*/}
+        builder.addCase(getUserCartsFromServer.pending , (state, action) => {
+            state.cartsLoading = true;
+            state.cartsError = false;
         })
 
-        builder.addCase(getCartsFromServer.fulfilled , (state, action) => {
-            state.loading = false;
+        builder.addCase(getUserCartsFromServer.fulfilled , (state, action) => {
+            state.cartsLoading = false;
             state.carts = action.payload;
+            state.cartsHasFetched = true;
         })
 
-        builder.addCase(addCartToServer.fulfilled, (state, action) => {
+        builder.addCase(getUserCartsFromServer.rejected , (state, action) => {
+            state.cartsLoading = false;
+            state.carts = action.payload;
+            state.cartsHasFetched = true;
+        })
+        {/*<!-- ! -------------------- Add Cart Extra Reducer -------------------- ! -->*/}
+        builder.addCase(addUserCartToServer.pending, (state) => {
+            state.cartsAddLoading = true;
+            state.cartsAddError = false;
+        })
+
+        builder.addCase(addUserCartToServer.fulfilled, (state, action) => {
+            state.addCartsLoading = false;
             state.carts.push(action.payload);
         })
 
-        builder.addCase(removeCartToServer.fulfilled, (state, action) => {
+        builder.addCase(addUserCartToServer.rejected, (state) => {
+            state.cartsAddLoading = false;
+            state.cartsAddError = true;
+        })
+        {/*<!-- ! -------------------- Remove Cart Extra Reducer -------------------- ! -->*/}
+        builder.addCase(removeUserCartFromServer.pending, (state) => {
+            state.cartsRemoveLoading = true;
+            state.cartsRemoveError = false;
+        })
+
+        builder.addCase(removeUserCartFromServer.fulfilled, (state, action) => {
             state.carts = state.carts.filter((item) => item.id !== action.payload);
         })
+
+        builder.addCase(removeUserCartFromServer.rejected, (state) => {
+            state.cartsRemoveLoading = false;
+            state.cartsRemoveError = true;
+        })
+
     }
 })
 
