@@ -15,18 +15,16 @@ import banner1 from "../../assets/images/banner/banner-1.gif"
 import supportImage from "../../assets/images/symbol/suportImg.png"
 import {AppContext} from "../../Context/AppContext.jsx";
 import useTitle from "../../Hooks/useTitle/useTitle.jsx";
-import {getCommentsFromServer} from "../../Redux/Store/Comments.jsx";
-import defaultProfile from "../../assets/images/profile/default.png";
-import {getTimeAgo} from "../../Utils/getTimeAgo/getTimeAgo.js";
 import CommentEditor from "../../Components/CommentEditor/CommentEditor.jsx";
-import {addCartToServer, getCartsFromServer} from "../../Redux/Store/Carts.jsx";
+import {addUserCartToServer, getUserCartsFromServer} from "../../Redux/Store/Carts.jsx";
 import Notification from "../../Components/Notification/Notification.jsx";
+import CoursePageLoader from "../../Components/Loader/CoursePageLoader.jsx";
 
 
 function CoursePage() {
     const [tab, setTab] = useState("description")
     const dispatch = useDispatch();
-    const {courses, loading} = useSelector(state => state.courses);
+    const {courses, courseLoading, courseHasFetched} = useSelector(state => state.courses);
     const {comments , commentsLoading} = useSelector(state => state.comments);
     const triggerRef = useRef(null)
     const [isSticky, setIsSticky] = useState(false);
@@ -50,10 +48,10 @@ function CoursePage() {
     });
 
     useEffect(() => {
-        if(!carts.length && isLogin){
-            dispatch(getCartsFromServer())
+        if(!courseLoading && !courseHasFetched){
+            dispatch(getCoursesFromServer())
         }
-    }, [userInfo]);
+    }, [courseLoading , courseHasFetched]);
 
     useEffect(() => {
         setMainCarts(()=>{
@@ -93,18 +91,18 @@ function CoursePage() {
     const addCourseToCart = (event)=>{
         event.preventDefault()
         const newCartItem = {
-            "id": carts.length + 1,
-            "userId": userInfo.id,
-            "courseId": targetCourse.id,
-            "quantity": 1,
-            "addedAt": new Date().toISOString()
-        }
-        dispatch(addCartToServer(newCartItem));
+            user_id: userInfo.sub,
+            course_id: targetCourse.id,
+            quantity: 1,
+            added_at: new Date().toISOString().split("T")[0],
+        };
+
+        dispatch(addUserCartToServer(newCartItem));
     }
 
 
     return (
-        <section className="container">
+        courseLoading || !courseHasFetched ? <CoursePageLoader /> :  <section className="container">
             {/*<!-- ! -------------------- Courses Intro -------------------- ! -->*/}
             <div className="bg-white dark:bg-dark-930 py-3 px-3 xl:px-10 sm:pt-6 sm:pb-4 rounded-lg my-10">
                 {/*<!-- ! -------------------- Courses Summary -------------------- ! -->*/}
@@ -117,9 +115,9 @@ function CoursePage() {
                         <div className="flex flex-col lg:flex-row gap-y-5 items-center justify-between">
                             {/*<!-- ! -------------------- Login Button -------------------- ! -->*/}
                             {!isLogin && <Link to="/auth" className="inline-flex items-center justify-center gap-x-2 bg-blue-700 border border-blue-700 text-white hover:text-blue-700 hover:bg-transparent rounded h-10 lg:h-14 px-9 transition-all">
-                                    <DynamicIcon name="educationIcon" className="size-5 text-inherit"/>
-                                    <span className="font-YekanBakh-Bold">برای یادگیری وارد سایت شوید</span>
-                                </Link>}
+                                <DynamicIcon name="educationIcon" className="size-5 text-inherit"/>
+                                <span className="font-YekanBakh-Bold">برای یادگیری وارد سایت شوید</span>
+                            </Link>}
                             {/*<!-- ! -------------------- Free & Paid Courses Button -------------------- ! -->*/}
                             {isLogin && isFindCourseInCart ?
                                 <div className="flex items-center gap-x-3">
@@ -214,18 +212,18 @@ function CoursePage() {
                         <ul className="px-6 space-x-5 md:space-x-8">
                             <li className="inline-block">
                                 <a href="#description-text" id="description" type="button" onClick={changeTab}
-                                        className={`relative ${tab === "description" ? 'text-blue-700 before:opacity-100' : 'text-gray-300 hover:text-gray-700 dark:hover:text-white before:opacity-0'} font-YekanBakh-Bold cursor-pointer pr-2 transition-all before:content-[''] before:absolute before:top-0 before:bottom-0 before:-right-1 before:my-auto before:size-1 before:rounded-full before:bg-blue-700`}>توضیحات
+                                   className={`relative ${tab === "description" ? 'text-blue-700 before:opacity-100' : 'text-gray-300 hover:text-gray-700 dark:hover:text-white before:opacity-0'} font-YekanBakh-Bold cursor-pointer pr-2 transition-all before:content-[''] before:absolute before:top-0 before:bottom-0 before:-right-1 before:my-auto before:size-1 before:rounded-full before:bg-blue-700`}>توضیحات
                                 </a>
                             </li>
                             <li className="hidden md:inline-block">
                                 <a href="#guarantee-text" id="guarantee " type="button" onClick={changeTab}
-                                        className={`relative ${tab === "guarantee " ? 'text-blue-700 before:opacity-100' : 'text-gray-300 hover:text-gray-700 dark:hover:text-white before:opacity-0'} font-YekanBakh-Bold cursor-pointer pr-2 transition-all before:content-[''] before:absolute before:top-0 before:bottom-0 before:-right-1 before:my-auto before:size-1 before:rounded-full before:bg-blue-700`}>گارانتی
+                                   className={`relative ${tab === "guarantee " ? 'text-blue-700 before:opacity-100' : 'text-gray-300 hover:text-gray-700 dark:hover:text-white before:opacity-0'} font-YekanBakh-Bold cursor-pointer pr-2 transition-all before:content-[''] before:absolute before:top-0 before:bottom-0 before:-right-1 before:my-auto before:size-1 before:rounded-full before:bg-blue-700`}>گارانتی
                                     بازگشت وجه
                                 </a>
                             </li>
                             <li className="inline-block">
                                 <a href="#curriculum-content" id="curriculum" type="button" onClick={changeTab}
-                                        className={`relative ${tab === "curriculum" ? 'text-blue-700 before:opacity-100' : 'text-gray-300 hover:text-gray-700 dark:hover:text-white before:opacity-0'} font-YekanBakh-Bold cursor-pointer pr-2 transition-all before:content-[''] before:absolute before:top-0 before:bottom-0 before:-right-1 before:my-auto before:size-1 before:rounded-full before:bg-blue-700`}>جلسات
+                                   className={`relative ${tab === "curriculum" ? 'text-blue-700 before:opacity-100' : 'text-gray-300 hover:text-gray-700 dark:hover:text-white before:opacity-0'} font-YekanBakh-Bold cursor-pointer pr-2 transition-all before:content-[''] before:absolute before:top-0 before:bottom-0 before:-right-1 before:my-auto before:size-1 before:rounded-full before:bg-blue-700`}>جلسات
                                     دوره
                                 </a>
                             </li>

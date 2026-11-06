@@ -7,7 +7,7 @@ import Overlay from "../Overlay/Overlay.jsx";
 import useToggle from "../../Hooks/useToggle/useToggle.jsx";
 import useCookie from "../../Hooks/useCookie/useCookie.jsx";
 import ConfirmModal from "../Modals/ConfirmModal/ConfirmModal.jsx";
-import {getCartsFromServer} from "../../Redux/Store/Carts.jsx";
+import { getUserCartsFromServer} from "../../Redux/Store/Carts.jsx";
 
 {/*<!-- ! -------------------- Images ! -------------------- ! -->*/}
 import defaultProfile from "../../assets/images/profile/default.png"
@@ -24,16 +24,14 @@ function Header(props) {
     const [, , removeUserID] = useCookie("userID", "");
     const [isShowModal, toggleIsShowModal] = useToggle();
     const dispatch = useDispatch();
-    const {carts , loadingCarts} = useSelector(state => state.carts);
-    const mainCarts = carts?.filter(cart => +cart.userId === userInfo.id)
-    const totalPrice = calculateTotal(mainCarts)
-
+    const {carts , cartsLoading, cartsError, cartsHasFetched} = useSelector(state => state.carts);
+    const totalPrice = calculateTotal(carts)
 
     useEffect(() => {
-        if(!carts.length && isLogin){
-            dispatch(getCartsFromServer())
+        if (isLogin && userInfo?.sub && !cartsHasFetched && !cartsLoading) {
+            dispatch(getUserCartsFromServer(userInfo.sub));
         }
-    }, [userInfo]);
+    }, [userInfo, cartsLoading, isLogin, cartsHasFetched]);
 
     useEffect(() => {
         window.addEventListener("click", closeSubMenus);
@@ -41,7 +39,6 @@ function Header(props) {
         return () => window.removeEventListener("click", closeSubMenus);
 
     }, [])
-
 
     const changeThemeHandler = () => theme === "dark" ? setTheme("light") : setTheme("dark")
 
@@ -135,15 +132,15 @@ function Header(props) {
                             {/*<!-- ! -------------------- Shopping Cart Dropdown -------------------- ! -->*/}
                             <div className={`${isOpenCartDropDown ? 'visible opacity-100' : 'invisible opacity-0'} absolute top-16 -left-4 z-10 w-96 px-7 pt-5 pb-8 rounded-lg bg-white dark:bg-dark-body-100 shadow-lg`}>
                                 <div className="flex items-center justify-between font-YekanBakh-Bold pb-4 border-b border-biscay-100 dark:border-gray-300">
-                                    <span className="text-lg text-gray-300">{mainCarts.length} مورد</span>
+                                    <span className="text-lg text-gray-300">{carts.length} مورد</span>
                                     <Link to="/cart-page" className="flex items-center gap-x-1 text-sm text-blue-700 dark:text-blue-450 hover:text-biscay-700 dark:hover:text-white transition-all">
                                         <span className="">مشاهده سید خرید</span>
                                         <DynamicIcon name="arrowDown" className="size-3 rotate-90 text-inherit"/>
                                     </Link>
                                 </div>
-                                {mainCarts.length > 0 ? <div className="">
+                                {carts.length > 0 ? <div className="">
                                     <div className="max-h-45 overflow-auto divide-y divide-biscay-100 dark:divide-white/15">
-                                        {mainCarts.map(cart=>(
+                                        {carts?.map(cart=>(
                                             <MiniCourseBox key={cart.id} {...cart} />
                                         ))}
                                     </div>
@@ -161,7 +158,7 @@ function Header(props) {
                                 </div>}
                             </div>
                             {/*<!-- ! -------------------- Course Count Badge -------------------- ! -->*/}
-                            <span className="size-6 flex-center absolute -top-2 -right-2 bg-red-450 text-white rounded-full font-YekanBakh text-sm">{mainCarts.length}</span>
+                            <span className="size-6 flex-center absolute -top-2 -right-2 bg-red-450 text-white rounded-full font-YekanBakh text-sm">{carts.length}</span>
                         </div>
                         {/*<!-- ! -------------------- Message Btn -------------------- ! -->*/}
                         <Link to="/dashboard/notifications" className="w-12 h-12 hidden lg:flex items-center justify-center relative dark:bg-dark-body-100 dark:hover:bg-[#ECEEEF] bg-[#ECEEEF] hover:bg-dark-body-100 rounded-full transition-all shrink-0 group">

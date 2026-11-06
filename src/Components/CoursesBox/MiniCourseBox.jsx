@@ -2,12 +2,12 @@ import React from 'react';
 import {Link} from 'react-router-dom';
 import DynamicIcon from "../../DynamicIcon/DynamicIcon.jsx";
 import {useDispatch} from "react-redux";
-import {removeCartToServer} from "../../Redux/Store/Carts.jsx";
+import {removeUserCartFromServer} from "../../Redux/Store/Carts.jsx";
 function MiniCourseBox({id,course}) {
     const dispatch = useDispatch()
 
     const removeCartItem = ()=>{
-        dispatch(removeCartToServer(id))
+        dispatch(removeUserCartFromServer(id))
     }
     return (
         <div className="w-full flex items-center justify-between py-5 px-2.5">

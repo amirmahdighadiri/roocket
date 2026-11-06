@@ -1,29 +1,49 @@
-import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { supabase } from "../../Lib/supabaseClient";
 
 export const getArticlesFromServer = createAsyncThunk(
     "getArticlesFromServer",
-    async ()=>{
-        return await fetch("http://localhost:3000/articles").then(res => res.json()).then(data => data)
+    async (_, { rejectWithValue }) => {
+        const { data, error } = await supabase
+            .from("articles")
+            .select("*")
+            .order("id", { ascending: true });
+
+        if (error) {
+            return rejectWithValue(error.message);
+        }
+
+        return data;
     }
-)
+);
+
 const slice = createSlice({
     name: "articles",
     initialState: {
         articles: [],
-        loading: false,
+        articleLoading: false,
+        articleError: null,
+        articleHasFetched: false,
     },
     reducers: {},
-    loading : false,
-    extraReducers: builder => {
-        builder.addCase(getArticlesFromServer.pending , (state, action) => {
-            state.loading = true
-        })
 
-        builder.addCase(getArticlesFromServer.fulfilled , (state, action) => {
-            state.loading = false;
+    extraReducers: (builder) => {
+        builder.addCase(getArticlesFromServer.pending, (state) => {
+            state.articleLoading = true;
+            state.articleError = null;
+        });
+
+        builder.addCase(getArticlesFromServer.fulfilled, (state, action) => {
+            state.articleLoading = false;
             state.articles = action.payload;
-        })
-    }
-})
+            state.articleHasFetched = true;
+        });
+
+        builder.addCase(getArticlesFromServer.rejected, (state, action) => {
+            state.articleLoading = false;
+            state.articleError = action.payload;
+        });
+    },
+});
 
 export default slice.reducer;

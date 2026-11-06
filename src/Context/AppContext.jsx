@@ -4,16 +4,7 @@ import {useLocation} from "react-router-dom";
 import {useDispatch} from "react-redux";
 import useLocalStorage from "../Hooks/useLocalStorage/useLocalStorage.jsx";
 import useToggle from "../Hooks/useToggle/useToggle.jsx";
-import {getCoursesFromServer} from "../Redux/Store/Courses.jsx";
-import {getCommentsFromServer} from "../Redux/Store/Comments.jsx";
-import {getPodcastsFromServer} from "../Redux/Store/Podcasts.jsx";
-import {getLearningPathFromServer} from "../Redux/Store/LearningPath.jsx";
-import {getArticlesFromServer} from "../Redux/Store/Articles.jsx";
-import {getUsersFromServer} from "../Redux/Store/Users.jsx";
-import {getCartsFromServer} from "../Redux/Store/Carts.jsx";
-import {getDiscountFromServer} from "../Redux/Store/Discount.jsx";
 import { supabase } from "../Lib/supabaseClient.js";
-
 export const AppContext = createContext()
 
 
@@ -81,7 +72,6 @@ function AppProvider({children}) {
         };
     }, []);
 
-    console.log(userInfo)
 
     return (
         <AppContext.Provider value={contentValue}>

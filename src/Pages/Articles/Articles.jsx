@@ -10,11 +10,18 @@ import ArticleBox from "../../Components/ArticleBox/ArticleBox.jsx";
 import {getArticlesFromServer} from "../../Redux/Store/Articles.jsx";
 import ContentList from "../../Components/ContentList/ContentList.jsx";
 import useTitle from "../../Hooks/useTitle/useTitle.jsx";
+import ArticleCardSkeleton from "../../Components/Loader/ArticleCardSkeleton.jsx";
 
 function Articles(props) {
+    const dispatch = useDispatch();
     const {podcasts, podcastLoading} = useSelector(state => state.podcasts);
-    const {articles , articlesLoading} = useSelector(state => state.articles);
+    const {articles, articleLoading, articleError, articleHasFetched} = useSelector(state => state.articles);
 
+    useEffect(() => {
+        if (!articleHasFetched && !articleLoading) {
+            dispatch(getArticlesFromServer())
+        }
+    },[articleLoading , articleHasFetched])
     useTitle('راکت | مقالات')
 
     return (
@@ -97,7 +104,7 @@ function Articles(props) {
                 </aside>
                 {/*<!-- ! -------------------- Filter & Articles -------------------- ! -->*/}
                 <div className="col-span-12 xl:col-span-9">
-                    <ContentList itemsContent={articles} BoxComponent={ArticleBox} title="آرشیو مقالات"/>
+                     <ContentList itemsContent={articles} BoxComponent={ArticleBox} title="آرشیو مقالات" hasLoading={articleLoading} />
                 </div>
             </div>
         </section>
