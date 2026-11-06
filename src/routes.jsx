@@ -27,6 +27,7 @@ import Articles from "./Pages/Articles/Articles.jsx";
 import ComingSoon from "./Pages/ComingSoon/ComingSoon.jsx";
 import CartPage from "./Pages/CartPage/CartPage.jsx";
 import Register from "./Pages/Auth/Register.jsx";
+import AdminPanel from "./Pages/AdminPanel/AdminPanel.jsx";
 
 const routes = [
     {
@@ -58,6 +59,7 @@ const routes = [
                     {path: 'change-password' , element: <ChangePassword />}
                 ]},
         ]},
+    {path: '/admin' , element: <AdminPanel/> },
     {path: '/auth' , element: <Auth/> },
     {path: '/verify' , element: <Verify/> },
     {path: '/register' , element: <Register/> },
