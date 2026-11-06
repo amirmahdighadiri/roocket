@@ -23,18 +23,11 @@ const metrics = [
     { label: "دیدگاه‌های جدید", value: "—", note: "در انتظار بررسی", icon: MessageSquare, tone: "orange" },
 ];
 
-const chartData = [32, 44, 39, 57, 48, 68, 61, 76, 63, 83, 72, 91];
-
 function AdminPanel() {
     const { theme, setTheme, userInfo } = useContext(AppContext);
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
     const [activeRange, setActiveRange] = useState("۱۲ ماه اخیر");
     const isDark = theme === "dark";
-
-    const chartPoints = useMemo(
-        () => chartData.map((value, index) => `${index * 64 + 12},${150 - value * 1.35}`).join(" "),
-        []
-    );
 
     const adminName = userInfo?.fullName || userInfo?.full_name || "مدیر راکت";
 
