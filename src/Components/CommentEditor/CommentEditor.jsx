@@ -30,7 +30,7 @@ function ToolbarButton({ onClick, active, disabled, title, children }) {
     );
 }
 
-function CommentEditor({toggleShowEditor , parentId , courseCommentLen,courseId}) {
+function CommentEditor({toggleShowEditor , parent_id ,course_id}) {
     const {userInfo ,setIsShowNotification} = useContext(AppContext)
     const dispatch = useDispatch()
     const editor = useEditor({
@@ -80,20 +80,10 @@ function CommentEditor({toggleShowEditor , parentId , courseCommentLen,courseId}
     const submit = async () => {
         const text = editor.getText().trim();
 
-
         if (!text) return
 
-        const newComment = {
-            id: courseCommentLen +1,
-            courseId: courseId,
-            userId: userInfo.id,
-            parentId: parentId ? parentId : null,
-            text: editor.getHTML(),
-            createdAt: new Date().toISOString()
-        }
-
         try{
-            await dispatch(addCommentToServer(newComment)).unwrap()
+            await dispatch(addCommentToServer({course_id, parent_id, text: editor.getHTML()})).unwrap()
 
             editor.commands.clearContent();
             toggleShowEditor(false)

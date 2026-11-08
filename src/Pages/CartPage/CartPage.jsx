@@ -5,7 +5,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {calculateTotal} from "../../Utils/calculateTotal/calculateTotal.js";
 import BigCourseBox from "../../Components/CoursesBox/BigCourseBox.jsx";
 import {getDiscountFromServer} from "../../Redux/Store/Discount.jsx";
-import CartPageLoader from "../../Components/Loader/CartPageLoader.jsx";
+import CartPageLoader from "../../Components/Loader/PageSkeleton/CartPageLoader.jsx";
 
 function CartPage() {
 

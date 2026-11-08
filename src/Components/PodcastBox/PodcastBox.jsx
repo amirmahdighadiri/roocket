@@ -16,7 +16,7 @@ function PodcastBox({episode_number , title , likes , duration , image_url , gri
                     </svg>
                     <span className="">شماره {episode_number}</span>
                 </div>
-                {/*<!-- ! -------------------- Podcast Reaction Btn-------------------- ! -->*/}
+                {/*<!-- ! -------------------- PodcastPage Reaction Btn-------------------- ! -->*/}
                 <div className="flex items-center gap-x-2">
                     <button className="flex items-center h-5 px-1 bg-gray-500/10 text-gray-500 dark:bg-gray-500/10 dark:text-gray-940 rounded xl:cursor-pointer transition-all">
                         <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" fill="none" className="ml-1 text-gray-500 dark:text-gray-940" viewBox="0 0 16 16">

@@ -1,29 +1,53 @@
-import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
+
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { supabase } from "../../Lib/supabaseClient";
 
 export const getPodcastsFromServer = createAsyncThunk(
     "getPodcastsFromServer",
-    async ()=>{
-        return await fetch("http://localhost:3000/episodes").then(res => res.json()).then(data => data)
+    async (_, { rejectWithValue }) => {
+        const { data, error } = await supabase
+            .from('episodes')
+            .select('*')
+            .order('id', { ascending: true });
+
+        if (error) {
+            return rejectWithValue(error.message);
+        }
+
+        return data;
     }
-)
+);
+
 const slice = createSlice({
     name: "podcasts",
+
     initialState: {
         podcasts: [],
-        loading: false,
+        podcastsLoading: false,
+        podcastsError: null,
+        podcastsHasFetched: false,
     },
-    reducers: {},
-    loading : false,
-    extraReducers: builder => {
-        builder.addCase(getPodcastsFromServer.pending , (state, action) => {
-            state.loading = true
-        })
 
-        builder.addCase(getPodcastsFromServer.fulfilled , (state, action) => {
-            state.loading = false;
+    reducers: {},
+
+    extraReducers: builder => {
+        builder.addCase(getPodcastsFromServer.pending, state => {
+            state.podcastsLoading = true;
+            state.podcastsError = null;
+        });
+
+        builder.addCase(getPodcastsFromServer.fulfilled, (state, action) => {
             state.podcasts = action.payload;
-        })
+            state.podcastsLoading = false;
+            state.podcastsHasFetched = true;
+        });
+
+        builder.addCase(getPodcastsFromServer.rejected, (state, action) => {
+            state.podcastsLoading = false;
+            state.podcastsError = action.payload || action.error.message;
+            state.podcastsHasFetched = true;
+        });
     }
-})
+});
 
 export default slice.reducer;

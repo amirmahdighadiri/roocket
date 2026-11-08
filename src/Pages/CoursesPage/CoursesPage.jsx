@@ -16,8 +16,9 @@ import {getLearningPathFromServer} from "../../Redux/Store/LearningPath.jsx";
 import NoResults from "../../Components/Template/NoResults/NoResults.jsx";
 import useTitle from "../../Hooks/useTitle/useTitle.jsx";
 import PaginationBtn from "../../Components/PaginationBtn/PaginationBtn.jsx";
-import CourseBoxSkeleton from "../../Components/Loader/CourseBoxSkeleton.jsx";
-import CoursesBoxSkeleton from "../../Components/Loader/CourseBoxSkeleton.jsx";
+import CourseBoxSkeleton from "../../Components/Loader/BoxSkeleton/CourseBoxSkeleton.jsx";
+import CoursesBoxSkeleton from "../../Components/Loader/BoxSkeleton/CourseBoxSkeleton.jsx";
+import LearningPathSkeleton from "../../Components/Loader/BoxSkeleton/LearningPathSkeleton.jsx";
 
 function CoursesPage(props) {
     const [categories, setCategories] = useState(coursesCategory);
@@ -26,8 +27,8 @@ function CoursesPage(props) {
     const [sortBy, setSortBy] = useState("");
     const [activeIndexTab , setActiveIndexTab] = useState(0);
     const dispatch = useDispatch();
-    const {courses , courseLoading , courseHasFetched} = useSelector(state => state.courses);
-    const learningPath = useSelector(state => state.learningPath);
+    const {courses , courseLoading} = useSelector(state => state.courses);
+    const {learningPath , learningPathLoading, learningPathError, learningPathHasFetched} = useSelector(state => state.learningPath);
     const courseFilterChangeHandler = () => setFilteredType(prev => prev === "current" ? "archive" : "current")
     const [finalCourses , setFinalCourses] = useState([])
     const [currentPage, setCurrentPage] = useState(1);
@@ -35,6 +36,12 @@ function CoursesPage(props) {
     const coursesPerPage = 9
     let pageCount= Math.ceil(finalCourses.length / coursesPerPage);
     const startIndex = (currentPage - 1) * coursesPerPage;
+
+    useEffect(() => {
+        if (!learningPathHasFetched && !learningPathLoading) {
+            dispatch(getLearningPathFromServer());
+        }
+    },[learningPathLoading, learningPathHasFetched])
 
     useTitle('راکت | دوره ها')
 
@@ -113,7 +120,8 @@ function CoursesPage(props) {
                     </div>
                 </div>
 
-                <Swiper
+
+                {learningPathLoading || !learningPathHasFetched ? <LearningPathSkeleton/> :    <Swiper
                     className="!w-full !overflow-hidden"
                     modules={[Navigation]}
                     navigation={{
@@ -143,7 +151,7 @@ function CoursesPage(props) {
                             </SwiperSlide>
                         ))
                     }
-                </Swiper>
+                </Swiper>}
             </div>
             {/*<!-- ! -------------------- Page Title -------------------- ! -->*/}
             <div className="mt-14 mb-8">

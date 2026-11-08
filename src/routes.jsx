@@ -3,11 +3,11 @@ import Error from "./Pages/Error/Error.jsx";
 import Layout from "./Components/Layout/Layout.jsx";
 import Auth from "./Pages/Auth/Auth.jsx";
 import AboutUs from "./Pages/AboutUs/AboutUs.jsx";
-import Skills from "./Pages/Skills/Skills.jsx";
+import SkillsPage from "./Pages/SkillsPage/SkillsPage.jsx";
 import CoursesPage from "./Pages/CoursesPage/CoursesPage.jsx";
 import Certifications from "./Pages/Certifications/Certifications.jsx";
 import CoursePage from "./Pages/CoursePage/CoursePage.jsx";
-import Podcast from "./Pages/Podcast/Podcast.jsx";
+import PodcastPage from "./Pages/PodcastPage/PodcastPage.jsx";
 import Verify from "./Pages/Auth/Verify.jsx";
 import DashboardLayout from "./Pages/DashboardLayout/DashboardLayout.jsx";
 import Panel from "./Components/DashboardPages/Panel/Panel.jsx";
@@ -33,11 +33,11 @@ const routes = [
         path: '/', element: <Layout/>, children: [
             {path: '/', element: <Home/>},
             {path: 'about-us', element: <AboutUs />},
-            {path: 'skills' , element: <Skills />},
+            {path: 'skills' , element: <SkillsPage />},
             {path: 'courses-page', element: <CoursesPage/>},
             {path: 'courses-page/:id', element: <CoursePage/>},
             {path: 'certifications' , element: <Certifications/>},
-            {path: 'podcasts' , element: <Podcast/>},
+            {path: 'podcasts' , element: <PodcastPage/>},
             {path: 'articles' , element: <Articles/>},
             {path: 'cart-page' , element: <CartPage/>},
         ]

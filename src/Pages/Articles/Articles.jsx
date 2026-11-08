@@ -10,7 +10,7 @@ import ArticleBox from "../../Components/ArticleBox/ArticleBox.jsx";
 import {getArticlesFromServer} from "../../Redux/Store/Articles.jsx";
 import ContentList from "../../Components/ContentList/ContentList.jsx";
 import useTitle from "../../Hooks/useTitle/useTitle.jsx";
-import ArticleCardSkeleton from "../../Components/Loader/ArticleCardSkeleton.jsx";
+import ArticleCardSkeleton from "../../Components/Loader/BoxSkeleton/ArticleCardSkeleton.jsx";
 
 function Articles(props) {
     const dispatch = useDispatch();
@@ -65,7 +65,7 @@ function Articles(props) {
                             </Link>
                         </div>
                     </div>
-                    {/*<!-- ! -------------------- Podcast Wrapper -------------------- ! -->*/}
+                    {/*<!-- ! -------------------- PodcastPage Wrapper -------------------- ! -->*/}
                     <div className="pt-9 pb-9 px-5 dark:bg-dark-930 border border-primary-gray-185 dark:border-dark-930 mb-8 rounded-md">
                         <div className="flex items-start gap-x-2 text-biscay-700 dark:text-white font-Mult-Font-Bold">
                             <DynamicIcon name="podcast" className="size-5 text-inherit"/>
@@ -104,7 +104,7 @@ function Articles(props) {
                 </aside>
                 {/*<!-- ! -------------------- Filter & Articles -------------------- ! -->*/}
                 <div className="col-span-12 xl:col-span-9">
-                     <ContentList itemsContent={articles} BoxComponent={ArticleBox} title="آرشیو مقالات" hasLoading={articleLoading} />
+                     <ContentList itemsContent={articles} BoxComponent={ArticleBox} title="آرشیو مقالات" hasLoading={articleLoading} SkeletonComponent={ArticleCardSkeleton}/>
                 </div>
             </div>
         </section>

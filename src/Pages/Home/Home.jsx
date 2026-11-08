@@ -26,10 +26,28 @@ function Home(props) {
     useTitle('آمورش برنامه نویسی صفر تا صد - ژاکت')
 
     const dispatch = useDispatch();
-    const {courses , loading} = useSelector(state => state.courses);
-    const learningPath = useSelector(state => state.learningPath);
-    const {podcasts , podcastLoading} = useSelector(state => state.podcasts);
-    const {articles,articlesLoading} = useSelector(state => state.articles);
+    const {courses , coursesLoading} = useSelector(state => state.courses);
+    const {learningPath , learningPathLoading, learningPathError, learningPathHasFetched} = useSelector(state => state.learningPath);
+    const {podcasts, podcastsLoading, podcastsError, podcastsHasFetched} = useSelector(state => state.podcasts);
+    const {articles, articleLoading, articleError, articleHasFetched} = useSelector(state => state.articles);
+
+    useEffect(() => {
+        if (!learningPathHasFetched && !learningPathLoading) {
+            dispatch(getLearningPathFromServer());
+        }
+    },[learningPathLoading, learningPathHasFetched])
+
+    useEffect(() => {
+        if (!articleLoading && !articleHasFetched) {
+            dispatch(getArticlesFromServer());
+        }
+    },[articleHasFetched , articleLoading])
+
+    useEffect(() => {
+        if (!podcastsLoading && !podcastsHasFetched) {
+            dispatch(getPodcastsFromServer());
+        }
+    },[podcastsLoading , podcastsHasFetched])
 
     return (
         <main className="">
@@ -44,7 +62,7 @@ function Home(props) {
             <ArticleSection articles={articles} />
             {/*<!-- ! -------------------- Instagram Section -------------------- ! -->*/}
             <InstagramSection/>
-            {/*<!-- ! -------------------- Podcast Section -------------------- ! -->*/}
+            {/*<!-- ! -------------------- PodcastPage Section -------------------- ! -->*/}
             <PodcastSection podcasts={podcasts} />
             {/*<!-- ! -------------------- Description Section -------------------- ! -->*/}
             <DescriptionSection />

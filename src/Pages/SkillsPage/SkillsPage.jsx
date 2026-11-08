@@ -10,10 +10,16 @@ import Accordion from "../../Components/Accordion/DescriptionAccordion.jsx";
 import { accordions } from '../../data.jsx';
 import useTitle from "../../Hooks/useTitle/useTitle.jsx";
 
-function Skills(props) {
+function SkillsPage(props) {
     const dispatch = useDispatch();
-    const skills = useSelector(state => state.skills);
+    const {skills, skillsLoading, skillsError, skillsHasFetched} = useSelector(state => state.skills);
     const [accordionItems , setAccordionItems] = useState(accordions)
+
+    useEffect(() => {
+        if (!skillsHasFetched && !skillsHasFetched) {
+            dispatch(getSkillsFromServer())
+        }
+    },[skillsLoading , skillsHasFetched])
 
     useTitle('راکت | مسیر یادگیری')
 
@@ -1011,4 +1017,4 @@ function Skills(props) {
     );
 }
 
-export default Skills;
+export default SkillsPage;
