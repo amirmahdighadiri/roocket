@@ -242,5 +242,4 @@ const certificateTabs = [
 ];
 
 
-
 export {accordions, coursesCategory, timeFilters , displayFilters , coursesTabs, questionTabs , followingTabs ,commentTabs ,notificationTabs,missionTabs,certificateTabs};

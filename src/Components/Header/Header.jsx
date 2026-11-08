@@ -13,7 +13,8 @@ import { getUserCartsFromServer} from "../../Redux/Store/Carts.jsx";
 import defaultProfile from "../../assets/images/profile/default.png"
 import MiniCourseBox from "../CoursesBox/MiniCourseBox.jsx";
 import {calculateTotal} from "../../Utils/calculateTotal/calculateTotal.js";
-import HeaderSkeleton from "../Loader/HeaderSkeleton.jsx";
+import HeaderSkeleton from "../Loader/BoxSkeleton/HeaderSkeleton.jsx";
+import BadgeLoader from "../Loader/BoxSkeleton/BadgeLoader.jsx";
 
 
 
@@ -89,6 +90,16 @@ function Header(props) {
         setIsShowOverlay()
     }
 
+    const openCoursesSubmenuHandler = ()=>{
+        toggleUsefulSubmenu(false)
+        toggleCoursesSubmenu()
+    }
+
+    const openUsefulSubmenuHandler = ()=>{
+        toggleCoursesSubmenu(false)
+        toggleUsefulSubmenu()
+    }
+
     return (
         <header className="mt-7">
             <div className="container">
@@ -158,7 +169,7 @@ function Header(props) {
                                 </div>}
                             </div>
                             {/*<!-- ! -------------------- Course Count Badge -------------------- ! -->*/}
-                            <span className="size-6 flex-center absolute -top-2 -right-2 bg-red-450 text-white rounded-full font-YekanBakh text-sm">{carts.length}</span>
+                            {cartsLoading || !cartsHasFetched ? <BadgeLoader/> : <span className="size-6 flex-center absolute -top-2 -right-2 bg-red-450 text-white rounded-full font-YekanBakh text-sm">{carts.length}</span>}
                         </div>
                         {/*<!-- ! -------------------- Message Btn -------------------- ! -->*/}
                         <Link to="/dashboard/notifications" className="w-12 h-12 hidden lg:flex items-center justify-center relative dark:bg-dark-body-100 dark:hover:bg-[#ECEEEF] bg-[#ECEEEF] hover:bg-dark-body-100 rounded-full transition-all shrink-0 group">
@@ -355,7 +366,7 @@ function Header(props) {
                             <Link to="/">راکت</Link>
                         </li>
                         <li className={`lg:relative ${isOpenCoursesSubmenu ? 'h-auto' : 'h-6'} text-biscay-700 hover:text-gray-hover-200 dark:text-white dark:hover:text-gray-hover-150 transition-all`}>
-                            <div onClick={toggleCoursesSubmenu} id="courses-submenu-btn"
+                            <div onClick={openCoursesSubmenuHandler} id="courses-submenu-btn"
                                  className="flex items-center gap-x-2">
                                 <DynamicIcon name={'play'}
                                              className={`block lg:hidden w-5 h-5 dark:text-white text-biscay-700`}/>
@@ -479,7 +490,7 @@ function Header(props) {
                             <Link to="/podcasts" className="">راکت کست</Link>
                         </li>
                         <li className={`lg:relative ${isOpenUsefulSubmenu ? 'h-auto' : 'h-6'}  text-biscay-700 hover:text-gray-hover-200 dark:text-white dark:hover:text-gray-hover-150 transition-all`}>
-                            <div onClick={toggleUsefulSubmenu} id="usefull-submenu-btn"
+                            <div onClick={openUsefulSubmenuHandler} id="usefull-submenu-btn"
                                  className="flex items-center gap-x-2">
                                 <DynamicIcon name={'link'}
                                              className={'block lg:hidden w-5 h-5 dark:text-white text-biscay-700'}/>

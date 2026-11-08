@@ -7,21 +7,28 @@ import {Link} from 'react-router-dom';
 import PodcastBox from "../../Components/PodcastBox/PodcastBox.jsx";
 import {getPodcastsFromServer} from "../../Redux/Store/Podcasts.jsx";
 
-{/*<!-- ! -------------------- Images -------------------- ! -->*/
-}
+{/*<!-- ! -------------------- Images -------------------- ! -->*/}
 import instagramPhone from "../../assets/images/instagram.png";
 import banner1 from "../../assets/images/banner/banner-1.gif";
 import podcastImage from "../../assets/images/symbol/podcast-archive.png";
 import Tags from "../../Components/Tags/Tags.jsx";
 import ContentList from "../../Components/ContentList/ContentList.jsx";
 import useTitle from "../../Hooks/useTitle/useTitle.jsx";
+import PodcastCardSkeleton from "../../Components/Loader/BoxSkeleton/PodcastCardSkeleton.jsx";
+import podcastCardSkeleton from "../../Components/Loader/BoxSkeleton/PodcastCardSkeleton.jsx";
 
 
-function Podcast(props) {
+function PodcastPage(props) {
 
     useTitle('راکت | پادکست')
     const dispatch = useDispatch();
-    const {podcasts, podcastLoading} = useSelector(state => state.podcasts);
+    const {podcasts, podcastsLoading, podcastsError, podcastsHasFetched} = useSelector(state => state.podcasts);
+
+    useEffect(() => {
+        if (!podcastsLoading && !podcastsHasFetched) {
+            dispatch(getPodcastsFromServer());
+        }
+    },[podcastsLoading , podcastsHasFetched])
 
 
     return (
@@ -59,11 +66,11 @@ function Podcast(props) {
                 </aside>
                 {/*<!-- ! -------------------- Filter & Podcasts -------------------- ! -->*/}
                 <div className="col-span-12 xl:col-span-9">
-                    <ContentList itemsContent={podcasts} BoxComponent={PodcastBox} title="لیست پادکست ها"/>
+                    <ContentList itemsContent={podcasts} BoxComponent={PodcastBox} title="لیست پادکست ها" hasLoading={podcastsLoading} SkeletonComponent={podcastCardSkeleton}/>
                 </div>
             </div>
         </section>
     );
 }
 
-export default Podcast;
+export default PodcastPage;

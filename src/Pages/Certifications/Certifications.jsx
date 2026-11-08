@@ -571,7 +571,7 @@ function Certifications(props) {
                         </svg>
                     </div>
                 </div>
-                {/*<!-- ! -------------------- Podcast Wrapper -------------------- ! -->*/}
+                {/*<!-- ! -------------------- PodcastPage Wrapper -------------------- ! -->*/}
                 <Link to="/" className="flex flex-col lg:flex-row items-center justify-center lg:justify-between bg-gray-210 dark:bg-dark-930 py-4 px-9 rounded-2xl mt-10 group">
                     <div className="flex flex-col lg:flex-row items-center gap-y-4">
                         <div className="lg:border-l-2 border-gray-300 dark:border-white lg:pl-8">

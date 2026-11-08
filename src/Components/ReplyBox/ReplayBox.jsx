@@ -5,7 +5,7 @@ import DynamicIcon from "../../DynamicIcon/DynamicIcon.jsx";
 import {Link} from 'react-router-dom';
 import {getTimeAgo} from "../../Utils/getTimeAgo/getTimeAgo.js";
 
-function ReplayBox({text,createdAt , user , toggleShowEditor}) {
+function ReplayBox({text,created_at , user_name , toggleShowEditor}) {
 
     return (
         <div className="relative p-6 border border-gray-210 dark:border-transparent rounded-lg bg-gray-210 dark:bg-dark-950/50 mt-5 mr-14 before:absolute before:-right-7 before:top-12.5 before:content-[''] before:w-7 before:h-0.75 before:bg-white dark:before:bg-dark-900">
@@ -19,8 +19,8 @@ function ReplayBox({text,createdAt , user , toggleShowEditor}) {
                     </div>
                     {/*<!-- ! -------------------- Profile Name -------------------- ! -->*/}
                     <div className="flex flex-col items-start gap-y-1">
-                        <Link to="/" className="text-biscay-700 dark:text-white hover:text-blue-700 dark:hover:text-blue-450 transition-all font-Mult-Font-Bold text-lg">{user?.fullName}</Link>
-                        <span className="text-gray-360 dark:text-gray-200 text-sm">{getTimeAgo(createdAt)}</span>
+                        <Link to="/" className="text-biscay-700 dark:text-white hover:text-blue-700 dark:hover:text-blue-450 transition-all font-Mult-Font-Bold text-lg">{user_name}</Link>
+                        <span className="text-gray-360 dark:text-gray-200 text-sm">{getTimeAgo(created_at)}</span>
                     </div>
                 </div>
                 {/*<!-- ! -------------------- Comment Like Count Btn -------------------- ! -->*/}

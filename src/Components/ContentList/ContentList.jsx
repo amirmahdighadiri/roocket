@@ -4,9 +4,9 @@ import podcastImage from "../../assets/images/symbol/podcast-archive.png";
 import {timeFilters} from "../../data.jsx";
 import {displayFilters} from "../../data.jsx";
 import PaginationBtn from "../PaginationBtn/PaginationBtn.jsx";
-import ArticleCardSkeleton from "../Loader/ArticleCardSkeleton.jsx";
+import ArticleCardSkeleton from "../Loader/BoxSkeleton/ArticleCardSkeleton.jsx";
 
-function ContentList({itemsContent , BoxComponent , title , hasLoading}) {
+function ContentList({itemsContent , BoxComponent , title , hasLoading , SkeletonComponent}) {
     const [timeFilter, setTimeFilter] = useState({label: "بروزترین", value: "newest"});
     const [displayFilter, setDisplayFilter] = useState({label: "همه", value: "all"});
     const [finalItems, setFinalItems] = useState([]);
@@ -127,7 +127,7 @@ function ContentList({itemsContent , BoxComponent , title , hasLoading}) {
                     {hasLoading ?
                         <div className="grid grid-cols-12 gap-x-6 gap-y-20">
                             {Array.from({length: 6}).map((_, i) => (
-                                <ArticleCardSkeleton key={i} gridClass="sm:col-span-6 xl:col-span-4"/>
+                                <SkeletonComponent key={i} gridClass="sm:col-span-6 xl:col-span-4"/>
                             ))}
                         </div> : <div  className="grid grid-cols-12 gap-x-5 gap-y-12 mt-7">
                             {finalItems

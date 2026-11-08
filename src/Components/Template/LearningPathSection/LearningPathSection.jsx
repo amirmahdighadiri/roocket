@@ -53,8 +53,7 @@ function LearningPathSection({learningPath}) {
                     </div>
                     <div className="custom-pagination !w-auto "></div>
                     <div className="custom-learnin-path-next-btn">
-                        <DynamicIcon name={'arrow'}
-                                     className={'size-8 hover:scale-120 cursor-pointer transition-all text-dark-550 dark:text-white dark:hover:text-white'}/>
+                        <DynamicIcon name={'arrow'} className={'size-8 hover:scale-120 cursor-pointer transition-all text-dark-550 dark:text-white dark:hover:text-white'}/>
                     </div>
                 </div>
             </div>

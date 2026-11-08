@@ -2,19 +2,19 @@ import React from 'react';
 import {Link} from "react-router-dom";
 import DynamicIcon from "../../DynamicIcon/DynamicIcon.jsx";
 
-function RoadmapBanner({isEven , skillId, name , desc , iconSrc , bannerSrc}) {
+function RoadmapBanner({isEven , id, name , description , icon_src , banner_src}) {
     return (
-        <div id={skillId} className={`flex flex-col ${isEven ? 'lg:flex-row ' : 'lg:flex-row-reverse'} items-center justify-between gap-x-20 scroll-mt-8`}>
+        <div id={id} className={`flex flex-col ${isEven ? 'lg:flex-row ' : 'lg:flex-row-reverse'} items-center justify-between gap-x-20 scroll-mt-8`}>
             {/*<!-- ! -------------------- Skill Content -------------------- ! -->*/}
             <div className="w-full relative flex flex-col lg:even:flex-row lg:odd:flex-row-reverse items-start">
                 {/*<!-- ! -------------------- Skill Icon  -------------------- ! -->*/}
                 <div className={`lg:absolute ${isEven ? '-right-20' : '-left-20'}  size-13 flex-center bg-gray-5 dark:bg-gray-5/10 rounded mb-3`}>
-                    <img src={iconSrc} alt={name} className="w-8/12"/>
+                    <img src={icon_src} alt={name} className="w-8/12"/>
                 </div>
                 {/*<!-- ! -------------------- Skill Banner Content -------------------- ! -->*/}
                 <div className={`text-right ${isEven ? 'lg:text-right' : 'lg:text-left'}`}>
                     <h3 className="font-Mult-Font-Bold text-3xl dark:text-white text-gray-800 mb-3">آموزش {name}</h3>
-                    <p className="font-Mult-Font-Medium text-gray-500 dark:text-gray-920 mb-7 leading-7">{desc}</p>
+                    <p className="font-Mult-Font-Medium text-gray-500 dark:text-gray-920 mb-7 leading-7">{description}</p>
                     <Link to="/coming-soon" className="inline-flex items-center gap-3 bg-transparent hover:bg-blue-700 dark:hover:bg-blue-450 border border-blue-700 rounded-md dark:border-blue-450 text-blue-700 dark:text-blue-450 hover:text-white font-YekanBakh-Bold py-3 px-5 shadow-lg transition-all">
                         نقشه راه شروع دوره
                         <DynamicIcon name={'arrow'} className={'size-6 text-inherit'} />
@@ -24,7 +24,7 @@ function RoadmapBanner({isEven , skillId, name , desc , iconSrc , bannerSrc}) {
             {/*<!-- ! -------------------- Skill Banner Image -------------------- ! -->*/}
             <div className="w-full relative bg-white dark:bg-dark-930 px-4 pt-3 pb-5 rounded-xl mt-5 lg:mt-0">
                 <Link to="/" className="block rounded-xl overflow-hidden group">
-                    <img src={bannerSrc} alt={`بنر ${name}`} className="w-full group-hover:scale-110 transition-all"/>
+                    <img src={banner_src} alt={`بنر ${name}`} className="w-full group-hover:scale-110 transition-all"/>
                 </Link>
                 <svg xmlns="http://www.w3.org/2000/svg" width="67" height="68" fill="none" className={`absolute ${isEven ? '-bottom-2.5 -left-5' : '-top-2.5 -right-5'}  z-0`} viewBox="0 0 67 68">
                     <g fill="#CBD1DB" opacity="0.4">

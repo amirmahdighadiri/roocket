@@ -8,9 +8,9 @@ import {getTimeAgo} from "../../Utils/getTimeAgo/getTimeAgo.js";
 import useToggle from "../../Hooks/useToggle/useToggle.jsx";
 import CommentEditor from "../CommentEditor/CommentEditor.jsx";
 
-function CommentBox({id,text,createdAt , user, comments , courseCommentLen , courseId}) {
+function CommentBox({id,text,created_at , user_name, comments  , course_id}) {
 
-    const replyComments = comments.filter(comment => comment.parentId === id)
+    const replyComments = comments.filter(comment => comment.parent_id === id)
     const [isShowEditor , toggleShowEditor] = useToggle()
 
 
@@ -28,8 +28,8 @@ function CommentBox({id,text,createdAt , user, comments , courseCommentLen , cou
                             </div>
                             {/*<!-- ! -------------------- Profile Name -------------------- ! -->*/}
                             <div className="flex flex-col items-start gap-y-1">
-                                <Link to="/" className="text-biscay-700 dark:text-white hover:text-blue-700 dark:hover:text-blue-450 transition-all font-Mult-Font-Bold text-lg">{user?.fullName}</Link>
-                                <span className="text-gray-360 dark:text-gray-200 text-sm">{getTimeAgo(createdAt)}</span>
+                                <Link to="/" className="text-biscay-700 dark:text-white hover:text-blue-700 dark:hover:text-blue-450 transition-all font-Mult-Font-Bold text-lg">{user_name}</Link>
+                                <span className="text-gray-360 dark:text-gray-200 text-sm">{getTimeAgo(created_at)}</span>
                             </div>
                         </div>
                         {/*<!-- ! -------------------- Comment Like Count Btn -------------------- ! -->*/}
@@ -57,7 +57,7 @@ function CommentBox({id,text,createdAt , user, comments , courseCommentLen , cou
                     ))}
                 </div>
 
-                {isShowEditor && <CommentEditor toggleShowEditor={toggleShowEditor} courseCommentLen={courseCommentLen} parentId={id} courseId={courseId}/> }
+                {isShowEditor && <CommentEditor toggleShowEditor={toggleShowEditor} parent_id={id} course_id={course_id}/> }
             </div>
     );
 }

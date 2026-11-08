@@ -18,14 +18,15 @@ import useTitle from "../../Hooks/useTitle/useTitle.jsx";
 import CommentEditor from "../../Components/CommentEditor/CommentEditor.jsx";
 import {addUserCartToServer, getUserCartsFromServer} from "../../Redux/Store/Carts.jsx";
 import Notification from "../../Components/Notification/Notification.jsx";
-import CoursePageLoader from "../../Components/Loader/CoursePageLoader.jsx";
+import CoursePageLoader from "../../Components/Loader/PageSkeleton/CoursePageLoader.jsx";
+import {getCommentsFromServer} from "../../Redux/Store/Comments.jsx";
 
 
 function CoursePage() {
     const [tab, setTab] = useState("description")
     const dispatch = useDispatch();
     const {courses, courseLoading, courseHasFetched} = useSelector(state => state.courses);
-    const {comments , commentsLoading} = useSelector(state => state.comments);
+    const {comments, commentsLoading, commentsError, commentsHasFetched} = useSelector(state => state.comments);
     const triggerRef = useRef(null)
     const [isSticky, setIsSticky] = useState(false);
     const [showMoreContent, toggleShowMoreContent] = useToggle();
@@ -33,19 +34,23 @@ function CoursePage() {
     const URLTitle = decodeURIComponent(location.pathname.split("/").pop());
     const [targetCourse, setTargetCourse] = useState({});
     const {isLogin, userInfo ,isShowNotification, setIsShowNotification} = useContext(AppContext)
-    const courseComments = comments.filter(comment => comment.courseId === targetCourse?.id)
-    const mainComments = courseComments.filter(comment => comment.parentId === null)
+    const courseComments = comments.filter(comment => comment.course_id === targetCourse?.id)
+    const mainComments = courseComments.filter(comment => comment.parent_id === null)
     const [isShowEditor, toggleShowEditor] = useToggle();
     const {carts , loadingCarts} = useSelector(state => state.carts);
     const [mainCarts, setMainCarts] = useState([]);
-    const isFindCourseInCart = mainCarts.some(
-        cart => cart.courseId === targetCourse.id
-    );
+    const isFindCourseInCart = mainCarts.some(cart => cart.courseId === targetCourse.id);
     const [notificationValue, setNotificationValue] = useState({
         title: "خطا !",
         message: "خطا در برقراری ارتباط.لطفا دوباره تلاش کنید!",
         Icon: () => <DynamicIcon name={'closeCircle'} className={'size-7 text-blue-700'}/>
     });
+
+    useEffect(() => {
+        if (!commentsLoading && !commentsHasFetched){
+            dispatch(getCommentsFromServer())
+        }
+    }, [commentsHasFetched , commentsLoading]);
 
     useEffect(() => {
         setMainCarts(()=>{
@@ -330,7 +335,7 @@ function CoursePage() {
                                 </div>}
                             </div>
 
-                            {isShowEditor && <CommentEditor toggleShowEditor={toggleShowEditor} courseCommentLen={comments.length} courseId={targetCourse.id}/>}
+                            {isShowEditor && <CommentEditor toggleShowEditor={toggleShowEditor} course_id={targetCourse.id}/>}
                         </div>
                         {/*<!-- ! -------------------- sign-up wrapper -------------------- ! -->*/}
                         {!isLogin && <div className="flex flex-col lg:flex-row items-center justify-between gap-y-4 px-8 py-5 bg-customOrange-550 text-white rounded-lg text-xl font-Mult-Font-Medium mb-6">
@@ -347,7 +352,7 @@ function CoursePage() {
                         <div className="space-y-5">
                             {
                                 mainComments.map(comment => (
-                                    <CommentBox key={comment.id} comments={courseComments} {...comment} courseCommentLen={comments.length} courseId={targetCourse.id}/>
+                                    <CommentBox key={comment.id} comments={courseComments} {...comment} course_id={targetCourse.id}/>
                                 ))
                             }
                         </div>

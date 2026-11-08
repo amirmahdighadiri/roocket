@@ -2,7 +2,7 @@ import {Link} from "react-router-dom";
 import {SwiperSlide} from "swiper/react";
 import DynamicIcon from "../../DynamicIcon/DynamicIcon.jsx";
 
-function LearningPathsBox({title,description,coursesCount,boxClass,icon,isActive}) {
+function LearningPathsBox({title,description,coursesCount,box_class,icon,isActive}) {
     return (
 
             <div className={`w-auto ${isActive ? 'shadow-cardshadow bg-white dark:bg-dark-body-50 border-dark-body-200' : 'hover:shadow-cardshadow dark:hover:bg-dark-body-50 hover:bg-white dark:hover:border-dark-body-200'} border border-primary-gray-185 dark:border-dark-500 rounded-lg transition-all duration-200`}>
@@ -11,7 +11,7 @@ function LearningPathsBox({title,description,coursesCount,boxClass,icon,isActive
                     {/*<!-- ! -------------------- Learning Routs Logos-------------------- ! -->*/}
                     <div className="flex items-center justify-between mb-8">
                         {/*<!-- ! -------------------- Learning Routs Icon -------------------- ! -->*/}
-                        <div className={`size-14 flex-center rounded-md ${boxClass}`}>
+                        <div className={`size-14 flex-center rounded-md ${box_class}`}>
                             <img src={icon} alt="course logo" className="size-9"/>
                         </div>
                         {/*<!-- ! -------------------- Learning Routs Course Icon -------------------- ! -->*/}
