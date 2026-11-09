@@ -242,4 +242,145 @@ const certificateTabs = [
 ];
 
 
-export {accordions, coursesCategory, timeFilters , displayFilters , coursesTabs, questionTabs , followingTabs ,commentTabs ,notificationTabs,missionTabs,certificateTabs};
+
+const aboutUsData = [
+    {
+        id: "activity-1",
+        title: "آموزش آنلاین",
+        image: "/images/about-us-image/corinne-kutz.png",
+        paragraphs: [
+            {
+                id: "activity-1-paragraph-1",
+                type: "text",
+                content:
+                    "مهم‌ترین بخشی که راکت بر اساس آن بنا نهاده شده، بخش آموزش آنلاین سایت است. در این بخش سعی داریم کار با جدیدترین زبان‌ها، فریم‌ورک‌ها و ابزارهای برنامه‌نویسی جهان را به فارسی‌زبانان آموزش دهیم."
+            },
+            {
+                id: "activity-1-paragraph-2",
+                type: "text",
+                content:
+                    "ما در راکت تمام سعی خود را می‌کنیم تا بتوانیم دوره‌های به‌روز و کاربردی را در اختیار شما قرار دهیم و شما را برای ورود به بازار کار آماده کنیم."
+            }
+        ],
+        button: {
+            id: "activity-1-button",
+            title: "مشاهده آموزش‌های آنلاین",
+            url: "/courses-page"
+        }
+    },
+    {
+        id: "activity-2",
+        title: "حل مشکلات برنامه‌نویسی",
+        image: "/images/about-us-image/christopher-gower.png",
+        paragraphs: [
+            {
+                id: "activity-2-paragraph-1",
+                type: "text",
+                content:
+                    "بخش مهمی از مسیر یادگیری یک زبان، حل کردن مشکلات و صحبت با برنامه‌نویسان دیگر برای بررسی دیدگاه‌های آن‌ها درباره زبان یا ابزار موردنظر است."
+            },
+            {
+                id: "activity-2-paragraph-2",
+                type: "text",
+                content:
+                    "در بخش پرسش و پاسخ راکت می‌توانید سؤال‌های مختلف خود را در حوزه‌های گوناگون مطرح کنید و برای حل مشکلات یا درک بهتر مسائل با دیگر برنامه‌نویسان گفتگو کنید."
+            }
+        ],
+        button: {
+            id: "activity-2-button",
+            title: "مشاهده پرسش و پاسخ‌ها",
+            url: "/coming-soon"
+        }
+    },
+    {
+        id: "activity-3",
+        title: "مقالات آموزشی",
+        image: "/images/about-us-image/markus-winkler.png",
+        paragraphs: [
+            {
+                id: "activity-3-paragraph-1",
+                type: "text",
+                content:
+                    "مقالات متنی از دیر باز بخش مهمی از سطوح کسب دانش را تشکیل داده‌اند. ما در راکت از این بخش صرف‌نظر نکرده‌ایم و به شکل جدی سعی در ارائه مقالات به‌روز و در سطح جهانی کرده‌ایم به شکلی که از شروع کار راکت تا به امروز هزاران مقاله آموزشی در عناوین مختلف را به زبان فارسی در وب‌سایت راکت قرار داده‌ایم تا فارسی‌زبانان عزیز بتوانند با خواندن این نوع مقالات به میزان دانش خود، هر چند کم، مقداری بیافزایند."
+            },
+            {
+                id: "activity-3-paragraph-2",
+                type: "mixed",
+                content: [
+                    {
+                        id: "activity-3-paragraph-2-item-1",
+                        type: "text",
+                        content: "ما در راکت سعی کرده‌ایم این مقاله را در طیف بسیار متنوع، از جمله "
+                    },
+                    {
+                        id: "activity-3-paragraph-2-item-2",
+                        type: "link",
+                        content: "تجربه‌کاربری",
+                        url: "/courses-page"
+                    },
+                    {
+                        id: "activity-3-paragraph-2-item-3",
+                        type: "text",
+                        content: "، "
+                    },
+                    {
+                        id: "activity-3-paragraph-2-item-4",
+                        type: "link",
+                        content: "توسعه فردی",
+                        url: "/courses-page"
+                    },
+                    {
+                        id: "activity-3-paragraph-2-item-5",
+                        type: "text",
+                        content: " و دنیای بزرگ "
+                    },
+                    {
+                        id: "activity-3-paragraph-2-item-6",
+                        type: "link",
+                        content: "برنامه‌نویسی",
+                        url: "/courses-page"
+                    },
+                    {
+                        id: "activity-3-paragraph-2-item-7",
+                        type: "text",
+                        content:
+                            " در دسترس فارسی‌زبانان عزیز قرار دهیم تا هر شخصی با هر سلیقه‌ای بتواند از مقالات راکت بهره‌مند شود."
+                    }
+                ]
+            }
+        ],
+        button: {
+            id: "activity-3-button",
+            title: "مشاهده مقالات راکت",
+            url: "/articles"
+        }
+    },
+    {
+        id: "activity-4",
+        title: "راکت‌کست",
+        image: "/images/about-us-image/will-francis.png",
+        paragraphs: [
+            {
+                id: "activity-4-paragraph-1",
+                type: "text",
+                content:
+                    "در کنار ویدیو و متن، بخش دیگری هم وجود دارد که بسیار مهم است و آن صداست. با استفاده از پادکست می‌توانید از زمان‌هایی که تنها قادر به گوش دادن هستید، برای یادگیری استفاده کنید."
+            },
+            {
+                id: "activity-4-paragraph-2",
+                type: "text",
+                content:
+                    "ما در راکت بخشی تحت عنوان راکت‌کست راه‌اندازی کرده‌ایم تا دیدگاه‌های شخصی و موضوعات مهمی را که می‌توان از طریق صدا منتقل کرد، با شما به اشتراک بگذاریم."
+            }
+        ],
+        button: {
+            id: "activity-4-button",
+            title: "مشاهده راکت‌کست‌ها",
+            url: "/podcasts"
+        }
+    }
+];
+
+
+
+export {accordions, coursesCategory, timeFilters , displayFilters , coursesTabs, questionTabs , followingTabs ,commentTabs ,notificationTabs,missionTabs,certificateTabs, aboutUsData};

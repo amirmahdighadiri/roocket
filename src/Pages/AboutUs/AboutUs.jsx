@@ -4,6 +4,8 @@ import {Link} from "react-router-dom";
 import AboutUsIntro from '../../assets/images/about-us-image/aboutUsIntro.png'
 import DynamicIcon from "../../DynamicIcon/DynamicIcon.jsx";
 import useTitle from "../../Hooks/useTitle/useTitle.jsx";
+import {aboutUsData} from "../../data.jsx";
+import AboutText from "../../Components/AboutText/AboutText.jsx";
 
 function AboutUs(props) {
 
@@ -59,8 +61,12 @@ function AboutUs(props) {
                     راکت
                 </h3>
                 {/*<!-- ! -------------------- About Roocket -------------------- ! -->*/}
-                <div className="space-y-40 mt-28">
-
+                <div className="space-y-40 mt-28 px-40">
+                    {
+                        aboutUsData.map((item, index) => (
+                            <AboutText key={item.id} {...item} isEven={index % 2 === 0} />
+                        ))
+                    }
                 </div>
             </section>
             {/*<!-- ! -------------------- Roocket Team Wrapper -------------------- ! -->*/}

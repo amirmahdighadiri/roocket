@@ -8,7 +8,7 @@ import {getTimeAgo} from "../../Utils/getTimeAgo/getTimeAgo.js";
 import useToggle from "../../Hooks/useToggle/useToggle.jsx";
 import CommentEditor from "../CommentEditor/CommentEditor.jsx";
 
-function CommentBox({id,text,created_at , user_name, comments  , course_id}) {
+function CommentBox({id, text, created_at , user_name, comments  , course_id}) {
 
     const replyComments = comments.filter(comment => comment.parent_id === id)
     const [isShowEditor , toggleShowEditor] = useToggle()

@@ -7,7 +7,9 @@ function Layout(props) {
     return (
         <>
             <Header />
-            <Outlet />
+            <main className="overflow-x-hidden">
+                <Outlet />
+            </main>
             <Footer />
         </>
     );
