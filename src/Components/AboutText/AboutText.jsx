@@ -7,7 +7,7 @@ function AboutText({title, image, paragraphs, button, isEven}) {
         <div className={`relative flex flex-col ${isEven ? 'md:flex-row' : 'md:flex-row-reverse'} items-center`}>
             <span className={`absolute ${isEven ? '-right-1/3' : '-left-1/3'}  size-80 md:size-138 rounded-full border border-blue-800/20`}></span>
             {/*<!-- ! -------------------- Image -------------------- ! -->*/}
-            <div className={`relative ${isEven ? 'ml-12' : 'mr-12'}`}>
+            <div className={`relative mx-auto ${isEven ? 'md:ml-12' : 'md:mr-12'}`}>
                 <span className={`absolute ${isEven ? '-right-6 rotate-12' : 'right-6 -rotate-12'} w-48 h-52 md:w-56 md:h-64  bg-blue-700/10 rounded-2xl`}></span>
                 <div className="relative w-48 h-52 md:w-56 md:h-64 rounded-2xl overflow-hidden">
                     <img src={image} alt={title}/>
