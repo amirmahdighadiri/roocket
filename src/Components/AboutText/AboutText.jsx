@@ -4,7 +4,7 @@ import {Link} from "react-router-dom";
 
 function AboutText({title, image, paragraphs, button, isEven}) {
     return (
-        <div className={`relative flex ${isEven ? 'flex-row' : 'flex-row-reverse'} items-center`}>
+        <div className={`relative flex flex-col ${isEven ? 'md:flex-row' : 'md:flex-row-reverse'} items-center`}>
             <span className={`absolute ${isEven ? '-right-1/3' : '-left-1/3'}  size-80 md:size-138 rounded-full border border-blue-800/20`}></span>
             {/*<!-- ! -------------------- Image -------------------- ! -->*/}
             <div className={`relative ${isEven ? 'ml-12' : 'mr-12'}`}>
@@ -16,7 +16,7 @@ function AboutText({title, image, paragraphs, button, isEven}) {
             </div>
             {/*<!-- ! -------------------- Text Content -------------------- ! -->*/}
             <div className="">
-                <h4 className="text-2xl sm:text-4xl text-blue-700 dark:text-blue-450 font-YekanBakh-Bold mb-4">{title}</h4>
+                <h4 className="text-2xl sm:text-4xl text-blue-700 dark:text-blue-450 font-YekanBakh-Bold mb-4 mt-12 md:mt-0 text-center md:text-right">{title}</h4>
                 <div className="text-base/8 lg:text-lg/8 text-gray-360 dark:text-gray-920 mb-7 space-y-5 font-YekanBakh-Bold text-justify">
                     {
                         paragraphs.map(paragraph =>{
@@ -32,10 +32,12 @@ function AboutText({title, image, paragraphs, button, isEven}) {
                         })
                     }
                 </div>
-                <Link to={button.url} title={button.title} className="inline-flex items-center gap-x-3 sm:text-lg font-YekanBakh-Bold text-blue-700 hover:text-gray-700 dark:text-blue-450 dark:hover:text-white transition-all">
-                    <span className="">{button.title}</span>
-                    <DynamicIcon name="arrow" className="size-6 text-inherit"/>
-                </Link>
+                <div className="text-center md:text-right">
+                    <Link to={button.url} title={button.title} className="inline-flex items-center gap-x-3 sm:text-lg font-YekanBakh-Bold text-blue-700 hover:text-gray-700 dark:text-blue-450 dark:hover:text-white transition-all">
+                        <span className="">{button.title}</span>
+                        <DynamicIcon name="arrow" className="size-6 text-inherit"/>
+                    </Link>
+                </div>
             </div>
         </div>
     );

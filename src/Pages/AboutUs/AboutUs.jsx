@@ -6,9 +6,22 @@ import DynamicIcon from "../../DynamicIcon/DynamicIcon.jsx";
 import useTitle from "../../Hooks/useTitle/useTitle.jsx";
 import {aboutUsData} from "../../data.jsx";
 import AboutText from "../../Components/AboutText/AboutText.jsx";
+import {useSelector, useDispatch} from "react-redux";
+import {useEffect} from "react";
+import {getTeachersFromServer} from "../../Redux/Store/Teacher.jsx";
+import TeacherBox from "../../Components/TeacherBox/TeacherBox.jsx";
 
 function AboutUs(props) {
+    const dispatch = useDispatch();
+    const {teachers, teacherLoading, teacherError, teacherHasFetched} = useSelector(state => state.teacher)
 
+    useEffect(() => {
+        if (!teacherLoading && !teacherHasFetched){
+            dispatch(getTeachersFromServer())
+        }
+    }, [teacherLoading , teacherHasFetched]);
+
+    console.log(teachers);
     useTitle('راکت | درباره ما')
     return (
         <section className="container">
@@ -61,7 +74,7 @@ function AboutUs(props) {
                     راکت
                 </h3>
                 {/*<!-- ! -------------------- About Roocket -------------------- ! -->*/}
-                <div className="space-y-40 mt-28 px-40">
+                <div className="space-y-40 mt-28 lg:px-40">
                     {
                         aboutUsData.map((item, index) => (
                             <AboutText key={item.id} {...item} isEven={index % 2 === 0} />
@@ -77,6 +90,11 @@ function AboutUs(props) {
                     <span className={`relative before:content-[""] before:absolute before:bottom-4 before:h-4 sm:before:h-5 before:w-full before:bg-customOrange-700/40 before:-z-10`}> راکت </span>
                 </h3>
                 <div className="grid grid-cols-12 gap-10 mt-16">
+                    {
+                        teachers.map(teacher => (
+                            <TeacherBox key={teacher.id} {...teacher} />
+                        ))
+                    }
 
                     <div className="col-span-12 sm:col-span-6 md:col-span-4 xl:col-span-3 flex flex-col items-center justify-center bg-blue-50 dark:bg-dark-930 rounded-xl hover:shadow-sm transition-all py-16 px-8 cursor-pointer">
                         <h4 className="font-YekanBakh-Bold text-blue-700 dark:text-white text-xl">نفر بعدی شما باشید</h4>
