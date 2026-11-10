@@ -89,7 +89,7 @@ function AboutUs(props) {
                     تیم
                     <span className={`relative before:content-[""] before:absolute before:bottom-4 before:h-4 sm:before:h-5 before:w-full before:bg-customOrange-700/40 before:-z-10`}> راکت </span>
                 </h3>
-                <div className="grid grid-cols-12 gap-10 mt-16">
+                <div className="grid grid-cols-12 gap-x-4 sm:gap-x-10 gap-y-10 mt-16">
                     {
                         teachers.map(teacher => (
                             <TeacherBox key={teacher.id} {...teacher} />
