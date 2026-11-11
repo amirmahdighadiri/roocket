@@ -380,12 +380,13 @@ const aboutUsData = [
 ];
 
 const socialMediaLinks = [
-    {id: 1, iconName: 'telegram'  , href: ""},
-    {id: 2, element: FaFacebook, href: ""},
-    {id: 3, element: 'twitter', href: ""},
-    {id: 4, element: FaInstagram , href: ""}
+    {id: 1, iconName: 'telegram_2'  , href: ""},
+    {id: 2, iconName: 'facebook', href: ""},
+    {id: 3, iconName: 'twitter', href: ""},
+    {id: 4, iconName: 'instagram' , href: ""},
+    {id: 5, iconName: 'youtube' , href: ""}
 ]
 
 
 
-export {accordions, coursesCategory, timeFilters , displayFilters , coursesTabs, questionTabs , followingTabs ,commentTabs ,notificationTabs,missionTabs,certificateTabs, aboutUsData};
+export {accordions, coursesCategory, timeFilters , displayFilters , coursesTabs, questionTabs , followingTabs ,commentTabs ,notificationTabs,missionTabs,certificateTabs, aboutUsData , socialMediaLinks};

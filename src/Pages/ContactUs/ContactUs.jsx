@@ -1,9 +1,11 @@
 
 import React, {useEffect, useState} from "react";
 import {Link} from "react-router-dom";
+import DynamicIcon from "../../DynamicIcon/DynamicIcon.jsx";
+import SocialBox from "../../Components/SocialBox/SocialBox.jsx";
+import {socialMediaLinks} from '../../data.jsx'
 
 function ContactUs() {
-    // const [socialData, setSocialData] = useState(socialMediaLinks);
     const [stepNumber, setStepNumber] = useState(1);
 
     const nextStep = () => {
@@ -48,22 +50,14 @@ function ContactUs() {
                         <h3 className="font-YekanBakh-Bold text-dark-550 dark:text-gray-920 mb-4 sm:mb-9 text-xl sm:text-2xl">پل
                             های ارتباطی</h3>
                         <div className="flex items-center gap-3">
-                            {/*<SocialBox*/}
-                            {/*    boxClass="size-16 bg-blue-700/10 hover:bg-blue-700 text-blue-700 hover:text-white rounded-lg">*/}
-                            {/*    <Telegram size="size-6"/>*/}
-                            {/*</SocialBox>*/}
-                            {/*<SocialBox*/}
-                            {/*    boxClass="size-16 bg-blue-700/10 hover:bg-blue-700 text-blue-700 hover:text-white rounded-lg">*/}
-                            {/*    <svg width="32" height="29" fill="none" className="transform scale-75 group"*/}
-                            {/*         viewBox="0 0 32 29">*/}
-                            {/*        <path*/}
-                            {/*            d="M15.979 28.5C3.177 28.5.434 25.985.434 14.25c0-3.226.207-5.754.773-7.726 1.45 1.454 3.28 3.202 5.268 4.76 2.818 2.208 6.232 4.261 9.504 4.261s6.686-2.053 9.505-4.262C27.47 9.726 29.3 7.978 30.75 6.524c.566 1.972.773 4.5.773 7.726 0 11.735-2.743 14.25-15.545 14.25"*/}
-                            {/*            fill="currentColor" stroke="currentColor"></path>*/}
-                            {/*        <path*/}
-                            {/*            d="M29.622 3.98c-1.518 1.548-3.531 3.536-5.736 5.264-2.778 2.176-5.582 3.71-7.907 3.71s-5.129-1.534-7.906-3.71C5.868 7.516 3.854 5.528 2.336 3.98 4.394.87 8.444 0 15.98 0S27.564.87 29.622 3.98"*/}
-                            {/*            fill="currentColor" stroke="currentColor"></path>*/}
-                            {/*    </svg>*/}
-                            {/*</SocialBox>*/}
+                            <SocialBox
+                                boxClass="size-16 bg-blue-700/10 hover:bg-blue-700 text-blue-700 hover:text-white hover:fill-white rounded-lg">
+                                <DynamicIcon name="telegram_2" className="size-6 text-inherit" />
+                            </SocialBox>
+                            <SocialBox
+                                boxClass="size-16 bg-blue-700/10 hover:bg-blue-700 text-blue-700 hover:text-white rounded-lg">
+                                <DynamicIcon name="mail" className="size-6 text-inherit" />
+                            </SocialBox>
                         </div>
                     </div>
                     {/*<!-- ! -------------------- Left Wrapper -------------------- ! -->*/}
@@ -71,22 +65,13 @@ function ContactUs() {
                         <h3 className="font-YekanBakh-Bold text-dark-550 dark:text-gray-920 mb-4 sm:mb-9 text-xl sm:text-2xl">شبکه
                             های اجتماعی</h3>
                         <div className="flex items-center gap-3">
-                            {/*{*/}
-                            {/*    socialData.map(social => {*/}
-                            {/*        const IconComponent = social.element*/}
-                            {/*        return (*/}
-                            {/*            <SocialBox key={social.id}*/}
-                            {/*                       boxClass="size-16 bg-blue-700/10 hover:bg-blue-700 text-blue-700 hover:text-white rounded-lg">*/}
-                            {/*                <IconComponent size={24}/>*/}
-                            {/*            </SocialBox>*/}
-                            {/*        )*/}
-
-                            {/*    })*/}
-                            {/*}*/}
-                            {/*<SocialBox*/}
-                            {/*    boxClass="size-16 bg-blue-700/10 hover:bg-blue-700 text-blue-700 hover:text-white rounded-lg">*/}
-                            {/*    <Telegram size="size-6"/>*/}
-                            {/*</SocialBox>*/}
+                            {
+                                socialMediaLinks.map(social =>(
+                                    <SocialBox key={social.id} boxClass="size-16 bg-blue-700/10 hover:bg-blue-700 text-blue-700 hover:text-white rounded-lg">
+                                        <DynamicIcon name={social.iconName} className="size-6 text-inherit" />
+                                    </SocialBox>
+                                ))
+                            }
                         </div>
                     </div>
                 </div>
@@ -171,8 +156,12 @@ function ContactUs() {
                         <div className="flex flex-col sm:flex-row items-center justify-between mt-8 gap-y-6">
                             {/*<!-- ! -------------------- Arrow Wrapper -------------------- ! -->*/}
                             <div className="flex items-center">
-                                {/*<Arrow onChangeStep={prevStep} iconClass="size-8 rotate-180 hover:scale-120 cursor-pointer transition-all text-blue-700 dark:text-blue-450 dark:hover:text-white" />*/}
-                                {/*<Arrow onChangeStep={nextStep} iconClass="size-8 hover:scale-120 cursor-pointer transition-all text-blue-700 dark:text-blue-450 dark:hover:text-white"/>*/}
+                                <div onClick={prevStep} className="">
+                                    <DynamicIcon name="arrow" className="size-9 rotate-180 hover:scale-120 cursor-pointer transition-all text-blue-700 dark:text-blue-450 dark:hover:text-white" />
+                                </div>
+                                <div onClick={nextStep} className="">
+                                    <DynamicIcon name="arrow" className="size-9 hover:scale-120 cursor-pointer transition-all text-blue-700 dark:text-blue-450 dark:hover:text-white" />
+                                </div>
                             </div>
                             {/*<!-- ! -------------------- Btn -------------------- ! -->*/}
                             <Link to="/" className="inline-flex items-center h-13 text-white hover:text-blue-700 hover:bg-white bg-blue-700 dark:hover:text-blue-450 dark:hover:border-blue-450 dark:hover:bg-transparent gap-x-2.5 border border-blue-700 font-bold px-3 sm:px-6 rounded-md hover:shadow-sm transition-all">
