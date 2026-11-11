@@ -21,7 +21,6 @@ function AboutUs(props) {
         }
     }, [teacherLoading , teacherHasFetched]);
 
-    console.log(teachers);
     useTitle('راکت | درباره ما')
     return (
         <section className="container">

@@ -27,6 +27,7 @@ import Articles from "./Pages/Articles/Articles.jsx";
 import ComingSoon from "./Pages/ComingSoon/ComingSoon.jsx";
 import CartPage from "./Pages/CartPage/CartPage.jsx";
 import Register from "./Pages/Auth/Register.jsx";
+import ContactUs from "./Pages/ContactUs/ContactUs.jsx";
 
 const routes = [
     {
@@ -40,6 +41,7 @@ const routes = [
             {path: 'podcasts' , element: <PodcastPage/>},
             {path: 'articles' , element: <Articles/>},
             {path: 'cart-page' , element: <CartPage/>},
+            {path: 'contact-us', element: <ContactUs/>},
         ]
     },
     {path: '/dashboard' , element: <DashboardLayout/> ,children: [

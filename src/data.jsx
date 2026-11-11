@@ -241,8 +241,6 @@ const certificateTabs = [
     },
 ];
 
-
-
 const aboutUsData = [
     {
         id: "activity-1",
@@ -380,6 +378,13 @@ const aboutUsData = [
         }
     }
 ];
+
+const socialMediaLinks = [
+    {id: 1, iconName: 'telegram'  , href: ""},
+    {id: 2, element: FaFacebook, href: ""},
+    {id: 3, element: 'twitter', href: ""},
+    {id: 4, element: FaInstagram , href: ""}
+]
 
 
 

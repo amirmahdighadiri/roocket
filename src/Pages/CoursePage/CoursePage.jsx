@@ -100,6 +100,7 @@ function CoursePage() {
     }
 
 
+
     return (
         courseLoading || !courseHasFetched ? <CoursePageLoader /> :  <section className="container">
             {/*<!-- ! -------------------- Courses Intro -------------------- ! -->*/}
@@ -243,43 +244,23 @@ function CoursePage() {
                             <div className={`${showMoreContent ? 'opacity-0' : 'opacity-100'} absolute bottom-0 left-0 w-full h-32 bg-gradient-to-t from-white dark:from-dark-930 via-white/90 dark:via-dark-930/90 to-transparent pointer-events-none transition-all`}></div>
                             {/*<!-- ! -------------------- Text Content -------------------- ! -->*/}
                             <div className={`${showMoreContent ? 'h-auto' : 'max-h-158'}  text-gray-700 dark:text-white mt-5 space-y-5 text-lg/9`}>
-                                <p className="font-Mult-Font-Bold">📢 معرفی دوره پروژه‌های لاراولی</p>
-                                <p className="font-Mult-Font-Medium">اگر می‌خواهید Laravel را به‌صورت عملی و پروژه‌محور
-                                    یاد بگیرید، این دوره برای شماست! در این دوره، به جای آموزش‌های تئوری، ۱۰ پروژه
-                                    کاربردی را از صفر تا صد پیاده‌سازی می‌کنیم تا بتوانید در دنیای واقعی از مهارت‌های
-                                    لاراولی خود استفاده کنید.</p>
-                                <p className="font-Mult-Font-Bold">💡 چه چیزهایی یاد می‌گیرید؟</p>
-                                <p className="font-Mult-Font-Medium *:block space-y-5">
-                                    <span className="">🔹 ساخت سیستم احراز هویت چندگانه (ایمیل، موبایل، رمز، OTP)</span>
-                                    <span className="">🔹 پیاده‌سازی سیستم مدیریت اعلان‌ها (ایمیل، SMS، تلگرام، پوش نوتیفیکیشن)</span>
-                                    <span
-                                        className="">🔹 طراحی و توسعه API برای اپلیکیشن‌های موبایل با احراز هویت امن</span>
-                                    <span className="">🔹 مدیریت فایل و فضای ذخیره‌سازی (آپلود، فشرده‌سازی، S3)</span>
-                                    <span className=""> 🔹 پیاده‌سازی چت زنده و پیام‌رسان با Laravel Reverb</span>
-                                    <span
-                                        className="">🔹 اتصال درگاه پرداخت و کیف پول دیجیتال برای مدیریت تراکنش‌ها</span>
-                                    <span className="">🔹 ایجاد سیستم مدیریت محتوا (CMS)‌ و ویرایشگر حرفه‌ای</span>
-                                    <span
-                                        className="">🔹 مدیریت نقش‌ها و سطوح دسترسی کاربران (ACL) با Spatie Permissions</span>
-                                    <span className="">🔹 بهینه‌سازی عملکرد و کشینگ در لاراول با Redis و Horizon</span>
-                                    <span className="">🔹 ساخت سیستم نظرات و امتیازدهی کاربران</span>
-                                </p>
-                                <p className="font-Mult-Font-Bold">✅ تمام پروژه‌ها به‌صورت عملی پیاده‌سازی می‌شوند و در
-                                    پایان دوره، مهارت‌های شما به سطح یک توسعه‌دهنده حرفه‌ای ارتقا می‌یابد!</p>
-                                <p className="font-Mult-Font-Medium">⚠️ نکته: این لیست ممکن است در زمان ضبط دوره شامل
-                                    تغییرات شود و همچنین مواردی اضافه یا تغییر کند.</p>
-                                <p className="font-Mult-Font-Bold">🎥 حتماً ویدیوی معرفی دوره را مشاهده کنید!</p>
-                                <p className="font-Mult-Font-Medium">در ویدیو توضیحات کامل‌تری درباره دوره، نحوه
-                                    برگزاری، سرفصل‌ها و جزئیات بیشتر ارائه شده است. 🚀</p>
-                                <h2 className="text-2xl font-Mult-Font-Bold">مزایا یادگیری لاراول به‌صورت پروژه
-                                    محور</h2>
-                                <p className="font-Mult-Font-Medium">یادگیری لاراول به‌صورت پروژه‌محور باعث می‌شود
-                                    مفاهیم تئوری را به‌طور عمیق‌تر و کاربردی‌تر درک کنید. در این روش، به جای تمرکز صرف
-                                    بر تعاریف و مفاهیم انتزاعی، با چالش‌های واقعی مواجه می‌شوید و توانایی حل مسئله در
-                                    شما تقویت می‌شود. همچنین، این سبک آموزش موجب تثبیت بهتر مباحث شده و اعتمادبه‌نفس شما
-                                    برای ورود به بازار کار را افزایش می‌دهد. علاوه بر این، با انجام پروژه‌های عملی،
-                                    نمونه‌کارهای ارزشمندی برای نمایش در گیت‌هاب (GitHub) ایجاد خواهید کرد که به تقویت
-                                    رزومه و افزایش شانس استخدام شما در شرکت‌های معتبر کمک فراوانی می‌کند.</p>
+                                {targetCourse?.description_content?.map((item , index) =>{
+                                    switch (item.type){
+                                        case "paragraph":{
+                                            return <p key={index} className={item.style === "bold" ? 'font-Mult-Font-Bold' : 'font-Mult-Font-Medium'}>{item.content}</p>
+                                        }
+                                        case "heading":{
+                                            return <h2 key={index} className={'text-2xl font-Mult-Font-Bold'}>{item.content}</h2>
+                                        }
+                                        case "list":{
+                                            return <ul key={index} className={'font-Mult-Font-Medium *:block space-y-5'}>
+                                                {item?.content?.map((text , index) => (
+                                                    <li key={index}>{text}</li>
+                                                ))}
+                                            </ul>
+                                        }
+                                    }
+                                })}
                             </div>
                             {/*<!-- ! -------------------- Show More Btn -------------------- ! -->*/}
                             <button onClick={toggleShowMoreContent} type="button" className="w-40 flex items-center justify-center mx-auto gap-x-2 relative bottom-0 border border-blue-700 bg-blue-700 hover:bg-transparent text-white hover:text-blue-700 font-YekanBakh-Medium cursor-pointer rounded-lg px-4 py-2 transition-all mt-3">
