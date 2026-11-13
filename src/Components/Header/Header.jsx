@@ -15,18 +15,23 @@ import MiniCourseBox from "../CoursesBox/MiniCourseBox.jsx";
 import {calculateTotal} from "../../Utils/calculateTotal/calculateTotal.js";
 import HeaderSkeleton from "../Loader/BoxSkeleton/HeaderSkeleton.jsx";
 import BadgeLoader from "../Loader/BoxSkeleton/BadgeLoader.jsx";
+import Notification from "../Notification/Notification.jsx";
 
 
 
 function Header(props) {
-    const {theme, setTheme, isOpenMenu, setIsOpenMenu, setIsShowOverlay, isLogin, userInfo , isOpenProfileMenu , toggleProfileMenu , isOpenCartDropDown , toggleCartDropDown,isAuthLoading,logoutHandler} = useContext(AppContext)
+    const {theme, setTheme, isOpenMenu, setIsOpenMenu, setIsShowOverlay, isLogin, userInfo , isOpenProfileMenu , toggleProfileMenu , isOpenCartDropDown , toggleCartDropDown,isAuthLoading,logoutHandler,isShowNotification,setIsShowNotification} = useContext(AppContext)
     const [isOpenCoursesSubmenu, toggleCoursesSubmenu] = useToggle(false)
     const [isOpenUsefulSubmenu, toggleUsefulSubmenu] = useToggle(false)
-    const [, , removeUserID] = useCookie("userID", "");
     const [isShowModal, toggleIsShowModal] = useToggle();
     const dispatch = useDispatch();
     const {carts , cartsLoading, cartsError, cartsHasFetched} = useSelector(state => state.carts);
     const totalPrice = calculateTotal(carts)
+    const [notificationValue, setNotificationValue] = useState({
+        title: "خطا !",
+        message: "خروج از حساب کاربری انجام نشد. لطفاً دوباره تلاش کنید.",
+        Icon: () => <DynamicIcon name={'closeCircle'} className={'size-7 text-blue-700'}/>
+    });
 
     useEffect(() => {
         if (isLogin && userInfo?.sub && !cartsHasFetched && !cartsLoading) {
@@ -75,10 +80,13 @@ function Header(props) {
         toggleProfileMenu()
     }
 
-    const confirmLogoutHandler = (status) => {
+    const confirmLogoutHandler = async (status) => {
         if (status){
-            logoutHandler()
-            window.location.reload();
+            try{
+                await logoutHandler()
+            }catch (err){
+                setIsShowNotification(true)
+            }
         }
         setIsShowOverlay()
         toggleIsShowModal()
@@ -175,7 +183,8 @@ function Header(props) {
                         <Link to="/dashboard/notifications" className="w-12 h-12 hidden lg:flex items-center justify-center relative dark:bg-dark-body-100 dark:hover:bg-[#ECEEEF] bg-[#ECEEEF] hover:bg-dark-body-100 rounded-full transition-all shrink-0 group">
                             <DynamicIcon name={'bell'} className={'size-4 text-biscay-700 group-hover:text-gray-920 dark:text-gray-920 dark:group-hover:text-biscay-700'}/>
                             {/*<!-- ! -------------------- Notification Badge -------------------- ! -->*/}
-                            <span className="size-6 flex-center absolute -top-2 -right-2 bg-red-450 text-white rounded-full font-YekanBakh text-sm">12</span>
+                            {!userInfo.length ? <span className="size-6 flex-center absolute -top-2 -right-2 bg-red-450 text-white rounded-full font-YekanBakh text-sm">12</span> : <BadgeLoader/>}
+
                         </Link>
                         {/*<!-- ! -------------------- Users Profile Image And Profile Menu -------------------- ! -->*/}
                         <div className={`relative ${isOpenProfileMenu ? 'z-20' : 'z-0'}`}>
@@ -259,8 +268,8 @@ function Header(props) {
                                             </Link>
                                             <span className="size-6 flex-center bg-yellow-500 rounded-full text-white font-YekanBakh-Bold">6</span>
                                         </li>
-                                        <li className="">
-                                            <button type="button" onClick={showModalConfirmHandler} className="flex items-center gap-x-4 text-gray-500 dark:text-gray-920">
+                                        <li className="" onClick={showModalConfirmHandler}>
+                                            <button type="button" className="flex items-center gap-x-4 text-gray-500 dark:text-gray-920">
                                                 <DynamicIcon name="logout" className="size-5 text-inherit" />
                                                 <span className="text-lg font-YekanBakh-Bold">خروج از حساب کاربری</span>
                                             </button>
@@ -521,6 +530,7 @@ function Header(props) {
             <div className="hidden dark:block w-full h-screen absolute top-0 right-0 bg-gradient-to-t from-transparent to-[#324456] -z-20"></div>
             <Overlay/>
             <ConfirmModal isShowModal={isShowModal} logoutHandler={confirmLogoutHandler}/>
+            <Notification {...notificationValue} isOpen={isShowNotification}/>
         </header>
     );
 }

@@ -40,7 +40,7 @@ function AppProvider({children}) {
         try {
             await logoutUser()
         }catch (err){
-            console.log(err.message)
+            throw err;
         }
 
     }
