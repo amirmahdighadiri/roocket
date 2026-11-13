@@ -95,7 +95,7 @@ const slice = createSlice({
         })
 
         builder.addCase(addUserCartToServer.fulfilled, (state, action) => {
-            state.addCartsLoading = false;
+            state.cartsAddLoading = false;
             state.carts.push(action.payload);
         })
 
