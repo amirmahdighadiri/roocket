@@ -19,7 +19,7 @@ import BadgeLoader from "../Loader/BoxSkeleton/BadgeLoader.jsx";
 
 
 function Header(props) {
-    const {theme, setTheme, isOpenMenu, setIsOpenMenu, setIsShowOverlay, isLogin, userInfo , isOpenProfileMenu , toggleProfileMenu , isOpenCartDropDown , toggleCartDropDown,isAuthLoading} = useContext(AppContext)
+    const {theme, setTheme, isOpenMenu, setIsOpenMenu, setIsShowOverlay, isLogin, userInfo , isOpenProfileMenu , toggleProfileMenu , isOpenCartDropDown , toggleCartDropDown,isAuthLoading,logoutHandler} = useContext(AppContext)
     const [isOpenCoursesSubmenu, toggleCoursesSubmenu] = useToggle(false)
     const [isOpenUsefulSubmenu, toggleUsefulSubmenu] = useToggle(false)
     const [, , removeUserID] = useCookie("userID", "");
@@ -75,9 +75,9 @@ function Header(props) {
         toggleProfileMenu()
     }
 
-    const logoutHandler = (status) => {
+    const confirmLogoutHandler = (status) => {
         if (status){
-            removeUserID()
+            logoutHandler()
             window.location.reload();
         }
         setIsShowOverlay()
@@ -198,7 +198,7 @@ function Header(props) {
                                                 <img src={defaultProfile} alt="default profile" className=""/>
                                             </div>
                                             <div className="flex flex-col gap-y-2">
-                                                <span className="text-biscay-700 dark:text-white font-YekanBakh-Heavy text-xl">{userInfo.fullName}</span>
+                                                <span className="text-biscay-700 dark:text-white font-YekanBakh-Heavy text-xl">{userInfo.full_name}</span>
                                                 <Link to="/dashboard/panel" className="flex items-center gap-x-2 text-blue-700 dark:text-blue-450 hover:opacity-80 transition-all">
                                                     <span className="">مشاهده پنل کاربری</span>
                                                     <DynamicIcon name="arrowRight" className="size-4 text-inherit rotate-180" />
@@ -290,9 +290,6 @@ function Header(props) {
                             </button>
                         </Link>
                     </div>)}
-
-
-
                 </div>
                 {/*<!-- ! -------------------- Header Menu Item ! =>(in mobile remove closed-position and add opened-position to show menu in mobile) ! -------------------- ! -->*/}
                 <nav id="menu" className={`fixed lg:static top-0 bottom-0 ${isOpenMenu ? 'right-0' : '-right-69'} h-full lg:h-auto w-69 lg:w-[92%] mx-auto bg-white lg:bg-[#CFD3DB] dark:bg-dark-910 lg:dark:bg-dark-body-100 py-5 px-5 lg:px-0 lg:rounded-b-3xl dark:shadow-whiteShadow transition-all z-20 overflow-y-auto lg:overflow-y-visible`}>
@@ -523,7 +520,7 @@ function Header(props) {
             </div>
             <div className="hidden dark:block w-full h-screen absolute top-0 right-0 bg-gradient-to-t from-transparent to-[#324456] -z-20"></div>
             <Overlay/>
-            <ConfirmModal isShowModal={isShowModal} logoutHandler={logoutHandler}/>
+            <ConfirmModal isShowModal={isShowModal} logoutHandler={confirmLogoutHandler}/>
         </header>
     );
 }

@@ -6,6 +6,7 @@ import useToggle from "../Hooks/useToggle/useToggle.jsx";
 import { supabase } from "../Lib/supabaseClient.js";
 import {useSelector} from "react-redux";
 import {getCoursesFromServer} from "../Redux/Store/Courses.jsx";
+import {logoutUser} from "../Lib/Services/authService.js";
 export const AppContext = createContext()
 
 
@@ -35,6 +36,15 @@ function AppProvider({children}) {
         toggleCartDropDown(false)
     }, [location.pathname])
 
+    const logoutHandler = async () => {
+        try {
+            await logoutUser()
+        }catch (err){
+            console.log(err.message)
+        }
+
+    }
+
     const contentValue = {
         theme,
         setTheme,
@@ -55,7 +65,8 @@ function AppProvider({children}) {
         isOpenCartDropDown,
         toggleCartDropDown,
         isAuthLoading,
-        setIsAuthLoading
+        setIsAuthLoading,
+        logoutHandler
     }
 
     useEffect(() => {
