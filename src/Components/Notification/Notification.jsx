@@ -2,9 +2,10 @@ import React, {useEffect, useState, useContext} from 'react';
 import ReactDOM from "react-dom";
 import {AppContext} from "../../Context/AppContext.jsx";
 
-function Notification({title, message, Icon, setIsOpen, isOpen}) {
+function Notification() {
     const [modalTopPosition, setModalTopPosition] = useState(0);
-    const {isShowNotification, setIsShowNotification} = useContext(AppContext)
+    const {isShowNotification, setIsShowNotification,notificationValue} = useContext(AppContext)
+    const Icon = notificationValue.Icon;
 
     useEffect(() => {
 
@@ -27,12 +28,12 @@ function Notification({title, message, Icon, setIsOpen, isOpen}) {
             {/* ! ================== ! Notification Icon ! ================== ! */}
             <div className="relative h-full flex-center">
                 <div className="absolute -right-1/2 -z-10 w-8 h-full rounded-sm bg-gray-300 dark:bg-dark-890"></div>
-                {Icon && <Icon/>}
+                {notificationValue.Icon && <Icon/>}
             </div>
             {/* ! ================== ! Notification Content ! ================== ! */}
             <div className="text-zinc-900 dark:text-zinc-100">
-                <p className="font-Dana-DemiBold text-lg">{title}</p>
-                <p className="text-sm">{message}</p>
+                <p className="font-Dana-DemiBold text-lg">{notificationValue.title}</p>
+                <p className="text-sm">{notificationValue.message}</p>
             </div>
             {/* ! ================== ! Progress Bar ! ================== ! */}
             <div  className={`absolute bottom-0 right-0 w-0 h-0.75 bg-blue-500 ${isShowNotification ? "animate-grow-width" : ""}`} onAnimationEnd={() => setIsShowNotification(false)}></div>

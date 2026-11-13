@@ -18,7 +18,11 @@ function CartPage() {
     const {discounts ,discountsLoading, discountsError, discountsHasFetched} = useSelector(state => state.discount)
     const [totalDiscount , setTotalDiscount] = useState(0);
     const { isShowNotification, setIsShowNotification} = useContext(AppContext)
-    const [notificationValue, setNotificationValue] = useState({});
+    const [notificationValue, setNotificationValue] = useState({
+        title: "خطا !",
+        message: "خطا در برقراری ارتباط.لطفا دوباره تلاش کنید!",
+        Icon: () => <DynamicIcon name={'closeCircle'} className={'size-7 text-blue-700'}/>
+    });
 
 
     useEffect(() => {

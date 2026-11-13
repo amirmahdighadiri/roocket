@@ -14,7 +14,11 @@ function Auth() {
     const [loading, setLoading] = useState(false);
     const [username, setUsername] = useState("");
     const {isShowNotification, setIsShowNotification , setIsLogin , setUserInfo} = useContext(AppContext)
-    const [notificationValue, setNotificationValue] = useState({});
+    const [notificationValue, setNotificationValue] = useState({
+        title: "خطا !",
+        message: "لطفا نام کاربر خود را به درستی وارد کنید.",
+        Icon: () => <DynamicIcon name={'closeCircle'} className={'size-7 text-blue-700'}/>
+    });
     const from = location.state?.from;
 
     const showNotificationHandler = ({title, message, Icon}) => {

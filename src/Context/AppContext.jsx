@@ -7,6 +7,7 @@ import { supabase } from "../Lib/supabaseClient.js";
 import {useSelector} from "react-redux";
 import {getCoursesFromServer} from "../Redux/Store/Courses.jsx";
 import {logoutUser} from "../Lib/Services/authService.js";
+import DynamicIcon from "../DynamicIcon/DynamicIcon.jsx";
 export const AppContext = createContext()
 
 
@@ -26,6 +27,7 @@ function AppProvider({children}) {
     const {courseLoading, courseHasFetched} = useSelector(
         state => state.courses
     );
+    const [notificationValue, setNotificationValue] = useState({});
 
     useEffect(() => {
         window.scrollTo(0, 0)
@@ -66,7 +68,8 @@ function AppProvider({children}) {
         toggleCartDropDown,
         isAuthLoading,
         setIsAuthLoading,
-        logoutHandler
+        logoutHandler,
+        notificationValue, setNotificationValue
     }
 
     useEffect(() => {

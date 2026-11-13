@@ -44,7 +44,11 @@ function CoursePage() {
     const {enrollments, enrollmentLoading, enrollmentError, enrollmentHasFetched} = useSelector(state => state.enrollments)
     const isInCart = carts.some(cart => cart.course_id === targetCourse?.id && cart.user_id === userInfo.sub);
     const isPurchased = enrollments.some(item => item.course_id === targetCourse?.id && item.user_id === userInfo.sub)
-    const [notificationValue, setNotificationValue] = useState({});
+    const [notificationValue, setNotificationValue] = useState({
+        title: "خطا !",
+        message: "خطا در برقراری ارتباط.لطفا دوباره تلاش کنید!",
+        Icon: () => <DynamicIcon name={'closeCircle'} className={'size-7 text-blue-700'}/>
+    });
 
 
     useTitle(`راکت | ${URLTitle}`)
