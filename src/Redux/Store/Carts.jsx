@@ -61,12 +61,12 @@ const slice = createSlice({
     initialState: {
         carts: [],
         cartsLoading: false,
-        cartsError: false,
+        cartsError: null,
         cartsHasFetched: false,
         cartsAddLoading: false,
-        cartsAddError: false,
+        cartsAddError: null,
         cartsRemoveLoading: false,
-        cartsRemoveError: false,
+        cartsRemoveError: null,
     },
     reducers: {},
     loading : false,
@@ -74,7 +74,7 @@ const slice = createSlice({
         {/*<!-- ! -------------------- Get User Cart Extra Reducer -------------------- ! -->*/}
         builder.addCase(getUserCartsFromServer.pending , (state, action) => {
             state.cartsLoading = true;
-            state.cartsError = false;
+            state.cartsError = null;
         })
 
         builder.addCase(getUserCartsFromServer.fulfilled , (state, action) => {
@@ -83,15 +83,15 @@ const slice = createSlice({
             state.cartsHasFetched = true;
         })
 
-        builder.addCase(getUserCartsFromServer.rejected , (state, action) => {
+        builder.addCase(getUserCartsFromServer.rejected, (state, action) => {
             state.cartsLoading = false;
-            state.carts = action.payload;
+            state.cartsError = action.payload || action.error.message;
             state.cartsHasFetched = true;
         })
         {/*<!-- ! -------------------- Add Cart Extra Reducer -------------------- ! -->*/}
         builder.addCase(addUserCartToServer.pending, (state) => {
             state.cartsAddLoading = true;
-            state.cartsAddError = false;
+            state.cartsAddError = null;
         })
 
         builder.addCase(addUserCartToServer.fulfilled, (state, action) => {
@@ -99,23 +99,24 @@ const slice = createSlice({
             state.carts.push(action.payload);
         })
 
-        builder.addCase(addUserCartToServer.rejected, (state) => {
+        builder.addCase(addUserCartToServer.rejected, (state, action) => {
             state.cartsAddLoading = false;
-            state.cartsAddError = true;
+            state.cartsAddError = action.payload || action.error.message;
         })
         {/*<!-- ! -------------------- Remove Cart Extra Reducer -------------------- ! -->*/}
         builder.addCase(removeUserCartFromServer.pending, (state) => {
             state.cartsRemoveLoading = true;
-            state.cartsRemoveError = false;
+            state.cartsRemoveError = null;
         })
 
         builder.addCase(removeUserCartFromServer.fulfilled, (state, action) => {
+            state.cartsRemoveLoading = false;
             state.carts = state.carts.filter((item) => item.id !== action.payload);
         })
 
-        builder.addCase(removeUserCartFromServer.rejected, (state) => {
+        builder.addCase(removeUserCartFromServer.rejected, (state, action) => {
             state.cartsRemoveLoading = false;
-            state.cartsRemoveError = true;
+            state.cartsRemoveError = action.payload || action.error.message;
         })
 
     }
