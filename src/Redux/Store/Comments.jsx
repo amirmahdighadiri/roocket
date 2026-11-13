@@ -114,7 +114,7 @@ const commentsSlice = createSlice({
 
         builder.addCase(getCommentsFromServer.rejected, (state, action) => {
             state.commentsLoading = false;
-            state.commentsError = action.payload;
+            state.commentsError = action.payload || action.error.message;
         });
 
         // ! Add Comment
@@ -131,7 +131,7 @@ const commentsSlice = createSlice({
 
         builder.addCase(addCommentToServer.rejected, (state, action) => {
             state.addCommentLoading = false;
-            state.addCommentError = action.payload;
+            state.addCommentError = action.payload || action.error.message;
         });
 
         // ! Delete Comment
@@ -169,7 +169,7 @@ const commentsSlice = createSlice({
 
         builder.addCase(deleteCommentFromServer.rejected, (state, action) => {
             state.deleteCommentLoading = false;
-            state.deleteCommentError = action.payload;
+            state.deleteCommentError = action.payload || action.error.message;
         });
     },
 });
