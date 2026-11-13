@@ -29,19 +29,20 @@ const slice = createSlice({
 
     extraReducers: (builder) => {
         builder.addCase(getTeachersFromServer.pending, (state) => {
-            state.teacherHasFetched = true;
-            state.articleError = null;
+            state.teacherLoading = true;
+            state.teacherError = null;
         });
 
         builder.addCase(getTeachersFromServer.fulfilled, (state, action) => {
-            state.teacherHasFetched = false;
+            state.teacherLoading = false;
             state.teachers = action.payload;
-            state.articleHasFetched = true;
+            state.teacherHasFetched = true;
         });
 
         builder.addCase(getTeachersFromServer.rejected, (state, action) => {
-            state.articleLoading = false;
-            state.teacherError = action.payload;
+            state.teacherLoading = false;
+            state.teacherError = action.payload || action.error.message;
+            state.teacherHasFetched = true;
         });
     },
 });
