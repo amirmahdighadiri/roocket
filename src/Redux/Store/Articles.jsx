@@ -41,7 +41,7 @@ const slice = createSlice({
 
         builder.addCase(getArticlesFromServer.rejected, (state, action) => {
             state.articleLoading = false;
-            state.articleError = action.payload;
+            state.articleError = action.payload || action.error.message;
         });
     },
 });
