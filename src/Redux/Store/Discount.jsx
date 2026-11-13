@@ -23,7 +23,7 @@ const slice = createSlice({
     initialState: {
         discounts: [],
         discountsLoading: false,
-        discountsError: false,
+        discountsError: null,
         discountsHasFetched: false,
     },
 
@@ -32,7 +32,7 @@ const slice = createSlice({
     extraReducers: (builder) => {
              builder.addCase(getDiscountFromServer.pending, (state) => {
                 state.discountsLoading = true;
-                state.discountsError = false;
+                state.discountsError = null;
             })
 
             builder.addCase(getDiscountFromServer.fulfilled, (state, action) => {
@@ -41,9 +41,9 @@ const slice = createSlice({
                 state.discountsHasFetched = true;
             })
 
-            builder.addCase(getDiscountFromServer.rejected, (state) => {
+            builder.addCase(getDiscountFromServer.rejected, (state, action) => {
                 state.discountsLoading = false;
-                state.discountsError = true;
+                state.discountsError = action.payload || action.error.message;
                 state.discountsHasFetched = true;
             });
     },
