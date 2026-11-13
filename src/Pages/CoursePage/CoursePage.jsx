@@ -1,5 +1,5 @@
-import React, {useState, useEffect, useRef , useContext} from 'react';
-import {Link , useLocation} from 'react-router-dom';
+import React, {useState, useEffect, useRef, useContext} from 'react';
+import {Link, useLocation} from 'react-router-dom';
 import {useDispatch, useSelector} from "react-redux";
 import DynamicIcon from "../../DynamicIcon/DynamicIcon.jsx";
 import {getCoursesFromServer} from "../../Redux/Store/Courses.jsx";
@@ -8,7 +8,9 @@ import CourseAccordion from "../../Components/Accordion/CourseAccordion/CourseAc
 import CourseLinkBox from "../../Components/CourseLinkBox/CourseLinkBox.jsx";
 import useToggle from "../../Hooks/useToggle/useToggle.jsx";
 import CommentBox from "../../Components/CommentBox/CommentBox.jsx";
-{/*<!-- ! -------------------- Images -------------------- ! -->*/}
+
+{/*<!-- ! -------------------- Images -------------------- ! -->*/
+}
 import chatImage from "../../assets/images/chat_img.png"
 import laravelBanner from "../../assets/images/banner/laravel.jpg"
 import banner1 from "../../assets/images/banner/banner-1.gif"
@@ -34,38 +36,39 @@ function CoursePage() {
     const location = useLocation()
     const URLTitle = decodeURIComponent(location.pathname.split("/").pop());
     const [targetCourse, setTargetCourse] = useState({});
-    const {isLogin, userInfo ,isShowNotification, setIsShowNotification} = useContext(AppContext)
+    const {isLogin, userInfo, isShowNotification, setIsShowNotification} = useContext(AppContext)
     const courseComments = comments.filter(comment => comment.course_id === targetCourse?.id)
     const mainComments = courseComments.filter(comment => comment.parent_id === null)
     const [isShowEditor, toggleShowEditor] = useToggle();
     const {carts, cartsLoading, cartsError, cartsHasFetched, cartsAddLoading} = useSelector(state => state.carts);
     const {enrollments, enrollmentLoading, enrollmentError, enrollmentHasFetched} = useSelector(state => state.enrollments)
     const isInCart = carts.some(cart => cart.course_id === targetCourse?.id && cart.user_id === userInfo.sub);
-    const isPurchased = enrollments.some(item =>     item.course_id === targetCourse?.id && item.user_id === userInfo.sub)
+    const isPurchased = enrollments.some(item => item.course_id === targetCourse?.id && item.user_id === userInfo.sub)
     const [notificationValue, setNotificationValue] = useState({
         title: "خطا !",
         message: "خطا در برقراری ارتباط.لطفا دوباره تلاش کنید!",
         Icon: () => <DynamicIcon name={'closeCircle'} className={'size-7 text-blue-700'}/>
     });
 
+
     useTitle(`راکت | ${URLTitle}`)
 
     useEffect(() => {
-        if (!commentsLoading && !commentsHasFetched){
+        if (!commentsLoading && !commentsHasFetched) {
             dispatch(getCommentsFromServer())
         }
-    }, [commentsHasFetched , commentsLoading]);
+    }, [commentsHasFetched, commentsLoading]);
 
     useEffect(() => {
-        if (!enrollmentHasFetched && !enrollmentLoading){
+        if (!enrollmentHasFetched && !enrollmentLoading) {
             dispatch(getEnrollmentsFromServer())
         }
-    }, [enrollmentHasFetched ,enrollmentLoading]);
+    }, [enrollmentHasFetched, enrollmentLoading]);
 
     useEffect(() => {
         const findCourse = courses.find(courses => courses.title === URLTitle)
         setTargetCourse(findCourse)
-    }, [courses,URLTitle]);
+    }, [courses, URLTitle]);
 
     useEffect(() => {
         const observer = new IntersectionObserver(([entry]) => {
@@ -86,7 +89,7 @@ function CoursePage() {
         setTab(event.target.id)
     }
 
-    const addCourseToCart = (event)=>{
+    const addCourseToCart = async (event) => {
         event.preventDefault()
         const newCartItem = {
             user_id: userInfo.sub,
@@ -95,13 +98,27 @@ function CoursePage() {
             added_at: new Date().toISOString().split("T")[0],
         };
 
-        dispatch(addUserCartToServer(newCartItem));
+        try {
+            dispatch(addUserCartToServer(newCartItem)).unwrap()
+            setNotificationValue({
+                title: "موفق!",
+                message: "دوره با موفقیت به سبد خرید اضافه شد!",
+                Icon: () => <DynamicIcon name="checkCircle" className="size-7 text-blue-700"/>,
+            });
+            setIsShowNotification(true)
+        } catch (err) {
+            setNotificationValue({
+                title: "خطا !",
+                message: "خطا در ارتباط با سرور. لطفاً دوباره تلاش کنید.",
+                Icon: () => <DynamicIcon name={'closeCircle'} className={'size-7 text-blue-700'}/>
+            });
+            setIsShowNotification(true)
+        }
+
     }
 
-    console.log(isPurchased)
-
     return (
-        courseLoading || !courseHasFetched ? <CoursePageLoader /> :  <section className="container">
+        courseLoading || !courseHasFetched ? <CoursePageLoader/> : <section className="container">
             {/*<!-- ! -------------------- Courses Intro -------------------- ! -->*/}
             <div className="bg-white dark:bg-dark-930 py-3 px-3 xl:px-10 sm:pt-6 sm:pb-4 rounded-lg my-10">
                 {/*<!-- ! -------------------- Courses Summary -------------------- ! -->*/}
@@ -113,33 +130,41 @@ function CoursePage() {
                         {/*<!-- ! -------------------- Courses Action Buttons -------------------- ! -->*/}
                         <div className="flex flex-col lg:flex-row gap-y-5 items-center justify-between">
                             {/*<!-- ! -------------------- Login Button -------------------- ! -->*/}
-                            {!isLogin && <Link to="/auth" className="inline-flex items-center justify-center gap-x-2 bg-blue-700 border border-blue-700 text-white hover:text-blue-700 hover:bg-transparent rounded h-10 lg:h-14 px-9 transition-all">
+                            {!isLogin && <Link to="/auth"
+                                               className="inline-flex items-center justify-center gap-x-2 bg-blue-700 border border-blue-700 text-white hover:text-blue-700 hover:bg-transparent rounded h-10 lg:h-14 px-9 transition-all">
                                 <DynamicIcon name="educationIcon" className="size-5 text-inherit"/>
                                 <span className="font-YekanBakh-Bold">برای یادگیری وارد سایت شوید</span>
                             </Link>}
                             {/*<!-- ! -------------------- Free & Paid Courses Button -------------------- ! -->*/}
                             {
-                                isLogin && ( isPurchased  ?
+                                isLogin && (isPurchased ?
                                         <div className="flex items-center gap-x-3">
-                                            <a href="#curriculum-content" className="inline-flex items-center justify-center gap-x-2 bg-blue-700 border border-blue-700 text-white hover:text-blue-700 hover:bg-transparent rounded h-10 lg:h-14 px-9 transition-all cursor-pointer">
+                                            <a href="#curriculum-content"
+                                               className="inline-flex items-center justify-center gap-x-2 bg-blue-700 border border-blue-700 text-white hover:text-blue-700 hover:bg-transparent rounded h-10 lg:h-14 px-9 transition-all cursor-pointer">
                                                 <span className="font-YekanBakh-Bold">مشاهده جلسات دوره</span>
                                                 <DynamicIcon name="educationIcon" className="size-5 text-inherit"/>
                                             </a>
-                                        </div>: isInCart ?
+                                        </div> : isInCart ?
                                             <div className="flex items-center gap-x-3">
-                                                <Link to="/cart-page" className="inline-flex items-center justify-center gap-x-2 bg-green-600 border border-green-600 text-white hover:text-green-600 hover:bg-transparent rounded h-10 lg:h-14 px-9 transition-all cursor-pointer">
-                                                    <span className="font-YekanBakh-Bold">نهایی سازی خرید و شروع یادگیری</span>
+                                                <Link to="/cart-page"
+                                                      className="inline-flex items-center justify-center gap-x-2 bg-green-600 border border-green-600 text-white hover:text-green-600 hover:bg-transparent rounded h-10 lg:h-14 px-9 transition-all cursor-pointer">
+                                                    <span
+                                                        className="font-YekanBakh-Bold">نهایی سازی خرید و شروع یادگیری</span>
                                                     <DynamicIcon name="educationIcon" className="size-5 text-inherit"/>
                                                 </Link>
-                                                <span className="flex items-center gap-x-1 text-customOrange-700 font-YekanBakh-Bold">
+                                                <span
+                                                    className="flex items-center gap-x-1 text-customOrange-700 font-YekanBakh-Bold">
                                                 <span className="">رایگان برای اعضای ویژه</span>
                                                 <DynamicIcon name="star" className="size-4 text-inherit mb-1"/>
                                             </span>
-                                            </div>: targetCourse?.price === 0 ?
+                                            </div> : targetCourse?.price === 0 ?
                                                 <div className="flex items-center gap-x-3">
-                                                    <button type="button" onClick={addCourseToCart} className="inline-flex items-center justify-center gap-x-2 bg-blue-700 border border-blue-700 text-white hover:text-blue-700 hover:bg-transparent rounded h-10 lg:h-14 px-9 transition-all">
-                                                        <span className="font-YekanBakh-Bold">ثبت نام رایگان</span>
-                                                        <DynamicIcon name="educationIcon" className="size-5 text-inherit"/>
+                                                    <button type="button" disabled={cartsAddLoading} onClick={addCourseToCart} className="relative inline-flex items-center justify-center gap-x-2 bg-blue-700 border border-blue-700 text-white hover:text-blue-700 hover:bg-transparent rounded h-10 lg:h-14 px-9 transition-all cursor-pointer">
+                                                        <span className={cartsAddLoading ? "invisible" : "font-YekanBakh-Bold"}>
+                                                            ثبت نام رایگان
+                                                        </span>
+                                                        <DynamicIcon name="educationIcon" className={`size-5 text-inherit ${cartsAddLoading ? "invisible" : ""}`}/>
+                                                        {cartsAddLoading && (<span className="absolute size-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />)}
                                                     </button>
                                                     <a href="#curriculum-content" className="flex items-center gap-x-1 text-blue-700 hover:text-gray-900 font-YekanBakh-Bold transition-all">
                                                         <span className="">مشاهده سر فصل ها</span>
@@ -147,21 +172,26 @@ function CoursePage() {
                                                     </a>
                                                 </div> :
                                                 <div className="flex items-center gap-x-3">
-                                                    <button type="button" onClick={addCourseToCart} className="inline-flex items-center justify-center gap-x-2 bg-blue-700 border border-blue-700 text-white hover:text-blue-700 hover:bg-transparent rounded h-10 lg:h-14 px-9 transition-all cursor-pointer">
-                                                        <span className="font-YekanBakh-Bold">خرید نقدی دوره (امکان دانلود)</span>
-                                                        <DynamicIcon name="educationIcon" className="size-5 text-inherit"/>
+                                                    <button type="button" disabled={cartsAddLoading} onClick={addCourseToCart} className="relative inline-flex items-center justify-center gap-x-2 bg-blue-700 border border-blue-700 text-white hover:text-blue-700 hover:bg-transparent rounded h-10 lg:h-14 px-9 transition-all cursor-pointer">
+                                                        <span className={cartsAddLoading ? "invisible" : "font-YekanBakh-Bold"}>
+                                                            خرید نقدی دوره (امکان دانلود)
+                                                        </span>
+                                                        <DynamicIcon name="educationIcon" className={`size-5 text-inherit ${cartsAddLoading ? "invisible" : ""}`}/>
+
+                                                        {cartsAddLoading && (<span className="absolute size-5 border-2 border-white/30 border-t-white rounded-full animate-spin"/>)}
                                                     </button>
                                                     <span className="flex items-center gap-x-1 text-customOrange-700 font-YekanBakh-Bold">
-                                                <span className="">رایگان برای اعضای ویژه</span>
-                                                    <DynamicIcon name="star" className="size-4 text-inherit mb-1"/>
-                                                </span>
+                                                        <span className="">رایگان برای اعضای ویژه</span>
+                                                        <DynamicIcon name="star" className="size-4 text-inherit mb-1"/>
+                                                    </span>
                                                 </div>
                                 )
                             }
 
                             {/*<!-- ! -------------------- Free & Price Course Price -------------------- ! -->*/}
                             <div className="inline-flex items-center gap-x-2 text-biscay-700 dark:text-white">
-                                <span className="text-5xl font-YekanBakh-Heavy">{targetCourse?.price === 0 ? 'رایگان !' : String(targetCourse?.price)?.replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</span>
+                                <span
+                                    className="text-5xl font-YekanBakh-Heavy">{targetCourse?.price === 0 ? 'رایگان !' : String(targetCourse?.price)?.replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</span>
                                 {targetCourse?.price !== 0 && <DynamicIcon name="toman" className="size-6"/>}
                             </div>
                         </div>
@@ -175,18 +205,22 @@ function CoursePage() {
                     </div>
                 </div>
                 {/*<!-- ! -------------------- Courses Meta -------------------- ! -->*/}
-                <div className="flex items-center justify-between border-t border-gray-100 dark:border-gray-900/10 pt-5 mt-10">
+                <div
+                    className="flex items-center justify-between border-t border-gray-100 dark:border-gray-900/10 pt-5 mt-10">
                     {/*<!-- ! -------------------- Courses Action Btn -------------------- ! -->*/}
                     <div className="flex items-center gap-x-5 lg:gap-x-7">
-                        <button type="button" className="flex items-center gap-x-1 text-dark-550 dark:text-dark-200 hover:text-red-450 transition-all cursor-pointer">
+                        <button type="button"
+                                className="flex items-center gap-x-1 text-dark-550 dark:text-dark-200 hover:text-red-450 transition-all cursor-pointer">
                             <DynamicIcon name="heart" className="size-6 text-inherit"/>
                             <span className="">{targetCourse?.userLike?.length}</span>
                         </button>
-                        <a href="#reviews-content" className="flex items-center gap-x-1 text-dark-550 dark:text-dark-200 hover:text-green-700 transition-all cursor-pointer">
+                        <a href="#reviews-content"
+                           className="flex items-center gap-x-1 text-dark-550 dark:text-dark-200 hover:text-green-700 transition-all cursor-pointer">
                             <DynamicIcon name="document" className="size-6 text-inherit"/>
                             <span className="">53</span>
                         </a>
-                        <button type="button" className="flex items-center gap-x-1 text-dark-550 dark:text-dark-200 hover:text-blue-700 transition-all cursor-pointer">
+                        <button type="button"
+                                className="flex items-center gap-x-1 text-dark-550 dark:text-dark-200 hover:text-blue-700 transition-all cursor-pointer">
                             <DynamicIcon name="bell" className="size-6 text-inherit"/>
                             <span className="">23</span>
                         </button>
@@ -214,7 +248,8 @@ function CoursePage() {
                     {/*<!-- ! --------------------  Sentinel Element For Detecting Sticky State -------------------- ! -->*/}
                     <div ref={triggerRef}></div>
                     {/*<!-- ! -------------------- Courses Details Tabs -------------------- ! -->*/}
-                    <div className={`sticky top-4 z-20 ${isSticky ? 'bg-black/8 dark:bg-black/15 backdrop-blur-xl border-white/10 mx-2' : 'bg-white dark:bg-dark-930 mx-0'} shadow-sm py-4 rounded mb-8 transition-all`}>
+                    <div
+                        className={`sticky top-4 z-20 ${isSticky ? 'bg-black/8 dark:bg-black/15 backdrop-blur-xl border-white/10 mx-2' : 'bg-white dark:bg-dark-930 mx-0'} shadow-sm py-4 rounded mb-8 transition-all`}>
                         <ul className="px-6 space-x-5 md:space-x-8">
                             <li className="inline-block">
                                 <a href="#description-text" id="description" type="button" onClick={changeTab}
@@ -234,33 +269,41 @@ function CoursePage() {
                                 </a>
                             </li>
                             <li className="inline-block">
-                                <a href="#reviews-content" id="reviews" type="button" onClick={changeTab} className={`relative ${tab === "reviews" ? 'text-blue-700 before:opacity-100' : 'text-gray-300 hover:text-gray-700 dark:hover:text-white before:opacity-0'} font-YekanBakh-Bold cursor-pointer pr-2 transition-all before:content-[''] before:absolute before:top-0 before:bottom-0 before:-right-1 before:my-auto before:size-1 before:rounded-full before:bg-blue-700`}>دیدگاه
+                                <a href="#reviews-content" id="reviews" type="button" onClick={changeTab}
+                                   className={`relative ${tab === "reviews" ? 'text-blue-700 before:opacity-100' : 'text-gray-300 hover:text-gray-700 dark:hover:text-white before:opacity-0'} font-YekanBakh-Bold cursor-pointer pr-2 transition-all before:content-[''] before:absolute before:top-0 before:bottom-0 before:-right-1 before:my-auto before:size-1 before:rounded-full before:bg-blue-700`}>دیدگاه
                                     و پرسش
                                 </a>
                             </li>
                         </ul>
                     </div>
                     {/*<!-- ! -------------------- Courses Description Text -------------------- ! -->*/}
-                    <div id="description-text" className="bg-white dark:bg-dark-930 shadow-sm rounded px-3 md:px-10 py-9 mb-8 scroll-mt-14">
-                        <span className="relative text-blue-700 dark:text-white text-2xl font-YekanBakh-Heavy pr-2 before:content-[''] before:absolute before:top-0 before:bottom-0 before:-right-1 before:my-auto before:size-2 before:rounded-full dark:before:bg-white before:bg-blue-700">
+                    <div id="description-text"
+                         className="bg-white dark:bg-dark-930 shadow-sm rounded px-3 md:px-10 py-9 mb-8 scroll-mt-14">
+                        <span
+                            className="relative text-blue-700 dark:text-white text-2xl font-YekanBakh-Heavy pr-2 before:content-[''] before:absolute before:top-0 before:bottom-0 before:-right-1 before:my-auto before:size-2 before:rounded-full dark:before:bg-white before:bg-blue-700">
                             توضیحات
                         </span>
                         <div className="relative overflow-hidden ">
                             {/*<!-- ! -------------------- Text Overlay -------------------- ! -->*/}
-                            <div className={`${showMoreContent ? 'opacity-0' : 'opacity-100'} absolute bottom-0 left-0 w-full h-32 bg-gradient-to-t from-white dark:from-dark-930 via-white/90 dark:via-dark-930/90 to-transparent pointer-events-none transition-all`}></div>
+                            <div
+                                className={`${showMoreContent ? 'opacity-0' : 'opacity-100'} absolute bottom-0 left-0 w-full h-32 bg-gradient-to-t from-white dark:from-dark-930 via-white/90 dark:via-dark-930/90 to-transparent pointer-events-none transition-all`}></div>
                             {/*<!-- ! -------------------- Text Content -------------------- ! -->*/}
-                            <div className={`${showMoreContent ? 'h-auto' : 'max-h-158'}  text-gray-700 dark:text-white mt-5 space-y-5 text-lg/9`}>
-                                {targetCourse?.description_content?.map((item , index) =>{
-                                    switch (item.type){
-                                        case "paragraph":{
-                                            return <p key={index} className={item.style === "bold" ? 'font-Mult-Font-Bold' : 'font-Mult-Font-Medium'}>{item.content}</p>
+                            <div
+                                className={`${showMoreContent ? 'h-auto' : 'max-h-158'}  text-gray-700 dark:text-white mt-5 space-y-5 text-lg/9`}>
+                                {targetCourse?.description_content?.map((item, index) => {
+                                    switch (item.type) {
+                                        case "paragraph": {
+                                            return <p key={index}
+                                                      className={item.style === "bold" ? 'font-Mult-Font-Bold' : 'font-Mult-Font-Medium'}>{item.content}</p>
                                         }
-                                        case "heading":{
-                                            return <h2 key={index} className={'text-2xl font-Mult-Font-Bold'}>{item.content}</h2>
+                                        case "heading": {
+                                            return <h2 key={index}
+                                                       className={'text-2xl font-Mult-Font-Bold'}>{item.content}</h2>
                                         }
-                                        case "list":{
-                                            return <ul key={index} className={'font-Mult-Font-Medium *:block space-y-5'}>
-                                                {item?.content?.map((text , index) => (
+                                        case "list": {
+                                            return <ul key={index}
+                                                       className={'font-Mult-Font-Medium *:block space-y-5'}>
+                                                {item?.content?.map((text, index) => (
                                                     <li key={index}>{text}</li>
                                                 ))}
                                             </ul>
@@ -269,14 +312,17 @@ function CoursePage() {
                                 })}
                             </div>
                             {/*<!-- ! -------------------- Show More Btn -------------------- ! -->*/}
-                            <button onClick={toggleShowMoreContent} type="button" className="w-40 flex items-center justify-center mx-auto gap-x-2 relative bottom-0 border border-blue-700 bg-blue-700 hover:bg-transparent text-white hover:text-blue-700 font-YekanBakh-Medium cursor-pointer rounded-lg px-4 py-2 transition-all mt-3">
+                            <button onClick={toggleShowMoreContent} type="button"
+                                    className="w-40 flex items-center justify-center mx-auto gap-x-2 relative bottom-0 border border-blue-700 bg-blue-700 hover:bg-transparent text-white hover:text-blue-700 font-YekanBakh-Medium cursor-pointer rounded-lg px-4 py-2 transition-all mt-3">
                                 <span className="text-lg">{showMoreContent ? 'مشاهده کمتر' : 'مشاهده بیشتر'}</span>
-                                {showMoreContent ? <DynamicIcon name="eyeSlash" className="size-5 text-inherit"/> :     <DynamicIcon name="eye" className="size-5 text-inherit"/>}
+                                {showMoreContent ? <DynamicIcon name="eyeSlash" className="size-5 text-inherit"/> :
+                                    <DynamicIcon name="eye" className="size-5 text-inherit"/>}
                             </button>
                         </div>
                     </div>
                     {/*<!-- ! -------------------- Courses Support -------------------- ! -->*/}
-                    <div id="guarantee-text" className="hidden md:block bg-white dark:bg-dark-930 shadow-sm rounded px-3 md:px-9 py-8 mb-8 scroll-mt-14">
+                    <div id="guarantee-text"
+                         className="hidden md:block bg-white dark:bg-dark-930 shadow-sm rounded px-3 md:px-9 py-8 mb-8 scroll-mt-14">
                         <h2 className="relative text-blue-700 dark:text-white text-2xl font-YekanBakh-Heavy pr-2 before:content-[''] before:absolute before:top-0 before:bottom-0 before:-right-1 before:my-auto before:size-2 before:rounded-full dark:before:bg-white before:bg-blue-700">گارانتی
                             بازگشت وجه</h2>
                         <div className="flex items-center mt-6">
@@ -296,7 +342,8 @@ function CoursePage() {
                         </div>
                     </div>
                     {/*<!-- ! -------------------- Courses Curriculum -------------------- ! -->*/}
-                    <div id="curriculum-content" className="bg-white dark:bg-dark-930 shadow-sm rounded px-3 md:px-10 py-7 mb-8 scroll-mt-14">
+                    <div id="curriculum-content"
+                         className="bg-white dark:bg-dark-930 shadow-sm rounded px-3 md:px-10 py-7 mb-8 scroll-mt-14">
                         <h2 className="relative text-blue-700 dark:text-white text-2xl font-YekanBakh-Heavy pr-2 mb-5 before:content-[''] before:absolute before:top-0 before:bottom-0 before:-right-1 before:my-auto before:size-2 before:rounded-full dark:before:bg-white before:bg-blue-700">جلسات
                             دوره</h2>
                         {/*<!-- ! -------------------- Courses Curriculum Links -------------------- ! -->*/}
@@ -306,26 +353,34 @@ function CoursePage() {
                         </div>
                     </div>
                     {/*<!-- ! -------------------- Courses comments Wrapper -------------------- ! -->*/}
-                    <div id="reviews-content" className="bg-white dark:bg-dark-930 shadow-sm rounded px-3 md:px-10 py-7 scroll-mt-14">
+                    <div id="reviews-content"
+                         className="bg-white dark:bg-dark-930 shadow-sm rounded px-3 md:px-10 py-7 scroll-mt-14">
                         {/*<!-- ! -------------------- Title & Add Comment Buttons -------------------- ! -->*/}
                         <div className="">
                             <div className="flex items-center justify-between mb-6">
                                 {/*<!-- ! -------------------- Title  -------------------- ! -->*/}
-                                <h2 className="relative text-blue-700 dark:text-white text-2xl font-YekanBakh-Heavy pr-2 before:content-[''] before:absolute before:top-0 before:bottom-0 before:-right-1 before:my-auto before:size-2 before:rounded-full dark:before:bg-white before:bg-blue-700">دیدگاه و پرسش</h2>
+                                <h2 className="relative text-blue-700 dark:text-white text-2xl font-YekanBakh-Heavy pr-2 before:content-[''] before:absolute before:top-0 before:bottom-0 before:-right-1 before:my-auto before:size-2 before:rounded-full dark:before:bg-white before:bg-blue-700">دیدگاه
+                                    و پرسش</h2>
                                 {/*<!-- ! -------------------- Add Comment Buttons -------------------- ! -->*/}
                                 {isLogin && <div className="flex items-center gap-x-2">
-                                    <button type="button" className="h-12 px-3 border border-blue-700 dark:border-white text-blue-700 dark:text-white hover:text-white hover:bg-blue-700 rounded cursor-pointer font-Mult-Font-Bold text-sm transition-all">دنبال کردن نظرات</button>
-                                    <button onClick={toggleShowEditor} type="button" className="flex items-center gap-x-2 h-12 px-3 border border-blue-700 text-white bg-blue-700 hover:text-blue-700 hover:bg-transparent rounded cursor-pointer font-Mult-Font-Bold text-sm transition-all">
+                                    <button type="button"
+                                            className="h-12 px-3 border border-blue-700 dark:border-white text-blue-700 dark:text-white hover:text-white hover:bg-blue-700 rounded cursor-pointer font-Mult-Font-Bold text-sm transition-all">دنبال
+                                        کردن نظرات
+                                    </button>
+                                    <button onClick={toggleShowEditor} type="button"
+                                            className="flex items-center gap-x-2 h-12 px-3 border border-blue-700 text-white bg-blue-700 hover:text-blue-700 hover:bg-transparent rounded cursor-pointer font-Mult-Font-Bold text-sm transition-all">
                                         <span className="">افزودن دیدگاه و پرسش جدید</span>
-                                        <DynamicIcon name="addCircle" className="size-6 text-inherit" />
+                                        <DynamicIcon name="addCircle" className="size-6 text-inherit"/>
                                     </button>
                                 </div>}
                             </div>
 
-                            {isShowEditor && <CommentEditor toggleShowEditor={toggleShowEditor} course_id={targetCourse.id}/>}
+                            {isShowEditor &&
+                                <CommentEditor toggleShowEditor={toggleShowEditor} course_id={targetCourse.id}/>}
                         </div>
                         {/*<!-- ! -------------------- sign-up wrapper -------------------- ! -->*/}
-                        {!isLogin && <div className="flex flex-col lg:flex-row items-center justify-between gap-y-4 px-8 py-5 bg-customOrange-550 text-white rounded-lg text-xl font-Mult-Font-Medium mb-6">
+                        {!isLogin && <div
+                            className="flex flex-col lg:flex-row items-center justify-between gap-y-4 px-8 py-5 bg-customOrange-550 text-white rounded-lg text-xl font-Mult-Font-Medium mb-6">
                             <div className="flex items-center gap-x-2">
                                 <DynamicIcon name="profile" className="size-8 text-inherit shrink-0"/>
                                 <span className="">برای ارسال دیدگاه لازم است وارد شده یا ثبت‌نام کنید</span>
@@ -339,7 +394,8 @@ function CoursePage() {
                         <div className="space-y-5">
                             {
                                 mainComments.map(comment => (
-                                    <CommentBox key={comment.id} comments={courseComments} {...comment} course_id={targetCourse.id}/>
+                                    <CommentBox key={comment.id} comments={courseComments} {...comment}
+                                                course_id={targetCourse.id}/>
                                 ))
                             }
                         </div>
@@ -348,19 +404,22 @@ function CoursePage() {
                 {/*<!-- ! -------------------- Courses Details Left -------------------- ! -->*/}
                 <div className="col-span-12 lg:col-span-3">
                     {/*<!-- ! -------------------- Score Wrapper -------------------- ! -->*/}
-                    <div className="flex justify-between bg-white dark:bg-dark-930 py-4 px-5 shadow-sm rounded overflow-hidden mb-4">
+                    <div
+                        className="flex justify-between bg-white dark:bg-dark-930 py-4 px-5 shadow-sm rounded overflow-hidden mb-4">
                         {/*<!-- ! -------------------- Course Status -------------------- ! -->*/}
                         <div className="w-full h-full relative">
                             <div className="inline-block absolute -top-7 -right-12">
                                 <span className="flex-center size-28 rounded-full bg-blue-700/5">
                                     <span className="flex-center size-18 rounded-full bg-blue-700/5">
                                         <span className="flex-center size-10 rounded-full bg-blue-700/5">
-                                            <span className="flex-center size-2 bg-blue-700 dark:bg-white rounded-full"></span>
+                                            <span
+                                                className="flex-center size-2 bg-blue-700 dark:bg-white rounded-full"></span>
                                         </span>
                                     </span>
                                 </span>
                             </div>
-                            <span className="absolute top-4.5 right-5 block text-blue-700 dark:text-white font-YekanBakh-Bold text-sm">{targetCourse?.status ? 'منتشر شده' : 'در حال برگزاری'}</span>
+                            <span
+                                className="absolute top-4.5 right-5 block text-blue-700 dark:text-white font-YekanBakh-Bold text-sm">{targetCourse?.status ? 'منتشر شده' : 'در حال برگزاری'}</span>
                         </div>
                         {/*<!-- ! -------------------- Score Star Wrapper -------------------- ! -->*/}
                         <div className="flex flex-col items-center">
@@ -377,25 +436,33 @@ function CoursePage() {
                     </div>
                     {/*<!-- ! -------------------- Course Info Cards Wrapper -------------------- ! -->*/}
                     <div className="grid grid-cols-12 gap-3 mb-4">
-                        <div className="col-span-4 flex flex-col items-center bg-white dark:bg-dark-930 shadow-sm rounded pt-3 pb-2">
+                        <div
+                            className="col-span-4 flex flex-col items-center bg-white dark:bg-dark-930 shadow-sm rounded pt-3 pb-2">
                             <DynamicIcon name="clock" className="size-6 text-blue-700 dark:text-white mb-3"/>
                             <span className="text-gray-300 dark:text-white text-xs">مدت دوره</span>
-                            <span className="text-chambray-700 dark:text-gray-200 font-YekanBakh-Bold">{targetCourse?.courseTime}</span>
+                            <span
+                                className="text-chambray-700 dark:text-gray-200 font-YekanBakh-Bold">{targetCourse?.courseTime}</span>
                         </div>
-                        <div className="col-span-4 flex flex-col items-center bg-white dark:bg-dark-930 shadow-sm rounded pt-3 pb-2">
+                        <div
+                            className="col-span-4 flex flex-col items-center bg-white dark:bg-dark-930 shadow-sm rounded pt-3 pb-2">
                             <DynamicIcon name="layoutGrid" className="size-6 text-blue-700 dark:text-white mb-3"/>
                             <span className="text-gray-300 dark:text-white text-xs">تعداد جلسات:</span>
-                            <span className="text-chambray-700 dark:text-gray-200 font-YekanBakh-Bold">{targetCourse?.sessions}</span>
+                            <span
+                                className="text-chambray-700 dark:text-gray-200 font-YekanBakh-Bold">{targetCourse?.sessions}</span>
                         </div>
-                        <div className="col-span-4 flex flex-col items-center bg-white dark:bg-dark-930 shadow-sm rounded pt-3 pb-2">
+                        <div
+                            className="col-span-4 flex flex-col items-center bg-white dark:bg-dark-930 shadow-sm rounded pt-3 pb-2">
                             <DynamicIcon name="verified" className="size-6 text-blue-700 dark:text-white mb-3"/>
                             <span className="text-gray-300 dark:text-white text-xs">نوع دوره:</span>
-                            <span className="text-chambray-700 dark:text-gray-200 font-YekanBakh-Bold">ویژه / نقدی</span>
+                            <span
+                                className="text-chambray-700 dark:text-gray-200 font-YekanBakh-Bold">ویژه / نقدی</span>
                         </div>
-                        <div className="col-span-4 flex flex-col items-center bg-white dark:bg-dark-930 shadow-sm rounded pt-3 pb-2">
+                        <div
+                            className="col-span-4 flex flex-col items-center bg-white dark:bg-dark-930 shadow-sm rounded pt-3 pb-2">
                             <DynamicIcon name="users" className="size-8 text-blue-700 dark:text-white mb-3"/>
                             <span className="text-gray-300 dark:text-white text-xs">شرکت‌کنندگان:</span>
-                            <span className="text-chambray-700 dark:text-gray-200 font-YekanBakh-Bold">{targetCourse?.participants} نفر</span>
+                            <span
+                                className="text-chambray-700 dark:text-gray-200 font-YekanBakh-Bold">{targetCourse?.participants} نفر</span>
                         </div>
                     </div>
                     {/*<!-- ! -------------------- Certificates Wrapper -------------------- ! -->*/}
@@ -411,7 +478,8 @@ function CoursePage() {
                                 </span>
                                 <span className="text-chambray-700 dark:text-gray-200 text-sm font-YekanBakh-Bold">
                                     وضعیت:
-                                    <span className="inline-block text-xs bg-customOrange-700 py-1 px-2 rounded font-YekanBakh-Medium mr-1">{isLogin ? 'در انتظار مشاهده کامل دوره به شکل آنلاین' : 'ابتدا وارد سایت شوید'}</span>
+                                    <span
+                                        className="inline-block text-xs bg-customOrange-700 py-1 px-2 rounded font-YekanBakh-Medium mr-1">{isLogin ? 'در انتظار مشاهده کامل دوره به شکل آنلاین' : 'ابتدا وارد سایت شوید'}</span>
                                 </span>
                             </div>
                         </div>
@@ -423,7 +491,8 @@ function CoursePage() {
                         </Link>
                     </div>
                     {/*<!-- ! -------------------- Teacher Wrapper -------------------- ! -->*/}
-                    <div className="flex flex-col items-center bg-white dark:bg-dark-930 py-4 px-5 shadow-sm rounded mb-4">
+                    <div
+                        className="flex flex-col items-center bg-white dark:bg-dark-930 py-4 px-5 shadow-sm rounded mb-4">
                         <div className="size-16 border-3 border-gray-200 rounded-full overflow-hidden mb-1">
                             <img src="/images/team-profile/hesam-mosavi.png" alt="hesam-mosavi" className=""/>
                         </div>
@@ -441,7 +510,8 @@ function CoursePage() {
                             علاقه خاصی دارم و دوست دارم دانشی ک...</p>
                     </div>
                     {/*<!-- ! -------------------- Chat Wrapper -------------------- ! -->*/}
-                    <div className="flex flex-col items-center border border-primary-gray-185/60 dark:border-primary-gray-185/5 py-4 px-12 shadow-sm rounded mb-4">
+                    <div
+                        className="flex flex-col items-center border border-primary-gray-185/60 dark:border-primary-gray-185/5 py-4 px-12 shadow-sm rounded mb-4">
                         <img src={chatImage} alt="chat Image" className=""/>
                         <h6 className="text-chambray-700 dark:text-white font-YekanBakh-Heavy text-2xl mb-2 text-center">گفتگوی‌
                             برنامه نویسان</h6>
