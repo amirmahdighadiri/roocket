@@ -20,6 +20,7 @@ import {addUserCartToServer, getUserCartsFromServer} from "../../Redux/Store/Car
 import Notification from "../../Components/Notification/Notification.jsx";
 import CoursePageLoader from "../../Components/Loader/PageSkeleton/CoursePageLoader.jsx";
 import {getCommentsFromServer} from "../../Redux/Store/Comments.jsx";
+import enrollments, {getEnrollmentsFromServer} from "../../Redux/Store/Enrollments.jsx";
 
 
 function CoursePage() {
@@ -37,14 +38,18 @@ function CoursePage() {
     const courseComments = comments.filter(comment => comment.course_id === targetCourse?.id)
     const mainComments = courseComments.filter(comment => comment.parent_id === null)
     const [isShowEditor, toggleShowEditor] = useToggle();
-    const {carts , loadingCarts} = useSelector(state => state.carts);
-    const [mainCarts, setMainCarts] = useState([]);
-    const isFindCourseInCart = mainCarts.some(cart => cart.courseId === targetCourse.id);
+    const {carts, cartsLoading, cartsError, cartsHasFetched, cartsAddLoading} = useSelector(state => state.carts);
+    const {enrollments, enrollmentLoading, enrollmentError, enrollmentHasFetched} = useSelector(state => state.enrollments)
+    const userCarts = carts.filter(cart => cart.user_id === userInfo.sub)
+    const isInCart = userCarts.some(cart => cart.course_id === targetCourse?.id);
+    const isPurchased = enrollments.some(item => item.course_id === targetCourse?.id)
     const [notificationValue, setNotificationValue] = useState({
         title: "خطا !",
         message: "خطا در برقراری ارتباط.لطفا دوباره تلاش کنید!",
         Icon: () => <DynamicIcon name={'closeCircle'} className={'size-7 text-blue-700'}/>
     });
+
+    useTitle(`راکت | ${URLTitle}`)
 
     useEffect(() => {
         if (!commentsLoading && !commentsHasFetched){
@@ -53,12 +58,10 @@ function CoursePage() {
     }, [commentsHasFetched , commentsLoading]);
 
     useEffect(() => {
-        setMainCarts(()=>{
-            return carts.filter(cart => +cart.userId === userInfo.id)
-        })
-    }, [carts]);
-
-    useTitle(`راکت | ${URLTitle}`)
+        if (!enrollmentHasFetched && !enrollmentLoading){
+            dispatch(getEnrollmentsFromServer())
+        }
+    }, [enrollmentHasFetched ,enrollmentLoading]);
 
     useEffect(() => {
         const findCourse = courses.find(courses => courses.title === URLTitle)
@@ -79,9 +82,6 @@ function CoursePage() {
         };
     }, []);
 
-    useEffect(() => {
-
-    }, []);
 
     const changeTab = (event) => {
         setTab(event.target.id)
@@ -99,7 +99,7 @@ function CoursePage() {
         dispatch(addUserCartToServer(newCartItem));
     }
 
-
+    console.log(isPurchased)
 
     return (
         courseLoading || !courseHasFetched ? <CoursePageLoader /> :  <section className="container">
@@ -119,40 +119,46 @@ function CoursePage() {
                                 <span className="font-YekanBakh-Bold">برای یادگیری وارد سایت شوید</span>
                             </Link>}
                             {/*<!-- ! -------------------- Free & Paid Courses Button -------------------- ! -->*/}
-                            {isLogin && isFindCourseInCart ?
-                                <div className="flex items-center gap-x-3">
-                                    <Link to="/cart-page" className="inline-flex items-center justify-center gap-x-2 bg-green-600 border border-green-600 text-white hover:text-green-600 hover:bg-transparent rounded h-10 lg:h-14 px-9 transition-all cursor-pointer">
-                                        <span className="font-YekanBakh-Bold">نهایی سازی خرید و شروع یادگیری</span>
-                                        <DynamicIcon name="educationIcon" className="size-5 text-inherit"/>
-                                    </Link>
-                                    <span className="flex items-center gap-x-1 text-customOrange-700 font-YekanBakh-Bold">
-                                        <span className="">رایگان برای اعضای ویژه</span>
-                                        <DynamicIcon name="star" className="size-4 text-inherit mb-1"/>
-                                    </span>
-                                </div>
-                                : targetCourse?.price === 0 ?
-                                    <div className="flex items-center gap-x-3">
-                                        <button type="button" onClick={addCourseToCart} className="inline-flex items-center justify-center gap-x-2 bg-blue-700 border border-blue-700 text-white hover:text-blue-700 hover:bg-transparent rounded h-10 lg:h-14 px-9 transition-all">
-                                            <span className="font-YekanBakh-Bold">ثبت نام رایگان</span>
-                                            <DynamicIcon name="educationIcon" className="size-5 text-inherit"/>
-                                        </button>
-                                        <a href="#curriculum-content" className="flex items-center gap-x-1 text-blue-700 hover:text-gray-900 font-YekanBakh-Bold transition-all">
-                                            <span className="">مشاهده سر فصل ها</span>
-                                            <DynamicIcon name="bookText" className="size-4 text-inherit mb-1"/>
-                                        </a>
-                                    </div> :
-                                    <div className="flex items-center gap-x-3">
-                                        <button type="button" onClick={addCourseToCart} className="inline-flex items-center justify-center gap-x-2 bg-blue-700 border border-blue-700 text-white hover:text-blue-700 hover:bg-transparent rounded h-10 lg:h-14 px-9 transition-all cursor-pointer">
-                                            <span className="font-YekanBakh-Bold">خرید نقدی دوره (امکان دانلود)</span>
-                                            <DynamicIcon name="educationIcon" className="size-5 text-inherit"/>
-                                        </button>
-                                        <span className="flex items-center gap-x-1 text-customOrange-700 font-YekanBakh-Bold">
-                                            <span className="">رایگان برای اعضای ویژه</span>
-                                            <DynamicIcon name="star" className="size-4 text-inherit mb-1"/>
-                                        </span>
-                                    </div>
-                            }
 
+                            {
+                               isPurchased  ?
+                                   <div className="flex items-center gap-x-3">
+                                       <a href="#curriculum-content" className="inline-flex items-center justify-center gap-x-2 bg-blue-700 border border-blue-700 text-white hover:text-blue-700 hover:bg-transparent rounded h-10 lg:h-14 px-9 transition-all cursor-pointer">
+                                            <span className="font-YekanBakh-Bold">مشاهده جلسات دوره</span>
+                                            <DynamicIcon name="educationIcon" className="size-5 text-inherit"/>
+                                       </a>
+                                    </div>: isInCart ?
+                                       <div className="flex items-center gap-x-3">
+                                            <Link to="/cart-page" className="inline-flex items-center justify-center gap-x-2 bg-green-600 border border-green-600 text-white hover:text-green-600 hover:bg-transparent rounded h-10 lg:h-14 px-9 transition-all cursor-pointer">
+                                               <span className="font-YekanBakh-Bold">نهایی سازی خرید و شروع یادگیری</span>
+                                               <DynamicIcon name="educationIcon" className="size-5 text-inherit"/>
+                                            </Link>
+                                            <span className="flex items-center gap-x-1 text-customOrange-700 font-YekanBakh-Bold">
+                                                <span className="">رایگان برای اعضای ویژه</span>
+                                                <DynamicIcon name="star" className="size-4 text-inherit mb-1"/>
+                                            </span>
+                                       </div>: targetCourse?.price === 0 ?
+                                           <div className="flex items-center gap-x-3">
+                                               <button type="button" onClick={addCourseToCart} className="inline-flex items-center justify-center gap-x-2 bg-blue-700 border border-blue-700 text-white hover:text-blue-700 hover:bg-transparent rounded h-10 lg:h-14 px-9 transition-all">
+                                                   <span className="font-YekanBakh-Bold">ثبت نام رایگان</span>
+                                                   <DynamicIcon name="educationIcon" className="size-5 text-inherit"/>
+                                               </button>
+                                               <a href="#curriculum-content" className="flex items-center gap-x-1 text-blue-700 hover:text-gray-900 font-YekanBakh-Bold transition-all">
+                                                   <span className="">مشاهده سر فصل ها</span>
+                                                   <DynamicIcon name="bookText" className="size-4 text-inherit mb-1"/>
+                                               </a>
+                                           </div> :
+                                           <div className="flex items-center gap-x-3">
+                                               <button type="button" onClick={addCourseToCart} className="inline-flex items-center justify-center gap-x-2 bg-blue-700 border border-blue-700 text-white hover:text-blue-700 hover:bg-transparent rounded h-10 lg:h-14 px-9 transition-all cursor-pointer">
+                                                   <span className="font-YekanBakh-Bold">خرید نقدی دوره (امکان دانلود)</span>
+                                                   <DynamicIcon name="educationIcon" className="size-5 text-inherit"/>
+                                               </button>
+                                               <span className="flex items-center gap-x-1 text-customOrange-700 font-YekanBakh-Bold">
+                                                <span className="">رایگان برای اعضای ویژه</span>
+                                                    <DynamicIcon name="star" className="size-4 text-inherit mb-1"/>
+                                                </span>
+                                           </div>
+                            }
                             {/*<!-- ! -------------------- Free & Price Course Price -------------------- ! -->*/}
                             <div className="inline-flex items-center gap-x-2 text-biscay-700 dark:text-white">
                                 <span className="text-5xl font-YekanBakh-Heavy">{targetCourse?.price === 0 ? 'رایگان !' : String(targetCourse?.price)?.replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</span>

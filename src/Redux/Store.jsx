@@ -8,6 +8,7 @@ import carts from "./Store/Carts.jsx";
 import comments from "./Store/Comments.jsx";
 import discount from "./Store/Discount.jsx";
 import teacher from "./Store/Teacher.jsx";
+import enrollments from "./Store/Enrollments.jsx";
 
 const store = configureStore({
     reducer: {
@@ -20,6 +21,7 @@ const store = configureStore({
         comments,
         discount,
         teacher,
+        enrollments,
     }
 })
 

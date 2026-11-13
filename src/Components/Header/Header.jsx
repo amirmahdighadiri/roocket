@@ -183,7 +183,7 @@ function Header(props) {
                         <Link to="/dashboard/notifications" className="w-12 h-12 hidden lg:flex items-center justify-center relative dark:bg-dark-body-100 dark:hover:bg-[#ECEEEF] bg-[#ECEEEF] hover:bg-dark-body-100 rounded-full transition-all shrink-0 group">
                             <DynamicIcon name={'bell'} className={'size-4 text-biscay-700 group-hover:text-gray-920 dark:text-gray-920 dark:group-hover:text-biscay-700'}/>
                             {/*<!-- ! -------------------- Notification Badge -------------------- ! -->*/}
-                            {!userInfo.length ? <span className="size-6 flex-center absolute -top-2 -right-2 bg-red-450 text-white rounded-full font-YekanBakh text-sm">12</span> : <BadgeLoader/>}
+                             <span className="size-6 flex-center absolute -top-2 -right-2 bg-red-450 text-white rounded-full font-YekanBakh text-sm">0</span>
 
                         </Link>
                         {/*<!-- ! -------------------- Users Profile Image And Profile Menu -------------------- ! -->*/}
