@@ -17,12 +17,8 @@ function CartPage() {
     const [discountInput , setDiscountInput] = useState("")
     const {discounts ,discountsLoading, discountsError, discountsHasFetched} = useSelector(state => state.discount)
     const [totalDiscount , setTotalDiscount] = useState(0);
-    const { isShowNotification, setIsShowNotification} = useContext(AppContext)
-    const [notificationValue, setNotificationValue] = useState({
-        title: "خطا !",
-        message: "خطا در برقراری ارتباط.لطفا دوباره تلاش کنید!",
-        Icon: () => <DynamicIcon name={'closeCircle'} className={'size-7 text-blue-700'}/>
-    });
+    const { isShowNotification, setIsShowNotification,setNotificationValue} = useContext(AppContext)
+    const [isDiscountApplied, setIsDiscountApplied] = useState(false);
 
 
     useEffect(() => {
@@ -33,8 +29,26 @@ function CartPage() {
 
     const submitDiscountCodeHandler = (e)=>{
         e.preventDefault()
-        const discountCode = discounts.find(discount => discountInput === discount.code)
-        setTotalDiscount((totalPrice * discountCode.percent) / 100)
+        try{
+            const discountCode = discounts.find(discount => discountInput.trim() === discount.code)
+            if(!discountCode) throw new Error("discountCode not found")
+            setTotalDiscount((totalPrice * discountCode.percent) / 100)
+            setNotificationValue({
+                title: "موفق!",
+                message: "کد تخفیف اعمال شد.",
+                Icon: () => <DynamicIcon name="checkCircle" className="size-7 text-blue-700"/>,
+            })
+            setIsShowNotification(true)
+            setIsDiscountApplied(true);
+        }catch (err){
+            setNotificationValue({
+                title: "خطا !",
+                message: "کد تخفیف معتبر نیست.",
+                Icon: () => <DynamicIcon name={'closeCircle'} className={'size-7 text-blue-700'}/>
+            });
+            setIsShowNotification(true)
+            setDiscountInput("")
+        }
     }
     
     const removeCartItem = (id)=>{
@@ -70,6 +84,7 @@ function CartPage() {
                         </Link>
                     </div>}
                     <div className="grid grid-cols-12 gap-y-10 lg:gap-x-10 mt-10 mb-20">
+                        {/*<!-- ! -------------------- Cart items -------------------- ! -->*/}
                         <div className="col-span-12 lg:col-span-8">
                             <div className="space-y-4">
                                 {carts.map(cart => (
@@ -82,10 +97,10 @@ function CartPage() {
                             <div className="relative bg-white dark:bg-dark-body-100 p-6 rounded-xl overflow-hidden">
                                 {/*<!-- ! -------------------- Circle Effect -------------------- ! -->*/}
                                 <span className="absolute -top-13 -left-14 flex-center size-28 rounded-full bg-blue-700/5">
-                            <span className="flex-center size-18 rounded-full bg-blue-700/5">
-                                <span className="flex-center size-10 rounded-full bg-blue-700/5"></span>
-                            </span>
-                        </span>
+                                    <span className="flex-center size-18 rounded-full bg-blue-700/5">
+                                        <span className="flex-center size-10 rounded-full bg-blue-700/5"></span>
+                                    </span>
+                                </span>
                                 {/*<!-- ! -------------------- Payment Title -------------------- ! -->*/}
                                 <h3 className="text-blue-700 dark:text-white text-3xl font-YekanBakh-Heavy border-b border-gray-300/10 pb-3 mb-6">اطلاعات
                                     پرداخت</h3>
@@ -98,7 +113,7 @@ function CartPage() {
                                                onChange={(e)=>setDiscountInput(e.target.value)}
                                                className="flex-4 border-none outline-none text-dark-550 dark:text-white text-sm font-Mult-Font-Bold"
                                                placeholder="کد تخفیف را وارد کنید"/>
-                                        <button onClick={submitDiscountCodeHandler} className="flex-1 px-2 h-full bg-blue-700 dark:bg-dark-930 text-white opacity-60 rounded-lg text-xs cursor-pointer">اعمال
+                                        <button onClick={submitDiscountCodeHandler} disabled={!discountInput.trim()  || isDiscountApplied} className={`flex-1 px-2 h-full disabled:opacity-40 disabled:cursor-not-allowed bg-blue-700 dark:bg-dark-930 text-white opacity-60 rounded-lg text-xs cursor-pointer`}>اعمال
                                             کد
                                         </button>
                                     </div>
@@ -147,9 +162,7 @@ function CartPage() {
                         </div>
                     </div>
                 </>}
-
             </section>
-
     );
 }
 

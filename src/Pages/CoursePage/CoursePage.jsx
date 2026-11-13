@@ -36,7 +36,7 @@ function CoursePage() {
     const location = useLocation()
     const URLTitle = decodeURIComponent(location.pathname.split("/").pop());
     const [targetCourse, setTargetCourse] = useState({});
-    const {isLogin, userInfo, isShowNotification, setIsShowNotification} = useContext(AppContext)
+    const {isLogin, userInfo, isShowNotification, setIsShowNotification,setNotificationValue} = useContext(AppContext)
     const courseComments = comments.filter(comment => comment.course_id === targetCourse?.id)
     const mainComments = courseComments.filter(comment => comment.parent_id === null)
     const [isShowEditor, toggleShowEditor] = useToggle();
@@ -44,11 +44,6 @@ function CoursePage() {
     const {enrollments, enrollmentLoading, enrollmentError, enrollmentHasFetched} = useSelector(state => state.enrollments)
     const isInCart = carts.some(cart => cart.course_id === targetCourse?.id && cart.user_id === userInfo.sub);
     const isPurchased = enrollments.some(item => item.course_id === targetCourse?.id && item.user_id === userInfo.sub)
-    const [notificationValue, setNotificationValue] = useState({
-        title: "خطا !",
-        message: "خطا در برقراری ارتباط.لطفا دوباره تلاش کنید!",
-        Icon: () => <DynamicIcon name={'closeCircle'} className={'size-7 text-blue-700'}/>
-    });
 
 
     useTitle(`راکت | ${URLTitle}`)
@@ -567,7 +562,6 @@ function CoursePage() {
                 </div>
             </div>
 
-            <Notification {...notificationValue} isOpen={isShowNotification}/>
         </section>
     );
 }

@@ -14,12 +14,7 @@ function Register() {
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
     const [loading, setLoading] = useState(false);
-    const {isShowNotification, setIsShowNotification} = useContext(AppContext)
-    const [notificationValue, setNotificationValue] = useState({
-        title: "خطا !",
-        message: "لطفا اطلاعات خود را به درستی وارد کنید.",
-        Icon: () => <DynamicIcon name={'closeCircle'} className={'size-7 text-blue-700'}/>
-    });
+    const {isShowNotification, setIsShowNotification,setNotificationValue} = useContext(AppContext)
     const from = location.state?.from;
 
     const showNotificationHandler = ({title, message, Icon}) => {
@@ -177,7 +172,6 @@ function Register() {
                   </svg>
             </span>
 
-            <Notification {...notificationValue} isOpen={isShowNotification}/>
         </section>
     );
 }
