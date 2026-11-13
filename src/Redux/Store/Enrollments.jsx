@@ -41,7 +41,7 @@ const slice = createSlice({
 
         builder.addCase(getEnrollmentsFromServer.rejected, (state, action) => {
             state.enrollmentLoading = false;
-            state.enrollmentError = action.payload;
+            state.enrollmentError = action.payload || action.error.message;
         });
     },
 });
