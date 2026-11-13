@@ -1,8 +1,20 @@
 import React from 'react';
 import DynamicIcon from "../../DynamicIcon/DynamicIcon.jsx";
 import {Link} from "react-router-dom";
+import {useDispatch , useSelector} from "react-redux";
+import {removeUserCartFromServer} from "../../Redux/Store/Carts.jsx";
 
-function BigCourseBox({course}) {
+function BigCourseBox({id,course,removeFunc}) {
+
+    const cartsRemoveLoadingId = useSelector(
+        state => state.carts.cartsRemoveLoadingId
+    );
+
+    const clickHandler = ()=>{
+        removeFunc(id);
+    }
+
+    const isRemoving = cartsRemoveLoadingId === id;
     return (
         <div className="flex flex-col gap-y-6 md:flex-row md:items-center md:justify-between md:gap-x-8 bg-white dark:bg-dark-body-100 px-5 py-6 sm:px-10 xl:px-14 sm:py-9 rounded-xl">
             {/*<!-- ! -------------------- Image & Title -------------------- ! -->*/}
@@ -50,8 +62,12 @@ function BigCourseBox({course}) {
                     </span>
                 </div>
                 {/*<!-- ! -------------------- Remove Btn -------------------- ! -->*/}
-                <button type="button" aria-label="حذف از سبد خرید" title="حذف از سبد خرید" className="p-2.5 rounded-lg text-dark-550 dark:text-gray-200 hover:text-red-500 hover:bg-red-500/10 transition-all cursor-pointer">
-                    <DynamicIcon name="trash" className="size-5 text-inherit"/>
+                <button onClick={clickHandler} type="button" aria-label="حذف از سبد خرید" title="حذف از سبد خرید" disabled={isRemoving} className="p-2.5 rounded-lg text-dark-550 dark:text-gray-200 hover:text-red-500 hover:bg-red-500/10 transition-all cursor-pointer disabled:opacity-60 disabled:cursor-not-allowed">
+                    {isRemoving ? (
+                        <span className="block size-5 border-2 border-current border-t-transparent rounded-full animate-spin" />
+                    ) : (
+                        <DynamicIcon name="trash" className="size-5 text-inherit" />
+                    )}
                 </button>
             </div>
         </div>

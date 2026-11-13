@@ -65,7 +65,7 @@ const slice = createSlice({
         cartsHasFetched: false,
         cartsAddLoading: false,
         cartsAddError: null,
-        cartsRemoveLoading: false,
+        cartsRemoveLoadingId: null,
         cartsRemoveError: null,
     },
     reducers: {},
@@ -104,18 +104,18 @@ const slice = createSlice({
             state.cartsAddError = action.payload || action.error.message;
         })
         {/*<!-- ! -------------------- Remove Cart Extra Reducer -------------------- ! -->*/}
-        builder.addCase(removeUserCartFromServer.pending, (state) => {
-            state.cartsRemoveLoading = true;
+        builder.addCase(removeUserCartFromServer.pending, (state , action) => {
+            state.cartsRemoveLoadingId = action.meta.arg
             state.cartsRemoveError = null;
         })
 
         builder.addCase(removeUserCartFromServer.fulfilled, (state, action) => {
-            state.cartsRemoveLoading = false;
+            state.cartsRemoveLoadingId = null
             state.carts = state.carts.filter((item) => item.id !== action.payload);
         })
 
         builder.addCase(removeUserCartFromServer.rejected, (state, action) => {
-            state.cartsRemoveLoading = false;
+            state.cartsRemoveLoadingId = null
             state.cartsRemoveError = action.payload || action.error.message;
         })
 

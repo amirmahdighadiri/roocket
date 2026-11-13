@@ -1,4 +1,4 @@
-import React, {useEffect,useState} from 'react';
+import React, {useEffect,useState,useContext} from 'react';
 import DynamicIcon from "../../DynamicIcon/DynamicIcon.jsx";
 import {Link} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
@@ -6,6 +6,8 @@ import {calculateTotal} from "../../Utils/calculateTotal/calculateTotal.js";
 import BigCourseBox from "../../Components/CoursesBox/BigCourseBox.jsx";
 import {getDiscountFromServer} from "../../Redux/Store/Discount.jsx";
 import CartPageLoader from "../../Components/Loader/PageSkeleton/CartPageLoader.jsx";
+import {removeUserCartFromServer} from "../../Redux/Store/Carts.jsx";
+import {AppContext} from "../../Context/AppContext.jsx";
 
 function CartPage() {
 
@@ -15,6 +17,8 @@ function CartPage() {
     const [discountInput , setDiscountInput] = useState("")
     const {discounts ,discountsLoading, discountsError, discountsHasFetched} = useSelector(state => state.discount)
     const [totalDiscount , setTotalDiscount] = useState(0);
+    const { isShowNotification, setIsShowNotification} = useContext(AppContext)
+    const [notificationValue, setNotificationValue] = useState({});
 
 
     useEffect(() => {
@@ -27,6 +31,26 @@ function CartPage() {
         e.preventDefault()
         const discountCode = discounts.find(discount => discountInput === discount.code)
         setTotalDiscount((totalPrice * discountCode.percent) / 100)
+    }
+    
+    const removeCartItem = (id)=>{
+        try{
+            dispatch(removeUserCartFromServer(id))
+            setNotificationValue({
+                title: "موفق!",
+                message: "دوره با موفقیت از سبد خرید حذف شد.",
+                Icon: () => <DynamicIcon name="checkCircle" className="size-7 text-blue-700"/>,
+            });
+            setIsShowNotification(true)
+        }catch (err){
+            setNotificationValue({
+                title: "خطا !",
+                message: "حذف دوره از سبد خرید انجام نشد. لطفاً دوباره تلاش کنید.",
+                Icon: () => <DynamicIcon name={'closeCircle'} className={'size-7 text-blue-700'}/>
+            });
+            setIsShowNotification(true)
+        }
+
     }
 
 
@@ -45,7 +69,7 @@ function CartPage() {
                         <div className="col-span-12 lg:col-span-8">
                             <div className="space-y-4">
                                 {carts.map(cart => (
-                                    <BigCourseBox key={cart.id} {...cart}/>
+                                    <BigCourseBox key={cart.id} {...cart} removeFunc={removeCartItem} />
                                 ))}
                             </div>
                         </div>
