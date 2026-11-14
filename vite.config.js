@@ -7,10 +7,5 @@ export default defineConfig({
         react(),
         tailwindcss(),
     ],
-    server: {
-        watch: {
-            ignored: ["**/db.json"],
-        },
-    },
     // base: "/roocket"
 })
