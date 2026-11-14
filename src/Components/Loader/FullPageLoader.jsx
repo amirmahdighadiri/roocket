@@ -8,7 +8,7 @@ function FullPageLoader() {
             <div className="relative flex size-24 items-center justify-center">
                 <span className="absolute inset-0 rounded-full border-[3px] border-blue-700/10 dark:border-white/10" />
                 <span className="absolute inset-0 animate-spin rounded-full border-[3px] border-transparent border-t-blue-700 dark:border-t-blue-450" />
-                <span className="flex size-14 items-center justify-center rounded-2xl bg-gradient-to-br from-blue-500 to-blue-700 font-Roboto-Bold text-3xl text-white shadow-contactUsShadow">
+                <span className="flex size-14 items-center justify-center rounded-2xl bg-gradient-to-br from-blue-500 to-blue-700 font-YekanBakh-Heavy text-3xl text-white shadow-contactUsShadow">
                     G
                 </span>
             </div>
