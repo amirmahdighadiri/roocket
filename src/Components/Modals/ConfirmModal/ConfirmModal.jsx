@@ -1,10 +1,11 @@
 import React , {useContext,useEffect} from 'react';
 import ReactDOM from "react-dom";
 import {AppContext} from "../../../Context/AppContext.jsx";
+import Spinner from "../../Loader/Spinner/Spinner.jsx";
 
-function ConfirmModal({logoutHandler}) {
+function ConfirmModal() {
 
-    const{isShowConfirmModal , confirmModalHandler , closeConfirmModal , confirmModalData} = useContext(AppContext);
+    const{isShowConfirmModal , confirmModalHandler , closeConfirmModal , confirmModalData,logoutLoading} = useContext(AppContext);
 
     useEffect(() => {
         if(isShowConfirmModal) {
@@ -18,10 +19,6 @@ function ConfirmModal({logoutHandler}) {
         };
     }, [isShowConfirmModal]);
 
-    const btnClickHandler = (status) => {
-        logoutHandler(status);
-    }
-
     return ReactDOM.createPortal(
         <div className={`${isShowConfirmModal ? 'block' : 'hidden'} fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-90 max-w-[calc(100%-32px)] rounded-xl bg-white dark:bg-dark-930 shadow-xl border border-gray-200 dark:border-gray-700 p-5 text-biscay-700 dark:text-white transition-all z-50`}>
                 {/*<!-- ! -------------------- Title -------------------- ! -->*/}
@@ -34,8 +31,9 @@ function ConfirmModal({logoutHandler}) {
                 </p>
                 {/*<!-- ! -------------------- Buttons -------------------- ! -->*/}
                 <div className="flex justify-center gap-3 mt-5 font-YekanBakh-Bold">
-                    <button onClick={()=>confirmModalHandler()} type="button" className="px-5 py-1.5 rounded-md border border-blue-700 bg-blue-700 hover:bg-transparent text-white hover:text-blue-700 cursor-pointer transition-all">
+                    <button onClick={()=>confirmModalHandler()} type="button" disabled={logoutLoading} className="flex items-center justify-center gap-x-2 px-5 py-1.5 rounded-md border border-blue-700 bg-blue-700 hover:bg-transparent text-white hover:text-blue-700 cursor-pointer transition-all disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:bg-blue-700 disabled:hover:text-white">
                         تایید
+                        {logoutLoading && <Spinner className="size-4" />}
                     </button>
                     <button onClick={()=> closeConfirmModal() } type="button" className="px-5 py-1.5 rounded-md border border-gray-300 dark:border-gray-600 bg-transparent text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800 cursor-pointer transition-all">
                         انصراف

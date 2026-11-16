@@ -89,7 +89,6 @@ function AppProvider({children}) {
 
         try {
             await logoutUser();
-
             setNotificationValue({
                 title: "موفق!",
                 message: "با موفقیت از حساب کاربری خارج شدید.",
@@ -100,13 +99,12 @@ function AppProvider({children}) {
                     />
                 ),
             });
-
             setIsShowNotification(true);
-
             setTimeout(() => {
                 navigate("/", { replace: true });
+                setLogoutLoading(false);
+                closeConfirmModal();
             }, 2500);
-
         } catch (err) {
             setNotificationValue({
                 title: "خطا!",
@@ -118,11 +116,11 @@ function AppProvider({children}) {
                     />
                 ),
             });
-
             setIsShowNotification(true);
-        }finally {
-            setLogoutLoading(false)
-            closeConfirmModal();
+            setTimeout(() => {
+                setLogoutLoading(false);
+                closeConfirmModal();
+            }, 2500);
         }
     };
 
