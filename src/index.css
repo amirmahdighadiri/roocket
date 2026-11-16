@@ -167,6 +167,7 @@
     --animate-progress: progress 2.5s linear 1;
     --animate-ripple: at-ripple .6s linear infinite;
     --animate-grow-width: grow-width 2.5s ease-in-out;
+    --animate-float: float 2.5s ease-in-out infinite;
 
     @keyframes grow-width {
         0%{
@@ -190,6 +191,14 @@
 
         to {
             box-shadow: 0 4px 10px rgba(59, 130, 246, .1), 0 0 0 5px rgba(59, 130, 246, .1), 0 0 0 10px rgba(59, 130, 246, .1), 0 0 0 20px hsla(0, 0%, 40%, 0)
+        }
+    }
+    @keyframes float {
+        0%, 100% {
+            transform: translateY(0);
+        }
+        50% {
+            transform: translateY(-12px);
         }
     }
 

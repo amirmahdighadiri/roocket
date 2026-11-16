@@ -20,10 +20,9 @@ import Notification from "../Notification/Notification.jsx";
 
 
 function Header(props) {
-    const {theme, setTheme, isOpenMenu, setIsOpenMenu, setIsShowOverlay, isLogin, userInfo , isOpenProfileMenu , toggleProfileMenu , isOpenCartDropDown , toggleCartDropDown,isAuthLoading,logoutHandler,isShowNotification,setIsShowNotification} = useContext(AppContext)
+    const {theme, setTheme, isOpenMenu, setIsOpenMenu, setIsShowOverlay, isLogin, userInfo , isOpenProfileMenu , toggleProfileMenu , isOpenCartDropDown , toggleCartDropDown,isAuthLoading,logoutHandler,isShowNotification,setIsShowNotification , openConfirmModal} = useContext(AppContext)
     const [isOpenCoursesSubmenu, toggleCoursesSubmenu] = useToggle(false)
     const [isOpenUsefulSubmenu, toggleUsefulSubmenu] = useToggle(false)
-    const [isShowModal, toggleIsShowModal] = useToggle();
     const dispatch = useDispatch();
     const {carts , cartsLoading, cartsError, cartsHasFetched} = useSelector(state => state.carts);
     const totalPrice = calculateTotal(carts)
@@ -71,25 +70,12 @@ function Header(props) {
         toggleProfileMenu()
     }
 
-    const showModalConfirmHandler = (event)=>{
-        document.documentElement.classList.add('min-h-screen')
-        document.documentElement.classList.add('overflow-hidden')
-        event.preventDefault()
-        setIsShowOverlay(true)
-        toggleIsShowModal()
-        toggleProfileMenu()
-    }
-
-    const confirmLogoutHandler = async (status) => {
-        if (status){
-            try{
-                await logoutHandler()
-            }catch (err){
-                setIsShowNotification(true)
-            }
-        }
-        setIsShowOverlay()
-        toggleIsShowModal()
+    const logoutClickHandler =  () => {
+        openConfirmModal({
+            title: "خروج از حساب",
+            message: "آیا مطمئن هستید که می‌خواهید از حساب کاربری خود خارج شوید؟",
+            onConfirm: logoutHandler,
+        })
     }
 
     const openCartDropDownHandler = (event)=>{
@@ -268,7 +254,7 @@ function Header(props) {
                                             </Link>
                                             <span className="size-6 flex-center bg-yellow-500 rounded-full text-white font-YekanBakh-Bold">6</span>
                                         </li>
-                                        <li className="" onClick={showModalConfirmHandler}>
+                                        <li className="" onClick={logoutClickHandler}>
                                             <button type="button" className="flex items-center gap-x-4 text-gray-500 dark:text-gray-920">
                                                 <DynamicIcon name="logout" className="size-5 text-inherit" />
                                                 <span className="text-lg font-YekanBakh-Bold">خروج از حساب کاربری</span>
@@ -529,8 +515,7 @@ function Header(props) {
             </div>
             <div className="hidden dark:block w-full h-screen absolute top-0 right-0 bg-gradient-to-t from-transparent to-[#324456] -z-20"></div>
             <Overlay/>
-            <ConfirmModal isShowModal={isShowModal} logoutHandler={confirmLogoutHandler}/>
-            <Notification {...notificationValue} isOpen={isShowNotification}/>
+            {/*<ConfirmModal isShowModal={isShowModal} logoutHandler={confirmLogoutHandler}/>*/}
         </header>
     );
 }

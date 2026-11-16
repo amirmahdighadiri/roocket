@@ -1,5 +1,5 @@
 import {createContext, useEffect, useState} from "react";
-import {useLocation} from "react-router-dom";
+import {useLocation,useNavigate} from "react-router-dom";
 import {useDispatch} from "react-redux";
 import useLocalStorage from "../Hooks/useLocalStorage/useLocalStorage.jsx";
 import useToggle from "../Hooks/useToggle/useToggle.jsx";
@@ -14,6 +14,7 @@ export const AppContext = createContext()
 function AppProvider({children}) {
     const dispatch = useDispatch();
     const location = useLocation();
+    const navigate = useNavigate();
     const [isOpenMenu, setIsOpenMenu] = useToggle(false);
     const [isShowOverlay, setIsShowOverlay] = useToggle(false);
     const [theme, setTheme] = useLocalStorage('theme', 'light');
@@ -24,6 +25,9 @@ function AppProvider({children}) {
     const [isOpenDashboardMenu , toggleDashboardMenu] = useToggle()
     const [isOpenCartDropDown , toggleCartDropDown] = useToggle();
     const [isAuthLoading, setIsAuthLoading] = useToggle(true);
+    const [isShowConfirmModal, setIsShowConfirmModal] = useToggle();
+    const [confirmModalData, setConfirmModalData] = useState(null);
+    const [logoutLoading, setLogoutLoading] = useState(false);
     const {courseLoading, courseHasFetched} = useSelector(
         state => state.courses
     );
@@ -37,40 +41,6 @@ function AppProvider({children}) {
         toggleProfileMenu(false)
         toggleCartDropDown(false)
     }, [location.pathname])
-
-    const logoutHandler = async () => {
-        try {
-            await logoutUser()
-        }catch (err){
-            throw err;
-        }
-
-    }
-
-    const contentValue = {
-        theme,
-        setTheme,
-        isOpenMenu,
-        setIsOpenMenu,
-        isShowOverlay,
-        setIsShowOverlay,
-        isLogin,
-        setIsLogin,
-        userInfo,
-        setUserInfo,
-        isShowNotification,
-        setIsShowNotification,
-        isOpenProfileMenu ,
-        toggleProfileMenu,
-        isOpenDashboardMenu ,
-        toggleDashboardMenu,
-        isOpenCartDropDown,
-        toggleCartDropDown,
-        isAuthLoading,
-        setIsAuthLoading,
-        logoutHandler,
-        notificationValue, setNotificationValue
-    }
 
     useEffect(() => {
         document.documentElement.className = String(theme);
@@ -96,6 +66,97 @@ function AppProvider({children}) {
         }
     }, [dispatch, courseHasFetched, courseLoading]);
 
+    const openConfirmModal = (data) => {
+        setIsShowConfirmModal(true);
+        setConfirmModalData(data);
+        setIsShowOverlay(true)
+        toggleProfileMenu()
+    };
+
+    const closeConfirmModal = () => {
+        setIsShowConfirmModal(false);
+        setConfirmModalData(null);
+        setIsShowOverlay(false)
+        toggleProfileMenu(false)
+    }
+
+    const confirmModalHandler = () => {
+        confirmModalData.onConfirm();
+    };
+
+    const logoutHandler = async () => {
+        setLogoutLoading(true);
+
+        try {
+            await logoutUser();
+
+            setNotificationValue({
+                title: "موفق!",
+                message: "با موفقیت از حساب کاربری خارج شدید.",
+                Icon: () => (
+                    <DynamicIcon
+                        name="checkCircle"
+                        className="size-7 text-blue-700"
+                    />
+                ),
+            });
+
+            setIsShowNotification(true);
+
+            setTimeout(() => {
+                navigate("/", { replace: true });
+            }, 2500);
+
+        } catch (err) {
+            setNotificationValue({
+                title: "خطا!",
+                message: "خروج از حساب انجام نشد. دوباره تلاش کنید.",
+                Icon: () => (
+                    <DynamicIcon
+                        name="closeCircle"
+                        className="size-7 text-blue-700"
+                    />
+                ),
+            });
+
+            setIsShowNotification(true);
+        }finally {
+            setLogoutLoading(false)
+            closeConfirmModal();
+        }
+    };
+
+    const contentValue = {
+        theme,
+        setTheme,
+        isOpenMenu,
+        setIsOpenMenu,
+        isShowOverlay,
+        setIsShowOverlay,
+        isLogin,
+        setIsLogin,
+        userInfo,
+        setUserInfo,
+        isShowNotification,
+        setIsShowNotification,
+        isOpenProfileMenu ,
+        toggleProfileMenu,
+        isOpenDashboardMenu ,
+        toggleDashboardMenu,
+        isOpenCartDropDown,
+        toggleCartDropDown,
+        isAuthLoading,
+        setIsAuthLoading,
+        logoutHandler,
+        notificationValue, setNotificationValue,
+        openConfirmModal,
+        closeConfirmModal,
+        isShowConfirmModal,
+        setIsShowConfirmModal,
+        confirmModalHandler,
+        confirmModalData,
+        logoutLoading
+    }
 
     return (
         <AppContext.Provider value={contentValue}>

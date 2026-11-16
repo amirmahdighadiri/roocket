@@ -3,6 +3,7 @@ import Header from "../Header/Header.jsx";
 import {Outlet} from "react-router-dom";
 import Footer from "../Footer/Footer.jsx";
 import Notification from "../Notification/Notification.jsx";
+import ConfirmModal from "../Modals/ConfirmModal/ConfirmModal.jsx";
 
 function Layout(props) {
     return (
@@ -13,6 +14,7 @@ function Layout(props) {
             </main>
             <Footer />
             <Notification />
+            <ConfirmModal />
         </>
     );
 }

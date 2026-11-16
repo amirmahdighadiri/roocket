@@ -1,15 +1,16 @@
 import React , {useContext} from 'react';
-import {Link , Outlet , useLocation,useNavigate} from "react-router-dom";
+import {Link , Outlet , useLocation,Navigate } from "react-router-dom";
 import DynamicIcon from "../../DynamicIcon/DynamicIcon.jsx";
 import {AppContext} from "../../Context/AppContext.jsx";
 import useToggle from "../../Hooks/useToggle/useToggle.jsx";
 import Overlay from "../../Components/Overlay/Overlay.jsx";
 import ConfirmModal from "../../Components/Modals/ConfirmModal/ConfirmModal.jsx";
 import useCookie from "../../Hooks/useCookie/useCookie.jsx";
+import FullPageLoader from "../../Components/Loader/PageLoader/FullPageLoader.jsx";
 
 function DashboardLayout(props) {
     const date = new Date();
-    const {theme, setTheme,userInfo,isOpenDashboardMenu , toggleDashboardMenu , setIsShowOverlay} = useContext(AppContext)
+    const {theme, setTheme,userInfo,isLogin,isAuthLoading,isOpenDashboardMenu , toggleDashboardMenu , setIsShowOverlay} = useContext(AppContext)
     const location = useLocation()
     const formatter = new Intl.DateTimeFormat("fa-IR-u-ca-persian", {
         weekday: "long",
@@ -18,9 +19,7 @@ function DashboardLayout(props) {
         day: "2-digit",
     });
     const parts = formatter.formatToParts(date);
-    const [isShowModal, toggleIsShowModal] = useToggle();
-    const [, , removeUserID] = useCookie("userID", "");
-    const navigate = useNavigate();
+    const [, , removeUserID] = useCookie("userID", "")
 
     const getPart = (id)=>{
        return  parts.find(item=> item.type === id)?.value
@@ -52,6 +51,14 @@ function DashboardLayout(props) {
         }
         setIsShowOverlay()
         toggleIsShowModal()
+    }
+
+    if (isAuthLoading){
+        return  <FullPageLoader />
+    }
+
+    if (!userInfo || !isLogin) {
+        return <Navigate to="/auth" replace />;
     }
 
     return (
@@ -221,6 +228,7 @@ function DashboardLayout(props) {
             </div>
             <Overlay />
             <ConfirmModal isShowModal={isShowModal} logoutHandler={logoutHandler}/>
+
         </section>
     );
 }
