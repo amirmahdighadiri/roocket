@@ -1,5 +1,5 @@
 import React , {useContext} from 'react';
-import {Link , Outlet , useLocation,useNavigate } from "react-router-dom";
+import {Link , Outlet , useLocation,useNavigate,Navigate  } from "react-router-dom";
 import DynamicIcon from "../../DynamicIcon/DynamicIcon.jsx";
 import {AppContext} from "../../Context/AppContext.jsx";
 import useToggle from "../../Hooks/useToggle/useToggle.jsx";
@@ -41,18 +41,17 @@ function DashboardLayout(props) {
             onConfirm: logoutHandler,
         })
     }
-    console.log(logoutLoading)
 
 
-    if (!logoutLoading){
+
         if (isAuthLoading){
             return  <FullPageLoader />
         }
 
-        if (!userInfo || !isLogin) {
-            navigate("/", { replace: true });
+        if ((!userInfo || !isLogin) && !logoutLoading) {
+            return <Navigate to="/auth" replace />
         }
-    }
+
 
     return (
         <section className="relative bg-white dark:bg-dark-body-100 grid grid-cols-12 min-h-screen overflow-hidden">
