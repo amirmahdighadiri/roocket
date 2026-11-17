@@ -10,7 +10,7 @@ import FullPageLoader from "../../Components/Loader/PageLoader/FullPageLoader.js
 
 function DashboardLayout(props) {
     const date = new Date();
-    const {theme, setTheme,userInfo,isLogin,isAuthLoading,isOpenDashboardMenu , toggleDashboardMenu , setIsShowOverlay} = useContext(AppContext)
+    const {theme, setTheme,userInfo,isLogin,isAuthLoading,isOpenDashboardMenu , toggleDashboardMenu , setIsShowOverlay , openConfirmModal , logoutHandler , logoutLoading} = useContext(AppContext)
     const location = useLocation()
     const formatter = new Intl.DateTimeFormat("fa-IR-u-ca-persian", {
         weekday: "long",
@@ -35,30 +35,22 @@ function DashboardLayout(props) {
         toggleDashboardMenu()
     }
 
-    const showModalConfirmHandler = (event)=>{
-        document.documentElement.classList.add('min-h-screen')
-        document.documentElement.classList.add('overflow-hidden')
-        event.preventDefault()
-        setIsShowOverlay(true)
-        toggleIsShowModal()
+    const logoutClickHandler =  () => {
+        openConfirmModal({
+            title: "خروج از حساب",
+            message: "آیا مطمئن هستید که می‌خواهید از حساب کاربری خود خارج شوید؟",
+            onConfirm: logoutHandler,
+        })
     }
 
-    const logoutHandler = (status) => {
-        if (status){
-            removeUserID()
-            window.location.href = "/"
-            return
+    if (!logoutLoading){
+        if (isAuthLoading){
+            return  <FullPageLoader />
         }
-        setIsShowOverlay()
-        toggleIsShowModal()
-    }
 
-    if (isAuthLoading){
-        return  <FullPageLoader />
-    }
-
-    if (!userInfo || !isLogin) {
-        return <Navigate to="/auth" replace />;
+        if (!userInfo || !isLogin) {
+            return <Navigate to="/auth" replace />;
+        }
     }
 
     return (
@@ -175,7 +167,7 @@ function DashboardLayout(props) {
                                 </Link>
                             </li>
                             <li className="">
-                                <button onClick={showModalConfirmHandler} type="button" className="flex items-center gap-x-4 text-gray-800 dark:text-white hover:text-red-450 transition-all px-4 py-3">
+                                <button onClick={logoutClickHandler} type="button" className="flex items-center gap-x-4 text-gray-800 dark:text-white hover:text-red-450 transition-all px-4 py-3">
                                     <DynamicIcon name="logout" className="size-5 fill-inherit"/>
                                     <span className="inline-block mt-2">خروج</span>
                                 </button>
@@ -193,7 +185,7 @@ function DashboardLayout(props) {
                             <DynamicIcon name="document" className="size-4 fill-inherit" />
                         </button>
                         <div className="flex flex-col md:flex-row md:items-center gap-x-5 gap-y-1">
-                            <span className="lg:pl-5 md:border-l border-gray-300 text-gray-800 dark:text-white font-YekanBakh-Bold text-sm lg:text-2xl">{userInfo.fullName} عزیز ؛خوش اومدی. 👋</span>
+                            <span className="lg:pl-5 md:border-l border-gray-300 text-gray-800 dark:text-white font-YekanBakh-Bold text-sm lg:text-2xl">{userInfo.full_name} عزیز ؛خوش اومدی. 👋</span>
                             <span className="text-gray-360 dark:text-gray-810 text-xs md:text-sm lg:text-base">{persianDate}</span>
                         </div>
                     </div>
@@ -227,7 +219,6 @@ function DashboardLayout(props) {
                 </section>
             </div>
             <Overlay />
-            <ConfirmModal isShowModal={isShowModal} logoutHandler={logoutHandler}/>
 
         </section>
     );
