@@ -40,6 +40,9 @@ function AppProvider({children}) {
         toggleDashboardMenu(false)
         toggleProfileMenu(false)
         toggleCartDropDown(false)
+        // if (location.pathname === "/") {
+        //     setLogoutLoading(false);
+        // }
     }, [location.pathname])
 
     useEffect(() => {
@@ -102,8 +105,8 @@ function AppProvider({children}) {
             setIsShowNotification(true);
             setTimeout(() => {
                 navigate("/", { replace: true });
-                setLogoutLoading(false);
                 closeConfirmModal();
+                setLogoutLoading(false);
             }, 2500);
         } catch (err) {
             setNotificationValue({
@@ -118,8 +121,8 @@ function AppProvider({children}) {
             });
             setIsShowNotification(true);
             setTimeout(() => {
-                setLogoutLoading(false);
                 closeConfirmModal();
+                setLogoutLoading(false);
             }, 2500);
         }
     };

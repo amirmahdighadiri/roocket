@@ -1,5 +1,5 @@
 import React , {useContext} from 'react';
-import {Link , Outlet , useLocation,Navigate } from "react-router-dom";
+import {Link , Outlet , useLocation,useNavigate } from "react-router-dom";
 import DynamicIcon from "../../DynamicIcon/DynamicIcon.jsx";
 import {AppContext} from "../../Context/AppContext.jsx";
 import useToggle from "../../Hooks/useToggle/useToggle.jsx";
@@ -10,6 +10,7 @@ import FullPageLoader from "../../Components/Loader/PageLoader/FullPageLoader.js
 
 function DashboardLayout(props) {
     const date = new Date();
+    const navigate = useNavigate();
     const {theme, setTheme,userInfo,isLogin,isAuthLoading,isOpenDashboardMenu , toggleDashboardMenu , setIsShowOverlay , openConfirmModal , logoutHandler , logoutLoading} = useContext(AppContext)
     const location = useLocation()
     const formatter = new Intl.DateTimeFormat("fa-IR-u-ca-persian", {
@@ -19,8 +20,6 @@ function DashboardLayout(props) {
         day: "2-digit",
     });
     const parts = formatter.formatToParts(date);
-    const [, , removeUserID] = useCookie("userID", "")
-
     const getPart = (id)=>{
        return  parts.find(item=> item.type === id)?.value
     }
@@ -42,6 +41,8 @@ function DashboardLayout(props) {
             onConfirm: logoutHandler,
         })
     }
+    console.log(logoutLoading)
+
 
     if (!logoutLoading){
         if (isAuthLoading){
@@ -49,7 +50,7 @@ function DashboardLayout(props) {
         }
 
         if (!userInfo || !isLogin) {
-            return <Navigate to="/auth" replace />;
+            navigate("/", { replace: true });
         }
     }
 
