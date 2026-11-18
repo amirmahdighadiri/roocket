@@ -40,10 +40,14 @@ function AppProvider({children}) {
         toggleDashboardMenu(false)
         toggleProfileMenu(false)
         toggleCartDropDown(false)
-        // if (location.pathname === "/") {
-        //     setLogoutLoading(false);
-        // }
+
     }, [location.pathname])
+
+    useEffect(() => {
+        if (location.pathname === "/" && logoutLoading) {
+            setLogoutLoading(false);
+        }
+    },[location.pathname , logoutLoading])
 
     useEffect(() => {
         document.documentElement.className = String(theme);
@@ -106,7 +110,6 @@ function AppProvider({children}) {
             setTimeout(() => {
                 navigate("/", { replace: true });
                 closeConfirmModal();
-                setLogoutLoading(false);
             }, 2500);
         } catch (err) {
             setNotificationValue({
