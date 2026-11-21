@@ -1,7 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import DynamicIcon from "../../DynamicIcon/DynamicIcon.jsx";
 import {useDispatch, useSelector} from "react-redux";
-import {getCoursesFromServer} from "../../Redux/Store/Courses.jsx";
 import CustomCheckBox from "../../Components/CustomCheckBox/CustomCheckBox.jsx";
 import CustomRadioBox from "../../Components/CustomRadioBox/CustomRadioBox.jsx";
 import {coursesCategory} from "../../data.jsx";
@@ -98,6 +97,7 @@ function CoursesPage(props) {
         location.state === 'free' ? setPlan('free') : setPlan('')
     }, [location.state]);
 
+    console.log(learningPath)
 
     return (
         <section className="container">

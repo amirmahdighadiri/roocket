@@ -1,176 +1,93 @@
+import DynamicIcon from "../../DynamicIcon/DynamicIcon.jsx";
+import {useLocation , Link} from 'react-router-dom'
 
-function Offline({ isOnline, isServerAvailable }) {
-    const isInternetDisconnected = !isOnline;
+function Offline() {
 
-    const title = isInternetDisconnected
-        ? "اتصال اینترنت برقرار نیست!"
-        : "ارتباط با سرور برقرار نشد!";
-
-    const description = isInternetDisconnected
-        ? "اتصال اینترنت خودت رو بررسی کن. به محض برقراری ارتباط می‌تونی دوباره از Roocket استفاده کنی."
-        : "اینترنتت وصله، اما در حال حاضر امکان ارتباط با سرور Roocket وجود نداره. لطفاً دوباره تلاش کن.";
-
-    const handleRetry = () => {
-        window.location.reload();
-    };
+    const location = useLocation()
 
     return (
-        <main className="min-h-screen flex items-center justify-center bg-body px-4 py-10 dark:bg-dark-890">
+        <section className="fixed inset-0 z-50 overflow-y-auto bg-body dark:bg-dark-890">
+            {/*<!-- ! -------------------- Background Effects -------------------- ! -->*/}
+            <div className="pointer-events-none absolute inset-0 overflow-hidden">
+                <span className="absolute -top-40 -right-40 size-[28rem] rounded-full bg-blue-700/10 blur-3xl"></span>
+                <span className="absolute -bottom-40 -left-40 size-[28rem] rounded-full bg-customOrange-700/10 blur-3xl"></span>
+                <span className="absolute top-1/3 left-1/4 size-3 rounded-full bg-blue-700/30 animate-float"></span>
+                <span className="absolute top-1/4 right-1/4 size-2 rounded-full bg-customOrange-700/50 animate-float [animation-delay:1s]"></span>
+                <span className="absolute bottom-1/4 right-1/3 size-4 rounded-full bg-red-450/20 animate-float [animation-delay:2s]"></span>
+            </div>
 
-            <section className="w-full max-w-xl rounded-3xl border border-gray-100 bg-white p-6 shadow-sm dark:border-white/5 dark:bg-dark-930 sm:p-10">
-
-                {/* Brand */}
-                <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-2">
-                        <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-blue-700 text-white dark:bg-blue-450 dark:text-dark-950">
-                            <svg
-                                className="h-6 w-6"
-                                viewBox="0 0 24 24"
-                                fill="none"
-                                stroke="currentColor"
-                                strokeWidth="2"
-                            >
-                                <path d="M12 2 4 13h7l-1 9 10-13h-7l1-7Z" />
+            <div className="relative container flex flex-col items-center justify-center py-10">
+                {/*<!-- ! -------------------- Logo -------------------- ! -->*/}
+                <div className="">
+                    <DynamicIcon name={'darkLogo'} className={'hidden dark:block w-44 h-10'}/>
+                    <DynamicIcon name={'lightLogo'} className={'dark:hidden block w-44 h-10'}/>
+                </div>
+                {/*<!-- ! -------------------- Content Box -------------------- ! -->*/}
+                <div className="container flex flex-col items-center justify-center py-10">
+                    <div className="relative w-full max-w-lg bg-white dark:bg-dark-930 rounded-2xl px-6 sm:px-12 py-12 text-center overflow-hidden shadow-sm animate-fade-up motion-reduce:animate-none">
+                        {/*<!-- ! -------------------- Circle Effect -------------------- ! -->*/}
+                        <span className="absolute -top-16 -left-16 flex-center size-40 rounded-full bg-blue-700/5 animate-pulse">
+                            <span className="flex-center size-28 rounded-full bg-blue-700/5">
+                                <span className="flex-center size-16 rounded-full bg-blue-700/5"></span>
+                            </span>
+                        </span>
+                        <span className="absolute -bottom-16 -right-16 flex-center size-40 rounded-full bg-customOrange-700/10 animate-pulse [animation-delay:1s]">
+                            <span className="flex-center size-28 rounded-full bg-customOrange-700/10"></span>
+                        </span>
+                        {/*<!-- ! -------------------- Icon -------------------- ! -->*/}
+                        <div className="relative flex-center mx-auto size-48 mb-6 animate-float">
+                            <span className={`absolute inset-0 rounded-full border-2 border-blue-700/30 animate-signal`}></span>
+                            <span className={`absolute inset-0 rounded-full border-2 border-blue-700/30 animate-signal [animation-delay:.8s]`}></span>
+                            <span className={`absolute inset-0 rounded-full border-2 border-blue-700/30 animate-signal [animation-delay:1.6s]`}></span>
+                            <div className={`relative flex-center size-28 rounded-full bg-gradient-to-br from-blue-700 to-blue-450 shadow-contactUsShadow`}>
+                                <svg xmlns="http://www.w3.org/2000/svg" className="size-14 text-white animate-glitch" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+                                        <path d="M2 8.8a15 15 0 0 1 4.6-2.8" opacity="0.5"/>
+                                        <path d="M22 8.8A15 15 0 0 0 12 5.5" opacity="0.5"/>
+                                        <path d="M5 12.9a10 10 0 0 1 4-2.2" opacity="0.7"/>
+                                        <path d="M19 12.9a10 10 0 0 0-3-2" opacity="0.7"/>
+                                        <path d="M8.5 16.4a5 5 0 0 1 3.5-1.4"/>
+                                        <path d="M15.5 16.4A5 5 0 0 0 14 15.4"/>
+                                        <circle cx="12" cy="19.5" r="1" fill="currentColor"/>
+                                        <path d="M3 3l18 18" strokeWidth="2.2"/>
+                                    </svg>
+                            </div>
+                        </div>
+                        {/*<!-- ! -------------------- Title & Description -------------------- ! -->*/}
+                        <h1 className="relative text-biscay-700 dark:text-white font-YekanBakh-Heavy text-3xl mb-3 animate-fade-up [animation-delay:.15s] motion-reduce:animate-none">اتصال به اینترنت برقرار نیست!</h1>
+                        <p className="relative text-gray-300 dark:text-gray-920 font-YekanBakh-Medium text-lg/8 mb-8 animate-fade-up [animation-delay:.25s] motion-reduce:animate-none">
+                            به نظر می‌رسه اینترنت شما قطع شده. اتصال خودتون رو بررسی کنید و دوباره تلاش کنید.
+                        </p>
+                        {/*<!-- ! -------------------- Tips -------------------- ! -->*/}
+                        <ul className="relative text-right space-y-3 bg-gray-300/10 dark:bg-dark-890 rounded-xl p-5 mb-8 font-Mult-Font-Medium text-sm text-dark-550 dark:text-gray-200">
+                            <li className="flex items-center gap-x-2 animate-fade-up [animation-delay:.35s] motion-reduce:animate-none">
+                                <span className="size-2 shrink-0 rounded-full bg-blue-700"></span>
+                                <span>مودم یا وای‌فای خودتون رو چک کنید.</span>
+                            </li>
+                            <li className="flex items-center gap-x-2 animate-fade-up [animation-delay:.45s] motion-reduce:animate-none">
+                                <span className="size-2 shrink-0 rounded-full bg-blue-700"></span>
+                                <span>حالت پرواز (Airplane Mode) خاموش باشه.</span>
+                            </li>
+                            <li className="flex items-center gap-x-2 animate-fade-up [animation-delay:.55s] motion-reduce:animate-none">
+                                <span className="size-2 shrink-0 rounded-full bg-blue-700"></span>
+                                <span>اگه از VPN استفاده می‌کنید، یک بار خاموش و روشنش کنید.</span>
+                            </li>
+                        </ul>
+                        {/*<!-- ! -------------------- Retry Button -------------------- ! -->*/}
+                        <Link to={location.pathname} type="button" className="group relative w-full h-14 flex-center gap-x-2 bg-blue-700 border border-blue-700 hover:bg-transparent text-white hover:text-blue-700 dark:hover:text-blue-450 dark:hover:border-blue-450 rounded-lg font-YekanBakh-Bold text-lg cursor-pointer transition-all animate-fade-up [animation-delay:.65s] motion-reduce:animate-none">
+                            <svg xmlns="http://www.w3.org/2000/svg" className="size-5 text-inherit transition-transform duration-500 group-hover:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.8">
+                                <path strokeLinecap="round" strokeLinejoin="round" d="M16.02 9.35h4.99V4.36M2.98 19.64v-4.99h4.99" />
+                                <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 9a8 8 0 0 0-14.3-2.2L3 9m1.5 6a8 8 0 0 0 14.3 2.2L21 15" />
                             </svg>
-                        </div>
-
-                        <span className="font-YekanBakh-Heavy text-xl text-gray-800 dark:text-white">
-                            Roocket
-                        </span>
+                            <span>تلاش دوباره</span>
+                        </Link>
                     </div>
 
-                    <span className="rounded-full bg-red-450/10 px-3 py-1.5 text-xs font-YekanBakh-Bold text-red-450">
-                        Offline
-                    </span>
+                    {/*<!-- ! -------------------- Copy Right Text -------------------- ! -->*/}
+                    <span className="mt-4 text-gray-400 text-xs animate-fade-up [animation-delay:.75s] motion-reduce:animate-none">همه حقوق برای راکت محفوظ است</span>
                 </div>
 
-                {/* Illustration */}
-                <div className="relative mx-auto my-10 flex h-52 w-52 items-center justify-center">
-
-                    <div className="absolute inset-0 rounded-full bg-blue-700/5 dark:bg-blue-450/5" />
-
-                    <div className="absolute inset-4 rounded-full border border-dashed border-blue-700/20 dark:border-blue-450/20" />
-
-                    <div className="relative flex h-36 w-36 items-center justify-center rounded-[2rem] bg-blue-50 dark:bg-dark-890">
-
-                        <svg
-                            className="h-20 w-20 text-blue-700 dark:text-blue-450"
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            stroke="currentColor"
-                            strokeWidth="1.5"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                        >
-                            <path d="M2 8.82a15 15 0 0 1 20 0" />
-                            <path d="M5 12.86a10 10 0 0 1 14 0" />
-                            <path d="M8.5 16.43a5 5 0 0 1 7 0" />
-                            <path d="M12 20h.01" />
-                            <path d="m3 3 18 18" stroke="#E81C4D" strokeWidth="2" />
-                        </svg>
-                    </div>
-
-                    <div className="absolute bottom-4 right-4 flex h-11 w-11 items-center justify-center rounded-2xl bg-red-450 text-white shadow-lg shadow-red-450/20">
-                        <svg
-                            className="h-6 w-6"
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            stroke="currentColor"
-                            strokeWidth="2"
-                        >
-                            <path d="m18 6-12 12M6 6l12 12" />
-                        </svg>
-                    </div>
-
-                    <span className="absolute left-8 top-8 h-2 w-2 rounded-full bg-blue-700 dark:bg-blue-450" />
-                    <span className="absolute right-8 top-7 h-3 w-3 rounded-full bg-yellow-400" />
-                </div>
-
-                {/* Message */}
-                <div className="text-center">
-                    <h1 className="font-YekanBakh-Heavy text-2xl text-gray-800 dark:text-white sm:text-3xl">
-                        {title}
-                    </h1>
-
-                    <p className="mx-auto mt-4 max-w-md text-sm leading-8 text-gray-500 dark:text-gray-300">
-                        {description}
-                    </p>
-                </div>
-
-                {/* Connection Status */}
-                <div className="mt-8 space-y-4 rounded-2xl bg-gray-50 p-4 dark:bg-dark-890">
-
-                    <div className="flex items-center justify-between">
-                        <div className="flex items-center gap-3">
-                            <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-white text-gray-500 dark:bg-dark-930 dark:text-gray-300">
-                                <svg className="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7">
-                                    <path d="M2 8.82a15 15 0 0 1 20 0M5 12.86a10 10 0 0 1 14 0M8.5 16.43a5 5 0 0 1 7 0M12 20h.01" />
-                                </svg>
-                            </div>
-
-                            <span className="text-sm text-gray-700 dark:text-gray-200">
-                                اتصال اینترنت
-                            </span>
-                        </div>
-
-                        <span className={`text-xs font-YekanBakh-Bold ${isOnline ? "text-green-600" : "text-red-450"}`}>
-                            {isOnline ? "متصل" : "قطع شده"}
-                        </span>
-                    </div>
-
-                    <div className="h-px bg-gray-200 dark:bg-white/10" />
-
-                    <div className="flex items-center justify-between">
-                        <div className="flex items-center gap-3">
-                            <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-white text-gray-500 dark:bg-dark-930 dark:text-gray-300">
-                                <svg className="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7">
-                                    <rect x="3" y="4" width="18" height="16" rx="2" />
-                                    <path d="M8 8h8M8 12h8M8 16h4" />
-                                </svg>
-                            </div>
-
-                            <span className="text-sm text-gray-700 dark:text-gray-200">
-                                سرور Roocket
-                            </span>
-                        </div>
-
-                        <span className={`text-xs font-YekanBakh-Bold ${isServerAvailable ? "text-green-600" : "text-red-450"}`}>
-                            {isServerAvailable ? "در دسترس" : "غیرقابل دسترس"}
-                        </span>
-                    </div>
-
-                </div>
-
-                {/* Retry */}
-                <button
-                    type="button"
-                    onClick={handleRetry}
-                    className="mt-7 flex h-12 w-full items-center justify-center gap-2 rounded-xl bg-blue-700 font-YekanBakh-Bold text-white transition duration-200 hover:bg-blue-800 active:scale-[0.98] dark:bg-blue-450 dark:text-dark-950 dark:hover:bg-blue-500"
-                >
-                    <svg
-                        className="h-5 w-5"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth="2"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                    >
-                        <path d="M20 7v5h-5" />
-                        <path d="M4 17v-5h5" />
-                        <path d="M5.64 9A8 8 0 0 1 19.2 5.6L20 7" />
-                        <path d="M4 17l.8 1.4A8 8 0 0 0 18.36 15" />
-                    </svg>
-
-                    تلاش مجدد
-                </button>
-
-                <p className="mt-5 text-center text-xs text-gray-400 dark:text-gray-500">
-                    امیدواریم به‌زودی دوباره کنارت باشیم :)
-                </p>
-
-            </section>
-        </main>
+            </div>
+        </section>
     );
 }
 

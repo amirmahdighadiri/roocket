@@ -5,20 +5,21 @@ import ConfirmModal from "./Components/Modals/ConfirmModal/ConfirmModal.jsx";
 import Notification from "./Components/Notification/Notification.jsx";
 import useOnlineStatus from "./Hooks/useOnlineStatus/useOnlineStatus.jsx";
 import OfflinePage from "./Pages/OfflinePage/OfflinePage.jsx";
+import FullPageLoader from "./Components/Loader/PageLoader/FullPageLoader.jsx";
 
 function App() {
-    const {isOnline , isServerAvailable} = useOnlineStatus()
+    const {isOnline , isServerAvailable,isCheckingServer} = useOnlineStatus()
     const router = useRoutes(routes);
     return (
         <AppProvider>
 
-            {isOnline || isServerAvailable ?
+            {isCheckingServer ? <FullPageLoader/> : isOnline && isServerAvailable  ?
                 <>
                     {router}
                     <Notification />
                     <ConfirmModal />
                 </> :
-                <OfflinePage isOnline={isOnline} />
+                <OfflinePage isOnline={isOnline} isChecking={isCheckingServer}/>
             }
 
         </AppProvider>

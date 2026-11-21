@@ -168,6 +168,10 @@
     --animate-ripple: at-ripple .6s linear infinite;
     --animate-grow-width: grow-width 2.5s ease-in-out;
     --animate-float: float 2.5s ease-in-out infinite;
+    --animate-fade-up: fade-up .6s ease-out both;
+    --animate-wifi-blink: wifi-blink 1.8s ease-in-out infinite;
+    --animate-signal: signal 2.4s ease-out infinite;
+    --animate-glitch: glitch 2.5s steps(1, end) infinite;
 
     @keyframes grow-width {
         0%{
@@ -193,6 +197,7 @@
             box-shadow: 0 4px 10px rgba(59, 130, 246, .1), 0 0 0 5px rgba(59, 130, 246, .1), 0 0 0 10px rgba(59, 130, 246, .1), 0 0 0 20px hsla(0, 0%, 40%, 0)
         }
     }
+
     @keyframes float {
         0%, 100% {
             transform: translateY(0);
@@ -202,6 +207,28 @@
         }
     }
 
+    @keyframes fade-up {
+        0% { opacity: 0; transform: translateY(20px); }
+        100% { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes wifi-blink {
+        0%, 100% { opacity: .2; }
+        50% { opacity: 1; }
+    }
+
+    @keyframes signal {
+        0% { transform: scale(.55); opacity: .8; }
+        100% { transform: scale(1.1); opacity: 0; }
+    }
+
+    @keyframes glitch {
+        0%, 88%, 100% { transform: translate(0); }
+        90% { transform: translate(-2px, 1px); }
+        92% { transform: translate(2px, -1px); }
+        94% { transform: translate(-1px, -1px); }
+        96% { transform: translate(1px, 1px); }
+    }
 }
 
 /* /==================== ! Tailwind Utilities ! ====================/ */

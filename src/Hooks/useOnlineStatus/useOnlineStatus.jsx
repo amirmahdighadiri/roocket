@@ -4,14 +4,17 @@ import {supabase} from "../../Lib/supabaseClient.js";
 function useOnlineStatus() {
     const [isOnline, setIsOnline] = useState(navigator.onLine);
     const [isServerAvailable, setIsServerAvailable] = useState(false);
+    const [isCheckingServer, setIsCheckingServer] = useState(true);
 
     useEffect(() => {
         if (!isOnline) {
             setIsServerAvailable(false);
+            setIsCheckingServer(false);
             return;
         }
 
         let isActive = true;
+        setIsCheckingServer(true);
 
         const checkServerAvailability = async () => {
             const { error } = await supabase
@@ -21,6 +24,7 @@ function useOnlineStatus() {
 
             if (isActive) {
                 setIsServerAvailable(!error);
+                setIsCheckingServer(false);
             }
         };
 
@@ -49,7 +53,7 @@ function useOnlineStatus() {
         };
     }, []);
 
-    return {isOnline , isServerAvailable};
+    return {isOnline , isServerAvailable , isCheckingServer};
 }
 
 export default useOnlineStatus;

@@ -3,8 +3,8 @@ import {SwiperSlide} from "swiper/react";
 import DynamicIcon from "../../DynamicIcon/DynamicIcon.jsx";
 
 function LearningPathsBox({title,description,coursesCount,box_class,icon,isActive}) {
+    console.log(box_class)
     return (
-
             <div className={`w-auto ${isActive ? 'shadow-cardshadow bg-white dark:bg-dark-body-50 border-dark-body-200' : 'hover:shadow-cardshadow dark:hover:bg-dark-body-50 hover:bg-white dark:hover:border-dark-body-200'} border border-primary-gray-185 dark:border-dark-500 rounded-lg transition-all duration-200`}>
                 {/*<!-- ! -------------------- Learning Routs Content -------------------- ! -->*/}
                 <div className="pb-4 pt-6 px-4 md:px-7">
