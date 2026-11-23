@@ -97,7 +97,6 @@ function CoursesPage(props) {
         location.state === 'free' ? setPlan('free') : setPlan('')
     }, [location.state]);
 
-    console.log(learningPath)
 
     return (
         <section className="container">

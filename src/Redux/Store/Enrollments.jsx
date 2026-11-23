@@ -3,10 +3,11 @@ import { supabase } from "../../Lib/supabaseClient";
 
 export const getEnrollmentsFromServer = createAsyncThunk(
     "getEnrollmentsFromServer",
-    async (_, { rejectWithValue }) => {
+    async (userId, { rejectWithValue }) => {
         const { data, error } = await supabase
             .from("enrollments")
             .select("*")
+            .eq("user_id", userId)
             .order("id", { ascending: true });
 
         if (error) {
@@ -17,6 +18,44 @@ export const getEnrollmentsFromServer = createAsyncThunk(
     }
 );
 
+export const addEnrollmentToServer = createAsyncThunk(
+    "enrollments/addEnrollmentToServer",
+    async ({ user_id, course_id }, { rejectWithValue }) => {
+        const { data: existingEnrollment, error: checkError } = await supabase
+            .from("enrollments")
+            .select("*")
+            .eq("user_id", user_id)
+            .eq("course_id", course_id)
+            .maybeSingle();
+
+        if (checkError) {
+            return rejectWithValue(checkError.message);
+        }
+
+        if (existingEnrollment) {
+            return {
+                enrollment: existingEnrollment,
+                isNew: false,
+            };
+        }
+
+        const { data, error } = await supabase
+            .from("enrollments")
+            .insert({ user_id, course_id })
+            .select("*")
+            .single();
+
+        if (error) {
+            return rejectWithValue(error.message);
+        }
+
+        return {
+            enrollment: data,
+            isNew: true,
+        };
+    }
+);
+
 const slice = createSlice({
     name: "enrollments",
     initialState: {
@@ -24,6 +63,9 @@ const slice = createSlice({
         enrollmentLoading: false,
         enrollmentError: null,
         enrollmentHasFetched: false,
+
+        enrollmentAddLoading: false,
+        enrollmentAddError: null,
     },
     reducers: {},
 
@@ -42,6 +84,26 @@ const slice = createSlice({
         builder.addCase(getEnrollmentsFromServer.rejected, (state, action) => {
             state.enrollmentLoading = false;
             state.enrollmentError = action.payload || action.error.message;
+        });
+
+        // ! Add Enrollment
+
+        builder.addCase(addEnrollmentToServer.pending, (state) => {
+            state.enrollmentAddLoading = true;
+            state.enrollmentAddError = null;
+        });
+
+        builder.addCase(addEnrollmentToServer.fulfilled, (state, action) => {
+            state.enrollmentAddLoading = false;
+
+            if (action.payload.isNew) {
+                state.enrollments.push(action.payload.enrollment);
+            }
+        });
+
+        builder.addCase(addEnrollmentToServer.rejected, (state, action) => {
+            state.enrollmentAddLoading = false;
+            state.enrollmentAddError = action.payload || action.error.message;
         });
     },
 });

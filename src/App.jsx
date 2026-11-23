@@ -12,7 +12,6 @@ function App() {
     const router = useRoutes(routes);
     return (
         <AppProvider>
-
             {isCheckingServer ? <FullPageLoader/> : isOnline && isServerAvailable  ?
                 <>
                     {router}
@@ -21,7 +20,6 @@ function App() {
                 </> :
                 <OfflinePage isOnline={isOnline} isChecking={isCheckingServer}/>
             }
-
         </AppProvider>
     )
 }

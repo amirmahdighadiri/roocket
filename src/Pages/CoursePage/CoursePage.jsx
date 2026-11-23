@@ -22,7 +22,7 @@ import {addUserCartToServer, getUserCartsFromServer} from "../../Redux/Store/Car
 import Notification from "../../Components/Notification/Notification.jsx";
 import CoursePageLoader from "../../Components/Loader/PageSkeleton/CoursePageLoader.jsx";
 import {getCommentsFromServer} from "../../Redux/Store/Comments.jsx";
-import {getEnrollmentsFromServer} from "../../Redux/Store/Enrollments.jsx";
+import {addEnrollmentToServer, getEnrollmentsFromServer} from "../../Redux/Store/Enrollments.jsx";
 
 
 function CoursePage() {
@@ -41,7 +41,7 @@ function CoursePage() {
     const mainComments = courseComments.filter(comment => comment.parent_id === null)
     const [isShowEditor, toggleShowEditor] = useToggle();
     const {carts, cartsLoading, cartsError, cartsHasFetched, cartsAddLoading} = useSelector(state => state.carts);
-    const {enrollments, enrollmentLoading, enrollmentError, enrollmentHasFetched} = useSelector(state => state.enrollments)
+    const {enrollments, enrollmentLoading, enrollmentError, enrollmentHasFetched , enrollmentAddLoading, enrollmentAddError} = useSelector(state => state.enrollments)
     const isInCart = carts.some(cart => cart.course_id === targetCourse?.id && cart.user_id === userInfo.sub);
     const isPurchased = enrollments.some(item => item.course_id === targetCourse?.id && item.user_id === userInfo.sub)
 
@@ -56,7 +56,7 @@ function CoursePage() {
 
     useEffect(() => {
         if (!enrollmentHasFetched && !enrollmentLoading) {
-            dispatch(getEnrollmentsFromServer())
+            dispatch(getEnrollmentsFromServer(userInfo?.sub))
         }
     }, [enrollmentHasFetched, enrollmentLoading]);
 
@@ -86,30 +86,36 @@ function CoursePage() {
 
     const addCourseToCart = async (event) => {
         event.preventDefault()
-        const newCartItem = {
-            user_id: userInfo.sub,
-            course_id: targetCourse.id,
-            quantity: 1,
-            added_at: new Date().toISOString().split("T")[0],
-        };
+        if (targetCourse.price === 0){
+            dispatch(addEnrollmentToServer({
+                user_id: userInfo?.sub,
+                course_id: targetCourse?.id,
+            }))
+        }else {
+            const newCartItem = {
+                user_id: userInfo.sub,
+                course_id: targetCourse.id,
+                quantity: 1,
+                added_at: new Date().toISOString().split("T")[0],
+            };
 
-        try {
-            dispatch(addUserCartToServer(newCartItem)).unwrap()
-            setNotificationValue({
-                title: "موفق!",
-                message: "دوره با موفقیت به سبد خرید اضافه شد!",
-                Icon: () => <DynamicIcon name="checkCircle" className="size-7 text-blue-700"/>,
-            });
-            setIsShowNotification(true)
-        } catch (err) {
-            setNotificationValue({
-                title: "خطا !",
-                message: "خطا در ارتباط با سرور. لطفاً دوباره تلاش کنید.",
-                Icon: () => <DynamicIcon name={'closeCircle'} className={'size-7 text-blue-700'}/>
-            });
-            setIsShowNotification(true)
+            try {
+                dispatch(addUserCartToServer(newCartItem)).unwrap()
+                setNotificationValue({
+                    title: "موفق!",
+                    message: "دوره با موفقیت به سبد خرید اضافه شد!",
+                    Icon: () => <DynamicIcon name="checkCircle" className="size-7 text-blue-700"/>,
+                });
+                setIsShowNotification(true)
+            } catch (err) {
+                setNotificationValue({
+                    title: "خطا !",
+                    message: "خطا در ارتباط با سرور. لطفاً دوباره تلاش کنید.",
+                    Icon: () => <DynamicIcon name={'closeCircle'} className={'size-7 text-blue-700'}/>
+                });
+                setIsShowNotification(true)
+            }
         }
-
     }
 
     return (
@@ -125,8 +131,7 @@ function CoursePage() {
                         {/*<!-- ! -------------------- Courses Action Buttons -------------------- ! -->*/}
                         <div className="flex flex-col lg:flex-row gap-y-5 items-center justify-between">
                             {/*<!-- ! -------------------- Login Button -------------------- ! -->*/}
-                            {!isLogin && <Link to="/auth"
-                                               className="inline-flex items-center justify-center gap-x-2 bg-blue-700 border border-blue-700 text-white hover:text-blue-700 hover:bg-transparent rounded h-10 lg:h-14 px-9 transition-all">
+                            {!isLogin && <Link to="/auth" className="inline-flex items-center justify-center gap-x-2 bg-blue-700 border border-blue-700 text-white hover:text-blue-700 hover:bg-transparent rounded h-10 lg:h-14 px-9 transition-all">
                                 <DynamicIcon name="educationIcon" className="size-5 text-inherit"/>
                                 <span className="font-YekanBakh-Bold">برای یادگیری وارد سایت شوید</span>
                             </Link>}
@@ -154,12 +159,12 @@ function CoursePage() {
                                             </span>
                                             </div> : targetCourse?.price === 0 ?
                                                 <div className="flex items-center gap-x-3">
-                                                    <button type="button" disabled={cartsAddLoading} onClick={addCourseToCart} className="relative inline-flex items-center justify-center gap-x-2 bg-blue-700 border border-blue-700 text-white hover:text-blue-700 hover:bg-transparent rounded h-10 lg:h-14 px-9 transition-all cursor-pointer">
-                                                        <span className={cartsAddLoading ? "invisible" : "font-YekanBakh-Bold"}>
+                                                    <button type="button" disabled={enrollmentAddLoading} onClick={addCourseToCart} className="relative inline-flex items-center justify-center gap-x-2 bg-blue-700 border border-blue-700 text-white hover:text-blue-700 hover:bg-transparent rounded h-10 lg:h-14 px-9 transition-all cursor-pointer">
+                                                        <span className={enrollmentAddLoading ? "invisible" : "font-YekanBakh-Bold"}>
                                                             ثبت نام رایگان
                                                         </span>
-                                                        <DynamicIcon name="educationIcon" className={`size-5 text-inherit ${cartsAddLoading ? "invisible" : ""}`}/>
-                                                        {cartsAddLoading && (<span className="absolute size-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />)}
+                                                        <DynamicIcon name="educationIcon" className={`size-5 text-inherit ${enrollmentAddLoading ? "invisible" : ""}`}/>
+                                                        {enrollmentAddLoading && (<span className="absolute size-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />)}
                                                     </button>
                                                     <a href="#curriculum-content" className="flex items-center gap-x-1 text-blue-700 hover:text-gray-900 font-YekanBakh-Bold transition-all">
                                                         <span className="">مشاهده سر فصل ها</span>
