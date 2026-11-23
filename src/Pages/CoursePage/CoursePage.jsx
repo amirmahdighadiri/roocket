@@ -1,11 +1,8 @@
 import React, {useState, useEffect, useRef, useContext} from 'react';
-import {Link, useLocation} from 'react-router-dom';
+import {Link, useLocation,useNavigate} from 'react-router-dom';
 import {useDispatch, useSelector} from "react-redux";
 import DynamicIcon from "../../DynamicIcon/DynamicIcon.jsx";
-import {getCoursesFromServer} from "../../Redux/Store/Courses.jsx";
-import {getLearningPathFromServer} from "../../Redux/Store/LearningPath.jsx";
 import CourseAccordion from "../../Components/Accordion/CourseAccordion/CourseAccordion.jsx";
-import CourseLinkBox from "../../Components/CourseLinkBox/CourseLinkBox.jsx";
 import useToggle from "../../Hooks/useToggle/useToggle.jsx";
 import CommentBox from "../../Components/CommentBox/CommentBox.jsx";
 
@@ -34,6 +31,7 @@ function CoursePage() {
     const [isSticky, setIsSticky] = useState(false);
     const [showMoreContent, toggleShowMoreContent] = useToggle();
     const location = useLocation()
+    const navigate = useNavigate();
     const URLTitle = decodeURIComponent(location.pathname.split("/").pop());
     const [targetCourse, setTargetCourse] = useState({});
     const {isLogin, userInfo, isShowNotification, setIsShowNotification,setNotificationValue} = useContext(AppContext)
@@ -55,10 +53,10 @@ function CoursePage() {
     }, [commentsHasFetched, commentsLoading]);
 
     useEffect(() => {
-        if (!enrollmentHasFetched && !enrollmentLoading) {
-            dispatch(getEnrollmentsFromServer(userInfo?.sub))
+        if (isLogin && userInfo?.sub && !enrollmentHasFetched && !enrollmentLoading) {
+            dispatch(getEnrollmentsFromServer(userInfo.sub));
         }
-    }, [enrollmentHasFetched, enrollmentLoading]);
+    }, [isLogin, userInfo?.sub, enrollmentHasFetched, enrollmentLoading]);
 
     useEffect(() => {
         const findCourse = courses.find(courses => courses.title === URLTitle)
@@ -118,6 +116,15 @@ function CoursePage() {
         }
     }
 
+    const redirectUserHandler = (event)=>{
+        event.preventDefault()
+        navigate("/auth", {
+            state: {
+                from: location
+            }
+        })
+    }
+
     return (
         courseLoading || !courseHasFetched ? <CoursePageLoader/> : <section className="container">
             {/*<!-- ! -------------------- Courses Intro -------------------- ! -->*/}
@@ -131,10 +138,12 @@ function CoursePage() {
                         {/*<!-- ! -------------------- Courses Action Buttons -------------------- ! -->*/}
                         <div className="flex flex-col lg:flex-row gap-y-5 items-center justify-between">
                             {/*<!-- ! -------------------- Login Button -------------------- ! -->*/}
-                            {!isLogin && <Link to="/auth" className="inline-flex items-center justify-center gap-x-2 bg-blue-700 border border-blue-700 text-white hover:text-blue-700 hover:bg-transparent rounded h-10 lg:h-14 px-9 transition-all">
-                                <DynamicIcon name="educationIcon" className="size-5 text-inherit"/>
-                                <span className="font-YekanBakh-Bold">برای یادگیری وارد سایت شوید</span>
-                            </Link>}
+                            {!isLogin &&  <button onClick={redirectUserHandler} className="inline-flex items-center justify-center gap-x-2 bg-blue-700 border border-blue-700 text-white hover:text-blue-700 hover:bg-transparent rounded h-10 lg:h-14 px-9 transition-all">
+                                <DynamicIcon name="educationIcon" className="size-5 text-inherit" />
+                                <span className="font-YekanBakh-Bold">
+                                     برای یادگیری وارد سایت شوید
+                                </span>
+                            </button>}
                             {/*<!-- ! -------------------- Free & Paid Courses Button -------------------- ! -->*/}
                             {
                                 isLogin && (isPurchased ?
@@ -385,10 +394,10 @@ function CoursePage() {
                                 <DynamicIcon name="profile" className="size-8 text-inherit shrink-0"/>
                                 <span className="">برای ارسال دیدگاه لازم است وارد شده یا ثبت‌نام کنید</span>
                             </div>
-                            <Link to="/" className="flex items-center gap-x-2 hover:text-gray-700 transition-all">
+                            <button type="button" onClick={redirectUserHandler} className="flex items-center gap-x-2 hover:text-gray-700 transition-all cursor-pointer">
                                 <span className="underline  font-YekanBakh-Bold">ورود یا ثبت‌نام</span>
                                 <DynamicIcon name="arrow" className="size-7 text-inherit"/>
-                            </Link>
+                            </button>
                         </div>}
                         {/*<!-- ! -------------------- comments Wrapper -------------------- ! -->*/}
                         <div className="space-y-5">
