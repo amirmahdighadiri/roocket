@@ -9,6 +9,12 @@ import comments from "./Store/Comments.jsx";
 import discount from "./Store/Discount.jsx";
 import teacher from "./Store/Teacher.jsx";
 import enrollments from "./Store/Enrollments.jsx";
+import courseProgress from "./Store/CourseProgress.jsx";
+import paymentTransactions from "./Store/PaymentTransactions.jsx";
+import articleComments from "./Store/ArticleComments.jsx";
+import podcastComments from "./Store/PodcastComments.jsx";
+import followedTeachers from "./Store/FollowedTeachers.jsx";
+import followedEpisodes from "./Store/FollowedEpisodes.jsx";
 
 const store = configureStore({
     reducer: {
@@ -22,6 +28,12 @@ const store = configureStore({
         discount,
         teacher,
         enrollments,
+        courseProgress,
+        paymentTransactions,
+        articleComments,
+        podcastComments,
+        followedTeachers,
+        followedEpisodes,
     }
 })
 
