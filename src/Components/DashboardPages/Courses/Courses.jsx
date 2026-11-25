@@ -1,11 +1,31 @@
-import React ,{useState} from 'react';
+import React ,{useState,useEffect,useContext} from 'react';
 import DynamicIcon from "../../../DynamicIcon/DynamicIcon.jsx";
 import {coursesTabs} from "../../../data.jsx";
 import Tabs from "../../Tabs/Tabs.jsx";
+import {Link} from "react-router-dom";
+import {useSelector,useDispatch} from "react-redux";
+import {getCourseProgressFromServer} from "../../../Redux/Store/CourseProgress.jsx";
+import {AppContext} from "../../../Context/AppContext.jsx";
+import DashboardCourseBox from "../../CoursesBox/DashboardCourseBox.jsx";
 
 function Courses(props) {
-
+    const dispatch = useDispatch();
     const [activeTab, setActiveTab] = useState({label: 'دوره های جاری' , key: 'current-courses'});
+    const {courseProgress, courseProgressLoading, courseProgressError, courseProgressHasFetched} = useSelector(state => state.courseProgress)
+    const {userInfo} = useContext(AppContext)
+    let displayedCourses = activeTab.key === "completed-courses"
+        ? courseProgress.filter(item => item.progress_percent === 100)
+        : activeTab.key === "current-courses" ||
+        activeTab.key === "purchased-courses"
+            ? courseProgress
+            : [];
+
+    useEffect(() => {
+        if (!courseProgressLoading && !courseProgressHasFetched){
+            dispatch(getCourseProgressFromServer(userInfo?.sub))
+        }
+    }, [courseProgressLoading , courseProgressHasFetched , userInfo?.sub]);
+
 
     return (
         <div className="container">
@@ -60,8 +80,17 @@ function Courses(props) {
             {/*<!-- ! -------------------- Tabs -------------------- ! -->*/}
             <Tabs activeTab={activeTab} tabs={coursesTabs} changeTab={setActiveTab}/>
             {/*<!-- ! -------------------- User Courses Content -------------------- ! -->*/}
-            <div className="p-8 rounded-xl bg-white dark:bg-dark-body-100 mb-24 mt-8">
-                <p className="text-biscay-700 dark:text-white font-YekanBakh-Medium">دوره‌ای در این فهرست نیست.</p>
+            <div className="">
+                {displayedCourses.length ?
+                    <div className="grid grid-cols-12 gap-5 mb-24 mt-8">
+                        {displayedCourses.map(item =>(
+                            <DashboardCourseBox key={item.id} {...item} />
+                        ))}
+                    </div> :
+                    <div className="p-8 rounded-xl bg-white dark:bg-dark-body-100 mb-24 mt-8">
+                        <p className="text-biscay-700 dark:text-white font-YekanBakh-Medium">دوره‌ای در این فهرست نیست.</p>
+                    </div>
+                }
             </div>
         </div>
     );

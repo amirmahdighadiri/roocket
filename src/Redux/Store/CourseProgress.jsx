@@ -6,7 +6,7 @@ export const getCourseProgressFromServer = createAsyncThunk(
     async (userId, { rejectWithValue }) => {
         const { data, error } = await supabase
             .from("course_progress")
-            .select("*")
+            .select(`*, course:courses(*)`)
             .eq("user_id", userId)
             .order("updated_at", { ascending: false });
 
